@@ -20,14 +20,18 @@
         tools:ignore="AllowBackup,GoogleAppIndexingWarning,UnusedAttribute"
         tools:replace="android:name">
 
-        <activity android:name="com.netease.music.MainActivity">
+        <activity android:name="com.netease.music.MainActivity" />
+
+        <activity android:name=".ui.page.PhoneLoginActivity" />
+        <activity android:name=".ui.page.LoginActivity" />
+        <!-- 闪屏界面作为应用的入口-->
+        <activity android:name=".ui.page.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
 
     </application>
 
