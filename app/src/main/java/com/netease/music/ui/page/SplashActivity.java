@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.imooc.lib_common_ui.utils.SharePreferenceUtil;
 import com.kunminx.architecture.utils.Utils;
+import com.netease.music.MainActivity;
 import com.netease.music.R;
 
 import java.util.concurrent.TimeUnit;
@@ -48,9 +49,11 @@ public class SplashActivity extends AppCompatActivity {
                         String authToken = SharePreferenceUtil.getInstance(Utils.getApp()).getAuthToken("");
                         if (TextUtils.isEmpty(authToken)) {
                             startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+                            finish();
                         } else {
                             //进入主界面
-                            //startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+                            startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                            finish();
                         }
                     }
 
