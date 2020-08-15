@@ -18,7 +18,6 @@ package com.kunminx.architecture.ui.page;
 
 import android.app.Activity;
 import android.content.res.Resources;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.inputmethod.InputMethodManager;
 
@@ -41,7 +40,7 @@ public abstract class BaseActivity extends DataBindingActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
 
-        BarUtils.setStatusBarColor(this, Color.TRANSPARENT);
+        //BarUtils.setStatusBarColor(this, Color.TRANSPARENT);
         BarUtils.setStatusBarLightMode(this, true);
 
         super.onCreate(savedInstanceState);

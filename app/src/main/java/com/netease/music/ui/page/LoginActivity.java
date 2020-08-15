@@ -30,10 +30,16 @@ public class LoginActivity extends BaseActivity {
             startActivity(new Intent(LoginActivity.this, PhoneLoginActivity.class));
         }
 
+        //TODO 体验
         public void experience() {
 
         }
 
     }
 
+    //返回按钮直接结束Activity
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
 }

@@ -2,12 +2,18 @@
 <layout>
 
     <data>
+
         <variable
             name="vm"
             type="com.netease.music.ui.state.PhoneLoginViewModel" />
+
         <variable
             name="proxy"
             type="com.netease.music.ui.page.PhoneLoginActivity.ClickProxy" />
+
+        <variable
+            name="listener"
+            type="com.imooc.lib_common_ui.widget.CaptchaView.OnInputListener" />
     </data>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -25,6 +31,7 @@
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_margin="10dp"
+            onClickWithDebouncing="@{() -> proxy.back()}"
             android:src="@drawable/ic_left_arrow_black" />
 
         <TextView
@@ -34,7 +41,7 @@
             android:layout_gravity="center"
             android:layout_weight="7"
             android:gravity="center_vertical"
-            android:text="手机号登录"
+            android:text="@{vm.title}"
             android:textColor="@color/black"
             android:textSize="19sp" />
 
@@ -44,7 +51,7 @@
         android:id="@+id/rv_login_phone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="visible">
+        visible="@{vm.showInputPhone}">
 
         <TextView
             android:id="@+id/tv_show_auto_signin"
@@ -74,6 +81,7 @@
             android:layout_marginTop="20dp"
             android:layout_toRightOf="@+id/tv_86"
             android:background="@null"
+            android:text="@={vm.phone}"
             android:paddingLeft="10dp" />
 
         <View
@@ -97,6 +105,7 @@
             android:gravity="center"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
+            onClickWithDebouncing="@{() -> proxy.next()}"
             android:text="下一步"
             android:textColor="@android:color/white"
             android:textSize="15sp" />
@@ -107,7 +116,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:visibility="gone">
+        visible="@{vm.showInputPassword}">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -123,6 +132,9 @@
                 android:layout_weight="8"
                 android:background="@null"
                 android:inputType="textPassword"
+
+                android:hint="@{vm.passwordHint}"
+                android:text="@={vm.password}"
                 android:paddingLeft="10dp" />
 
             <TextView
@@ -131,6 +143,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
                 android:text="忘记密码?"
+                onClickWithDebouncing="@{() -> proxy.forgetPassword()}"
+                visible="@{!vm.showForgetPassword}"
                 android:textColor="@color/blue"
                 android:textSize="11sp" />
         </LinearLayout>
@@ -156,7 +170,8 @@
             android:gravity="center"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
-            android:text="登录"
+            onClickWithDebouncing="@{() -> proxy.login()}"
+            android:text='@{!vm.showForgetPassword? "登录":"下一步"}'
             android:textColor="@android:color/white"
             android:textSize="15sp" />
     </LinearLayout>
@@ -166,7 +181,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:visibility="gone">
+        visible="@{vm.showCaptureView}">
 
         <TextView
             android:id="@+id/tv_capcha_title"
@@ -183,8 +198,10 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_marginTop="5dp"
+            onClickWithDebouncing="@{() -> proxy.reObtainCpatureCode()}"
+            android:enabled="@{vm.enableCaptureButton}"
             android:layout_marginRight="20dp"
-            android:text="58秒" />
+            android:text="@{vm.countDownText}" />
 
         <TextView
             android:id="@+id/tv_capcha_phone"
@@ -194,16 +211,16 @@
             android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="20dp"
-            android:text="150****1555" />
+            android:text='@{vm.phone.length() >= 11 ? vm.phone.substring(0,3) + "****" + vm.phone.substring(7) : ""}' />
 
         <com.imooc.lib_common_ui.widget.CaptchaView
             android:id="@+id/captcha_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_capcha_phone"
+            initCaptureViewListener="@{listener}"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp" />
-
 
     </RelativeLayout>
 </LinearLayout>

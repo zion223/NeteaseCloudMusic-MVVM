@@ -25,6 +25,7 @@ import android.widget.TextView;
 import androidx.databinding.BindingAdapter;
 
 import com.bumptech.glide.Glide;
+import com.imooc.lib_common_ui.widget.CaptchaView;
 import com.kunminx.architecture.utils.ClickUtils;
 
 /**
@@ -81,5 +82,10 @@ public class CommonBindingAdapter {
         ViewGroup.LayoutParams params = view.getLayoutParams();
         params.height = adjustHeight;
         view.setLayoutParams(params);
+    }
+
+    @BindingAdapter(value = {"initCaptureViewListener"})
+    public static void setListener(CaptchaView captchaView, CaptchaView.OnInputListener listener) {
+        captchaView.setOnInputListener(listener);
     }
 }

@@ -8,15 +8,34 @@ import com.netease.music.domain.request.AccountRequest;
 
 public class PhoneLoginViewModel extends ViewModel {
 
-    public final ObservableField<String> name = new ObservableField<>();
-
+    //输入手机号界面
+    public final ObservableBoolean showInputPhone = new ObservableBoolean();
+    //输入密码界面
+    public final ObservableBoolean showInputPassword = new ObservableBoolean();
+    //忘记密码界面
+    public final ObservableBoolean showForgetPassword = new ObservableBoolean();
+    //显示验证码界面
+    public final ObservableBoolean showCaptureView = new ObservableBoolean();
+    //使能重新获取验证码按钮
+    public final ObservableBoolean enableCaptureButton = new ObservableBoolean();
+    //密码hint
+    public final ObservableField<String> passwordHint = new ObservableField<>();
+    //界面标题
+    public final ObservableField<String> title = new ObservableField<>();
+    //1min 倒计时输入验证码
+    public final ObservableField<String> countDownText = new ObservableField<>();
+    //手机号
+    public final ObservableField<String> phone = new ObservableField<>();
+    //密码
     public final ObservableField<String> password = new ObservableField<>();
-
-    public final ObservableBoolean loadingVisible = new ObservableBoolean();
-
-    //TODO 将 request 作为 ViewModel 的成员暴露给 Activity/Fragment，
-    // 如此便于语义的明确，以及实现多个 request 在 ViewModel 中的组合和复用。
 
     public final AccountRequest accountRequest = new AccountRequest();
 
+    {
+        showInputPhone.set(true);
+        showInputPassword.set(false);
+        title.set("手机号登录");
+        phone.set("");
+        enableCaptureButton.set(false);
+    }
 }

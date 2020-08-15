@@ -17,11 +17,14 @@
 package com.netease.music;
 
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+
 import com.kunminx.architecture.ui.page.BaseActivity;
 import com.kunminx.architecture.ui.page.DataBindingConfig;
 import com.netease.music.ui.callback.SharedViewModel;
@@ -33,6 +36,7 @@ public class MainActivity extends BaseActivity {
     private MainActivityViewModel mMainActivityViewModel;
     private SharedViewModel mSharedViewModel;
     private boolean mIsListened = false;
+    private long firstTime = 0;
 
     @Override
     protected void initViewModel() {
@@ -141,6 +145,21 @@ public class MainActivity extends BaseActivity {
         mSharedViewModel.closeSlidePanelIfExpanded.setValue(true);
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
+            if (System.currentTimeMillis() - firstTime > 2000) {
+                showLongToast("再按一次退出程序");
+                firstTime = System.currentTimeMillis();
+            } else {
+                finish();
+                System.exit(0);
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
     public class EventHandler extends DrawerLayout.SimpleDrawerListener {
         @Override
         public void onDrawerOpened(View drawerView) {
@@ -155,4 +174,6 @@ public class MainActivity extends BaseActivity {
             mMainActivityViewModel.openDrawer.setValue(false);
         }
     }
+
+
 }
