@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="4aa8b573-e1bb-404a-a405-ca645b41b62e" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../../java/com/imooc/imooc_voice/view/drawer/NotficationDelegate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/b3g.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/boi.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/com/imooc/imooc_voice/util/SharePreferenceUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../java/com/imooc/imooc_voice/util/SharePreferenceUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/com/imooc/imooc_voice/view/home/BaseDelegate.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../java/com/imooc/imooc_voice/view/home/BaseDelegate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/com/imooc/imooc_voice/view/home/HomeDelegate.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../java/com/imooc/imooc_voice/view/home/HomeDelegate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/com/imooc/imooc_voice/view/login/LoginDelegate.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../java/com/imooc/imooc_voice/view/login/LoginDelegate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/com/imooc/imooc_voice/view/login/PhoneLoginDelegate.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../java/com/imooc/imooc_voice/view/login/PhoneLoginDelegate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/com/imooc/imooc_voice/view/mine/MineDelegate.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../java/com/imooc/imooc_voice/view/mine/MineDelegate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../layout/delegate_base.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../layout/delegate_base.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../layout/delegate_demo.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../layout/delegate_demo.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../layout/delegate_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../layout/delegate_main.xml" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../../../.." />
+  </component>
+  <component name="ProjectId" id="1aw6PoCQobRtKuR4bEwZzVtA8Vn" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="4aa8b573-e1bb-404a-a405-ca645b41b62e" name="Default Changelist" comment="" />
+      <created>1587634287496</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1587634287496</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

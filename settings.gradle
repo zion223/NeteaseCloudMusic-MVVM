@@ -1,0 +1,6 @@
+include ':lib_network'
+include ':lib_image_loader'
+include ':lib_api'
+include ':lib_common_ui'
+include ':app', ':architecture'
+rootProject.name = 'NeteaseCloudMusic'

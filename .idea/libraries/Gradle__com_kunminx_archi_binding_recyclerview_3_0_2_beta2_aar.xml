@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="Gradle: com.kunminx.archi:binding-recyclerview:3.0.2-beta2@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b599d0d2ae17a0d58d7ac1cce881a95e/jetified-binding-recyclerview-3.0.2-beta2/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b599d0d2ae17a0d58d7ac1cce881a95e/jetified-binding-recyclerview-3.0.2-beta2/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b599d0d2ae17a0d58d7ac1cce881a95e/jetified-binding-recyclerview-3.0.2-beta2/res" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.kunminx.archi/binding-recyclerview/3.0.2-beta2/43f7d854fdf29db858da796b78616e5316a6e806/binding-recyclerview-3.0.2-beta2-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.kunminx.archi/binding-recyclerview/3.0.2-beta2/fb924ea405f1962c21c44d5a068f27fa707c9e3a/binding-recyclerview-3.0.2-beta2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
