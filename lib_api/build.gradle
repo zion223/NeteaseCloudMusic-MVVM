@@ -23,7 +23,8 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    api rootProject.depsLibs.gson
     implementation this.rootProject.depsLibs.BaseRecyclerViewAdapterHelper
     implementation this.rootProject.depsLibs.greendao
-    implementation project(path: ':lib_network')
+    //implementation project(path: ':lib_network')
 }

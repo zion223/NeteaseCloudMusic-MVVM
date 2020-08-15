@@ -27,5 +27,12 @@ dependencies {
     api rootProject.depsLibs.okhttp //okttp依赖
     api rootProject.depsLibs.cookieJar //cookie依赖
     api rootProject.depsLibs.gson
-
+    api 'com.squareup.retrofit2:retrofit:2.6.0'
+    api 'com.squareup.retrofit2:converter-gson:2.4.0'
+    api 'com.squareup.retrofit2:adapter-rxjava2:2.5.0'
+    //rxjava库
+    implementation this.rootProject.depsLibs.rxjava
+    implementation this.rootProject.depsLibs.rxandroid
+    compileOnly project(':lib_api')
+    implementation project(':architecture')
 }
