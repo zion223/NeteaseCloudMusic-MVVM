@@ -1,15 +1,16 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 29
-    buildToolsVersion "30.0.1"
+
+    compileSdkVersion rootProject.android.compileSdkVersion
+    buildToolsVersion rootProject.android.buildToolsVersion
+
     defaultConfig {
-        applicationId "com.netease.music"
-        minSdkVersion 23
-        targetSdkVersion 29
-        versionCode 2
-        versionName "1.1.0"
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        applicationId rootProject.android.applicationId
+        minSdkVersion rootProject.android.minSdkVersion
+        targetSdkVersion rootProject.android.targetSdkVersion
+        versionCode rootProject.android.versionCode
+        versionName rootProject.android.versionName
     }
     buildTypes {
         release {
