@@ -28,7 +28,7 @@
 
         <action
             android:id="@+id/action_mainFragment_to_searchFragment"
-            app:destination="@id/searchFragment"
+            app:destination="@id/searchActivity"
             app:enterAnim="@anim/h_fragment_enter"
             app:exitAnim="@anim/h_fragment_exit"
             app:popEnterAnim="@anim/h_fragment_pop_enter"
@@ -44,13 +44,28 @@
 
     </fragment>
 
-    <fragment
-        android:id="@+id/searchFragment"
-        android:name="com.netease.music.ui.page.SearchFragment"
-        android:label="fragment_search"
+    <activity
+        android:id="@+id/searchActivity"
+        android:name="com.netease.music.ui.page.search.SearchActivity"
+        android:label="activity_search"
         tools:layout="@layout/fragment_search">
 
-    </fragment>
+        <action
+            android:id="@+id/action_searchActiviy_to_searchResultActivity"
+            app:destination="@id/searchResultActivity"
+            app:enterAnim="@anim/h_fragment_enter"
+            app:exitAnim="@anim/h_fragment_exit"
+            app:popEnterAnim="@anim/h_fragment_pop_enter"
+            app:popExitAnim="@anim/h_fragment_pop_exit" />
+    </activity>
+
+    <activity
+        android:id="@+id/searchResultActivity"
+        android:name="com.netease.music.ui.page.search.SearchResultActivity"
+        android:label="activity_search_result"
+        tools:layout="@layout/fragment_search">
+
+    </activity>
 
     <fragment
         android:id="@+id/loginFragment"

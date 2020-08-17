@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="info"
+            type="com.netease.music.data.bean.LibraryInfo" />
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="10dp">
+
+        <TextView
+            android:id="@+id/tv_suggest_rank"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="1"
+            android:textColor="@color/gray"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tv_suggest_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_toRightOf="@+id/tv_suggest_rank"
+            android:text="处处吻"
+            android:textColor="@color/black"
+            android:textSize="15.5sp" />
+
+        <ImageView
+            android:id="@+id/iv_suggest_icon"
+            android:layout_width="25dp"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/tv_suggest_name"
+            android:layout_alignBottom="@+id/tv_suggest_name"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/tv_suggest_name" />
+
+        <TextView
+            android:id="@+id/tv_suggest_artist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_suggest_name"
+            android:layout_alignLeft="@+id/tv_suggest_name"
+            android:layout_marginTop="3dp"
+            android:paddingBottom="10dp"
+            android:text="会唱着这首歌的人会发光"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tv_suggest_hot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="8dp"
+            android:text="1200022"
+            android:textColor="@color/silver"
+            android:textSize="12sp" />
+
+    </RelativeLayout>
+</layout>

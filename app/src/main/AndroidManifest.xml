@@ -26,6 +26,8 @@
         <activity android:name=".ui.page.LoginActivity" />
         <activity android:name=".ui.page.drawer.CloudMusicActivity" />
         <activity android:name=".ui.page.drawer.MessageTabActivity" />
+        <activity android:name=".ui.page.search.SearchActivity" />
+        <activity android:name=".ui.page.search.SearchResultActivity" />
         <!-- 闪屏界面作为应用的入口-->
         <activity android:name=".ui.page.SplashActivity">
             <intent-filter>

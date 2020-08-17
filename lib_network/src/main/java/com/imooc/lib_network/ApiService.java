@@ -68,6 +68,7 @@ public interface ApiService {
     @GET("user/cloud")
     Observable<UserCloudBean> getUserCloudMusic();
 
+
     @GET("register/cellphone")
     Observable<LoginBean> register(@Query("phone") String phone, @Query("password") String password, @Query("capture") String capture);
 

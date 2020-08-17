@@ -72,6 +72,7 @@ public abstract class BaseActivity extends DataBindingActivity {
         }
     }
 
+    //如果输入法在窗口上已经显示，则隐藏，反之则显示
     protected void toggleSoftInput() {
         InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
         imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
