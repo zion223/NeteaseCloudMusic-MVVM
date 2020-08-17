@@ -69,6 +69,8 @@ dependencies {
     //rxjava库
     implementation this.rootProject.depsLibs.rxjava
     implementation this.rootProject.depsLibs.rxandroid
+    //MagicIndicator
+    implementation this.rootProject.depsLibs.magicindicator
     //RecyclerView adapter
     implementation this.rootProject.depsLibs.BaseRecyclerViewAdapterHelper
     //permission
