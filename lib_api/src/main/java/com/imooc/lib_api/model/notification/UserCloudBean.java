@@ -15,8 +15,8 @@ public class UserCloudBean {
     private int code;
     private ArrayList<CloudSong> data;
 
-    public int getCount() {
-        return count;
+    public String getCount() {
+        return "共" + count + "首";
     }
 
     public void setCount(int count) {
@@ -162,5 +162,18 @@ public class UserCloudBean {
         public void setSimpleSong(SongDetailBean.SongsBean simpleSong) {
             this.simpleSong = simpleSong;
         }
+    }
+
+    @Override
+    public String toString() {
+        return "UserCloudBean{" +
+                "count=" + count +
+                ", upgradeSign=" + upgradeSign +
+                ", size=" + size +
+                ", maxSize=" + maxSize +
+                ", hasMore=" + hasMore +
+                ", code=" + code +
+                ", data=" + data +
+                '}';
     }
 }

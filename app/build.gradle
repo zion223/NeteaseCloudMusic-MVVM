@@ -69,6 +69,8 @@ dependencies {
     //rxjava库
     implementation this.rootProject.depsLibs.rxjava
     implementation this.rootProject.depsLibs.rxandroid
+    //RecyclerView adapter
+    implementation this.rootProject.depsLibs.BaseRecyclerViewAdapterHelper
     //permission
     implementation this.rootProject.depsLibs.easypermission
     implementation project(path: ':lib_common_ui')

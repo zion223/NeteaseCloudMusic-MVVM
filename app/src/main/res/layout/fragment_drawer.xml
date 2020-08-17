@@ -1,19 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><!--
-  ~ Copyright 2018-present KunMinX
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~    http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License.
-  -->
-
+<?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
@@ -26,10 +11,6 @@
         <variable
             name="click"
             type="com.netease.music.ui.page.DrawerFragment.ClickProxy" />
-
-        <variable
-            name="adapter"
-            type="androidx.recyclerview.widget.ListAdapter" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -37,73 +18,441 @@
         android:layout_height="match_parent"
         android:background="@color/white">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/iv_logo"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginTop="40dp"
-            android:onClick="@{()->click.logoClick()}"
-            android:src="@drawable/ic_launcher"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <RelativeLayout
+            android:id="@+id/left_drawer_layout_base"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:layout_marginEnd="25dp"
+            android:background="@color/white">
 
-        <TextView
-            android:id="@+id/tv_app"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:background="?attr/selectableItemBackground"
-            android:onClick="@{()->click.logoClick()}"
-            android:text="@string/app_name"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/iv_logo" />
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/divider"
+                android:scrollbars="none">
 
-        <TextView
-            android:id="@+id/tv_summary"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:background="?attr/selectableItemBackground"
-            android:onClick="@{()->click.logoClick()}"
-            android:text="@string/app_summary"
-            android:textColor="@color/light_gray"
-            android:textSize="12sp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_app" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv"
-            adapter="@{adapter}"
-            submitList="@{vm.list}"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="24dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toTopOf="@+id/tv_copyright"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_summary" />
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/tv_copyright"
-            android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:background="?attr/selectableItemBackground"
-            android:gravity="center"
-            android:onClick="@{()->click.logoClick()}"
-            android:text="@string/Copyright"
-            android:textColor="@color/light_gray"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rv" />
+                        <RelativeLayout
+                            android:id="@+id/rl_main_avatar"
+                            android:layout_width="match_parent"
+                            android:layout_height="180dp"
+                            android:background="@color/app_background"
+                            visible="@{!(vm.user == null)}">
+
+                            <ImageView
+                                android:id="@+id/avatr_view"
+                                android:layout_width="60dp"
+                                android:layout_height="60dp"
+                                android:layout_alignParentLeft="true"
+                                android:layout_marginLeft="10dp"
+                                imageUrl="@{vm.user.profile.avatarUrl}"
+                                android:layout_marginTop="50dp" />
+
+                            <TextView
+                                android:id="@+id/avatar_name"
+                                android:layout_width="90dp"
+                                android:layout_height="wrap_content"
+                                android:layout_alignLeft="@+id/avatr_view"
+                                android:layout_alignTop="@+id/avatar_check"
+                                android:layout_alignBottom="@+id/avatar_check"
+                                android:ellipsize="end"
+                                android:gravity="center_vertical"
+                                android:maxLines="1"
+                                android:text="@{vm.user.profile.nickname}"
+                                android:textColor="@color/black"
+                                android:textSize="15sp" />
+
+                            <ImageView
+                                android:id="@+id/iv_avatar_vip"
+                                android:layout_width="30dp"
+                                android:layout_height="wrap_content"
+                                android:layout_alignTop="@+id/avatar_name"
+                                android:layout_alignBottom="@+id/avatar_name"
+                                android:layout_marginLeft="10dp"
+                                android:layout_toRightOf="@+id/avatar_name"
+                                android:src="@drawable/ic_vip"
+                                android:visibility="gone" />
+
+                            <TextView
+                                android:id="@+id/tv_user_level"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignTop="@+id/avatar_name"
+                                android:layout_alignBottom="@+id/avatar_name"
+                                android:layout_marginLeft="10dp"
+                                android:layout_toRightOf="@+id/iv_avatar_vip"
+                                android:gravity="center"
+                                android:paddingLeft="3dp"
+                                android:paddingRight="3dp"
+                                android:textColor="@color/lightgray"
+                                android:textSize="11sp"
+                                android:textStyle="bold|italic" />
+
+                            <TextView
+                                android:id="@+id/avatar_check"
+                                android:layout_width="60dp"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/avatr_view"
+                                android:layout_alignParentRight="true"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginRight="20dp"
+                                android:background="@drawable/bg_round_red"
+                                android:gravity="center_horizontal"
+                                android:paddingTop="5dp"
+                                android:paddingBottom="5dp"
+                                android:text="签到"
+                                android:textColor="@color/white"
+                                android:textSize="11sp" />
+                        </RelativeLayout>
+
+                        <LinearLayout
+                            android:id="@+id/unloggin_layout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            visible="@{vm.user == null}">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="20dp"
+                                android:gravity="center"
+                                android:text="@string/home_login_tip"
+                                android:textColor="@color/color_333333"
+                                android:textSize="13sp" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:gravity="center"
+                                android:text="@string/home_login_tip_2"
+                                android:textColor="@color/color_333333"
+                                android:textSize="13sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginTop="20dp"
+                                android:background="@drawable/bg_home_login"
+                                android:paddingStart="40dp"
+                                android:paddingTop="5dp"
+                                android:paddingEnd="40dp"
+                                android:paddingBottom="5dp"
+                                onClickWithDebouncing="@{() -> click.login()}"
+                                android:text="@string/home_login"
+                                android:textColor="@color/color_333333"
+                                android:textSize="15sp" />
+                        </LinearLayout>
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="35dp"
+                        android:orientation="horizontal"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp">
+
+                        <com.imooc.lib_common_ui.VerticalItemView
+                            android:id="@+id/icon_notification_msg"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            app:icon="@drawable/ic_message_red"
+                            app:iconHeight="23dp"
+                            app:iconWidth="23dp"
+                            app:infoText="我的消息"
+                            app:infoTextColor="@color/color_333333"
+                            app:infoTextMarginTop="5dp"
+                            app:infoTextSize="11sp"
+                            app:tipBg="@drawable/bg_circle_red"
+                            app:tipPaddingRight="2dp"
+                            app:tipPaddingTop="2dp"
+                            app:tipText="1"
+                            onClickWithDebouncing="@{() -> click.searchMessage()}"
+                            app:tipTextColor="@color/color_white"
+                            app:tipTextSize="7sp" />
+
+                        <com.imooc.lib_common_ui.VerticalItemView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            app:icon="@drawable/ic_notification_friend"
+                            app:iconHeight="23dp"
+                            app:iconWidth="23dp"
+                            app:infoText="我的好友"
+                            app:infoTextColor="@color/color_333333"
+                            app:infoTextMarginTop="5dp"
+                            app:infoTextSize="11sp"
+                            app:tipBg="@drawable/bg_circle_red"
+                            app:tipPaddingRight="2dp"
+                            app:tipPaddingTop="2dp"
+                            app:tipText="1"
+                            app:tipTextColor="@color/color_white"
+                            app:tipTextSize="7sp" />
+
+                        <com.imooc.lib_common_ui.VerticalItemView
+                            android:id="@+id/icon_notification_listen"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            app:icon="@drawable/ic_listen_regeconize"
+                            app:iconHeight="23dp"
+                            app:iconWidth="23dp"
+                            app:infoText="听歌识曲"
+                            app:infoTextColor="@color/color_333333"
+                            app:infoTextMarginTop="5dp"
+                            app:infoTextSize="11sp"
+                            app:tipBg="@drawable/bg_circle_red"
+                            app:tipPaddingRight="2dp"
+                            app:tipPaddingTop="2dp"
+                            app:tipText="1"
+                            app:tipTextColor="@color/color_white"
+                            app:tipTextSize="7sp" />
+
+                        <com.imooc.lib_common_ui.VerticalItemView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            app:icon="@drawable/ic_change_skin"
+                            app:iconHeight="23dp"
+                            app:iconWidth="23dp"
+                            app:infoText="个性换肤"
+                            app:infoTextColor="@color/color_333333"
+                            app:infoTextMarginTop="5dp"
+                            app:infoTextSize="11sp"
+                            app:tipBg="@drawable/bg_circle_red"
+                            app:tipPaddingRight="2dp"
+                            app:tipPaddingTop="2dp"
+                            app:tipText="1"
+                            app:tipTextColor="@color/color_white"
+                            app:tipTextSize="7sp" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:layout_margin="20dp"
+                        android:background="#dddddd" />
+
+                    <com.imooc.lib_common_ui.HornizeItemView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:hIcon="@drawable/ic_perform"
+                        app:hTipVisiblity="false"
+                        app:paddingLeft="20dp"
+                        app:paddingRight="30dp"
+                        app:rightText="周杰伦青岛"
+                        app:tileText="演出" />
+
+                    <com.imooc.lib_common_ui.HornizeItemView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:hIcon="@drawable/ic_shop"
+                        app:hTipVisiblity="false"
+                        app:paddingLeft="20dp"
+                        app:paddingRight="30dp"
+                        app:rightText="Freelace耳机728元"
+                        app:tileText="商城" />
+
+                    <com.imooc.lib_common_ui.HornizeItemView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:hIcon="@drawable/ic_position"
+                        app:hTipVisiblity="false"
+                        app:paddingLeft="20dp"
+                        app:paddingRight="30dp"
+                        app:tileText="附近的人" />
+
+                    <com.imooc.lib_common_ui.HornizeItemView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:hIcon="@drawable/ic_lingsheng"
+                        app:hTipVisiblity="false"
+                        app:paddingLeft="20dp"
+                        app:paddingRight="30dp"
+                        app:tileText="口袋铃声" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:layout_margin="20dp"
+                        android:background="#dddddd" />
+
+                    <com.imooc.lib_common_ui.HornizeItemView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:hIcon="@drawable/ic_timer"
+                        app:hTipVisiblity="false"
+                        app:paddingLeft="20dp"
+                        app:paddingRight="30dp"
+                        app:tileText="定时停止播放" />
+
+                    <com.imooc.lib_common_ui.HornizeItemView
+                        android:id="@+id/home_qrcode"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:hIcon="@drawable/ic_scan"
+                        app:hTipVisiblity="false"
+                        app:paddingLeft="20dp"
+                        app:paddingRight="30dp"
+                        app:tileText="扫一扫" />
+
+                    <com.imooc.lib_common_ui.HornizeItemView
+                        android:id="@+id/home_music"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:hIcon="@drawable/ic_alarm"
+                        app:hTipVisiblity="false"
+                        app:paddingLeft="20dp"
+                        app:paddingRight="30dp"
+                        app:tileText="音乐闹钟" />
+
+                    <com.imooc.lib_common_ui.HornizeItemView
+                        android:id="@+id/online_music_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:hIcon="@drawable/ic_free_flow"
+                        app:hTipVisiblity="false"
+                        app:paddingLeft="20dp"
+                        app:paddingRight="30dp"
+                        app:tileText="在线听歌免流量" />
+
+                    <com.imooc.lib_common_ui.HornizeItemView
+                        android:id="@+id/icon_cloud_music"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:hIcon="@drawable/ic_cloud"
+                        app:hTipVisiblity="false"
+                        app:paddingLeft="20dp"
+                        app:paddingRight="30dp"
+                        onClickWithDebouncing="@{() -> click.searchCloud()}"
+                        app:tileText="音乐云盘" />
+
+                    <com.imooc.lib_common_ui.HornizeItemView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:hIcon="@drawable/ic_discount"
+                        app:hTipVisiblity="false"
+                        app:paddingLeft="20dp"
+                        app:paddingRight="30dp"
+                        app:tileText="优惠卷" />
+
+                    <com.imooc.lib_common_ui.HornizeItemView
+                        android:id="@+id/check_update_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:hIcon="@drawable/ic_sun"
+                        app:hTipVisiblity="false"
+                        app:paddingLeft="20dp"
+                        app:paddingRight="30dp"
+                        app:tileText="检查更新" />
+                </LinearLayout>
+
+            </ScrollView>
+
+            <View
+                android:id="@+id/divider"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_alignTop="@id/operator_view"
+                android:background="#dddddd" />
+
+            <LinearLayout
+                android:id="@+id/operator_view"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_alignParentBottom="true"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@mipmap/ic_night" />
+
+                    <View
+                        android:layout_width="6dp"
+                        android:layout_height="match_parent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="夜间模式"
+                        android:textColor="@color/color_333333"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@mipmap/ic_setting" />
+
+                    <View
+                        android:layout_width="6dp"
+                        android:layout_height="match_parent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="设置"
+                        android:textColor="@color/color_333333"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/exit_layout"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@mipmap/ic_shutdown" />
+
+                    <View
+                        android:layout_width="6dp"
+                        android:layout_height="match_parent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="退出"
+                        android:textColor="@color/color_333333"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </RelativeLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

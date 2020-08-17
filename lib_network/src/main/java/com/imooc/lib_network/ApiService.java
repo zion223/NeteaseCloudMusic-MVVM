@@ -14,6 +14,7 @@ import com.imooc.lib_api.model.dj.DjRecommendTypeBean;
 import com.imooc.lib_api.model.dj.DjSubBean;
 import com.imooc.lib_api.model.mv.MvSublistBean;
 import com.imooc.lib_api.model.notification.CommonMessageBean;
+import com.imooc.lib_api.model.notification.UserCloudBean;
 import com.imooc.lib_api.model.playlist.CatlistBean;
 import com.imooc.lib_api.model.playlist.DailyRecommendBean;
 import com.imooc.lib_api.model.playlist.HighQualityPlayListBean;
@@ -63,6 +64,9 @@ public interface ApiService {
 
     @GET("captcha/sent")
     Observable<CommonMessageBean> capture(@Query("phone") String phone);
+
+    @GET("user/cloud")
+    Observable<UserCloudBean> getUserCloudMusic();
 
     @GET("register/cellphone")
     Observable<LoginBean> register(@Query("phone") String phone, @Query("password") String password, @Query("capture") String capture);

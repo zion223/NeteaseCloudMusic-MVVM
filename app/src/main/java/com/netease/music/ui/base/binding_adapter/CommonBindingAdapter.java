@@ -16,6 +16,7 @@
 
 package com.netease.music.ui.base.binding_adapter;
 
+import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,8 +24,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.databinding.BindingAdapter;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.imooc.lib_common_ui.widget.CaptchaView;
 import com.kunminx.architecture.utils.ClickUtils;
 
@@ -87,5 +91,21 @@ public class CommonBindingAdapter {
     @BindingAdapter(value = {"initCaptureViewListener"})
     public static void setListener(CaptchaView captchaView, CaptchaView.OnInputListener listener) {
         captchaView.setOnInputListener(listener);
+    }
+
+    @BindingAdapter(value = {"showLoadingAnim"})
+    public static void showLoadingAnim(ImageView imageView, Boolean show) {
+        AnimationDrawable animationDrawable = (AnimationDrawable) imageView.getDrawable();
+        if (show) {
+            animationDrawable.start();
+        } else {
+            animationDrawable.stop();
+        }
+    }
+
+    @BindingAdapter(value = {"linearAdapter"})
+    public static void initRecyclerViewWithLinearLayoutManager(RecyclerView recyclerView, RecyclerView.Adapter adapter) {
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
     }
 }

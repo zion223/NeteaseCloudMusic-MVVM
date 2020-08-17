@@ -1,18 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><!--
-  ~ Copyright 2018-present KunMinX
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~    http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License.
-  -->
+<?xml version="1.0" encoding="utf-8"?>
 
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -24,5 +10,47 @@
         android:id="@+id/drawerFragment"
         android:name="com.netease.music.ui.page.DrawerFragment"
         android:label="fragment_drawer"
-        tools:layout="@layout/fragment_drawer" />
+        tools:layout="@layout/fragment_drawer">
+
+        <action
+            android:id="@+id/action_drawerFragment_to_messageTabFragment"
+            app:destination="@id/messageTabFragment"
+            app:enterAnim="@anim/h_fragment_enter"
+            app:exitAnim="@anim/h_fragment_exit"
+            app:popEnterAnim="@anim/h_fragment_pop_enter"
+            app:popExitAnim="@anim/h_fragment_pop_exit" />
+        <action
+            android:id="@+id/action_drawerFragment_to_cloudFragment"
+            app:destination="@id/cloudActivity"
+            app:enterAnim="@anim/h_fragment_enter"
+            app:exitAnim="@anim/h_fragment_exit"
+            app:popEnterAnim="@anim/h_fragment_pop_enter"
+            app:popExitAnim="@anim/h_fragment_pop_exit" />
+
+        <action
+            android:id="@+id/action_drawerFragment_to_loginActivity"
+            app:destination="@id/loginFragment"
+            app:enterAnim="@anim/h_fragment_enter"
+            app:exitAnim="@anim/h_fragment_exit"
+            app:popEnterAnim="@anim/h_fragment_pop_enter"
+            app:popExitAnim="@anim/h_fragment_pop_exit" />
+    </fragment>
+
+    <activity
+        android:id="@+id/messageTabFragment"
+        android:name="com.netease.music.ui.page.drawer.MessageTabActivity"
+        android:label="messageFragment"
+        tools:layout="@layout/fragment_login" />
+
+    <activity
+        android:id="@+id/cloudActivity"
+        android:name="com.netease.music.ui.page.drawer.CloudMusicActivity"
+        android:label="cloudActivity"
+        tools:layout="@layout/delegate_user_cloud" />
+
+    <activity
+        android:id="@+id/loginFragment"
+        android:name="com.netease.music.ui.page.PhoneLoginActivity"
+        android:label="phoneLoginFragment"
+        tools:layout="@layout/delegate_phone_login" />
 </navigation>
