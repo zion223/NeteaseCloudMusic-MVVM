@@ -66,11 +66,16 @@ dependencies {
     implementation 'com.sothree.slidinguppanel:library:3.4.0'
     implementation 'net.steamcrafted:materialiconlib:1.1.5'
 
+    implementation  'com.scwang.smart:refresh-layout-kernel:2.0.1'      //核心必须依赖
+    implementation  'com.scwang.smart:refresh-header-classics:2.0.1'    //经典刷新头
     //rxjava库
     implementation this.rootProject.depsLibs.rxjava
     implementation this.rootProject.depsLibs.rxandroid
     //MagicIndicator
     implementation this.rootProject.depsLibs.magicindicator
+    //视频播放
+    implementation this.rootProject.depsLibs.videoplayer
+
     //RecyclerView adapter
     implementation this.rootProject.depsLibs.BaseRecyclerViewAdapterHelper
     //permission
@@ -79,7 +84,7 @@ dependencies {
     implementation project(path: ':lib_image_loader')
     //implementation project(path: ':lib_webview')
     implementation project(path: ':lib_audio')
-    //implementation project(path: ':lib_video')
+    implementation project(path: ':lib_video')
     //implementation project(path: ':lib_update')
     implementation project(path: ':lib_api')
     implementation project(path: ':lib_network')

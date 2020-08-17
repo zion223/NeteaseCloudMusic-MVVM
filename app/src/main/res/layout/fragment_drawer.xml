@@ -10,7 +10,7 @@
 
         <variable
             name="click"
-            type="com.netease.music.ui.page.DrawerFragment.ClickProxy" />
+            type="com.netease.music.ui.page.drawer.DrawerFragment.ClickProxy" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

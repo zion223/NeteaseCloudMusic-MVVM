@@ -35,6 +35,9 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.imooc.lib_common_ui.widget.CaptchaView;
 import com.kunminx.architecture.utils.ClickUtils;
 import com.kunminx.architecture.utils.Utils;
+import com.scwang.smart.refresh.layout.SmartRefreshLayout;
+import com.scwang.smart.refresh.layout.listener.OnLoadMoreListener;
+import com.scwang.smart.refresh.layout.listener.OnRefreshListener;
 
 import java.util.List;
 
@@ -128,6 +131,16 @@ public class CommonBindingAdapter {
     @BindingAdapter(value = {"viewPagerOffsetLimit"})
     public static void setViewPagerAdapter(ViewPager viewPager, int limit) {
         viewPager.setOffscreenPageLimit(limit);
+    }
+
+    @BindingAdapter(value = {"onSmartRefreshListener"}, requireAll = false)
+    public static void setOffsetChangeListener(SmartRefreshLayout refreshLayout, OnRefreshListener listener) {
+        refreshLayout.setOnRefreshListener(listener);
+    }
+
+    @BindingAdapter(value = {"onSmartLoadMoreListener"}, requireAll = false)
+    public static void setOnLoadMoreListener(SmartRefreshLayout refreshLayout, OnLoadMoreListener listener) {
+        refreshLayout.setOnLoadMoreListener(listener);
     }
 
     @BindingAdapter(value = {"adapter", "submitList", "autoScrollToTopWhenInsert", "autoScrollToBottomWhenInsert"}, requireAll = false)

@@ -1,14 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    <data>
+
+        <variable
+            name="vm"
+            type="com.netease.music.ui.state.CloudVillageFragmentViewModel" />
+
+        <variable
+            name="refreshListener"
+            type="com.scwang.smart.refresh.layout.listener.OnRefreshListener" />
+
+        <variable
+            name="loadMoreListener"
+            type="com.scwang.smart.refresh.layout.listener.OnLoadMoreListener" />
+    </data>
+
+    <com.scwang.smart.refresh.layout.SmartRefreshLayout
         android:id="@+id/refresh_layout_delegate_friend"
+        onSmartLoadMoreListener="@{loadMoreListener}"
+        onSmartRefreshListener="@{refreshListener}"
+        reloadRefreshState="@{vm.reloadState}"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <com.scwang.smart.refresh.header.ClassicsHeader
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_delegate_friend"
+            linearAdapter="@{vm.adapter}"
+            visible="@{!vm.loadingVisible}"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+        <include
+            bind:loading="@{vm.loadingVisible}"
+            bind:visible="@{vm.loadingVisible}"
+            layout="@layout/delegate_normal_loading" />
+    </com.scwang.smart.refresh.layout.SmartRefreshLayout>
 </layout>
