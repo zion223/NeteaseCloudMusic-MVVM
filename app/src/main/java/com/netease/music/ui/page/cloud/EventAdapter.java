@@ -31,7 +31,7 @@ public class EventAdapter extends BaseQuickAdapter<UserEventBean.EventsBean, Bas
 
     //图片加载
     private ImageLoaderManager manager;
-    private List<ImageView> imgList = new ArrayList<>();
+    private List<Integer> imgList = new ArrayList<>();
 
     public EventAdapter(@Nullable List<UserEventBean.EventsBean> data) {
         super(R.layout.item_user_event, data);
@@ -59,8 +59,7 @@ public class EventAdapter extends BaseQuickAdapter<UserEventBean.EventsBean, Bas
         adapter.setText(R.id.tv_relayout_count, item.getInfo().getShareCount() == 0 ? "" : String.valueOf(item.getInfo().getShareCount()));
         adapter.setText(R.id.tv_comment_count, item.getInfo().getCommentCount() == 0 ? "" : String.valueOf(item.getInfo().getCommentCount()));
         adapter.setText(R.id.tv_like_count, item.getInfo().getLikedCount() == 0 ? "" : String.valueOf(item.getInfo().getLikedCount()));
-        //初始化图片控件
-        initImageView(adapter);
+
         //解析JSON
         String jsonEvnet = item.getJson();
         UserEventJsonBean userEventJsonBean = GsonUtil.fromJSON(jsonEvnet, UserEventJsonBean.class);
@@ -70,6 +69,8 @@ public class EventAdapter extends BaseQuickAdapter<UserEventBean.EventsBean, Bas
                 adapter.setVisible(R.id.tv_content, true);
                 adapter.setText(R.id.tv_content, userEventJsonBean.getMsg());
             }
+            //初始化图片控件
+            initImageView(adapter);
             //显示图片
             showImg(adapter, item);
             //显示分享组件的内容 歌曲、电台、歌单 、专辑等
@@ -135,15 +136,16 @@ public class EventAdapter extends BaseQuickAdapter<UserEventBean.EventsBean, Bas
         ImageView ivShow8 = adapter.getView(R.id.iv_img_8);
         ImageView ivShow9 = adapter.getView(R.id.iv_img_9);
 
-        imgList.add(ivShow1);
-        imgList.add(ivShow2);
-        imgList.add(ivShow3);
-        imgList.add(ivShow4);
-        imgList.add(ivShow5);
-        imgList.add(ivShow6);
-        imgList.add(ivShow7);
-        imgList.add(ivShow8);
-        imgList.add(ivShow9);
+        imgList.add(R.id.iv_img_1);
+        imgList.add(R.id.iv_img_2);
+        imgList.add(R.id.iv_img_3);
+        imgList.add(R.id.iv_img_4);
+        imgList.add(R.id.iv_img_5);
+        imgList.add(R.id.iv_img_6);
+        imgList.add(R.id.iv_img_7);
+        imgList.add(R.id.iv_img_8);
+        imgList.add(R.id.iv_img_9);
+
     }
 
 
@@ -169,14 +171,14 @@ public class EventAdapter extends BaseQuickAdapter<UserEventBean.EventsBean, Bas
                 if (i == 6) {
                     adapter.setVisible(R.id.ll_img_group3, true);
                 }
-                manager.displayImageForCorner(imgList.get(i), item.getPics().get(i).getRectangleUrl());
+                manager.displayImageForCorner(adapter.getView(imgList.get(i)), item.getPics().get(i).getRectangleUrl());
                 //每张图片的点击事件
-                ImageView imageView = imgList.get(i);
+                ImageView imageView = adapter.getView(imgList.get(i));
 
 
                 final int postion = i;
                 //查看大图
-                imgList.get(i).setOnClickListener(new View.OnClickListener() {
+                adapter.getView(imgList.get(i)).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
 
