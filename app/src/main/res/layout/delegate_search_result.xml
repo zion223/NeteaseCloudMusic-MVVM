@@ -25,7 +25,6 @@
                 android:layout_height="25dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
-                onClickWithDebouncing="@{() -> }"
                 android:src="@drawable/ic_left_arrow_black" />
 
             <EditText

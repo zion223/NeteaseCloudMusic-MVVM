@@ -42,14 +42,19 @@
                 app:defaultNavHost="true"
                 app:navGraph="@navigation/nav_main" />
 
-            <fragment
+            <!--<fragment
                 android:id="@+id/slide_fragment_host"
                 android:name="androidx.navigation.fragment.NavHostFragment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fitsSystemWindows="true"
                 app:defaultNavHost="true"
-                app:navGraph="@navigation/nav_slide" />
+                app:navGraph="@navigation/nav_slide" />-->
+            <com.imooc.lib_audio.mediaplayer.view.BottomMusicView
+                android:id="@+id/bottom_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true" />
 
         </com.sothree.slidinguppanel.SlidingUpPanelLayout>
 

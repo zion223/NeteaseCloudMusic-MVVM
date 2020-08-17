@@ -78,7 +78,7 @@ dependencies {
     implementation project(path: ':lib_common_ui')
     implementation project(path: ':lib_image_loader')
     //implementation project(path: ':lib_webview')
-    //implementation project(path: ':lib_audio')
+    implementation project(path: ':lib_audio')
     //implementation project(path: ':lib_video')
     //implementation project(path: ':lib_update')
     implementation project(path: ':lib_api')

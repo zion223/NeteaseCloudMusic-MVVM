@@ -1,3 +1,4 @@
+include ':lib_audio'
 include ':lib_network'
 include ':lib_image_loader'
 include ':lib_api'

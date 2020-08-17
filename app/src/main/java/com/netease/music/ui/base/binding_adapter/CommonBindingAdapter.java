@@ -25,8 +25,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.databinding.BindingAdapter;
+import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -118,9 +120,14 @@ public class CommonBindingAdapter {
         editText.setOnEditorActionListener(listener);
     }
 
-    @BindingAdapter(value = {"submitList"})
-    public static void setRecyclerViewData(EditText editText, TextView.OnEditorActionListener listener) {
-        editText.setOnEditorActionListener(listener);
+    @BindingAdapter(value = {"viewPagerAdapter"})
+    public static void setViewPagerAdapter(ViewPager viewPager, FragmentPagerAdapter adapter) {
+        viewPager.setAdapter(adapter);
+    }
+
+    @BindingAdapter(value = {"viewPagerOffsetLimit"})
+    public static void setViewPagerAdapter(ViewPager viewPager, int limit) {
+        viewPager.setOffscreenPageLimit(limit);
     }
 
     @BindingAdapter(value = {"adapter", "submitList", "autoScrollToTopWhenInsert", "autoScrollToBottomWhenInsert"}, requireAll = false)

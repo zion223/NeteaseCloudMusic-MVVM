@@ -1,18 +1,15 @@
 package com.netease.music.ui.page;
 
 import android.os.Bundle;
-import android.view.View;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.kunminx.architecture.ui.page.BaseFragment;
 import com.kunminx.architecture.ui.page.DataBindingConfig;
 import com.netease.music.BR;
 import com.netease.music.R;
-import com.netease.music.player.PlayerManager;
 import com.netease.music.ui.callback.SharedViewModel;
-import com.netease.music.ui.page.adapter.PlaylistAdapter;
+import com.netease.music.ui.page.adapter.HomePagerAdapter;
 import com.netease.music.ui.state.MainViewModel;
 
 public class MainFragment extends BaseFragment {
@@ -29,66 +26,17 @@ public class MainFragment extends BaseFragment {
     @Override
     protected DataBindingConfig getDataBindingConfig() {
 
-        //TODO tip: DataBinding 严格模式：
-        // 将 DataBinding 实例限制于 base 页面中，默认不向子类暴露，
-        // 通过这样的方式，来彻底解决 视图调用的一致性问题，
-        // 如此，视图刷新的安全性将和基于函数式编程的 Jetpack Compose 持平。
-        // 而 DataBindingConfig 就是在这样的背景下，用于为 base 页面中的 DataBinding 提供绑定项。
-
-        // 如果这样说还不理解的话，详见 https://xiaozhuanlan.com/topic/9816742350 和 https://xiaozhuanlan.com/topic/2356748910
-
         return new DataBindingConfig(R.layout.fragment_main, BR.vm, mMainViewModel)
                 .addBindingParam(BR.click, new ClickProxy())
-                .addBindingParam(BR.adapter, new PlaylistAdapter(getContext()));
+                .addBindingParam(BR.adapter, new HomePagerAdapter(getChildFragmentManager(), mMainViewModel.channelArray.get()));
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-        PlayerManager.getInstance().getChangeMusicLiveData().observe(getViewLifecycleOwner(), changeMusic -> {
-
-            // TODO tip 1：所有播放状态的改变，都要通过这个 作为 唯一可信源 的 PlayerManager 来统一分发，
-
-            // 如此才能方便 追溯事件源，以及 避免 不可预期的 推送和错误。
-            // 如果这样说还不理解的话，详见 https://xiaozhuanlan.com/topic/0168753249
-
-            mMainViewModel.notifyCurrentListChanged.setValue(true);
-        });
-
-        mMainViewModel.musicRequest.getFreeMusicsLiveData().observe(getViewLifecycleOwner(), musicAlbum -> {
-            if (musicAlbum != null && musicAlbum.getMusics() != null) {
-                mMainViewModel.list.setValue(musicAlbum.getMusics());
-
-                // TODO tip 4：未作 UnPeek 处理的 用于 request 的 LiveData，在视图控制器重建时会自动倒灌数据
-
-                // 一定要记住这一点，因为如果没有妥善处理，这里就会出现预期外的错误，一定要记得它在重建时 是一定会倒灌的。
-
-                // 如果这样说还不理解的话，详见 https://xiaozhuanlan.com/topic/0129483567
-
-                if (PlayerManager.getInstance().getAlbum() == null ||
-                        !PlayerManager.getInstance().getAlbum().getAlbumId().equals(musicAlbum.getAlbumId())) {
-                    PlayerManager.getInstance().loadAlbum(musicAlbum);
-                }
-            }
-        });
-
-        if (PlayerManager.getInstance().getAlbum() == null) {
-
-            //TODO 将 request 作为 ViewModel 的成员暴露给 Activity/Fragment，
-            // 如此便于语义的明确，以及实现多个 request 在 ViewModel 中的组合和复用。
-
-            mMainViewModel.musicRequest.requestFreeMusics();
-        } else {
-            mMainViewModel.list.setValue(PlayerManager.getInstance().getAlbum().getMusics());
-        }
     }
 
-
-    // TODO tip 2：此处通过 DataBinding 来规避 在 setOnClickListener 时存在的 视图调用的一致性问题，
-
-    // 也即，有绑定就有绑定，没绑定也没什么大不了的，总之 不会因一致性问题造成 视图调用的空指针。
-    // 如果这么说还不理解的话，详见 https://xiaozhuanlan.com/topic/9816742350
 
     public class ClickProxy {
 
