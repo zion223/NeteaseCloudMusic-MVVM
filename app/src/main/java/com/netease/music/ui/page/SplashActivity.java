@@ -12,6 +12,7 @@ import com.imooc.lib_common_ui.utils.SharePreferenceUtil;
 import com.kunminx.architecture.utils.Utils;
 import com.netease.music.MainActivity;
 import com.netease.music.R;
+import com.netease.music.ui.page.login.LoginActivity;
 
 import java.util.concurrent.TimeUnit;
 
@@ -22,8 +23,6 @@ import pub.devrel.easypermissions.EasyPermissions;
 
 
 public class SplashActivity extends AppCompatActivity {
-
-    private static final String TAG = "SplashActivity";
 
 
     @Override

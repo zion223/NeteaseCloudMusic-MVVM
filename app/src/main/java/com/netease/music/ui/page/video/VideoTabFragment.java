@@ -1,4 +1,4 @@
-package com.netease.music.ui.page;
+package com.netease.music.ui.page.video;
 
 import com.kunminx.architecture.ui.page.BaseFragment;
 import com.kunminx.architecture.ui.page.DataBindingConfig;

@@ -1,4 +1,4 @@
-package com.netease.music.ui.page;
+package com.netease.music.ui.page.login;
 
 
 import android.content.Intent;
@@ -27,7 +27,6 @@ import io.reactivex.schedulers.Schedulers;
 
 public class PhoneLoginActivity extends BaseActivity {
 
-    private static final String TAG = "PhoneLoginActivity";
 
     private PhoneLoginViewModel mPhoneLoginViewModel;
 

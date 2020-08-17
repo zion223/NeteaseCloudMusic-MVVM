@@ -22,8 +22,8 @@
 
         <activity android:name="com.netease.music.MainActivity" />
 
-        <activity android:name=".ui.page.PhoneLoginActivity" />
-        <activity android:name=".ui.page.LoginActivity" />
+        <activity android:name=".ui.page.login.PhoneLoginActivity" />
+        <activity android:name=".ui.page.login.LoginActivity" />
         <activity android:name=".ui.page.drawer.CloudMusicActivity" />
         <activity android:name=".ui.page.drawer.MessageTabActivity" />
         <activity android:name=".ui.page.search.SearchActivity" />

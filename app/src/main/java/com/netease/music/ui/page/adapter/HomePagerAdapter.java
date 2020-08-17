@@ -5,10 +5,10 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.netease.music.data.config.CHANNEL;
-import com.netease.music.ui.page.CloudVillageFragment;
-import com.netease.music.ui.page.DiscoverFragment;
-import com.netease.music.ui.page.MineFragment;
-import com.netease.music.ui.page.VideoTabFragment;
+import com.netease.music.ui.page.cloud.CloudVillageFragment;
+import com.netease.music.ui.page.discover.DiscoverFragment;
+import com.netease.music.ui.page.mine.MineFragment;
+import com.netease.music.ui.page.video.VideoTabFragment;
 
 import org.jetbrains.annotations.NotNull;
 

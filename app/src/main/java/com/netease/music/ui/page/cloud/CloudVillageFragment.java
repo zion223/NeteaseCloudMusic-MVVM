@@ -1,10 +1,11 @@
-package com.netease.music.ui.page;
+package com.netease.music.ui.page.cloud;
 
 import com.kunminx.architecture.ui.page.BaseFragment;
 import com.kunminx.architecture.ui.page.DataBindingConfig;
 import com.netease.music.R;
 
-public class MineFragment extends BaseFragment {
+public class CloudVillageFragment extends BaseFragment {
+
 
     @Override
     protected void initViewModel() {
@@ -13,6 +14,6 @@ public class MineFragment extends BaseFragment {
 
     @Override
     protected DataBindingConfig getDataBindingConfig() {
-        return new DataBindingConfig(R.layout.delegate_mine, 0, null);
+        return new DataBindingConfig(R.layout.delegate_friend, 0, null);
     }
 }

@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/drawerFragment"
-        android:name="com.netease.music.ui.page.DrawerFragment"
+        android:name="com.netease.music.ui.page.drawer.DrawerFragment"
         android:label="fragment_drawer"
         tools:layout="@layout/fragment_drawer">
 
@@ -50,7 +50,7 @@
 
     <activity
         android:id="@+id/loginFragment"
-        android:name="com.netease.music.ui.page.PhoneLoginActivity"
+        android:name="com.netease.music.ui.page.login.PhoneLoginActivity"
         android:label="phoneLoginFragment"
         tools:layout="@layout/delegate_phone_login" />
 </navigation>

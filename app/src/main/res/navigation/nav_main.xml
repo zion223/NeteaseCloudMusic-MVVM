@@ -55,7 +55,7 @@
 
     <activity
         android:id="@+id/loginFragment"
-        android:name="com.netease.music.ui.page.LoginActivity"
+        android:name="com.netease.music.ui.page.login.LoginActivity"
         android:label="LoginFragment"
         tools:layout="@layout/fragment_login" />
 

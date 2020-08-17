@@ -9,7 +9,7 @@
 
         <variable
             name="proxy"
-            type="com.netease.music.ui.page.PhoneLoginActivity.ClickProxy" />
+            type="com.netease.music.ui.page.login.PhoneLoginActivity.ClickProxy" />
 
         <variable
             name="listener"

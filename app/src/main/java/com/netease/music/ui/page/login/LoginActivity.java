@@ -1,4 +1,4 @@
-package com.netease.music.ui.page;
+package com.netease.music.ui.page.login;
 
 import android.content.Intent;
 

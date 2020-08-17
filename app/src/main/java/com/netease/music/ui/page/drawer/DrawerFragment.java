@@ -1,4 +1,4 @@
-package com.netease.music.ui.page;
+package com.netease.music.ui.page.drawer;
 
 import android.os.Bundle;
 import android.view.View;

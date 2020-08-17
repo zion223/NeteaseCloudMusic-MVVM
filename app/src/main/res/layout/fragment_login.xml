@@ -10,7 +10,7 @@
 
         <variable
             name="click"
-            type="com.netease.music.ui.page.LoginActivity.ClickProxy" />
+            type="com.netease.music.ui.page.login.LoginActivity.ClickProxy" />
 
     </data>
 
