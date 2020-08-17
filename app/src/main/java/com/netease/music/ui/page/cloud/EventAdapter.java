@@ -36,7 +36,6 @@ public class EventAdapter extends BaseQuickAdapter<UserEventBean.EventsBean, Bas
     public EventAdapter(@Nullable List<UserEventBean.EventsBean> data) {
         super(R.layout.item_user_event, data);
         manager = ImageLoaderManager.getInstance();
-        //this.mDelegate = delegate;
     }
 
     @Override
@@ -44,13 +43,6 @@ public class EventAdapter extends BaseQuickAdapter<UserEventBean.EventsBean, Bas
         //用户头像
         ImageView avatarView = adapter.getView(R.id.iv_avatar);
         manager.displayImageForCircle(avatarView, item.getUser().getAvatarUrl());
-        avatarView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //用户详情
-                //mDelegate.getSupportDelegate().start(UserDetailDelegate.newInstance(item.getUser().getUserId()));
-            }
-        });
         //昵称
         adapter.setText(R.id.tv_nickname, item.getUser().getNickname());
         //发布时间
@@ -70,12 +62,11 @@ public class EventAdapter extends BaseQuickAdapter<UserEventBean.EventsBean, Bas
                 adapter.setText(R.id.tv_content, userEventJsonBean.getMsg());
             }
             //初始化图片控件
-            initImageView(adapter);
+            initImageViewList();
             //显示图片
             showImg(adapter, item);
             //显示分享组件的内容 歌曲、电台、歌单 、专辑等
             showShareLayout(adapter, userEventJsonBean);
-
 
             int type;
             if (item.getInfo().getCommentThread().getResourceInfo() == null) {
@@ -83,11 +74,6 @@ public class EventAdapter extends BaseQuickAdapter<UserEventBean.EventsBean, Bas
             } else {
                 type = item.getInfo().getCommentThread().getResourceInfo().getEventType();
             }
-
-            //String resourceInfo = item.getInfo().getCommentThread().getResourceInfo().getName();
-            //String title = resourceInfo.split(":")[0];
-            //标题头
-            //adapter.setText(R.id.tv_title, title + ":");
 
             switch (type) {
                 case 18:
@@ -125,17 +111,7 @@ public class EventAdapter extends BaseQuickAdapter<UserEventBean.EventsBean, Bas
     }
 
 
-    private void initImageView(BaseViewHolder adapter) {
-        ImageView ivShow1 = adapter.getView(R.id.iv_img_1);
-        ImageView ivShow2 = adapter.getView(R.id.iv_img_2);
-        ImageView ivShow3 = adapter.getView(R.id.iv_img_3);
-        ImageView ivShow4 = adapter.getView(R.id.iv_img_4);
-        ImageView ivShow5 = adapter.getView(R.id.iv_img_5);
-        ImageView ivShow6 = adapter.getView(R.id.iv_img_6);
-        ImageView ivShow7 = adapter.getView(R.id.iv_img_7);
-        ImageView ivShow8 = adapter.getView(R.id.iv_img_8);
-        ImageView ivShow9 = adapter.getView(R.id.iv_img_9);
-
+    private void initImageViewList() {
         imgList.add(R.id.iv_img_1);
         imgList.add(R.id.iv_img_2);
         imgList.add(R.id.iv_img_3);
@@ -145,7 +121,6 @@ public class EventAdapter extends BaseQuickAdapter<UserEventBean.EventsBean, Bas
         imgList.add(R.id.iv_img_7);
         imgList.add(R.id.iv_img_8);
         imgList.add(R.id.iv_img_9);
-
     }
 
 
@@ -154,11 +129,11 @@ public class EventAdapter extends BaseQuickAdapter<UserEventBean.EventsBean, Bas
 
         //转换图片list集合
 
-        final ArrayList<Object> urlList = new ArrayList<>();
-
-        for (int i = 0; i < item.getPics().size(); i++) {
-            urlList.add(item.getPics().get(i).getRectangleUrl());
-        }
+//        final ArrayList<Object> urlList = new ArrayList<>();
+//
+//        for (int i = 0; i < item.getPics().size(); i++) {
+//            urlList.add(item.getPics().get(i).getRectangleUrl());
+//        }
         if (item.getPics() != null || item.getPics().size() != 0) {
             adapter.setVisible(R.id.rl_img, true);
             for (int i = 0; i < item.getPics().size(); i++) {
@@ -200,26 +175,7 @@ public class EventAdapter extends BaseQuickAdapter<UserEventBean.EventsBean, Bas
     @SuppressLint("CheckResult")
     private void showShareLayout(BaseViewHolder adapter, UserEventJsonBean jsonBean) {
         //点击播放 音乐、电台内容 查看歌单和专辑
-//		adapter.setOnClickListener(R.id.rl_share, new View.OnClickListener() {
-//			@Override
-//			public void onClick(View v) {
-//				if(jsonBean.getSong() != null && !TextUtils.isEmpty(jsonBean.getSong().getName())){
-//					//播放歌曲
-//					DailyRecommendBean.RecommendBean item = jsonBean.getSong();
-//					String songPlayUrl = HttpConstants.getSongPlayUrl(item.getId());
-//					AudioHelper.addAudio(new AudioBean(String.valueOf(item.getId()), songPlayUrl, item.getName(), item.getArtists().get(0).getName(), item.getAlbum().getName(), item.getAlbum().getName(), item.getAlbum().getPicUrl(), TimeUtil.getTimeNoYMDH(item.getDuration())));
-//				}else if(jsonBean.getAlbum() != null){
-//					//查看专辑
-//					mDelegate.getSupportDelegate().start(SongListDetailDelegate.newInstance(ALBUM, jsonBean.getAlbum().getId()));
-//				}else if(jsonBean.getPlaylist() != null){
-//					//查看歌单
-//					mDelegate.getSupportDelegate().start(SongListDetailDelegate.newInstance(PLAYLIST, jsonBean.getPlaylist().getId()));
-//				}
-//
-//			}
-//		});
 
-        //单曲
         if (jsonBean != null && jsonBean.getSong() != null && !TextUtils.isEmpty(jsonBean.getSong().getName())) {
             adapter.setVisible(R.id.rl_share, true);
             manager.displayImageForCorner(adapter.getView(R.id.iv_song_cover), jsonBean.getSong().getAlbum().getPicUrl());
