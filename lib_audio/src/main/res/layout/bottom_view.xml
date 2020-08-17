@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#dddddd" />
+
+    <RelativeLayout
+        android:id="@+id/content_view"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/divider"
+        android:clipChildren="false"
+        android:paddingStart="5dp"
+        android:paddingBottom="5dp">
+
+        <ImageView
+            android:id="@+id/album_view"
+            android:layout_width="37dp"
+            android:layout_height="37dp"
+            android:layout_centerVertical="true"
+            android:scaleType="fitXY" />
+
+
+        <TextView
+            android:id="@+id/audio_name_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/album_view"
+            android:layout_marginStart="7dp"
+            android:layout_marginLeft="7dp"
+            android:layout_marginTop="-1dp"
+            android:layout_marginRight="20dp"
+            android:layout_toRightOf="@id/album_view"
+            android:ellipsize="end"
+            android:textColor="#333333"
+            android:textSize="14sp"
+            tools:text="歌曲名" />
+
+        <TextView
+            android:id="@+id/audio_album_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/audio_name_view"
+            android:layout_alignLeft="@+id/audio_name_view"
+            android:layout_marginTop="3dp"
+            android:layout_marginRight="20dp"
+            android:ellipsize="end"
+            android:textColor="#999999"
+            android:textSize="12sp"
+            tools:text="歌手名" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:background="@android:color/transparent"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp"
+            android:paddingTop="-10dp">
+
+
+            <com.imooc.lib_common_ui.widget.CircleProgressButton
+                android:id="@+id/play_view"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_gravity="center_vertical"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp" />
+
+            <ImageView
+                android:id="@+id/show_list_view"
+                android:layout_width="35dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="20dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:src="@mipmap/audio_black_cat" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>
