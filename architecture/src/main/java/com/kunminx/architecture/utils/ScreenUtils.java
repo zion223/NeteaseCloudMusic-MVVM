@@ -1,6 +1,7 @@
 package com.kunminx.architecture.utils;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.KeyguardManager;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
@@ -293,5 +294,15 @@ public final class ScreenUtils {
         return (Utils.getApp().getResources().getConfiguration().screenLayout
                 & Configuration.SCREENLAYOUT_SIZE_MASK)
                 >= Configuration.SCREENLAYOUT_SIZE_LARGE;
+    }
+
+    /**
+     * Set the status bar color.
+     */
+    public static void setStatusBarColor(Activity activity, int statusBarColor) {
+        Window window = activity.getWindow();
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.setStatusBarColor(statusBarColor);
     }
 }
