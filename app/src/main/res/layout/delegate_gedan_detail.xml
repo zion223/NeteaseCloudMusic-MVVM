@@ -1,0 +1,462 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.netease.music.ui.state.SonglistDeatilViewModel" />
+
+        <variable
+            name="proxy"
+            type="com.netease.music.ui.page.discover.square.detail.SongListDetailActivity.ClickProxy" />
+
+        <import type="com.netease.music.data.config.TYPE" />
+
+        <import type="com.netease.music.util.SearchUtil" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/appbar_gedan_detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/gray"
+                app:elevation="0dp">
+
+                <com.google.android.material.appbar.CollapsingToolbarLayout
+                    android:id="@+id/collapsing_toolbar_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="310dp"
+                    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                    app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+                    <ImageView
+                        android:id="@+id/iv_gedan_detail_img_back"
+                        imageUrl="@{vm.backgroundImgUrl}"
+                        radis="@{vm.backgroundImgRadis}"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        app:layout_collapseMode="parallax" />
+
+                    <ImageView
+                        android:id="@+id/iv_gedan_detail_img_cover"
+                        imageUrl="@{vm.backgroundImgUrl}"
+                        radis="@{vm.backgroundCoverImgRadis}"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        app:layout_collapseMode="parallax" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <RelativeLayout
+                            android:id="@+id/rl_gedan_detail_img"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/rl_toolbar"
+                            android:layout_marginTop="?attr/actionBarSize"
+                            android:paddingLeft="10dp"
+                            android:paddingBottom="20dp">
+
+                            <ImageView
+                                android:id="@+id/iv_gedan_detail_album_tag"
+                                visible="@{vm.type == TYPE.ALBUM}"
+                                android:layout_width="125dp"
+                                android:layout_height="30dp"
+                                android:layout_marginLeft="10dp"
+                                android:src="@drawable/ic_album_attach_top" />
+
+                            <ImageView
+                                android:id="@+id/iv_gedan_detail_img"
+                                cornerImageUrl="@{vm.coverImgUrl}"
+                                android:layout_width="125dp"
+                                android:layout_height="125dp"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="20dp" />
+
+                            <ImageView
+                                android:id="@+id/iv_gedan_detail_playnum"
+                                visible="@{vm.type == TYPE.SONG}"
+                                android:layout_width="13dp"
+                                android:layout_height="13dp"
+                                android:layout_alignTop="@+id/iv_gedan_detail_img"
+                                android:layout_alignBottom="@+id/tv_gedan_detail_playnum"
+                                android:layout_marginTop="5dp"
+                                android:layout_toLeftOf="@+id/tv_gedan_detail_playnum"
+                                android:src="@drawable/ic_song_play_num" />
+
+                            <TextView
+                                android:id="@+id/tv_gedan_detail_playnum"
+                                visible="@{vm.type == TYPE.SONG}"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignTop="@+id/iv_gedan_detail_img"
+                                android:layout_alignRight="@+id/iv_gedan_detail_img"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginRight="5dp"
+                                android:text="@{SearchUtil.getCorresPondingString(vm.playCount)}"
+                                android:textColor="@color/white"
+                                android:textSize="10sp" />
+
+                            <TextView
+                                android:id="@+id/tv_gedan_detail_title"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_alignTop="@+id/iv_gedan_detail_img"
+                                android:layout_marginLeft="20dp"
+                                android:layout_marginRight="10dp"
+                                android:layout_toRightOf="@+id/iv_gedan_detail_img"
+                                android:maxLines="2"
+                                android:text=""
+                                android:textColor="@color/white"
+                                android:textSize="17sp"
+                                android:textStyle="bold" />
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="25dp"
+                                android:layout_below="@+id/tv_gedan_detail_title"
+                                android:layout_alignLeft="@+id/tv_gedan_detail_title"
+                                android:layout_marginTop="15dp">
+
+                                <ImageView
+                                    android:id="@+id/iv_gedan_detail_avatar_img"
+                                    circleImageUrl="@{vm.creatorImgUrl}"
+                                    visible="@{vm.type == TYPE.SONG}"
+                                    android:layout_width="25dp"
+                                    android:layout_height="25dp"
+                                    android:layout_marginRight="10dp" />
+
+                                <TextView
+                                    android:id="@+id/tv_gedan_detail_avatar_name"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:text="@{vm.creator}"
+                                    android:textColor="@color/white"
+                                    android:textSize="12sp" />
+
+                                <ImageView
+                                    android:layout_width="10dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_gravity="center_vertical"
+                                    android:src="@drawable/ic_right_arrow_white" />
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/tv_gedan_detail_desc"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignLeft="@+id/tv_gedan_detail_title"
+                                android:layout_alignBottom="@+id/iv_gedan_detail_img"
+                                android:layout_marginRight="5dp"
+                                android:ellipsize="end"
+                                android:gravity="bottom"
+                                android:maxLines="2"
+                                android:text="@{vm.desc}"
+                                android:textColor="@color/white"
+                                android:textSize="11sp" />
+
+                        </RelativeLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:id="@+id/ll_gedan_detail_comment"
+                                android:layout_width="fill_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="35dp"
+                                    android:layout_height="35dp"
+                                    android:layout_gravity="center_horizontal"
+                                    android:src="@drawable/ic_comment_white" />
+
+                                <TextView
+                                    android:id="@+id/tv_gedan_detail_comment_count"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
+                                    android:text="@{vm.commentCount}"
+                                    android:textColor="@color/white" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="fill_parent"
+                                android:layout_height="60dp"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="35dp"
+                                    android:layout_height="35dp"
+                                    android:layout_gravity="center_horizontal"
+                                    android:src="@drawable/ic_share_white" />
+
+                                <TextView
+                                    android:id="@+id/tv_gedan_detail_share_count"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
+                                    android:text="@{vm.shareCount}"
+                                    android:textColor="@color/white" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="35dp"
+                                    android:layout_height="35dp"
+                                    android:layout_gravity="center_horizontal"
+                                    android:src="@drawable/ic_download_white" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
+                                    android:text="下载"
+                                    android:textColor="@color/white" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="35dp"
+                                    android:layout_height="35dp"
+                                    android:layout_gravity="center_horizontal"
+                                    android:src="@drawable/ic_download_white" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
+                                    android:text="多选"
+                                    android:textColor="@color/white" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <androidx.appcompat.widget.Toolbar
+                        android:id="@+id/toolbar_gedan_detail"
+                        android:layout_width="match_parent"
+                        android:layout_height="55dp"
+                        android:layout_marginBottom="15dp"
+                        app:contentInsetEnd="0dp"
+                        app:contentInsetLeft="0dp"
+                        app:contentInsetStart="0dp"
+                        app:layout_collapseMode="pin"
+                        app:maxButtonHeight="20dp"
+                        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                        app:titleMargin="0dp">
+
+                        <RelativeLayout
+                            android:id="@+id/rl_toolbar_gedan_detail"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:id="@+id/img_gedan_detail_back"
+                                onClickWithDebouncing="@{() -> proxy.back()}"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_centerVertical="true"
+                                android:layout_marginTop="10dp"
+                                android:src="@drawable/ic_left_arrow_white1" />
+
+                            <ImageView
+                                android:id="@+id/iv_gedan_detail_search"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_marginTop="12dp"
+                                android:layout_marginRight="10dp"
+                                android:layout_toLeftOf="@+id/iv_gedan_detail_more"
+                                android:src="@drawable/ic_search_white" />
+
+                            <ImageView
+                                android:id="@+id/iv_gedan_detail_more"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_alignParentRight="true"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginRight="10dp"
+                                android:src="@drawable/ic_more_white" />
+
+                            <TextView
+                                android:id="@+id/tv_gedan_detail_toolbar_title"
+                                android:layout_width="200dp"
+                                android:layout_height="30dp"
+                                android:layout_centerVertical="true"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_toRightOf="@+id/img_gedan_detail_back"
+                                android:gravity="center_vertical"
+                                android:text='@{vm.type.key}'
+                                android:textColor="@color/white"
+                                android:textSize="17sp" />
+
+                            <TextView
+                                android:id="@+id/tv_gedan_detail_toolbar_reason"
+                                visible='@{!(vm.reason == "")}'
+                                android:layout_width="wrap_content"
+                                android:layout_height="15dp"
+                                android:layout_below="@+id/tv_gedan_detail_toolbar_title"
+                                android:layout_alignLeft="@+id/tv_gedan_detail_toolbar_title"
+                                android:gravity="top"
+                                android:text="@{vm.reason}"
+                                android:textColor="@color/white"
+                                android:textSize="8sp" />
+                        </RelativeLayout>
+                    </androidx.appcompat.widget.Toolbar>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="15dp"
+                        android:layout_marginTop="620dp"
+                        android:background="@drawable/bg_dailyrecommend"
+                        app:layout_collapseMode="pin" />
+                </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+            </com.google.android.material.appbar.AppBarLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_play_header"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+                <LinearLayout
+                    android:id="@+id/ll_play_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_gravity="top"
+                    android:background="@color/white"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="23dp"
+                        android:layout_height="23dp"
+                        android:layout_gravity="top"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="5dp"
+                        android:src="@drawable/ic_play_gray" />
+
+                    <TextView
+                        android:id="@+id/tv_gedan_detaill_all_play"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="5dp"
+                        android:text="全部播放"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tv_gedan_detail_song_num"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="1"
+                        android:text='@{"(共" + vm.songCount + "首)"}' />
+
+                    <LinearLayout
+                        android:id="@+id/ll_gedan_subscribe"
+                        onClickWithDebouncing="@{()-> proxy.changeSubscribeStatus()}"
+                        visible="@{!vm.isCollected}"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/bg_round_red"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/iv_gedan_detail_collect_status"
+                            android:layout_width="10dp"
+                            android:layout_height="10dp"
+                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/ic_add_white" />
+
+                        <TextView
+                            android:id="@+id/tv_gedan_detail_collect_count"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:text='@{"收藏(" + SearchUtil.getCorresPondingString(vm.collectCount) + ")"}'
+                            android:textColor="@color/white"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_gedan_subscribed"
+                        onClickWithDebouncing="@{()-> proxy.changeSubscribeStatus()}"
+                        visible="@{vm.isCollected}"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="5dp">
+
+                        <ImageView
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/ic_collected" />
+
+                        <TextView
+                            android:id="@+id/tv_gedan_detail_collect_count1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="@{vm.collectCount}" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_gedan_detail_normal"
+                    linearAdapter="@{vm.adapter}"
+                    visible="@{!vm.loadingVisible}"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                    android:layout_below="@+id/ll_play_header"
+                    app:layout_scrollFlags="scroll" />
+
+                <include
+                    bind:loading="@{vm.loadingVisible}"
+                    bind:visible="@{vm.loadingVisible}"
+                    layout="@layout/delegate_normal_loading" />
+            </RelativeLayout>
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </LinearLayout>
+</layout>

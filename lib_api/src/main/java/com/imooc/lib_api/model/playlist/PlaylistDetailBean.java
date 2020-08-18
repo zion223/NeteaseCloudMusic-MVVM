@@ -163,8 +163,8 @@ public class PlaylistDetailBean {
             this.cloudTrackCount = cloudTrackCount;
         }
 
-        public int getSubscribedCount() {
-            return subscribedCount;
+        public String getSubscribedCount() {
+            return String.valueOf(subscribedCount);
         }
 
         public void setSubscribedCount(int subscribedCount) {
@@ -275,8 +275,8 @@ public class PlaylistDetailBean {
             this.newImported = newImported;
         }
 
-        public long getPlayCount() {
-            return playCount;
+        public String getPlayCount() {
+            return String.valueOf(playCount);
         }
 
         public void setPlayCount(long playCount) {
@@ -331,16 +331,16 @@ public class PlaylistDetailBean {
             this.id = id;
         }
 
-        public int getShareCount() {
-            return shareCount;
+        public String getShareCount() {
+            return String.valueOf(shareCount);
         }
 
         public void setShareCount(int shareCount) {
             this.shareCount = shareCount;
         }
 
-        public int getCommentCount() {
-            return commentCount;
+        public String getCommentCount() {
+            return String.valueOf(commentCount);
         }
 
         public void setCommentCount(int commentCount) {

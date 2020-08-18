@@ -6,11 +6,15 @@ import androidx.annotation.Nullable;
 
 import com.bigkoo.convenientbanner.listener.OnItemClickListener;
 import com.imooc.lib_api.model.banner.BannerBean;
+import com.imooc.lib_api.model.playlist.MainRecommendPlayListBean;
 import com.kunminx.architecture.ui.page.BaseFragment;
 import com.kunminx.architecture.ui.page.DataBindingConfig;
+import com.kunminx.binding_recyclerview.adapter.BaseDataBindingAdapter;
 import com.netease.music.BR;
 import com.netease.music.R;
+import com.netease.music.data.config.TYPE;
 import com.netease.music.ui.page.adapter.RecommendPlayListAdapter;
+import com.netease.music.ui.page.discover.square.detail.SongListDetailActivity;
 import com.netease.music.ui.state.DiscoverViewModel;
 
 import java.util.ArrayList;
@@ -49,6 +53,8 @@ public class DiscoverFragment extends BaseFragment {
         mDiscoverViewModel.discoverRequest.getRecommendPlaylistLiveData().observe(this, recommendBeans -> {
             final RecommendPlayListAdapter playListAdapter = new RecommendPlayListAdapter(getContext());
             playListAdapter.submitList(recommendBeans);
+            //打开歌单详情界面
+            playListAdapter.setOnItemClickListener((item, position) -> SongListDetailActivity.startActivity(getContext(), TYPE.SONG_ID, item.getId(), item.getCopywriter()));
             mDiscoverViewModel.playListAdapter.set(playListAdapter);
         });
 

@@ -91,13 +91,11 @@ public class ImageLoaderManager {
 				.into(new BitmapImageViewTarget(imageView) {
 					@Override
 					protected void setResource(final Bitmap resource) {
-						if(true){
-							RoundedBitmapDrawable circularBitmapDrawable =
-									RoundedBitmapDrawableFactory.create(imageView.getResources(), resource);
-							circularBitmapDrawable.setCircular(true);
-							imageView.setImageDrawable(circularBitmapDrawable);
-						}
-					}
+                        RoundedBitmapDrawable circularBitmapDrawable =
+                                RoundedBitmapDrawableFactory.create(imageView.getResources(), resource);
+                        circularBitmapDrawable.setCircular(true);
+                        imageView.setImageDrawable(circularBitmapDrawable);
+                    }
 				});
 	}
 

@@ -48,6 +48,10 @@ public class SearchUtil {
 		return getCorresPondingString(((Long) num).intValue());
 	}
 
+	public static String getCorresPondingString(String num) {
+		return getCorresPondingString((Integer.parseInt(num)));
+	}
+
 	//根据用户类型 设置不同的用户专属图标
 	public static void setUserTypeImg(int type, int viewId, BaseViewHolder viewHolder) {
 		switch (type) {

@@ -37,6 +37,7 @@
         android:maxLines="1"
         android:singleLine="true"
         android:text="被驯服的象"
+        android:layout_toLeftOf="@+id/viewpager_list_button"
         android:textColor="@color/listTextColor"
         android:textSize="15sp" />
 

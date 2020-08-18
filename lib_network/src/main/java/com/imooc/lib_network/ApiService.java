@@ -164,7 +164,7 @@ public interface ApiService {
     Observable<LikeListBean> getLikeList(@Query("uid") long uid);
 
     @GET("song/detail")
-    Observable<SongDetailBean> getSongDetail(@Query("ids") long ids);
+    Observable<SongDetailBean> getSongDetail(@Query("ids") String ids);
 
     @GET("like")
     Observable<LikeMusicBean> likeMusice(@Query("id") long id);
@@ -177,6 +177,14 @@ public interface ApiService {
 
     @GET("playmode/intelligence/list")
     Observable<PlayModeIntelligenceBean> getIntelligenceList(@Query("id") long id, @Query("pid") long pid);
+
+    @GET("playlist/subscribe")
+        // t=1 收藏 2 取消收藏
+    Observable<CommonMessageBean> subscribePlayList(@Query("id") long id, @Query("t") long t);
+
+    @GET("album/sub")
+        // t=1 收藏 2 取消收藏
+    Observable<CommonMessageBean> subscribeAlbum(@Query("id") long id, @Query("t") long t);
 
     @GET("album/sublist")
     Observable<AlbumSublistBean> getAlbumSublist();

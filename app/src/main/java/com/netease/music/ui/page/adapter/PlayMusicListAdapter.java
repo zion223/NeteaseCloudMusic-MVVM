@@ -25,19 +25,16 @@ public class PlayMusicListAdapter extends BaseQuickAdapter<SongDetailBean.SongsB
 
     public PlayMusicListAdapter(boolean hasHeader, @Nullable List<SongDetailBean.SongsBean> data) {
         super(R.layout.item_gedan_detail_song, data);
-        // this.mContext = context;
         this.hasHeader = hasHeader;
     }
 
     public PlayMusicListAdapter(@Nullable List<SongDetailBean.SongsBean> data) {
         super(R.layout.item_gedan_detail_song, data);
-        //this.mContext = context;
         this.hasHeader = false;
     }
 
     public PlayMusicListAdapter(boolean hasHeader, boolean showMoreView, @Nullable List<SongDetailBean.SongsBean> data) {
         super(R.layout.item_gedan_detail_song, data);
-        //this.mContext = context;
         this.hasHeader = hasHeader;
         this.showMoreView = showMoreView;
     }

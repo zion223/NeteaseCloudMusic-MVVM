@@ -53,19 +53,9 @@ import java.util.List;
 @SuppressWarnings("unused")
 public class CommonBindingAdapter {
 
-    @BindingAdapter(value = {"imageUrl", "placeHolder"}, requireAll = false)
-    public static void loadUrl(ImageView view, String url, Drawable placeHolder) {
-        Glide.with(view.getContext()).load(url).placeholder(placeHolder).into(view);
-    }
-
     @BindingAdapter(value = {"visible"}, requireAll = false)
     public static void visible(View view, boolean visible) {
         view.setVisibility(visible ? View.VISIBLE : View.GONE);
-    }
-
-    @BindingAdapter(value = {"showDrawable", "drawableShowed"}, requireAll = false)
-    public static void showDrawable(ImageView view, boolean showDrawable, int drawableShowed) {
-        view.setImageResource(showDrawable ? drawableShowed : android.R.color.transparent);
     }
 
     @BindingAdapter(value = {"textColor"}, requireAll = false)
@@ -73,10 +63,6 @@ public class CommonBindingAdapter {
         textView.setTextColor(textView.getResources().getColor(textColorRes));
     }
 
-    @BindingAdapter(value = {"imageRes"}, requireAll = false)
-    public static void setImageRes(ImageView imageView, int imageRes) {
-        imageView.setImageResource(imageRes);
-    }
 
     @BindingAdapter(value = {"selected"}, requireAll = false)
     public static void selected(View view, boolean select) {
