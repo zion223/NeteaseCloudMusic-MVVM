@@ -1,11 +1,11 @@
 package com.netease.music.ui.state;
 
 import androidx.databinding.ObservableField;
-import androidx.databinding.ObservableInt;
 import androidx.lifecycle.ViewModel;
 
+import com.imooc.lib_api.model.album.AlbumOrSongBean;
 import com.imooc.lib_api.model.banner.BannerBean;
-import com.kunminx.binding_recyclerview.adapter.SimpleDataBindingAdapter;
+import com.kunminx.architecture.ui.adapter.SimpleDataBindingAdapter;
 import com.netease.music.data.config.TYPE;
 import com.netease.music.domain.request.DiscoverRequest;
 
@@ -21,8 +21,11 @@ public class DiscoverViewModel extends ViewModel {
 
     //推荐歌单的Adapter
     public final ObservableField<SimpleDataBindingAdapter> playListAdapter = new ObservableField<>();
-    //推荐歌单的spanCount 默认是3
-    public final ObservableInt playListSpanCount = new ObservableInt();
+
+    //所有的新歌和新碟数据
+    public final ObservableField<List<AlbumOrSongBean>> albumOrSongLiveData = new ObservableField<>();
+    //当前显示的数据
+    public final ObservableField<List<AlbumOrSongBean>> currentAlbumOrSongLiveData = new ObservableField<>();
 
     //当前选中的是新歌还是新碟
     public final ObservableField<TYPE> type = new ObservableField<>();
@@ -31,7 +34,6 @@ public class DiscoverViewModel extends ViewModel {
     public DiscoverRequest discoverRequest = new DiscoverRequest();
 
     {
-        playListSpanCount.set(3);
         //默认初始选中的是专辑
         type.set(TYPE.ALBUM);
     }

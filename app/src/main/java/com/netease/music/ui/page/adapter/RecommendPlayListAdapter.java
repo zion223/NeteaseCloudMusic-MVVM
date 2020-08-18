@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.imooc.lib_api.model.playlist.MainRecommendPlayListBean;
 import com.imooc.lib_image_loader.app.ImageLoaderManager;
-import com.kunminx.binding_recyclerview.adapter.SimpleDataBindingAdapter;
+import com.kunminx.architecture.ui.adapter.SimpleDataBindingAdapter;
 import com.netease.music.R;
 import com.netease.music.databinding.ItemDiscoverGedanBinding;
 

@@ -8,6 +8,7 @@ import android.os.Handler;
 import androidx.annotation.Nullable;
 
 import com.imooc.lib_api.model.playlist.PlaylistDetailBean;
+import com.imooc.lib_api.model.search.AlbumSearchBean;
 import com.kunminx.architecture.ui.page.BaseActivity;
 import com.kunminx.architecture.ui.page.DataBindingConfig;
 import com.netease.music.BR;
@@ -21,8 +22,8 @@ public class SongListDetailActivity extends BaseActivity {
 
     private SonglistDeatilViewModel mViewModel;
 
-    private static final String TYPEID = "TYPEID";
-    private static final String LISTID = "LISTID";
+    private static final String TYPEID = "TYPE_ID";
+    private static final String LISTID = "LIST_ID";
     private static final String REASON = "REASON";
 
     public static void startActivity(Context context, int typeId, long listId, String copyWriter) {
@@ -52,6 +53,7 @@ public class SongListDetailActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         Bundle data = getIntent().getBundleExtra("data");
 
+        //歌单相关
         mViewModel.songListRequest.getPlayListLiveData().observe(this, playlistDetailBean -> {
             final PlaylistDetailBean.PlaylistBean playlist = playlistDetailBean.getPlaylist();
             //歌单名称
@@ -65,7 +67,7 @@ public class SongListDetailActivity extends BaseActivity {
             mViewModel.shareCount.set(playlist.getShareCount());
             mViewModel.commentCount.set(playlist.getCommentCount());
             mViewModel.collectCount.set(playlist.getSubscribedCount());
-            mViewModel.songCount.set(String.valueOf(playlist.getTrackIds().size()));
+            mViewModel.songCount.set(String.valueOf(playlist.getTrackCount()));
             //是否收藏该歌单
             mViewModel.isCollected.set(playlist.isSubscribed());
 
@@ -76,6 +78,39 @@ public class SongListDetailActivity extends BaseActivity {
             mViewModel.creatorImgUrl.set(playlist.getCreator().getAvatarUrl());
             //背景图
             mViewModel.backgroundImgUrl.set(playlist.getCoverImgUrl());
+        });
+        //专辑相关
+        mViewModel.songListRequest.getAlbumDetailLiveData().observe(this, albumDetailBean -> {
+            AlbumSearchBean.ResultBean.AlbumsBean album = albumDetailBean.getAlbum();
+            //歌单名称
+            if (album.getAlias().size() != 0) {
+                mViewModel.title.set(album.getName() + album.getAlias().get(0));
+            } else {
+                mViewModel.title.set(album.getName());
+            }
+            //歌单描述
+            mViewModel.desc.set(album.getDescription());
+            //歌单创建者
+            if (album.getArtists().size() > 1) {
+                //拼接歌手名
+                mViewModel.creator.set("歌手:  " + album.getArtists().get(0).getName() + "/" + album.getArtists().get(1).getName());
+            } else {
+                mViewModel.creator.set("歌手:  " + album.getArtist().getName());
+            }
+            //专辑不显示播放数量
+            mViewModel.shareCount.set(albumDetailBean.getShareCount());
+            mViewModel.commentCount.set(albumDetailBean.getCommentCount());
+            mViewModel.collectCount.set(albumDetailBean.getSubCount());
+            mViewModel.songCount.set(String.valueOf(albumDetailBean.getSongs().size()));
+            //是否收藏该歌单
+            mViewModel.isCollected.set(albumDetailBean.isSub());
+
+            //图片相关
+            //封面
+            mViewModel.coverImgUrl.set(album.getPicUrl());
+            //背景图
+            mViewModel.backgroundImgUrl.set(album.getPicUrl());
+
         });
 
         //歌曲数据  专辑和歌单的数据
@@ -107,13 +142,11 @@ public class SongListDetailActivity extends BaseActivity {
                 mViewModel.songListRequest.requestPlayListMusicLiveData(mViewModel.listId.get());
             } else if (TYPE.getTypeByID(data.getInt(TYPEID)) == TYPE.ALBUM) {
                 //请求专辑相关数据
-
+                mViewModel.songListRequest.requestAlbumLiveData(mViewModel.listId.get());
             } else {
                 throw new IllegalArgumentException("type id parse error");
             }
-
         }
-
     }
 
 

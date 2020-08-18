@@ -19,6 +19,7 @@ package com.netease.music.ui.page.adapter;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 
+import com.imooc.lib_api.model.album.AlbumOrSongBean;
 import com.imooc.lib_api.model.playlist.MainRecommendPlayListBean;
 import com.netease.music.data.bean.LibraryInfo;
 import com.netease.music.data.bean.TestAlbum;
@@ -30,6 +31,8 @@ public class DiffUtils {
     private DiffUtil.ItemCallback<TestAlbum.TestMusic> mTestMusicItemCallback;
 
     private DiffUtil.ItemCallback<MainRecommendPlayListBean.RecommendBean> mRecommendPlaylistItemCallback;
+
+    private DiffUtil.ItemCallback<AlbumOrSongBean> mAlbumOrSongItemCallback;
 
     private DiffUtils() {
     }
@@ -79,7 +82,7 @@ public class DiffUtils {
             mRecommendPlaylistItemCallback = new DiffUtil.ItemCallback<MainRecommendPlayListBean.RecommendBean>() {
                 @Override
                 public boolean areItemsTheSame(@NonNull MainRecommendPlayListBean.RecommendBean oldItem, @NonNull MainRecommendPlayListBean.RecommendBean newItem) {
-                    return oldItem == newItem;
+                    return oldItem.equals(newItem);
                 }
 
                 @Override
@@ -89,5 +92,22 @@ public class DiffUtils {
             };
         }
         return mRecommendPlaylistItemCallback;
+    }
+
+    public DiffUtil.ItemCallback<AlbumOrSongBean> getAlbumOrSongItemCallback() {
+        if (mAlbumOrSongItemCallback == null) {
+            mAlbumOrSongItemCallback = new DiffUtil.ItemCallback<AlbumOrSongBean>() {
+                @Override
+                public boolean areItemsTheSame(@NonNull AlbumOrSongBean oldItem, @NonNull AlbumOrSongBean newItem) {
+                    return oldItem.equals(newItem);
+                }
+
+                @Override
+                public boolean areContentsTheSame(@NonNull AlbumOrSongBean oldItem, @NonNull AlbumOrSongBean newItem) {
+                    return oldItem.getId() == newItem.getId();
+                }
+            };
+        }
+        return mAlbumOrSongItemCallback;
     }
 }

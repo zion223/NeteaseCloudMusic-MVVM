@@ -22,7 +22,7 @@ import android.net.Uri;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.kunminx.binding_recyclerview.adapter.SimpleDataBindingAdapter;
+import com.kunminx.architecture.ui.adapter.SimpleDataBindingAdapter;
 import com.netease.music.R;
 import com.netease.music.data.bean.LibraryInfo;
 import com.netease.music.databinding.AdapterLibraryBinding;

@@ -44,7 +44,7 @@ public class SearchActivity extends BaseActivity {
 
         mSearchViewModel.searchRequest.getHotSearchLiveData().observe(this, hotSearchDetailBean -> {
 
-            HotSearchAdapter hotSearchAdapter = new HotSearchAdapter(null);
+            HotSearchAdapter hotSearchAdapter = new HotSearchAdapter(hotSearchDetailBean.getData());
             hotSearchAdapter.setHeaderView(LayoutInflater.from(Utils.getApp()).inflate(R.layout.header_suggest, null));
             hotSearchAdapter.setOnItemClickListener((adapter, view, position) -> {
                 HotSearchDetailBean.DataBean entity = (HotSearchDetailBean.DataBean) adapter.getItem(position);
@@ -53,8 +53,6 @@ public class SearchActivity extends BaseActivity {
                 //getSupportDelegate().start(SearchResultDelegate.newInstance(searchword));
             });
             mSearchViewModel.adapter.set(hotSearchAdapter);
-            mSearchViewModel.list.set(hotSearchDetailBean.getData());
-
         });
 
         mSearchViewModel.searchRequest.requestHotSearch();

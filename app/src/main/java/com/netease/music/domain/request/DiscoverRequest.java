@@ -3,13 +3,20 @@ package com.netease.music.domain.request;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.imooc.lib_api.model.album.AlbumOrSongBean;
 import com.imooc.lib_api.model.banner.BannerBean;
+import com.imooc.lib_api.model.playlist.DailyRecommendBean;
 import com.imooc.lib_api.model.playlist.MainRecommendPlayListBean;
+import com.imooc.lib_api.model.search.AlbumSearchBean;
+import com.imooc.lib_api.model.song.NewSongBean;
 import com.imooc.lib_network.ApiEngine;
 import com.kunminx.architecture.domain.request.BaseRequest;
+import com.netease.music.data.config.TYPE;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -22,8 +29,15 @@ public class DiscoverRequest extends BaseRequest {
     //推荐歌曲数据
     private MutableLiveData<List<MainRecommendPlayListBean.RecommendBean>> mRecommendPlayListLiveData;
 
-    //TODO tip 向 ui 层提供的 request LiveData，使用抽象的 LiveData 而不是 MutableLiveData
-    // 如此是为了来自数据层的数据，在 ui 层中只读，以避免团队新手不可预期的误用
+    //新歌和新碟数据
+    private MutableLiveData<List<AlbumOrSongBean>> mAlbumOrSongLiveData;
+
+    public MutableLiveData<List<AlbumOrSongBean>> getAlbumOrSongLiveData() {
+        if (mAlbumOrSongLiveData == null) {
+            mAlbumOrSongLiveData = new MutableLiveData<>();
+        }
+        return mAlbumOrSongLiveData;
+    }
 
     public LiveData<BannerBean> getBannerLiveData() {
         if (mBannerLiveData == null) {
@@ -92,6 +106,43 @@ public class DiscoverRequest extends BaseRequest {
                     @Override
                     public void onComplete() {
 
+                    }
+                });
+    }
+
+    public void requestAlbumAndSongData() {
+        //新碟上架
+        Observable<AlbumSearchBean.ResultBean> albumObservable = ApiEngine.getInstance().getApiService().getTopAlbum(3).subscribeOn(Schedulers.io());
+        //新歌速递
+        Observable<NewSongBean> newSongObservable = ApiEngine.getInstance().getApiService().getTopSong(0).subscribeOn(Schedulers.io());
+        Disposable subscribe = Observable.zip(albumObservable, newSongObservable, (resultBean, newSongBean) -> {
+            final List<AlbumOrSongBean> data = new ArrayList<>();
+            List<AlbumSearchBean.ResultBean.AlbumsBean> albums = resultBean.getAlbums();
+            if (albums.size() >= 3) {
+                for (int i = 0; i < 3; i++) {
+                    String artistName = albums.get(i).getArtist().getName();
+                    String albumName = albums.get(i).getName();
+                    String picUrl = albums.get(i).getPicUrl();
+                    long id = albums.get(i).getId();
+                    data.add(new AlbumOrSongBean(String.valueOf(id), TYPE.ALBUM_ID, picUrl, albumName, artistName));
+                }
+            }
+            final List<DailyRecommendBean.RecommendBean> song = newSongBean.getData();
+            if (song.size() >= 3) {
+                for (int i = 0; i < 3; i++) {
+                    String artistName = song.get(i).getArtists().get(0).getName();
+                    String albumName = song.get(i).getName();
+                    String picUrl = song.get(i).getAlbum().getPicUrl();
+                    long id = song.get(i).getId();
+                    data.add(new AlbumOrSongBean(String.valueOf(id), TYPE.SONG_ID, picUrl, albumName, artistName));
+                }
+            }
+            return data;
+        })
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(albumOrSongBeans -> {
+                    if (albumOrSongBeans.size() >= 5) {
+                        mAlbumOrSongLiveData.postValue(albumOrSongBeans);
                     }
                 });
     }

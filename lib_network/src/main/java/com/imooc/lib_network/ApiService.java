@@ -1,6 +1,8 @@
 package com.imooc.lib_network;
 
 
+import com.imooc.lib_api.model.album.AlbumDetailBean;
+import com.imooc.lib_api.model.album.AlbumDynamicBean;
 import com.imooc.lib_api.model.album.AlbumSublistBean;
 import com.imooc.lib_api.model.artist.ArtistSublistBean;
 import com.imooc.lib_api.model.banner.BannerBean;
@@ -43,6 +45,7 @@ import com.imooc.lib_api.model.song.LikeMusicBean;
 import com.imooc.lib_api.model.song.LyricBean;
 import com.imooc.lib_api.model.song.MusicCanPlayBean;
 import com.imooc.lib_api.model.song.MusicCommentBean;
+import com.imooc.lib_api.model.song.NewSongBean;
 import com.imooc.lib_api.model.song.PlayListCommentBean;
 import com.imooc.lib_api.model.song.SongDetailBean;
 import com.imooc.lib_api.model.user.LikeListBean;
@@ -72,6 +75,11 @@ public interface ApiService {
     @GET("user/cloud")
     Observable<UserCloudBean> getUserCloudMusic();
 
+    @GET("album")
+    Observable<AlbumDetailBean> getAlbumDetail(@Query("id") long id);
+
+    @GET("album/detail/dynamic")
+    Observable<AlbumDynamicBean> getAlbumDynamic(@Query("id") long id);
 
     @GET("register/cellphone")
     Observable<LoginBean> register(@Query("phone") String phone, @Query("password") String password, @Query("capture") String capture);
@@ -185,6 +193,16 @@ public interface ApiService {
     @GET("album/sub")
         // t=1 收藏 2 取消收藏
     Observable<CommonMessageBean> subscribeAlbum(@Query("id") long id, @Query("t") long t);
+
+    @GET("top/album")
+    Observable<AlbumSearchBean.ResultBean> getTopAlbum(@Query("limit") int limit);
+
+    @GET("album/newest")
+    Observable<AlbumSearchBean.ResultBean> getNewAlbum();
+
+    @GET("top/song")
+        //PS.全部:0 华语:7  欧美:96 日本:8 韩国:16
+    Observable<NewSongBean> getTopSong(@Query("type") int type);
 
     @GET("album/sublist")
     Observable<AlbumSublistBean> getAlbumSublist();

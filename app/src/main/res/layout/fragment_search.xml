@@ -81,7 +81,6 @@
             android:id="@+id/rv_suggest_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            adapter="@{vm.adapter}"
-            submitList="@{vm.list}" />
+            linearAdapter="@{vm.adapter}" />
     </LinearLayout>
 </layout>

@@ -11,6 +11,7 @@ import com.kunminx.architecture.ui.page.DataBindingConfig;
 import com.netease.music.BR;
 import com.netease.music.R;
 import com.netease.music.data.config.TYPE;
+import com.netease.music.ui.page.adapter.AlbumSongAdapter;
 import com.netease.music.ui.page.adapter.RecommendPlayListAdapter;
 import com.netease.music.ui.page.discover.square.detail.SongListDetailActivity;
 import com.netease.music.ui.state.DiscoverViewModel;
@@ -32,7 +33,8 @@ public class DiscoverFragment extends BaseFragment {
     protected DataBindingConfig getDataBindingConfig() {
         return new DataBindingConfig(R.layout.delegate_discover, BR.vm, mDiscoverViewModel)
                 .addBindingParam(BR.bannerListener, bannerListener)
-                .addBindingParam(BR.proxy, new ClickProxy());
+                .addBindingParam(BR.proxy, new ClickProxy())
+                .addBindingParam(BR.albumSongAdapter, new AlbumSongAdapter(getContext()));
     }
 
     @Override
@@ -55,6 +57,13 @@ public class DiscoverFragment extends BaseFragment {
             //打开歌单详情界面
             playListAdapter.setOnItemClickListener((item, position) -> SongListDetailActivity.startActivity(getContext(), TYPE.SONG_ID, item.getId(), item.getCopywriter()));
             mDiscoverViewModel.playListAdapter.set(playListAdapter);
+        });
+        //新歌和新碟的数据 新碟在前三个 新歌在后三个
+        mDiscoverViewModel.discoverRequest.getAlbumOrSongLiveData().observe(this, albumOrSongBeans -> {
+            //获取全部的数据
+            mDiscoverViewModel.albumOrSongLiveData.set(albumOrSongBeans);
+            //前三位是新碟的数据
+            mDiscoverViewModel.currentAlbumOrSongLiveData.set(albumOrSongBeans.subList(0, 3));
         });
 
         //请求Banner数据
@@ -105,9 +114,13 @@ public class DiscoverFragment extends BaseFragment {
     public class ClickProxy {
         public void changeAlbumOrSong() {
             if (mDiscoverViewModel.type.get().getValue() == TYPE.ALBUM.getValue()) {
+                //切换到新歌
                 mDiscoverViewModel.type.set(TYPE.SONG);
+                mDiscoverViewModel.currentAlbumOrSongLiveData.set(mDiscoverViewModel.albumOrSongLiveData.get().subList(3, 6));
             } else {
+                //切换到新碟
                 mDiscoverViewModel.type.set(TYPE.ALBUM);
+                mDiscoverViewModel.currentAlbumOrSongLiveData.set(mDiscoverViewModel.albumOrSongLiveData.get().subList(0, 3));
             }
         }
     }

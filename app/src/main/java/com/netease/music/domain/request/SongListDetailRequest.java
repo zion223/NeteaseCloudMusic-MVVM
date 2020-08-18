@@ -5,6 +5,8 @@ import android.annotation.SuppressLint;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.imooc.lib_api.model.album.AlbumDetailBean;
+import com.imooc.lib_api.model.album.AlbumDynamicBean;
 import com.imooc.lib_api.model.notification.CommonMessageBean;
 import com.imooc.lib_api.model.playlist.PlaylistDetailBean;
 import com.imooc.lib_api.model.song.SongDetailBean;
@@ -27,6 +29,9 @@ public class SongListDetailRequest extends BaseRequest {
 
     //查询歌单数据
     private MutableLiveData<PlaylistDetailBean> mPlayListLiveData;
+    //查询专辑数据
+    private MutableLiveData<AlbumDetailBean> mAlbumDetailLiveData;
+
     //歌曲
     private MutableLiveData<List<SongDetailBean.SongsBean>> mSongDetailLiveData;
     //改变对专辑或歌单的收藏状态
@@ -51,6 +56,13 @@ public class SongListDetailRequest extends BaseRequest {
             mSongDetailLiveData = new MutableLiveData<>();
         }
         return mSongDetailLiveData;
+    }
+
+    public LiveData<AlbumDetailBean> getAlbumDetailLiveData() {
+        if (mAlbumDetailLiveData == null) {
+            mAlbumDetailLiveData = new MutableLiveData<>();
+        }
+        return mAlbumDetailLiveData;
     }
 
     //收藏  歌单/专辑
@@ -85,6 +97,27 @@ public class SongListDetailRequest extends BaseRequest {
 
                 });
 
+    }
+
+    //请求专辑的数据  专辑详情和专辑动态
+    public void requestAlbumLiveData(long id) {
+        Observable<AlbumDetailBean> albumDetailObservable = ApiEngine.getInstance().getApiService().getAlbumDetail(id).subscribeOn(Schedulers.io());
+        Observable<AlbumDynamicBean> albumDynamicObservable = ApiEngine.getInstance().getApiService().getAlbumDynamic(id).subscribeOn(Schedulers.io());
+        Disposable subscribe = Observable.zip(albumDetailObservable, albumDynamicObservable, (albumDetailBean, albumDynamicBean) -> {
+            //转换数据
+            albumDetailBean.setCommentCount(albumDynamicBean.getCommentCount());
+            albumDetailBean.setShareCount(albumDynamicBean.getShareCount());
+            albumDetailBean.setSubCount(albumDynamicBean.getSubCount());
+            albumDetailBean.setSub(albumDynamicBean.isSub());
+            //专辑的歌曲
+            mSongDetailLiveData.postValue(albumDetailBean.getSongs());
+
+            return albumDetailBean;
+        })
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(bean -> {
+                    mAlbumDetailLiveData.postValue(bean);
+                });
     }
 
     //改变对专辑或歌单的收藏或者取消收藏
