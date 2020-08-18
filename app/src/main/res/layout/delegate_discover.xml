@@ -11,6 +11,14 @@
         <variable
             name="bannerListener"
             type="com.bigkoo.convenientbanner.listener.OnItemClickListener" />
+
+        <variable
+            name="proxy"
+            type="com.netease.music.ui.page.discover.DiscoverFragment.ClickProxy" />
+
+        <import type="com.netease.music.data.config.TYPE" />
+
+        <import type="android.graphics.Typeface" />
     </data>
 
     <androidx.core.widget.NestedScrollView
@@ -240,9 +248,10 @@
                     android:layout_marginBottom="15dp"
                     android:padding="3dp"
                     android:text="新碟"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    onClickWithDebouncing="@{() -> proxy.changeAlbumOrSong()}"
+                    android:textColor="@{vm.type == TYPE.SONG? @color/gray: @color/black}"
+                    android:textSize="@{vm.type == TYPE.SONG? @dimen/sp_12: @dimen/sp_15}"
+                    android:typeface="@{vm.type == TYPE.SONG? Typeface.defaultFromStyle(Typeface.NORMAL): Typeface.defaultFromStyle(Typeface.BOLD)}" />
 
                 <TextView
                     android:id="@+id/tv_discover_new_song"
@@ -253,10 +262,11 @@
                     android:layout_marginBottom="15dp"
                     android:layout_weight="3"
                     android:padding="3dp"
+                    onClickWithDebouncing="@{() -> proxy.changeAlbumOrSong()}"
                     android:text="新歌"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:textColor="@{vm.type == TYPE.SONG? @color/black: @color/gray}"
+                    android:textSize="@{vm.type == TYPE.SONG? @dimen/sp_15: @dimen/sp_12}"
+                    android:typeface="@{vm.type == TYPE.SONG? Typeface.defaultFromStyle(Typeface.BOLD): Typeface.defaultFromStyle(Typeface.NORMAL)}" />
 
                 <TextView
                     android:id="@+id/tv_discover_more_album_song"
@@ -265,9 +275,8 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginRight="15dp"
                     android:background="@drawable/bg_discover_gedan"
-                    android:text="更多新碟"
-                    android:textColor="@color/black"
-                    android:textSize="10sp" />
+                    android:text='@{vm.type == TYPE.SONG ? "新歌推荐": "更多新碟"}'
+                    android:textColor="@color/black" />
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView

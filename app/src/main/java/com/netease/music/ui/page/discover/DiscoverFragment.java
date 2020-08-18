@@ -6,10 +6,8 @@ import androidx.annotation.Nullable;
 
 import com.bigkoo.convenientbanner.listener.OnItemClickListener;
 import com.imooc.lib_api.model.banner.BannerBean;
-import com.imooc.lib_api.model.playlist.MainRecommendPlayListBean;
 import com.kunminx.architecture.ui.page.BaseFragment;
 import com.kunminx.architecture.ui.page.DataBindingConfig;
-import com.kunminx.binding_recyclerview.adapter.BaseDataBindingAdapter;
 import com.netease.music.BR;
 import com.netease.music.R;
 import com.netease.music.data.config.TYPE;
@@ -33,7 +31,8 @@ public class DiscoverFragment extends BaseFragment {
     @Override
     protected DataBindingConfig getDataBindingConfig() {
         return new DataBindingConfig(R.layout.delegate_discover, BR.vm, mDiscoverViewModel)
-                .addBindingParam(BR.bannerListener, bannerListener);
+                .addBindingParam(BR.bannerListener, bannerListener)
+                .addBindingParam(BR.proxy, new ClickProxy());
     }
 
     @Override
@@ -62,6 +61,8 @@ public class DiscoverFragment extends BaseFragment {
         mDiscoverViewModel.discoverRequest.requestBannerData();
         //请求歌单数据
         mDiscoverViewModel.discoverRequest.requestRecommendPlaylistData();
+        //请求新碟上架和新歌速递数据
+        mDiscoverViewModel.discoverRequest.requestAlbumAndSongData();
 
     }
 
@@ -99,6 +100,17 @@ public class DiscoverFragment extends BaseFragment {
         }
 
     };
+
+
+    public class ClickProxy {
+        public void changeAlbumOrSong() {
+            if (mDiscoverViewModel.type.get().getValue() == TYPE.ALBUM.getValue()) {
+                mDiscoverViewModel.type.set(TYPE.SONG);
+            } else {
+                mDiscoverViewModel.type.set(TYPE.ALBUM);
+            }
+        }
+    }
 
 
 }
