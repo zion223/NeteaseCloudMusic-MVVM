@@ -30,7 +30,7 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ScreenUtils.setStatusBarColor(this, Color.parseColor("DE3C32"));
+        ScreenUtils.setStatusBarColor(this, Color.parseColor("#DE3C32"));
         setContentView(R.layout.delegate_splash);
         String[] perms = {Manifest.permission.READ_PHONE_STATE
                 , Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION
