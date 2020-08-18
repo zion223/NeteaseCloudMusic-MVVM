@@ -10,6 +10,7 @@ import com.kunminx.architecture.ui.page.BaseFragment;
 import com.kunminx.architecture.ui.page.DataBindingConfig;
 import com.netease.music.BR;
 import com.netease.music.R;
+import com.netease.music.ui.page.adapter.RecommendPlayListAdapter;
 import com.netease.music.ui.state.DiscoverViewModel;
 
 import java.util.ArrayList;
@@ -44,8 +45,17 @@ public class DiscoverFragment extends BaseFragment {
             mDiscoverViewModel.bannersPic.set(bannerPic);
         });
 
+        //推荐歌单数据
+        mDiscoverViewModel.discoverRequest.getRecommendPlaylistLiveData().observe(this, recommendBeans -> {
+            final RecommendPlayListAdapter playListAdapter = new RecommendPlayListAdapter(getContext());
+            playListAdapter.submitList(recommendBeans);
+            mDiscoverViewModel.playListAdapter.set(playListAdapter);
+        });
+
         //请求Banner数据
         mDiscoverViewModel.discoverRequest.requestBannerData();
+        //请求歌单数据
+        mDiscoverViewModel.discoverRequest.requestRecommendPlaylistData();
 
     }
 
@@ -83,4 +93,6 @@ public class DiscoverFragment extends BaseFragment {
         }
 
     };
+
+
 }

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.imooc.lib_api.model.playlist.MainRecommendPlayListBean.RecommendBean" />
+
+        <import type="com.netease.music.util.SearchUtil" />
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="10dp">
+
+        <ImageView
+            android:id="@+id/iv_item_discover"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/ic_test" />
+
+        <ImageView
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_alignTop="@+id/tv_item_discover_playnum"
+            android:layout_alignBottom="@+id/tv_item_discover_playnum"
+            android:layout_toLeftOf="@+id/tv_item_discover_playnum"
+            android:src="@drawable/ic_song_play_num" />
+
+        <TextView
+            android:id="@+id/tv_item_discover_playnum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/iv_item_discover"
+            android:layout_marginRight="5dp"
+            android:text="@{SearchUtil.getCorresPondingString(item.playcount)}"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tv_item_discover_des"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iv_item_discover"
+            android:layout_alignLeft="@+id/iv_item_discover"
+            android:layout_marginTop="7dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="@{item.name}"
+            android:textColor="@color/black"
+            android:textSize="12sp" />
+
+    </RelativeLayout>
+</layout>

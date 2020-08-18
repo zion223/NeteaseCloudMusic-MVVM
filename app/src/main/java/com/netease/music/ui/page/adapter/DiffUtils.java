@@ -19,6 +19,7 @@ package com.netease.music.ui.page.adapter;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 
+import com.imooc.lib_api.model.playlist.MainRecommendPlayListBean;
 import com.netease.music.data.bean.LibraryInfo;
 import com.netease.music.data.bean.TestAlbum;
 
@@ -27,6 +28,8 @@ public class DiffUtils {
     private DiffUtil.ItemCallback<LibraryInfo> mLibraryInfoItemCallback;
 
     private DiffUtil.ItemCallback<TestAlbum.TestMusic> mTestMusicItemCallback;
+
+    private DiffUtil.ItemCallback<MainRecommendPlayListBean.RecommendBean> mRecommendPlaylistItemCallback;
 
     private DiffUtils() {
     }
@@ -69,5 +72,22 @@ public class DiffUtils {
             };
         }
         return mTestMusicItemCallback;
+    }
+
+    public DiffUtil.ItemCallback<MainRecommendPlayListBean.RecommendBean> getRecommendPlayListItemCallback() {
+        if (mRecommendPlaylistItemCallback == null) {
+            mRecommendPlaylistItemCallback = new DiffUtil.ItemCallback<MainRecommendPlayListBean.RecommendBean>() {
+                @Override
+                public boolean areItemsTheSame(@NonNull MainRecommendPlayListBean.RecommendBean oldItem, @NonNull MainRecommendPlayListBean.RecommendBean newItem) {
+                    return oldItem == newItem;
+                }
+
+                @Override
+                public boolean areContentsTheSame(@NonNull MainRecommendPlayListBean.RecommendBean oldItem, @NonNull MainRecommendPlayListBean.RecommendBean newItem) {
+                    return oldItem.getId() == newItem.getId();
+                }
+            };
+        }
+        return mRecommendPlaylistItemCallback;
     }
 }
