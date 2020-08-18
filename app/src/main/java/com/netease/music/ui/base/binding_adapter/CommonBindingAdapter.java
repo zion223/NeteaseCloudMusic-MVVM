@@ -30,15 +30,21 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import com.ToxicBakery.viewpager.transforms.DefaultTransformer;
+import com.bigkoo.convenientbanner.ConvenientBanner;
+import com.bigkoo.convenientbanner.listener.OnItemClickListener;
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.imooc.lib_common_ui.bannder.HolderCreator;
 import com.imooc.lib_common_ui.widget.CaptchaView;
 import com.kunminx.architecture.utils.ClickUtils;
 import com.kunminx.architecture.utils.Utils;
+import com.netease.music.R;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
 import com.scwang.smart.refresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smart.refresh.layout.listener.OnRefreshListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -142,6 +148,19 @@ public class CommonBindingAdapter {
     public static void setOnLoadMoreListener(SmartRefreshLayout refreshLayout, OnLoadMoreListener listener) {
         refreshLayout.setOnLoadMoreListener(listener);
     }
+
+    @BindingAdapter(value = {"bannerPic", "bannerListener"})
+    public static void setDefault(ConvenientBanner convenientBanner,
+                                  List<String> banners,
+                                  OnItemClickListener listener) {
+        convenientBanner.setPages(new HolderCreator(), banners)
+                .setPageIndicator(new int[]{R.drawable.dot_normal, R.drawable.dot_focus})
+                .setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.CENTER_HORIZONTAL)
+                .setPageTransformer(new DefaultTransformer())
+                .setOnItemClickListener(listener)
+                .setCanLoop(true);
+    }
+
 
     @BindingAdapter(value = {"adapter", "submitList", "autoScrollToTopWhenInsert", "autoScrollToBottomWhenInsert"}, requireAll = false)
     public static void bindList(RecyclerView recyclerView, BaseQuickAdapter adapter, List list,

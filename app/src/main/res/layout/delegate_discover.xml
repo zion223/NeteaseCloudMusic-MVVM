@@ -2,6 +2,17 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+
+        <variable
+            name="vm"
+            type="com.netease.music.ui.state.DiscoverViewModel" />
+
+        <variable
+            name="bannerListener"
+            type="com.bigkoo.convenientbanner.listener.OnItemClickListener" />
+    </data>
+
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -23,7 +34,9 @@
                 <com.bigkoo.convenientbanner.ConvenientBanner
                     android:id="@+id/banner_recycler_item"
                     android:layout_width="match_parent"
-                    android:layout_height="130dp" />
+                    android:layout_height="130dp"
+                    bannerPic="@{vm.bannersPic}"
+                    bannerListener="@{bannerListener}" />
             </androidx.cardview.widget.CardView>
 
             <LinearLayout
@@ -208,7 +221,7 @@
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_discover_gedan"
+                android:id="@+id/rv_discover_playlist"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
