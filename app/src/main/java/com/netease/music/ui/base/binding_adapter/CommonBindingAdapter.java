@@ -35,6 +35,7 @@ import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.listener.OnItemClickListener;
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.google.android.material.appbar.AppBarLayout;
 import com.imooc.lib_common_ui.bannder.HolderCreator;
 import com.imooc.lib_common_ui.widget.CaptchaView;
 import com.kunminx.architecture.utils.ClickUtils;
@@ -63,12 +64,15 @@ public class CommonBindingAdapter {
         textView.setTextColor(textView.getResources().getColor(textColorRes));
     }
 
-
     @BindingAdapter(value = {"selected"}, requireAll = false)
     public static void selected(View view, boolean select) {
         view.setSelected(select);
     }
 
+    @BindingAdapter(value = {"alpha"}, requireAll = false)
+    public static void selected(View view, float alpha) {
+        view.setAlpha(alpha);
+    }
 
     @BindingAdapter(value = {"onClickWithDebouncing"}, requireAll = false)
     public static void onClickWithDebouncing(View view, View.OnClickListener clickListener) {
@@ -127,6 +131,11 @@ public class CommonBindingAdapter {
     @BindingAdapter(value = {"onSmartLoadMoreListener"}, requireAll = false)
     public static void setOnLoadMoreListener(SmartRefreshLayout refreshLayout, OnLoadMoreListener listener) {
         refreshLayout.setOnLoadMoreListener(listener);
+    }
+
+    @BindingAdapter(value = {"onOffsetChangedListener"}, requireAll = false)
+    public static void addOnOffsetChangedListener(AppBarLayout appBarLayout, AppBarLayout.OnOffsetChangedListener listener) {
+        appBarLayout.addOnOffsetChangedListener(listener);
     }
 
     @BindingAdapter(value = {"bannerPic", "bannerListener"})

@@ -56,7 +56,7 @@ public class CloudMusicActivity extends BaseActivity {
 
             View headerView = LayoutInflater.from(Utils.getApp()).inflate(R.layout.item_music_header, null, false);
             ((TextView) headerView.findViewById(R.id.play_all_number)).setText(userCloudBean.getCount());
-            PlayMusicListAdapter adapter = new PlayMusicListAdapter(true, songData);
+            PlayMusicListAdapter adapter = new PlayMusicListAdapter(songData, true);
             adapter.setHeaderView(headerView);
             mCloudMusicViewModel.adapter.set(adapter);
             //停止显示加载按钮

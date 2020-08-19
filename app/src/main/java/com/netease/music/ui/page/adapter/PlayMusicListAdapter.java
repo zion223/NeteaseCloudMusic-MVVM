@@ -2,8 +2,6 @@ package com.netease.music.ui.page.adapter;
 
 import android.content.Context;
 
-import androidx.annotation.Nullable;
-
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.imooc.lib_api.model.song.SongDetailBean;
@@ -19,27 +17,27 @@ public class PlayMusicListAdapter extends BaseQuickAdapter<SongDetailBean.SongsB
 
     private Context mContext;
     //是否有头布局 影响显示序号
-    private Boolean hasHeader;
+    private Boolean hasHeader = false;
     //在用户的听歌排行中不显示此View 而是显示听歌的次数
     private boolean showMoreView = true;
-    //在新歌速递中显示歌曲的图片而不是显示序号
-    private boolean showSongImg = false;
+    //在新歌速递中或者每日推荐中显示歌曲的专辑的图片而不是显示序号
+    private boolean showAlbumImg = false;
 
-    public PlayMusicListAdapter(boolean hasHeader, @Nullable List<SongDetailBean.SongsBean> data) {
+    public PlayMusicListAdapter(List<SongDetailBean.SongsBean> data, boolean hasHeader) {
         super(R.layout.item_gedan_detail_song, data);
         this.hasHeader = hasHeader;
     }
 
-    public PlayMusicListAdapter(@Nullable List<SongDetailBean.SongsBean> data) {
+    public PlayMusicListAdapter(List<SongDetailBean.SongsBean> data) {
         super(R.layout.item_gedan_detail_song, data);
-        this.hasHeader = false;
     }
 
-    public PlayMusicListAdapter(boolean hasHeader, boolean showMoreView, @Nullable List<SongDetailBean.SongsBean> data) {
+    public PlayMusicListAdapter(List<SongDetailBean.SongsBean> data, boolean hasHeader, boolean showMoreView) {
         super(R.layout.item_gedan_detail_song, data);
         this.hasHeader = hasHeader;
         this.showMoreView = showMoreView;
     }
+
 
     @Override
     protected void convert(@NotNull BaseViewHolder helper, SongDetailBean.SongsBean item) {

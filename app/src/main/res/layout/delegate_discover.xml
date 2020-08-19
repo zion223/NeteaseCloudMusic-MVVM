@@ -73,6 +73,7 @@
                         android:layout_height="40dp"
                         android:layout_gravity="center_horizontal"
                         android:background="@drawable/bg_item_spec"
+                        onClickWithDebouncing="@{() -> proxy.dailyRecommend()}"
                         android:src="@drawable/t_dragonball_icn_daily" />
 
                     <TextView

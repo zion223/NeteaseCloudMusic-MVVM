@@ -1,0 +1,112 @@
+package com.netease.music.ui.page.discover.daily;
+
+import android.graphics.Color;
+import android.os.Bundle;
+import android.os.Handler;
+import android.text.TextUtils;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.viewholder.BaseViewHolder;
+import com.google.android.material.appbar.AppBarLayout;
+import com.imooc.lib_api.model.song.SongDetailBean;
+import com.imooc.lib_common_ui.appbar.AppBarStateChangeListener;
+import com.imooc.lib_image_loader.app.ImageLoaderManager;
+import com.kunminx.architecture.ui.page.BaseActivity;
+import com.kunminx.architecture.ui.page.DataBindingConfig;
+import com.kunminx.architecture.utils.BarUtils;
+import com.netease.music.BR;
+import com.netease.music.R;
+import com.netease.music.ui.state.DailyRecommendViewModel;
+
+import java.util.List;
+
+//每日推荐界面
+public class DailyRecommendActivity extends BaseActivity {
+
+    private DailyRecommendViewModel mViewModel;
+
+    @Override
+    protected void initViewModel() {
+        mViewModel = getActivityViewModel(DailyRecommendViewModel.class);
+    }
+
+    @Override
+    protected DataBindingConfig getDataBindingConfig() {
+        return new DataBindingConfig(R.layout.delegate_daily_recommend, BR.vm, mViewModel)
+                .addBindingParam(BR.offsetListener, listener);
+    }
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        BarUtils.setStatusBarColor(this, Color.TRANSPARENT);
+        DailyRecommendAdapter dailyRecommendAdapter = new DailyRecommendAdapter(null);
+        dailyRecommendAdapter.setOnItemClickListener((adapter, view, position) -> {
+            //播放音乐
+            SongDetailBean.SongsBean entity = (SongDetailBean.SongsBean) adapter.getItem(position);
+        });
+        mViewModel.recommendRequest.getDailRecommendLiveData().observe(this, dailyRecommendBean -> {
+            dailyRecommendAdapter.addData(dailyRecommendBean.getData().getDailySongs());
+            mViewModel.adapter.set(dailyRecommendAdapter);
+            //延迟1s显示加载动画
+            new Handler().postDelayed(() -> mViewModel.loadingVisible.set(false), 1000);
+        });
+        //请求数据
+        mViewModel.recommendRequest.requestDailyRecommendMusic();
+
+    }
+
+    AppBarStateChangeListener listener = new AppBarStateChangeListener() {
+        @Override
+        public void onStateChanged(AppBarLayout appBarLayout, State state) {
+            if (state == State.COLLAPSED) {
+                mViewModel.leftTitleAlpha.set(255f);
+                mViewModel.leftTitleVisiable.set(true);
+            }
+        }
+
+        @Override
+        public void onOffsetChanged(AppBarLayout appBarLayout) {
+//            float alphaPercent = (float) (mRlPlayAll.getTop() - minDistance) / (float) deltaDistance;
+//            int alpha = (int) (alphaPercent * 255);
+//            mIvAppBarCoverBackground.setImageAlpha(alpha);
+//            mTvMonth.setAlpha(alphaPercent);
+//            mTvDay.setAlpha(alphaPercent);
+//            if (alphaPercent < 0.2f) {
+//                float leftTitleAlpha = (1.0f - alphaPercent / 0.2f);
+//                mViewModel.leftTitleAlpha.set(leftTitleAlpha);
+//                mViewModel.leftTitleVisiable.set(true);
+//            } else {
+//                mViewModel.leftTitleAlpha.set(0f);
+//                mViewModel.leftTitleVisiable.set(true);
+//            }
+        }
+    };
+
+
+    private static class DailyRecommendAdapter extends BaseQuickAdapter<SongDetailBean.SongsBean, BaseViewHolder> {
+
+        private ImageLoaderManager manager;
+
+        DailyRecommendAdapter(@Nullable List<SongDetailBean.SongsBean> data) {
+            super(R.layout.item_top_song, data);
+            manager = ImageLoaderManager.getInstance();
+        }
+
+        @Override
+        protected void convert(@NonNull BaseViewHolder helper, SongDetailBean.SongsBean item) {
+            manager.displayImageForCorner(helper.getView(R.id.iv_song_img), item.getAl().getPicUrl());
+            helper.setText(R.id.viewpager_list_toptext, item.getName());
+            helper.setText(R.id.viewpager_list_bottom_text, item.getAr().get(0).getName() + " - " + item.getAl().getName());
+            //推荐原因
+            if (TextUtils.isEmpty(item.getRecommendReason())) {
+                helper.setVisible(R.id.viewpager_list_reason, false);
+            } else {
+                helper.setText(R.id.viewpager_list_reason, item.getRecommendReason());
+            }
+        }
+    }
+}

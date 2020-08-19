@@ -15,6 +15,7 @@ import com.netease.music.data.config.TYPE;
 import com.netease.music.ui.page.adapter.AlbumSongAdapter;
 import com.netease.music.ui.page.adapter.RecommendPlayListAdapter;
 import com.netease.music.ui.page.discover.album.NewAlbumActivity;
+import com.netease.music.ui.page.discover.daily.DailyRecommendActivity;
 import com.netease.music.ui.page.discover.square.detail.SongListDetailActivity;
 import com.netease.music.ui.state.DiscoverViewModel;
 
@@ -135,6 +136,10 @@ public class DiscoverFragment extends BaseFragment {
                 //新碟上架
                 startActivity(new Intent(getContext(), NewAlbumActivity.class));
             }
+        }
+
+        public void dailyRecommend() {
+            startActivity(new Intent(getContext(), DailyRecommendActivity.class));
         }
     }
 

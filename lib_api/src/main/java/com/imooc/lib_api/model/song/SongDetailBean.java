@@ -111,6 +111,19 @@ public class SongDetailBean {
         private List<ArBean> ar;
         private List<?> alia;
         private List<?> rtUrls;
+        private String recommendReason;
+
+        public void setMv(long mv) {
+            this.mv = mv;
+        }
+
+        public String getRecommendReason() {
+            return recommendReason;
+        }
+
+        public void setRecommendReason(String recommendReason) {
+            this.recommendReason = recommendReason;
+        }
 
         public String getName() {
             return name;
