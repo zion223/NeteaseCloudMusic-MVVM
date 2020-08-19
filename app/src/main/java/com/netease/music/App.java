@@ -16,6 +16,7 @@
 
 package com.netease.music;
 
+import com.imooc.lib_audio.app.AudioHelper;
 import com.kunminx.architecture.BaseApplication;
 import com.kunminx.architecture.utils.Utils;
 import com.netease.music.player.PlayerManager;
@@ -28,7 +29,7 @@ public class App extends BaseApplication {
     @Override
     public void onCreate() {
         super.onCreate();
-
+        AudioHelper.init(this);
         Utils.init(this);
         PlayerManager.getInstance().init(this);
     }
