@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,10 +14,12 @@ import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.google.android.material.appbar.AppBarLayout;
 import com.imooc.lib_api.model.song.SongDetailBean;
 import com.imooc.lib_common_ui.appbar.AppBarStateChangeListener;
+import com.imooc.lib_common_ui.utils.StatusBarUtil;
 import com.imooc.lib_image_loader.app.ImageLoaderManager;
 import com.kunminx.architecture.ui.page.BaseActivity;
 import com.kunminx.architecture.ui.page.DataBindingConfig;
 import com.kunminx.architecture.utils.BarUtils;
+import com.kunminx.architecture.utils.Utils;
 import com.netease.music.BR;
 import com.netease.music.R;
 import com.netease.music.ui.state.DailyRecommendViewModel;
@@ -27,6 +30,8 @@ import java.util.List;
 public class DailyRecommendActivity extends BaseActivity {
 
     private DailyRecommendViewModel mViewModel;
+    private int minDistance;
+    private int deltaDistance;
 
     @Override
     protected void initViewModel() {
@@ -43,6 +48,10 @@ public class DailyRecommendActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         BarUtils.setStatusBarColor(this, Color.TRANSPARENT);
+
+        minDistance = StatusBarUtil.dip2px(Utils.getApp(), 55);
+        deltaDistance = StatusBarUtil.dip2px(Utils.getApp(), 200) - minDistance;
+
         DailyRecommendAdapter dailyRecommendAdapter = new DailyRecommendAdapter(null);
         dailyRecommendAdapter.setOnItemClickListener((adapter, view, position) -> {
             //播放音乐
@@ -70,21 +79,35 @@ public class DailyRecommendActivity extends BaseActivity {
 
         @Override
         public void onOffsetChanged(AppBarLayout appBarLayout) {
-//            float alphaPercent = (float) (mRlPlayAll.getTop() - minDistance) / (float) deltaDistance;
-//            int alpha = (int) (alphaPercent * 255);
-//            mIvAppBarCoverBackground.setImageAlpha(alpha);
-//            mTvMonth.setAlpha(alphaPercent);
-//            mTvDay.setAlpha(alphaPercent);
-//            if (alphaPercent < 0.2f) {
-//                float leftTitleAlpha = (1.0f - alphaPercent / 0.2f);
-//                mViewModel.leftTitleAlpha.set(leftTitleAlpha);
-//                mViewModel.leftTitleVisiable.set(true);
-//            } else {
-//                mViewModel.leftTitleAlpha.set(0f);
-//                mViewModel.leftTitleVisiable.set(true);
-//            }
+            View playView = appBarLayout.getRootView().findViewById(R.id.rl_play);
+            float alphaPercent = (float) (playView.getTop() - minDistance) / (float) deltaDistance;
+            int alpha = (int) (alphaPercent * 255);
+            //背景图片
+            mViewModel.coverImgAlpha.set(alpha);
+            //日期
+            mViewModel.textAlpha.set(alphaPercent);
+            if (alphaPercent < 0.2f) {
+                float leftTitleAlpha = (1.0f - alphaPercent / 0.2f);
+                mViewModel.leftTitleAlpha.set(leftTitleAlpha);
+                mViewModel.leftTitleVisiable.set(true);
+            } else {
+                mViewModel.leftTitleAlpha.set(0f);
+                mViewModel.leftTitleVisiable.set(true);
+            }
         }
     };
+
+    public class ClickProxy {
+        //返回
+        public void back() {
+            finish();
+        }
+
+        //播放全部音乐
+        public void playAll() {
+
+        }
+    }
 
 
     private static class DailyRecommendAdapter extends BaseQuickAdapter<SongDetailBean.SongsBean, BaseViewHolder> {

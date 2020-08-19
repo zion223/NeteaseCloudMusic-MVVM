@@ -70,8 +70,13 @@ public class CommonBindingAdapter {
     }
 
     @BindingAdapter(value = {"alpha"}, requireAll = false)
-    public static void selected(View view, float alpha) {
+    public static void setAlpha(View view, float alpha) {
         view.setAlpha(alpha);
+    }
+
+    @BindingAdapter(value = {"imgalpha"}, requireAll = false)
+    public static void setImageViewAlpha(ImageView view, int alpha) {
+        view.setImageAlpha(alpha);
     }
 
     @BindingAdapter(value = {"onClickWithDebouncing"}, requireAll = false)

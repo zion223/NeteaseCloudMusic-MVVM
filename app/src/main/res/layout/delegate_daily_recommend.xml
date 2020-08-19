@@ -10,6 +10,10 @@
         <variable
             name="offsetListener"
             type="com.google.android.material.appbar.AppBarLayout.OnOffsetChangedListener" />
+
+        <variable
+            name="proxy"
+            type="com.netease.music.ui.page.discover.daily.DailyRecommendActivity.ClickProxy" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -46,6 +50,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     imageUrl="@{vm.backgroundImgUrl}"
+                    imgalpha="@{vm.coverImgAlpha}"
                     android:scaleType="centerCrop"
                     app:layout_collapseMode="parallax" />
 
@@ -61,6 +66,7 @@
                         android:layout_marginStart="20dp"
                         android:layout_marginTop="80dp"
                         android:text="@{vm.day}"
+                        alpha="@{vm.textAlpha}"
                         android:textColor="#f0f0f0f0"
                         android:textSize="30sp"
                         android:typeface="monospace" />
@@ -73,6 +79,7 @@
                         android:layout_marginStart="8dp"
                         android:layout_toEndOf="@+id/tv_day"
                         android:text='@{"/" + vm.month}'
+                        alpha="@{vm.textAlpha}"
                         android:textColor="#f0f0f0"
                         android:textSize="20sp"
                         android:typeface="monospace" />
@@ -110,6 +117,7 @@
                             android:layout_width="25dp"
                             android:layout_height="25dp"
                             android:layout_margin="10dp"
+                            onClickWithDebouncing="@{() -> proxy.back()}"
                             android:src="@drawable/ic_left_arrow_white" />
 
                         <TextView
@@ -158,7 +166,8 @@
                     android:id="@+id/rl_playall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp">
+                    android:layout_marginStart="20dp"
+                    onClickWithDebouncing="@{() -> proxy.playAll()}">
 
                     <ImageView
                         android:id="@+id/iv_playall"

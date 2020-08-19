@@ -17,6 +17,11 @@ public class DailyRecommendViewModel extends BaseLoadingViewModel {
 
     //标题透明度
     public ObservableFloat leftTitleAlpha = new ObservableFloat();
+    //日期和背景图片透明度
+    public ObservableFloat textAlpha = new ObservableFloat();
+    //背景透明度
+    public ObservableInt coverImgAlpha = new ObservableInt();
+
     public ObservableBoolean leftTitleVisiable = new ObservableBoolean();
 
     public ObservableField<String> day = new ObservableField<>();
