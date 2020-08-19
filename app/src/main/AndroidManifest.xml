@@ -32,6 +32,7 @@
         <activity android:name=".ui.page.discover.album.NewAlbumActivity" />
         <activity android:name=".ui.page.discover.daily.DailyRecommendActivity" />
         <activity android:name=".ui.page.discover.radio.RadioActivity" />
+        <activity android:name=".ui.page.discover.radio.RadioPayActivity" />
         <!-- 闪屏界面作为应用的入口-->
         <activity android:name=".ui.page.SplashActivity">
             <intent-filter>

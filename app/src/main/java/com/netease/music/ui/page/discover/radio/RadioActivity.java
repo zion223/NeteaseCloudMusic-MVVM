@@ -1,5 +1,6 @@
 package com.netease.music.ui.page.discover.radio;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -73,7 +74,7 @@ public class RadioActivity extends BaseActivity {
 
         //付费精品
         public void vip() {
-
+            startActivity(new Intent(RadioActivity.this, RadioPayActivity.class));
         }
 
         public void changeRecommendData() {

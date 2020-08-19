@@ -37,6 +37,17 @@ public class RecyclerViewBindingAdapter {
         }
     }
 
+    @BindingAdapter(value = {"addList"}, requireAll = false)
+    public static void initRecyclerAddData(RecyclerView recyclerView, List data) {
+        if (data != null) {
+            if (recyclerView.getAdapter() instanceof ListAdapter) {
+                ((ListAdapter) recyclerView.getAdapter()).submitList(data);
+            } else if (recyclerView.getAdapter() instanceof BaseQuickAdapter) {
+                ((BaseQuickAdapter) recyclerView.getAdapter()).addData(data);
+            }
+        }
+    }
+
 //    @BindingAdapter(value = {"adapter", "submitList", "autoScrollToTopWhenInsert", "autoScrollToBottomWhenInsert"}, requireAll = false)
 //    public static void bindList(RecyclerView recyclerView, SimpleDataBindingAdapter adapter, List list,
 //                                boolean autoScrollToTopWhenInsert, boolean autoScrollToBottomWhenInsert) {
