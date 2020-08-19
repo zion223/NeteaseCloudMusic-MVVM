@@ -50,7 +50,7 @@
                 android:fitsSystemWindows="true"
                 app:defaultNavHost="true"
                 app:navGraph="@navigation/nav_slide" />-->
-            <com.imooc.lib_audio.mediaplayer.view.BottomMusicView
+            <com.netease.lib_audio.mediaplayer.view.BottomMusicView
                 android:id="@+id/bottom_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

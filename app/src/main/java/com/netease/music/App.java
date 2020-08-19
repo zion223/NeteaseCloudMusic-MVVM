@@ -16,7 +16,7 @@
 
 package com.netease.music;
 
-import com.imooc.lib_audio.app.AudioHelper;
+import com.netease.lib_audio.app.AudioHelper;
 import com.kunminx.architecture.BaseApplication;
 import com.kunminx.architecture.utils.Utils;
 import com.netease.music.player.PlayerManager;
