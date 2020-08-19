@@ -54,7 +54,7 @@
                                 android:layout_height="60dp"
                                 android:layout_alignParentLeft="true"
                                 android:layout_marginLeft="10dp"
-                                imageUrl="@{vm.user.profile.avatarUrl}"
+                                circleImageUrl="@{vm.user.profile.avatarUrl}"
                                 android:layout_marginTop="50dp" />
 
                             <TextView
