@@ -22,6 +22,8 @@ public class PlayMusicListAdapter extends BaseQuickAdapter<SongDetailBean.SongsB
     private Boolean hasHeader;
     //在用户的听歌排行中不显示此View 而是显示听歌的次数
     private boolean showMoreView = true;
+    //在新歌速递中显示歌曲的图片而不是显示序号
+    private boolean showSongImg = false;
 
     public PlayMusicListAdapter(boolean hasHeader, @Nullable List<SongDetailBean.SongsBean> data) {
         super(R.layout.item_gedan_detail_song, data);

@@ -1,5 +1,6 @@
 package com.netease.music.ui.page.discover;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -13,6 +14,7 @@ import com.netease.music.R;
 import com.netease.music.data.config.TYPE;
 import com.netease.music.ui.page.adapter.AlbumSongAdapter;
 import com.netease.music.ui.page.adapter.RecommendPlayListAdapter;
+import com.netease.music.ui.page.discover.album.NewAlbumActivity;
 import com.netease.music.ui.page.discover.square.detail.SongListDetailActivity;
 import com.netease.music.ui.state.DiscoverViewModel;
 
@@ -112,6 +114,7 @@ public class DiscoverFragment extends BaseFragment {
 
 
     public class ClickProxy {
+
         public void changeAlbumOrSong() {
             if (mDiscoverViewModel.type.get().getValue() == TYPE.ALBUM.getValue()) {
                 //切换到新歌
@@ -121,6 +124,16 @@ public class DiscoverFragment extends BaseFragment {
                 //切换到新碟
                 mDiscoverViewModel.type.set(TYPE.ALBUM);
                 mDiscoverViewModel.currentAlbumOrSongLiveData.set(mDiscoverViewModel.albumOrSongLiveData.get().subList(0, 3));
+            }
+        }
+
+        public void clickAlbumOrSongDetail() {
+            //新歌推荐
+            if (mDiscoverViewModel.type.get() == TYPE.SONG) {
+
+            } else {
+                //新碟上架
+                startActivity(new Intent(getContext(), NewAlbumActivity.class));
             }
         }
     }

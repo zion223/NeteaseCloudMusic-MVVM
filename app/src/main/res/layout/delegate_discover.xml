@@ -278,6 +278,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginRight="15dp"
                     android:background="@drawable/bg_discover_gedan"
+                    onClickWithDebouncing="@{ () -> proxy.clickAlbumOrSongDetail()}"
                     android:text='@{vm.type == TYPE.SONG ? "新歌推荐": "更多新碟"}'
                     android:textSize="10sp"
                     android:textColor="@color/black" />
