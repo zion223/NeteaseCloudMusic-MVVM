@@ -1,4 +1,4 @@
-package com.netease.lib_audio.mediaplayer.view;
+package com.netease.music.ui.page.audio;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -14,14 +14,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
+import com.imooc.lib_api.model.song.AudioBean;
 import com.imooc.lib_audio.R;
+import com.lxj.xpopup.XPopup;
+import com.lxj.xpopup.core.BottomPopupView;
 import com.netease.lib_audio.mediaplayer.core.AudioController;
 import com.netease.lib_audio.mediaplayer.events.AudioLoadEvent;
 import com.netease.lib_audio.mediaplayer.events.AudioPlayModeEvent;
 import com.netease.lib_audio.mediaplayer.events.AudioRemoveEvent;
-import com.imooc.lib_api.model.song.AudioBean;
-import com.lxj.xpopup.XPopup;
-import com.lxj.xpopup.core.BottomPopupView;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;

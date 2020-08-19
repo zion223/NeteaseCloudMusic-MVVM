@@ -1,7 +1,6 @@
-package com.netease.lib_audio.mediaplayer.view;
+package com.netease.music.ui.page.audio;
 
 import android.animation.ObjectAnimator;
-import android.app.Activity;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -12,17 +11,17 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.imooc.lib_api.model.song.AudioBean;
 import com.imooc.lib_audio.R;
+import com.imooc.lib_common_ui.utils.SharePreferenceUtil;
+import com.imooc.lib_common_ui.widget.CircleProgressButton;
+import com.imooc.lib_image_loader.app.ImageLoaderManager;
+import com.lxj.xpopup.XPopup;
 import com.netease.lib_audio.mediaplayer.core.AudioController;
 import com.netease.lib_audio.mediaplayer.events.AudioLoadEvent;
 import com.netease.lib_audio.mediaplayer.events.AudioPauseEvent;
 import com.netease.lib_audio.mediaplayer.events.AudioProgressEvent;
 import com.netease.lib_audio.mediaplayer.events.AudioStartEvent;
-import com.imooc.lib_api.model.song.AudioBean;
-import com.imooc.lib_common_ui.utils.SharePreferenceUtil;
-import com.imooc.lib_common_ui.widget.CircleProgressButton;
-import com.imooc.lib_image_loader.app.ImageLoaderManager;
-import com.lxj.xpopup.XPopup;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -78,7 +77,7 @@ public class BottomMusicView extends RelativeLayout {
             public void onClick(View v) {
                 //跳到音乐播放Activitity
                 if (AudioController.getInstance().getNowPlaying() != null) {
-                    MusicPlayerActivity.start((Activity) mContext);
+                    //MusicPlayerActivity.start((Activity) mContext);
                 } else {
                     Toast.makeText(getContext(), "当前播放队列无歌曲", Toast.LENGTH_SHORT).show();
                 }

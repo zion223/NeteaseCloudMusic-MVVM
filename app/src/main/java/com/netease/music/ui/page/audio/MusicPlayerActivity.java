@@ -1,11 +1,10 @@
-package com.netease.music.ui.page.music;
+package com.netease.music.ui.page.audio;
 
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.transition.TransitionInflater;
 import android.util.Log;
@@ -34,8 +33,8 @@ import com.netease.lib_audio.mediaplayer.events.AudioPauseEvent;
 import com.netease.lib_audio.mediaplayer.events.AudioPlayModeEvent;
 import com.netease.lib_audio.mediaplayer.events.AudioProgressEvent;
 import com.netease.lib_audio.mediaplayer.events.AudioStartEvent;
-import com.netease.lib_audio.mediaplayer.util.Utils;
 import com.netease.lib_audio.mediaplayer.view.IndictorView;
+import com.netease.music.util.TimeUtil;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -95,10 +94,8 @@ public class MusicPlayerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_music_service_layout);
         //使用转场动画 从底部弹出和退出
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setEnterTransition(
-                    TransitionInflater.from(this).inflateTransition(R.transition.transition_bottom2top));
-        }
+        getWindow().setEnterTransition(
+                TransitionInflater.from(this).inflateTransition(R.transition.transition_bottom2top));
         EventBus.getDefault().register(this);
         initData();
         initView();
@@ -483,7 +480,7 @@ public class MusicPlayerActivity extends AppCompatActivity {
         mProgressView.setProgress(currentTime);
         //设置最大时间
         mProgressView.setMax(totalTime);
-        mStartTimeView.setText(Utils.formatTime(currentTime));
+        mStartTimeView.setText(TimeUtil.formatTime(currentTime));
         //更新歌词播放进度
         lrcView.updateTime(currentTime);
         //更新状态

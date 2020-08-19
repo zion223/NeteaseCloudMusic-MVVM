@@ -79,7 +79,8 @@ dependencies {
     implementation this.rootProject.depsLibs.magicindicator
     //视频播放
     implementation this.rootProject.depsLibs.videoplayer
-
+    //xpop
+    implementation this.rootProject.depsLibs.xpopup
     //RecyclerView adapter
     implementation this.rootProject.depsLibs.BaseRecyclerViewAdapterHelper
     //permission
@@ -92,6 +93,5 @@ dependencies {
     //implementation project(path: ':lib_update')
     implementation project(path: ':lib_api')
     implementation project(path: ':lib_network')
-    //implementation project(path: ':lib_pullalive')
     //implementation project(path: ':lib_share')
 }

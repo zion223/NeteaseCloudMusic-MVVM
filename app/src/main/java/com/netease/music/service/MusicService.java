@@ -1,4 +1,4 @@
-package com.netease.lib_audio.mediaplayer.core;
+package com.netease.music.service;
 
 import android.app.Service;
 import android.content.BroadcastReceiver;
@@ -11,19 +11,19 @@ import android.text.TextUtils;
 import androidx.annotation.Nullable;
 
 import com.netease.lib_audio.app.AudioHelper;
+import com.netease.lib_audio.mediaplayer.core.AudioController;
 import com.netease.lib_audio.mediaplayer.events.AudioFavouriteEvent;
 import com.netease.lib_audio.mediaplayer.events.AudioLoadEvent;
 import com.netease.lib_audio.mediaplayer.events.AudioPauseEvent;
 import com.netease.lib_audio.mediaplayer.events.AudioReleaseEvent;
 import com.netease.lib_audio.mediaplayer.events.AudioStartEvent;
-import com.netease.lib_audio.mediaplayer.view.NotificationHelper;
+import com.netease.music.ui.page.audio.NotificationHelper;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 
-import static com.netease.lib_audio.mediaplayer.view.NotificationHelper.NOTIFICATION_ID;
 
 public class MusicService extends Service implements NotificationHelper.NotificationHelperListener {
 
@@ -156,7 +156,7 @@ public class MusicService extends Service implements NotificationHelper.Notifica
 					//AudioController.getInstance().changeFavourite();
 					break;
 				case EXTRA_CANCLE:
-					NotificationHelper.getInstance().getNotificationManager().cancel(NOTIFICATION_ID);
+					NotificationHelper.getInstance().getNotificationManager().cancel(NotificationHelper.NOTIFICATION_ID);
 			}
 		}
 	}

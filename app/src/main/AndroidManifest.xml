@@ -54,6 +54,13 @@
             </intent-filter>
         </activity>
 
+
+        <service
+            android:name="com.netease.music.service.MusicService"
+            android:enabled="true"
+            android:exported="false" />
+
+
     </application>
 
 </manifest>

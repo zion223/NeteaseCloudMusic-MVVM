@@ -4,9 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 
 import com.netease.lib_audio.mediaplayer.core.AudioController;
-import com.netease.lib_audio.mediaplayer.core.MusicService;
 import com.imooc.lib_api.model.song.AudioBean;
-import com.netease.lib_audio.mediaplayer.view.MusicPlayerActivity;
 
 import java.util.ArrayList;
 
@@ -17,7 +15,6 @@ public final class AudioHelper {
 
 	public static void init(Context context) {
 		mContext = context;
-		MusicService.startMusicService();
 	}
 
 	public static Context getContext() {
@@ -29,7 +26,7 @@ public final class AudioHelper {
 	public static void addAudio(Activity activity, AudioBean bean) {
 		AudioController.getInstance().addAudio(bean);
 		if (activity != null) {
-			MusicPlayerActivity.start(activity);
+			//MusicPlayerActivity.start(activity);
 		}
 	}
 

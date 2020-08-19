@@ -1,4 +1,4 @@
-package com.netease.lib_audio.mediaplayer.view;
+package com.netease.music.ui.page.audio;
 
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -15,7 +15,7 @@ import androidx.core.app.NotificationCompat;
 import com.imooc.lib_audio.R;
 import com.netease.lib_audio.app.AudioHelper;
 import com.netease.lib_audio.mediaplayer.core.AudioController;
-import com.netease.lib_audio.mediaplayer.core.MusicService;
+import com.netease.music.service.MusicService;
 import com.imooc.lib_api.model.song.AudioBean;
 import com.imooc.lib_image_loader.app.ImageLoaderManager;
 

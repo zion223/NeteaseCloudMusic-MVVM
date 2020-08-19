@@ -1,23 +1,18 @@
-package com.netease.lib_audio.mediaplayer.view;
+package com.netease.music.ui.page.audio;
 
 import android.content.Context;
-import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
-import com.imooc.lib_api.model.notification.CommonMessageBean;
 import com.imooc.lib_api.model.user.UserPlaylistBean;
 import com.imooc.lib_audio.R;
 import com.imooc.lib_common_ui.utils.SharePreferenceUtil;
 import com.imooc.lib_image_loader.app.ImageLoaderManager;
-import com.imooc.lib_network.listener.DisposeDataListener;
 import com.lxj.xpopup.core.CenterPopupView;
 
 import java.util.List;
