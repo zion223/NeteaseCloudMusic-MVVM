@@ -33,7 +33,7 @@ public class RecyclerViewBindingAdapter {
         if (recyclerView.getAdapter() instanceof ListAdapter) {
             ((ListAdapter) recyclerView.getAdapter()).submitList(data);
         } else if (recyclerView.getAdapter() instanceof BaseQuickAdapter) {
-            ((BaseQuickAdapter) recyclerView.getAdapter()).addData(data);
+            ((BaseQuickAdapter) recyclerView.getAdapter()).replaceData(data);
         }
     }
 

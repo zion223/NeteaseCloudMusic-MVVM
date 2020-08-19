@@ -6,6 +6,7 @@ import com.imooc.lib_api.model.album.AlbumDynamicBean;
 import com.imooc.lib_api.model.album.AlbumSublistBean;
 import com.imooc.lib_api.model.artist.ArtistSublistBean;
 import com.imooc.lib_api.model.banner.BannerBean;
+import com.imooc.lib_api.model.dj.DjBannerBean;
 import com.imooc.lib_api.model.dj.DjCategoryRecommendBean;
 import com.imooc.lib_api.model.dj.DjCatelistBean;
 import com.imooc.lib_api.model.dj.DjDetailBean;
@@ -89,6 +90,9 @@ public interface ApiService {
 
     @GET("banner")
     Observable<BannerBean> getBanner(@Query("type") String type);
+
+    @GET("dj/banner")
+    Observable<DjBannerBean> getRadioBanner();
 
     @GET("recommend/resource")
     Observable<MainRecommendPlayListBean> getRecommendPlayList();

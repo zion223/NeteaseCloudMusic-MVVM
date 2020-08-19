@@ -143,7 +143,7 @@ public class CommonBindingAdapter {
         appBarLayout.addOnOffsetChangedListener(listener);
     }
 
-    @BindingAdapter(value = {"bannerPic", "bannerListener"})
+    @BindingAdapter(value = {"bannerPic", "bannerListener"}, requireAll = false)
     public static void setDefault(ConvenientBanner convenientBanner,
                                   List<String> banners,
                                   OnItemClickListener listener) {
