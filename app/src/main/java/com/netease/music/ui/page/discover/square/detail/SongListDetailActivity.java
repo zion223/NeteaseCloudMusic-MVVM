@@ -108,8 +108,8 @@ public class SongListDetailActivity extends BaseActivity {
             //图片相关
             //封面
             mViewModel.coverImgUrl.set(album.getPicUrl());
-            //背景图
-            mViewModel.backgroundImgUrl.set(album.getPicUrl());
+            //背景图  暂时不显示背景图片
+            //mViewModel.backgroundImgUrl.set(album.getPicUrl());
 
         });
 
