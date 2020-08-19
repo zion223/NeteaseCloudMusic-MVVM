@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.imooc.lib_common_ui.utils.SharePreferenceUtil;
-import com.kunminx.architecture.utils.ScreenUtils;
+import com.kunminx.architecture.utils.BarUtils;
 import com.kunminx.architecture.utils.Utils;
 import com.netease.music.MainActivity;
 import com.netease.music.R;
@@ -30,7 +30,8 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ScreenUtils.setStatusBarColor(this, Color.parseColor("#DE3C32"));
+        BarUtils.setStatusBarColor(this, Color.TRANSPARENT);
+
         setContentView(R.layout.delegate_splash);
         String[] perms = {Manifest.permission.READ_PHONE_STATE
                 , Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION
