@@ -5,7 +5,7 @@ import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.content.Intent;
-import android.os.Build;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.transition.TransitionInflater;
 import android.util.Log;
@@ -24,6 +24,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.app.ActivityOptionsCompat;
 
 import com.imooc.lib_audio.R;
+import com.kunminx.architecture.utils.BarUtils;
 import com.netease.lib_audio.mediaplayer.events.AudioBufferUpdateEvent;
 import com.netease.lib_audio.mediaplayer.core.AudioController;
 import com.netease.lib_audio.mediaplayer.core.CustomMediaPlayer;
@@ -94,11 +95,11 @@ public class MusicPlayerActivity extends AppCompatActivity {
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_music_service_layout);
+		//沉积式布局
+		BarUtils.setStatusBarColor(this, Color.TRANSPARENT);
 		//使用转场动画 从底部弹出和退出
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-			getWindow().setEnterTransition(
-					TransitionInflater.from(this).inflateTransition(R.transition.transition_bottom2top));
-		}
+		getWindow().setEnterTransition(
+				TransitionInflater.from(this).inflateTransition(R.transition.transition_bottom2top));
 		EventBus.getDefault().register(this);
 		initData();
 		initView();

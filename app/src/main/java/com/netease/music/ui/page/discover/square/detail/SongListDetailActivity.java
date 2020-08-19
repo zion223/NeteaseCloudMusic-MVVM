@@ -7,15 +7,20 @@ import android.os.Handler;
 
 import androidx.annotation.Nullable;
 
+import com.imooc.lib_api.HttpConstants;
 import com.imooc.lib_api.model.playlist.PlaylistDetailBean;
 import com.imooc.lib_api.model.search.AlbumSearchBean;
+import com.imooc.lib_api.model.song.AudioBean;
+import com.imooc.lib_api.model.song.SongDetailBean;
 import com.kunminx.architecture.ui.page.BaseActivity;
 import com.kunminx.architecture.ui.page.DataBindingConfig;
+import com.netease.lib_audio.app.AudioHelper;
 import com.netease.music.BR;
 import com.netease.music.R;
 import com.netease.music.data.config.TYPE;
 import com.netease.music.ui.page.adapter.PlayMusicListAdapter;
 import com.netease.music.ui.state.SonglistDeatilViewModel;
+import com.netease.music.util.TimeUtil;
 
 public class SongListDetailActivity extends BaseActivity {
 
@@ -118,6 +123,10 @@ public class SongListDetailActivity extends BaseActivity {
             PlayMusicListAdapter playMusicListAdapter = new PlayMusicListAdapter(songList);
             playMusicListAdapter.setOnItemClickListener((adapter, view, position) -> {
                 //加入播放队列
+                SongDetailBean.SongsBean item = (SongDetailBean.SongsBean) adapter.getItem(position);
+                String songPlayUrl = HttpConstants.getSongPlayUrl(item.getId());
+                AudioHelper.addAudio(SongListDetailActivity.this, new AudioBean(String.valueOf(item.getId()), songPlayUrl, item.getName(), item.getAr().get(0).getName(), item.getAl().getName(), item.getAl().getName(), item.getAl().getPicUrl(), TimeUtil.getTimeNoYMDH(item.getDt())));
+
             });
             mViewModel.adapter.set(playMusicListAdapter);
             //延迟1s 显示加载动画

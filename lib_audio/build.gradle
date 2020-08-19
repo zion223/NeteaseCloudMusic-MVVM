@@ -51,5 +51,6 @@ dependencies {
     compileOnly project(':lib_common_ui')
     compileOnly project(':lib_api')
     compileOnly project(':lib_network')
+    compileOnly project(':architecture')
 }
 

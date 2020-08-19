@@ -95,9 +95,7 @@ public class AudioController {
     }
 
     public void addAudio(int index, AudioBean bean) {
-        if (mQueue.size() <= 0) {
-            throw new AudioQueueEmptyException("");
-        }
+
         int query = mQueue.indexOf(bean);
         if (query <= -1) {
             //当前播放列表中没有此歌曲

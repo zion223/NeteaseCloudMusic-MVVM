@@ -73,8 +73,14 @@
                 android:layout_height="match_parent"
                 android:layout_below="@id/title_layout"
                 viewPagerAdapter="@{adapter}"
-                viewPagerOffsetLimit="@{vm.limit}" />
+                viewPagerOffsetLimit="@{vm.limit}"
+                android:layout_above="@+id/bottom_view" />
 
+            <com.netease.lib_audio.mediaplayer.view.BottomMusicView
+                android:id="@+id/bottom_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true" />
         </RelativeLayout>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

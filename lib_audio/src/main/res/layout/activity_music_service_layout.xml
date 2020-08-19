@@ -17,12 +17,13 @@
         android:src="@mipmap/ic_play_neddle"
         android:transformPivotX="15.1dp"
         android:transformPivotY="15.1dp" />
+
     <!--标题布局-->
     <RelativeLayout
         android:id="@+id/title_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingStart="12dp"
+        android:paddingStart="10dp"
         android:paddingTop="8dp"
         android:paddingEnd="12dp">
 

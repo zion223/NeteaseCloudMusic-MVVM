@@ -196,7 +196,7 @@ public class IndictorView extends RelativeLayout implements ViewPager.OnPageChan
 		}
 	}
 
-	void setListaner(OnIndicatorViewStatusChangeListener listener) {
+	public void setListaner(OnIndicatorViewStatusChangeListener listener) {
 		this.mListener = listener;
 	}
 
