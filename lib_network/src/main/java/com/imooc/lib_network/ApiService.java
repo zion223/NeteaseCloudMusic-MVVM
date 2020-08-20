@@ -182,7 +182,14 @@ public interface ApiService {
     Observable<LikeMusicBean> likeMusice(@Query("id") long id);
 
     @GET("comment/music")
-    Observable<MusicCommentBean> getMusicComment(@Query("id") long id);
+    Observable<PlayListCommentBean> getMusicComment(@Query("id") String id);
+
+    @GET("comment/playlist")
+    Observable<PlayListCommentBean> getPlayListComment(@Query("id") String id);
+
+    @GET("comment/album")
+    Observable<PlayListCommentBean> getAlbumComment(@Query("id") String id);
+
 
     @GET("comment/like")
     Observable<CommentLikeBean> likeComment(@Query("id") long id, @Query("cid") long cid, @Query("t") int t, @Query("type") int type);

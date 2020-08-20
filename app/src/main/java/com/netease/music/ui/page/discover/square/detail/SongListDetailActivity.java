@@ -98,9 +98,9 @@ public class SongListDetailActivity extends BaseActivity {
             //歌单创建者
             if (album.getArtists().size() > 1) {
                 //拼接歌手名
-                mViewModel.creator.set("歌手:  " + album.getArtists().get(0).getName() + "/" + album.getArtists().get(1).getName());
+                mViewModel.creator.set(album.getArtists().get(0).getName() + "/" + album.getArtists().get(1).getName());
             } else {
-                mViewModel.creator.set("歌手:  " + album.getArtist().getName());
+                mViewModel.creator.set(album.getArtist().getName());
             }
             //专辑不显示播放数量
             mViewModel.shareCount.set(albumDetailBean.getShareCount());
@@ -167,6 +167,11 @@ public class SongListDetailActivity extends BaseActivity {
         //改变对专辑或歌单的收藏或者取消收藏
         public void changeSubscribeStatus() {
             mViewModel.songListRequest.requestChangeSubscribeListStatus(mViewModel.type.get(), mViewModel.isCollected.get(), mViewModel.listId.get());
+        }
+
+        public void comment() {
+            //专辑评论 或者歌单评论
+            CommentActivity.startActivity(SongListDetailActivity.this, mViewModel.listId.get().toString(), mViewModel.type.get().getValue(), mViewModel.coverImgUrl.get(), mViewModel.title.get(), mViewModel.creator.get());
         }
     }
 }

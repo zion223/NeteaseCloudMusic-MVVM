@@ -46,6 +46,7 @@
         <activity android:name=".ui.page.discover.radio.RadioActivity" />
         <activity android:name=".ui.page.discover.radio.RadioPayActivity" />
         <activity android:name=".ui.page.audio.MusicPlayerActivity" />
+        <activity android:name=".ui.page.discover.square.detail.CommentActivity" />
         <!-- 闪屏界面作为应用的入口-->
         <activity android:name=".ui.page.SplashActivity">
             <intent-filter>

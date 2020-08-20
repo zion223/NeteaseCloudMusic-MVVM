@@ -6,6 +6,7 @@ import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.transition.TransitionInflater;
 import android.util.Log;
@@ -26,6 +27,7 @@ import androidx.core.app.ActivityOptionsCompat;
 import com.imooc.lib_api.model.song.AudioBean;
 import com.imooc.lib_audio.R;
 import com.imooc.lib_common_ui.lrc.LrcView;
+import com.kunminx.architecture.utils.BarUtils;
 import com.netease.lib_audio.mediaplayer.core.AudioController;
 import com.netease.lib_audio.mediaplayer.core.CustomMediaPlayer;
 import com.netease.lib_audio.mediaplayer.events.AudioBufferUpdateEvent;
@@ -35,6 +37,8 @@ import com.netease.lib_audio.mediaplayer.events.AudioPlayModeEvent;
 import com.netease.lib_audio.mediaplayer.events.AudioProgressEvent;
 import com.netease.lib_audio.mediaplayer.events.AudioStartEvent;
 import com.netease.lib_audio.mediaplayer.view.IndictorView;
+import com.netease.music.data.config.TYPE;
+import com.netease.music.ui.page.discover.square.detail.CommentActivity;
 import com.netease.music.util.TimeUtil;
 
 import org.greenrobot.eventbus.EventBus;
@@ -93,6 +97,7 @@ public class MusicPlayerActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        BarUtils.setStatusBarColor(this, Color.TRANSPARENT);
         setContentView(R.layout.activity_music_service_layout);
         //使用转场动画 从底部弹出和退出
         getWindow().setEnterTransition(
@@ -184,13 +189,7 @@ public class MusicPlayerActivity extends AppCompatActivity {
         mNeddleiew.bringToFront();
         //评论
         mCommectView = findViewById(R.id.iv_comment);
-        mCommectView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO  打开歌曲评论
-
-            }
-        });
+        mCommectView.setOnClickListener(v -> CommentActivity.startActivity(MusicPlayerActivity.this, mAudioBean.getId(), TYPE.SONG_ID, mAudioBean.getAlbumPic(), mAudioBean.getAuthor(), mAudioBean.getName()));
         //喜欢音乐
         mFavouriteView = findViewById(R.id.favourite_view);
         //设置喜欢标志为 默认为false
