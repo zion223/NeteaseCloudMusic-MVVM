@@ -1,6 +1,7 @@
 package com.netease.music.ui.page.audio;
 
 import android.animation.ObjectAnimator;
+import android.app.Activity;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -72,15 +73,12 @@ public class BottomMusicView extends RelativeLayout {
 
     private void initView() {
         View rootView = LayoutInflater.from(mContext).inflate(R.layout.bottom_view, this);
-        rootView.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //跳到音乐播放Activitity
-                if (AudioController.getInstance().getNowPlaying() != null) {
-                    //MusicPlayerActivity.start((Activity) mContext);
-                } else {
-                    Toast.makeText(getContext(), "当前播放队列无歌曲", Toast.LENGTH_SHORT).show();
-                }
+        rootView.setOnClickListener(v -> {
+            //跳到音乐播放Activitity
+            if (AudioController.getInstance().getNowPlaying() != null) {
+                MusicPlayerActivity.start((Activity) mContext);
+            } else {
+                Toast.makeText(getContext(), "当前播放队列无歌曲", Toast.LENGTH_SHORT).show();
             }
         });
         mLeftView = rootView.findViewById(R.id.album_view);

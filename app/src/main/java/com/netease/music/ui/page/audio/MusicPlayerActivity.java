@@ -3,6 +3,7 @@ package com.netease.music.ui.page.audio;
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -457,6 +458,7 @@ public class MusicPlayerActivity extends AppCompatActivity {
     }
 
     //加载其他音乐 next pre
+    @SuppressLint("SetTextI18n")
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onAudioLoadEvent(AudioLoadEvent event) {
         //更新notifacation为load状态
