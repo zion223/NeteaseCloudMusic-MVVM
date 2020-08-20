@@ -123,7 +123,7 @@ public class SongListDetailRequest extends BaseRequest {
     //改变对专辑或歌单的收藏或者取消收藏
     public void requestChangeSubscribeListStatus(TYPE type, boolean isCollected, long id) {
         Observable<CommonMessageBean> changeObservable = null;
-        if (type.getValue() == TYPE.SONG_ID) {
+        if (type.getValue() == TYPE.PLAYLIST_ID) {
             //收藏或取消收藏歌单
             changeObservable = ApiEngine.getInstance().getApiService().subscribePlayList(id, !isCollected ? 1 : 2);
         } else {

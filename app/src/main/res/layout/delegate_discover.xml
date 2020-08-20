@@ -254,9 +254,9 @@
                     android:padding="3dp"
                     android:text="新碟"
                     onClickWithDebouncing="@{() -> proxy.changeAlbumOrSong()}"
-                    android:textColor="@{vm.type == TYPE.SONG? @color/gray: @color/black}"
-                    android:textSize="@{vm.type == TYPE.SONG? @dimen/sp_12: @dimen/sp_15}"
-                    android:typeface="@{vm.type == TYPE.SONG? Typeface.defaultFromStyle(Typeface.NORMAL): Typeface.defaultFromStyle(Typeface.BOLD)}" />
+                    android:textColor="@{vm.type == TYPE.PLAYLIST? @color/gray: @color/black}"
+                    android:textSize="@{vm.type == TYPE.PLAYLIST? @dimen/sp_12: @dimen/sp_15}"
+                    android:typeface="@{vm.type == TYPE.PLAYLIST? Typeface.defaultFromStyle(Typeface.NORMAL): Typeface.defaultFromStyle(Typeface.BOLD)}" />
 
                 <TextView
                     android:id="@+id/tv_discover_new_song"
@@ -269,9 +269,9 @@
                     android:padding="3dp"
                     onClickWithDebouncing="@{() -> proxy.changeAlbumOrSong()}"
                     android:text="新歌"
-                    android:textColor="@{vm.type == TYPE.SONG? @color/black: @color/gray}"
-                    android:textSize="@{vm.type == TYPE.SONG? @dimen/sp_15: @dimen/sp_12}"
-                    android:typeface="@{vm.type == TYPE.SONG? Typeface.defaultFromStyle(Typeface.BOLD): Typeface.defaultFromStyle(Typeface.NORMAL)}" />
+                    android:textColor="@{vm.type == TYPE.PLAYLIST? @color/black: @color/gray}"
+                    android:textSize="@{vm.type == TYPE.PLAYLIST? @dimen/sp_15: @dimen/sp_12}"
+                    android:typeface="@{vm.type == TYPE.PLAYLIST? Typeface.defaultFromStyle(Typeface.BOLD): Typeface.defaultFromStyle(Typeface.NORMAL)}" />
 
                 <TextView
                     android:id="@+id/tv_discover_more_album_song"
@@ -281,7 +281,7 @@
                     android:layout_marginRight="15dp"
                     android:background="@drawable/bg_discover_gedan"
                     onClickWithDebouncing="@{ () -> proxy.clickAlbumOrSongDetail()}"
-                    android:text='@{vm.type == TYPE.SONG ? "新歌推荐": "更多新碟"}'
+                    android:text='@{vm.type == TYPE.PLAYLIST ? "新歌推荐": "更多新碟"}'
                     android:textSize="10sp"
                     android:textColor="@color/black" />
             </LinearLayout>

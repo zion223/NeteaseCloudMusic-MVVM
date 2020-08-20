@@ -59,7 +59,7 @@ public class DiscoverFragment extends BaseFragment {
             final RecommendPlayListAdapter playListAdapter = new RecommendPlayListAdapter(getContext());
             playListAdapter.submitList(recommendBeans);
             //打开歌单详情界面
-            playListAdapter.setOnItemClickListener((item, position) -> SongListDetailActivity.startActivity(getContext(), TYPE.SONG_ID, item.getId(), item.getCopywriter()));
+            playListAdapter.setOnItemClickListener((item, position) -> SongListDetailActivity.startActivity(getContext(), TYPE.PLAYLIST_ID, item.getId(), item.getCopywriter()));
             mDiscoverViewModel.playListAdapter.set(playListAdapter);
         });
         //新歌和新碟的数据 新碟在前三个 新歌在后三个
@@ -120,7 +120,7 @@ public class DiscoverFragment extends BaseFragment {
         public void changeAlbumOrSong() {
             if (mDiscoverViewModel.type.get().getValue() == TYPE.ALBUM.getValue()) {
                 //切换到新歌
-                mDiscoverViewModel.type.set(TYPE.SONG);
+                mDiscoverViewModel.type.set(TYPE.PLAYLIST);
                 mDiscoverViewModel.currentAlbumOrSongLiveData.set(mDiscoverViewModel.albumOrSongLiveData.get().subList(3, 6));
             } else {
                 //切换到新碟
@@ -131,7 +131,7 @@ public class DiscoverFragment extends BaseFragment {
 
         public void clickAlbumOrSongDetail() {
             //新歌推荐
-            if (mDiscoverViewModel.type.get() == TYPE.SONG) {
+            if (mDiscoverViewModel.type.get() == TYPE.PLAYLIST) {
 
             } else {
                 //新碟上架

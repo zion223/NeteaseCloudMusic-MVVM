@@ -91,7 +91,7 @@
 
                             <ImageView
                                 android:id="@+id/iv_gedan_detail_playnum"
-                                visible="@{vm.type == TYPE.SONG}"
+                                visible="@{vm.type == TYPE.PLAYLIST}"
                                 android:layout_width="13dp"
                                 android:layout_height="13dp"
                                 android:layout_alignTop="@+id/iv_gedan_detail_img"
@@ -102,7 +102,7 @@
 
                             <TextView
                                 android:id="@+id/tv_gedan_detail_playnum"
-                                visible="@{vm.type == TYPE.SONG}"
+                                visible="@{vm.type == TYPE.PLAYLIST}"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignTop="@+id/iv_gedan_detail_img"
@@ -137,7 +137,7 @@
                                 <ImageView
                                     android:id="@+id/iv_gedan_detail_avatar_img"
                                     circleImageUrl="@{vm.creatorImgUrl}"
-                                    visible="@{vm.type == TYPE.SONG}"
+                                    visible="@{vm.type == TYPE.PLAYLIST}"
                                     android:layout_width="25dp"
                                     android:layout_height="25dp"
                                     android:layout_marginRight="10dp" />

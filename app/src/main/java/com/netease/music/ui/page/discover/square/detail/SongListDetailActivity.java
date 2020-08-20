@@ -146,7 +146,7 @@ public class SongListDetailActivity extends BaseActivity {
             mViewModel.type.set(TYPE.getTypeByID(data.getInt(TYPEID)));
             mViewModel.reason.set(data.getString(REASON));
             mViewModel.listId.set(data.getLong(LISTID));
-            if (TYPE.getTypeByID(data.getInt(TYPEID)) == TYPE.SONG) {
+            if (TYPE.getTypeByID(data.getInt(TYPEID)) == TYPE.PLAYLIST) {
                 //请求歌单相关数据
                 mViewModel.songListRequest.requestPlayListMusicLiveData(mViewModel.listId.get());
             } else if (TYPE.getTypeByID(data.getInt(TYPEID)) == TYPE.ALBUM) {
