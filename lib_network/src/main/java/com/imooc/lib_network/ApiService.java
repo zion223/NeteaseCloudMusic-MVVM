@@ -16,6 +16,8 @@ import com.imooc.lib_api.model.dj.DjRecommendBean;
 import com.imooc.lib_api.model.dj.DjRecommendTypeBean;
 import com.imooc.lib_api.model.dj.DjSubBean;
 import com.imooc.lib_api.model.mv.MvSublistBean;
+import com.imooc.lib_api.model.mv.VideoBean;
+import com.imooc.lib_api.model.mv.VideoGroupBean;
 import com.imooc.lib_api.model.mv.VideoUrlBean;
 import com.imooc.lib_api.model.notification.CommonMessageBean;
 import com.imooc.lib_api.model.notification.UserCloudBean;
@@ -190,6 +192,14 @@ public interface ApiService {
     @GET("comment/album")
     Observable<PlayListCommentBean> getAlbumComment(@Query("id") String id);
 
+    @GET("video/group/list")
+    Observable<VideoGroupBean> getVideoGroup();
+
+    @GET("video/group")
+    Observable<VideoBean> getVideoTab(@Query("id") long id);
+
+    @GET("video/timeline/recommend")
+    Observable<VideoBean> getVideoRecommend();
 
     @GET("comment/like")
     Observable<CommentLikeBean> likeComment(@Query("id") long id, @Query("cid") long cid, @Query("t") int t, @Query("type") int type);

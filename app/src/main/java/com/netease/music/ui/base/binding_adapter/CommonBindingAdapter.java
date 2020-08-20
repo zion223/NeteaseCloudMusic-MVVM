@@ -123,6 +123,11 @@ public class CommonBindingAdapter {
         viewPager.setAdapter(adapter);
     }
 
+    @BindingAdapter(value = {"currentItem"})
+    public static void setCurrentItem(ViewPager viewPager, int item) {
+        viewPager.setCurrentItem(item);
+    }
+
     @BindingAdapter(value = {"viewPagerOffsetLimit"})
     public static void setViewPagerAdapter(ViewPager viewPager, int limit) {
         viewPager.setOffscreenPageLimit(limit);

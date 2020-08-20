@@ -30,10 +30,12 @@ public class RecyclerViewBindingAdapter {
 
     @BindingAdapter(value = {"submitList"}, requireAll = false)
     public static void initRecyclerViewData(RecyclerView recyclerView, List data) {
-        if (recyclerView.getAdapter() instanceof ListAdapter) {
-            ((ListAdapter) recyclerView.getAdapter()).submitList(data);
-        } else if (recyclerView.getAdapter() instanceof BaseQuickAdapter) {
-            ((BaseQuickAdapter) recyclerView.getAdapter()).replaceData(data);
+        if (data != null) {
+            if (recyclerView.getAdapter() instanceof ListAdapter) {
+                ((ListAdapter) recyclerView.getAdapter()).submitList(data);
+            } else if (recyclerView.getAdapter() instanceof BaseQuickAdapter) {
+                ((BaseQuickAdapter) recyclerView.getAdapter()).replaceData(data);
+            }
         }
     }
 
@@ -46,6 +48,11 @@ public class RecyclerViewBindingAdapter {
                 ((BaseQuickAdapter) recyclerView.getAdapter()).addData(data);
             }
         }
+    }
+
+    @BindingAdapter(value = {"onChildAttachStateChangeListener"}, requireAll = false)
+    public static void addOnChildAttachStateChangeListener(RecyclerView recyclerView, RecyclerView.OnChildAttachStateChangeListener listener) {
+        recyclerView.addOnChildAttachStateChangeListener(listener);
     }
 
 //    @BindingAdapter(value = {"adapter", "submitList", "autoScrollToTopWhenInsert", "autoScrollToBottomWhenInsert"}, requireAll = false)

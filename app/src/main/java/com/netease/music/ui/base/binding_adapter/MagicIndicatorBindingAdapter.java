@@ -3,11 +3,14 @@ package com.netease.music.ui.base.binding_adapter;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.view.View;
+import android.widget.LinearLayout;
 
 import androidx.databinding.BindingAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.imooc.lib_common_ui.navigator.CommonNavigatorCreater;
 import com.kunminx.architecture.utils.Utils;
 import com.netease.music.R;
 import com.netease.music.data.config.CHANNEL;
@@ -15,6 +18,7 @@ import com.netease.music.ui.view.ScaleTransitionPagerTitleView;
 
 import net.lucode.hackware.magicindicator.MagicIndicator;
 import net.lucode.hackware.magicindicator.ViewPagerHelper;
+import net.lucode.hackware.magicindicator.buildins.UIUtil;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.CommonNavigator;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.CommonNavigatorAdapter;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerIndicator;
@@ -46,12 +50,7 @@ public class MagicIndicatorBindingAdapter {
                 simplePagerTitleView.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
                 simplePagerTitleView.setNormalColor(Color.parseColor("#999999"));
                 simplePagerTitleView.setSelectedColor(Color.parseColor("#333333"));
-                simplePagerTitleView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        viewPager.setCurrentItem(index);
-                    }
-                });
+                simplePagerTitleView.setOnClickListener(v -> viewPager.setCurrentItem(index));
                 return simplePagerTitleView;
             }
 
@@ -68,6 +67,26 @@ public class MagicIndicatorBindingAdapter {
         magicIndicator.setNavigator(commonNavigator);
 
         ViewPagerHelper.bind(magicIndicator, viewPager);
-        viewPager.setCurrentItem(1);
+    }
+
+
+    @BindingAdapter(value = {"commonIndicatorTitle"}, requireAll = false)
+    public static void bindCommonMagicIndocator(MagicIndicator magicIndicator, String[] channels) {
+        if (channels != null) {
+            ViewPager viewPager = magicIndicator.getRootView().findViewById(R.id.view_pager_tab);
+            magicIndicator.setBackgroundColor(Color.WHITE);
+            CommonNavigator commonNavigator = CommonNavigatorCreater.setDefaultNavigator(magicIndicator.getContext(), channels, viewPager);
+            magicIndicator.setNavigator(commonNavigator);
+
+            LinearLayout titleContainer = commonNavigator.getTitleContainer(); // must after setNavigator
+            titleContainer.setShowDividers(LinearLayout.SHOW_DIVIDER_MIDDLE);
+            titleContainer.setDividerDrawable(new ColorDrawable() {
+                @Override
+                public int getIntrinsicWidth() {
+                    return UIUtil.dip2px(Utils.getApp(), 20);
+                }
+            });
+            ViewPagerHelper.bind(magicIndicator, viewPager);
+        }
     }
 }
