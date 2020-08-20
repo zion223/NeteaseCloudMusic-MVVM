@@ -7,18 +7,21 @@ import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.kunminx.architecture.ui.adapter.SimpleDataBindingAdapter;
-import com.kunminx.architecture.utils.Utils;
 
 import java.util.List;
 
 public class RecyclerViewBindingAdapter {
 
 
-    @BindingAdapter(value = {"linearAdapter"})
-    public static void initRecyclerViewWithLinearLayoutManager(RecyclerView recyclerView, RecyclerView.Adapter adapter) {
+    @BindingAdapter(value = {"linearAdapter", "cannotScrollVertically"}, requireAll = false)
+    public static void initRecyclerViewWithLinearLayoutManager(RecyclerView recyclerView, RecyclerView.Adapter adapter, boolean can) {
         recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
+        recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()) {
+            @Override
+            public boolean canScrollVertically() {
+                return !can;
+            }
+        });
     }
 
     @BindingAdapter(value = {"gridAdapter", "spanCount"}, requireAll = false)

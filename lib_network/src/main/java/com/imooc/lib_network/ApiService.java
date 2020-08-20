@@ -17,7 +17,9 @@ import com.imooc.lib_api.model.dj.DjRecommendTypeBean;
 import com.imooc.lib_api.model.dj.DjSubBean;
 import com.imooc.lib_api.model.mv.MvSublistBean;
 import com.imooc.lib_api.model.mv.VideoBean;
+import com.imooc.lib_api.model.mv.VideoDetailBean;
 import com.imooc.lib_api.model.mv.VideoGroupBean;
+import com.imooc.lib_api.model.mv.VideoRelatedBean;
 import com.imooc.lib_api.model.mv.VideoUrlBean;
 import com.imooc.lib_api.model.notification.CommonMessageBean;
 import com.imooc.lib_api.model.notification.UserCloudBean;
@@ -198,8 +200,14 @@ public interface ApiService {
     @GET("video/group")
     Observable<VideoBean> getVideoTab(@Query("id") long id);
 
+    @GET("video/detail")
+    Observable<VideoDetailBean> getVideoDetail(@Query("id") String id);
+
     @GET("video/timeline/recommend")
     Observable<VideoBean> getVideoRecommend();
+
+    @GET("related/allvideo")
+    Observable<VideoRelatedBean> getVideoRelated(@Query("id") String id);
 
     @GET("comment/like")
     Observable<CommentLikeBean> likeComment(@Query("id") long id, @Query("cid") long cid, @Query("t") int t, @Query("type") int type);
@@ -245,6 +253,9 @@ public interface ApiService {
 
     @GET("comment/playlist")
     Observable<PlayListCommentBean> getPlaylistComment(@Query("id") long id);
+
+    @GET("comment/video")
+    Observable<PlayListCommentBean> getVideoComment(@Query("id") String id);
 
     @GET("dj/paygift")
     Observable<DjPaygiftBean> getDjPaygift(@Query("limit") int limit, @Query("offset") int offset);

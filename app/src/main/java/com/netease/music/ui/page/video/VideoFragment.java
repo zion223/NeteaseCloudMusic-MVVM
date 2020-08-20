@@ -65,6 +65,8 @@ public class VideoFragment extends BaseFragment {
             VideoAdapter adapter = new VideoAdapter(null);
             adapter.setOnItemClickListener((adapter1, view, position) -> {
                 //进入视频详情页面
+                VideoBean.VideoEntity entity = (VideoBean.VideoEntity) adapter1.getItem(position);
+                VideoDetailActivity.startActivity(getContext(), entity.getData().getVid());
             });
             mVideoViewModel.adpter.set(adapter);
 
