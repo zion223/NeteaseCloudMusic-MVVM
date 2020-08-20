@@ -74,6 +74,7 @@
                 android:layout_below="@id/title_layout"
                 viewPagerAdapter="@{adapter}"
                 viewPagerOffsetLimit="@{vm.limit}"
+                currentItem="@{vm.currentItem}"
                 android:layout_above="@+id/bottom_view" />
 
             <com.netease.music.ui.page.audio.BottomMusicView
