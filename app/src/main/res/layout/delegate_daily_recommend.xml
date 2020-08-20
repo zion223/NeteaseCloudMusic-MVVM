@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
 
@@ -16,8 +16,7 @@
             type="com.netease.music.ui.page.discover.daily.DailyRecommendActivity.ClickProxy" />
     </data>
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -27,6 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             onOffsetChangedListener="@{offsetListener}"
+            android:fitsSystemWindows="true"
             app:elevation="0dp">
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
@@ -100,12 +100,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
                     android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
                     app:contentInsetEnd="0dp"
                     app:contentInsetLeft="0dp"
                     app:contentInsetStart="0dp"
                     app:layout_collapseMode="pin"
                     app:maxButtonHeight="20dp"
-                    app:titleMargin="0dp">
+                    app:titleMargin="0dp"
+                    android:minHeight="?attr/actionBarSize"
+                    android:fitsSystemWindows="true">
 
                     <LinearLayout
                         android:layout_width="match_parent"

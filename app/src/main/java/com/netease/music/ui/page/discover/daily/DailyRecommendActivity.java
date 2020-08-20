@@ -41,7 +41,8 @@ public class DailyRecommendActivity extends BaseActivity {
     @Override
     protected DataBindingConfig getDataBindingConfig() {
         return new DataBindingConfig(R.layout.delegate_daily_recommend, BR.vm, mViewModel)
-                .addBindingParam(BR.offsetListener, listener);
+                .addBindingParam(BR.offsetListener, listener)
+                .addBindingParam(BR.proxy, new ClickProxy());
     }
 
     @Override
