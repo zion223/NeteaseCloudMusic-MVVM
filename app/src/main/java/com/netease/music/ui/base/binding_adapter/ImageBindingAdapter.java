@@ -49,6 +49,11 @@ public class ImageBindingAdapter {
         imageView.setImageResource(imageRes);
     }
 
+    @BindingAdapter(value = {"imageRes"}, requireAll = false)
+    public static void setImageRes(ImageView imageView, Drawable imageRes) {
+        imageView.setImageDrawable(imageRes);
+    }
+
     @BindingAdapter(value = {"showDrawable", "drawableShowed"}, requireAll = false)
     public static void showDrawable(ImageView view, boolean showDrawable, int drawableShowed) {
         view.setImageResource(showDrawable ? drawableShowed : android.R.color.transparent);
