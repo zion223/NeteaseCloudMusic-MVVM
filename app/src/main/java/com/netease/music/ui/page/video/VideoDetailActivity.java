@@ -54,8 +54,7 @@ public class VideoDetailActivity extends BaseActivity {
             });
             mViewModel.request.getVideoCommentLiveData().observe(this, commentBean -> {
 
-                MultipleSectionGedanCommentAdapter commentAdapter = new MultipleSectionGedanCommentAdapter(videoId, TYPE.VIDEO_ID, this.getBaseContext(), commentBean);
-                mViewModel.commentAdapter.set(commentAdapter);
+                mViewModel.commentAdapter.set(new MultipleSectionGedanCommentAdapter(videoId, TYPE.VIDEO_ID, this.getBaseContext(), commentBean));
 
                 mViewModel.loadingVisible.set(false);
             });
