@@ -9,6 +9,7 @@ import com.imooc.lib_api.model.playlist.PlayListCommentEntity;
 import com.imooc.lib_api.model.song.MusicCommentBean;
 import com.imooc.lib_image_loader.app.ImageLoaderManager;
 import com.netease.music.R;
+import com.netease.music.ui.page.discover.user.UserDetailActivity;
 import com.netease.music.util.TimeUtil;
 
 import org.jetbrains.annotations.NotNull;
@@ -25,16 +26,19 @@ public class MultipleSectionGedanCommentAdapter extends BaseSectionQuickAdapter<
 
     public MultipleSectionGedanCommentAdapter(String commentId, int type, Context context, List<PlayListCommentEntity> data) {
         super(R.layout.item_gedan_comment_header, R.layout.item_gedan_detail_comment, data);
+        setNormalLayout(R.layout.item_gedan_detail_comment);
         manager = ImageLoaderManager.getInstance();
         this.commentId = commentId;
         mContext = context;
         commentType = type;
+        //TODO 不好使
         addChildClickViewIds(R.id.iv_item_gedan_comment_avatar_img, R.id.tv_item_gedan_comment_avatar_name, R.id.iv_item_gedan_comment_zan);
         setOnItemClickListener((adapter, view, position) -> {
             switch (view.getId()) {
                 case R.id.iv_item_gedan_comment_avatar_img:
                 case R.id.tv_item_gedan_comment_avatar_name:
                     //点击进入用户详情
+                    UserDetailActivity.startActivity(context, data.get(position).getComment().getUser().getUserId());
                     break;
                 case R.id.iv_item_gedan_comment_zan:
                     //点赞
@@ -83,19 +87,7 @@ public class MultipleSectionGedanCommentAdapter extends BaseSectionQuickAdapter<
             baseViewHolder.setVisible(R.id.tv_item_gedan_comment_replied, true);
             baseViewHolder.setText(R.id.tv_item_gedan_comment_replied, bean.getBeReplied().size() + "条回复");
         }
-//        //点击头像和用户名进入用户详情
-//        baseViewHolder.setOnClickListener(R.id.iv_item_gedan_comment_avatar_img, new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                mDelegate.getSupportDelegate().start(UserDetailDelegate.newInstance(String.valueOf(bean.getUser().getUserId())));
-//            }
-//        });
-//        baseViewHolder.setOnClickListener(R.id.tv_item_gedan_comment_avatar_name, new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                mDelegate.getSupportDelegate().start(UserDetailDelegate.newInstance(String.valueOf(bean.getUser().getUserId())));
-//            }
-//        });
+
         final ImageView praiseView = baseViewHolder.getView(R.id.iv_item_gedan_comment_zan);
         //tag : true 当前是赞 false当前不是赞
         if (bean.isLiked()) {
@@ -106,6 +98,7 @@ public class MultipleSectionGedanCommentAdapter extends BaseSectionQuickAdapter<
             praiseView.setTag(false);
             praiseView.setImageResource(R.drawable.ic_parise);
         }
+        //TODO  评论点赞和取消点赞
 //        baseViewHolder.setOnClickListener(R.id.iv_item_gedan_comment_zan, new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
