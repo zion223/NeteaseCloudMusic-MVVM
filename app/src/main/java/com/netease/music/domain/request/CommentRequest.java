@@ -3,10 +3,14 @@ package com.netease.music.domain.request;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.imooc.lib_api.model.playlist.PlayListCommentEntity;
 import com.imooc.lib_api.model.song.PlayListCommentBean;
 import com.imooc.lib_network.ApiEngine;
 import com.kunminx.architecture.domain.request.BaseRequest;
 import com.netease.music.data.config.TYPE;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import io.reactivex.Observable;
 import io.reactivex.Observer;
@@ -17,16 +21,23 @@ import io.reactivex.schedulers.Schedulers;
 public class CommentRequest extends BaseRequest {
 
 
-    private MutableLiveData<PlayListCommentBean> mCommentLiveData;
+    private MutableLiveData<List<PlayListCommentEntity>> mCommentLiveData;
+    private MutableLiveData<Integer> mCommentSizeLiveData;
 
 
-    public LiveData<PlayListCommentBean> getCommentLiveData() {
+    public LiveData<List<PlayListCommentEntity>> getCommentLiveData() {
         if (mCommentLiveData == null) {
             mCommentLiveData = new MutableLiveData<>();
         }
         return mCommentLiveData;
     }
 
+    public MutableLiveData<Integer> getCommentSizeLiveData() {
+        if (mCommentSizeLiveData == null) {
+            mCommentSizeLiveData = new MutableLiveData<>();
+        }
+        return mCommentSizeLiveData;
+    }
 
     public void requestCommentData(TYPE type, String id) {
 
@@ -55,8 +66,21 @@ public class CommentRequest extends BaseRequest {
                         }
 
                         @Override
-                        public void onNext(PlayListCommentBean playListCommentBean) {
-                            mCommentLiveData.postValue(playListCommentBean);
+                        public void onNext(PlayListCommentBean commentBean) {
+                            mCommentSizeLiveData.postValue(commentBean.getTotal());
+                            final ArrayList<PlayListCommentEntity> entities = new ArrayList<>();
+
+                            entities.add(new PlayListCommentEntity("精彩评论"));
+                            if (commentBean.getHotComments() != null && commentBean.getHotComments().size() > 0) {
+                                for (int i = 0; i < commentBean.getHotComments().size(); i++) {
+                                    entities.add(new PlayListCommentEntity(commentBean.getHotComments().get(i)));
+                                }
+                            }
+                            entities.add(new PlayListCommentEntity("最新评论", String.valueOf(commentBean.getTotal())));
+                            for (int j = 0; j < commentBean.getComments().size(); j++) {
+                                entities.add(new PlayListCommentEntity(commentBean.getComments().get(j)));
+                            }
+                            mCommentLiveData.postValue(entities);
                         }
 
                         @Override

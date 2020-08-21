@@ -1,6 +1,5 @@
 package com.netease.music.ui.state;
 
-import android.text.SpannableString;
 
 import androidx.databinding.ObservableField;
 import androidx.databinding.ObservableInt;
