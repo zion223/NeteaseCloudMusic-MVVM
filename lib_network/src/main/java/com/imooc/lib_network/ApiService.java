@@ -49,15 +49,17 @@ import com.imooc.lib_api.model.song.CommentLikeBean;
 import com.imooc.lib_api.model.song.LikeMusicBean;
 import com.imooc.lib_api.model.song.LyricBean;
 import com.imooc.lib_api.model.song.MusicCanPlayBean;
-import com.imooc.lib_api.model.song.MusicCommentBean;
 import com.imooc.lib_api.model.song.NewSongBean;
 import com.imooc.lib_api.model.song.PlayListCommentBean;
 import com.imooc.lib_api.model.song.SongDetailBean;
+import com.imooc.lib_api.model.user.FollowBean;
 import com.imooc.lib_api.model.user.LikeListBean;
 import com.imooc.lib_api.model.user.LoginBean;
 import com.imooc.lib_api.model.user.MainEventBean;
 import com.imooc.lib_api.model.user.UserDetailBean;
 import com.imooc.lib_api.model.user.UserEventBean;
+import com.imooc.lib_api.model.user.UserFollowedBean;
+import com.imooc.lib_api.model.user.UserFollowerBean;
 import com.imooc.lib_api.model.user.UserPlaylistBean;
 
 import io.reactivex.Observable;
@@ -142,6 +144,17 @@ public interface ApiService {
 
     @GET("user/detail")
     Observable<UserDetailBean> getUserDetail(@Query("uid") long uid);
+
+    @GET("follow")
+        // t:1关注 0:取消关注
+    Observable<FollowBean> getUserFollow(@Query("id") long uid, @Query("t") int t);
+
+
+    @GET("user/follows")
+    Observable<UserFollowerBean> getUserFollower(@Query("id") long uid);
+
+    @GET("user/followeds")
+    Observable<UserFollowedBean> getUserFollowed(@Query("id") long uid);
 
     @GET("search/hot/detail")
     Observable<HotSearchDetailBean> getSearchHotDetail();

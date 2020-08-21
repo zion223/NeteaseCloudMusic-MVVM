@@ -143,11 +143,7 @@ public class RadioRequest extends BaseRequest {
 
     //订阅或取消订阅
     public void requestSubRadio(String radioId, boolean isSub) {
-        int sub = 0;
-        if (isSub) {
-            sub = 1;
-        }
-        Disposable subscribe = ApiEngine.getInstance().getApiService().getSubRadio(radioId, sub)
+        Disposable subscribe = ApiEngine.getInstance().getApiService().getSubRadio(radioId, isSub ? 1 : 0)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(djSubBean -> mRadioSubLiveData.postValue(djSubBean));
