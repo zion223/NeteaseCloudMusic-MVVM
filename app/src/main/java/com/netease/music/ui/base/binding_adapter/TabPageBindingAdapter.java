@@ -1,32 +1,40 @@
 package com.netease.music.ui.base.binding_adapter;
 
+import android.graphics.Color;
+
 import androidx.databinding.BindingAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
+import com.imooc.lib_common_ui.navigator.CommonNavigatorCreater;
 import com.kunminx.architecture.ui.adapter.CommonViewPagerAdapter;
 import com.netease.music.R;
+
+import net.lucode.hackware.magicindicator.MagicIndicator;
+import net.lucode.hackware.magicindicator.ViewPagerHelper;
+import net.lucode.hackware.magicindicator.buildins.commonnavigator.CommonNavigator;
 
 /**
  * Create by KunMinX at 2020/3/13
  */
 public class TabPageBindingAdapter {
 
-    @BindingAdapter(value = {"initTabAndPage"}, requireAll = false)
-    public static void initTabAndPage(TabLayout tabLayout, boolean initTabAndPage) {
-        int count = tabLayout.getTabCount();
-        String[] title = new String[count];
-        for (int i = 0; i < count; i++) {
-            TabLayout.Tab tab = tabLayout.getTabAt(i);
-            if (tab != null && tab.getText() != null) {
-                title[i] = tab.getText().toString();
-            }
+    //适用于ViewPager只含有两个的情况
+    @BindingAdapter(value = {"initTabAndPage", "currentItem"}, requireAll = false)
+    public static void initTabAndPage(MagicIndicator indicator, CharSequence[] title, int currentItem) {
+        if (title != null) {
+            ViewPager viewPager = (indicator.getRootView()).findViewById(R.id.view_pager);
+
+            indicator.setBackgroundColor(Color.WHITE);
+            CommonNavigator commonNavigator = CommonNavigatorCreater.setDefaultNavigator(indicator.getContext(), title, viewPager);
+            commonNavigator.setAdjustMode(true);
+            indicator.setNavigator(commonNavigator);
+            indicator.onPageSelected(1);
+            ViewPagerHelper.bind(indicator, viewPager);
+            viewPager.setAdapter(new CommonViewPagerAdapter(title.length, false, title));
+            viewPager.setCurrentItem(currentItem);
         }
-        ViewPager viewPager = (tabLayout.getRootView()).findViewById(R.id.view_pager);
-        if (viewPager != null) {
-            viewPager.setAdapter(new CommonViewPagerAdapter(count, false, title));
-            tabLayout.setupWithViewPager(viewPager);
-        }
+
     }
 
     @BindingAdapter(value = {"tabSelectedListener"}, requireAll = false)

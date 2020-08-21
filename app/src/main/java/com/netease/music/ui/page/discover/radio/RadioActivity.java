@@ -45,6 +45,7 @@ public class RadioActivity extends BaseActivity {
         djRecommendAdapter.setOnItemClickListener((adapter, view, position) -> {
             //跳转到电台详情
             DjRecommendBean.DjRadiosBean entity = (DjRecommendBean.DjRadiosBean) adapter.getItem(position);
+            RadioDetailActivity.startActivity(this, String.valueOf(entity.getId()));
         });
         mRadioViewModel.adapter.set(djRecommendAdapter);
 

@@ -11,9 +11,9 @@ import com.lxj.xpopup.core.CenterPopupView;
 //取消订阅电台
 public class UnsubscribeRadioDialog extends CenterPopupView {
 
-    IConfirmUnsubscribeListener listener;
+    IConfirmListener listener;
 
-    public UnsubscribeRadioDialog(@NonNull Context context, IConfirmUnsubscribeListener listener) {
+    public UnsubscribeRadioDialog(@NonNull Context context, IConfirmListener listener) {
         super(context);
         this.listener = listener;
     }
@@ -40,7 +40,7 @@ public class UnsubscribeRadioDialog extends CenterPopupView {
         });
     }
 
-    public interface IConfirmUnsubscribeListener{
+    public interface IConfirmListener {
         void onConfirm();
     }
 }

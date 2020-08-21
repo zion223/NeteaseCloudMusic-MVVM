@@ -74,6 +74,11 @@ public class CommonBindingAdapter {
         view.setAlpha(alpha);
     }
 
+    @BindingAdapter(value = {"backgroundDrawable"}, requireAll = false)
+    public static void setBackGround(View view, Drawable alpha) {
+        view.setBackground(alpha);
+    }
+
     @BindingAdapter(value = {"imgalpha"}, requireAll = false)
     public static void setImageViewAlpha(ImageView view, int alpha) {
         view.setImageAlpha(alpha);

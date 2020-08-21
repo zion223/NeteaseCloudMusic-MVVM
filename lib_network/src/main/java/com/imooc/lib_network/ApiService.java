@@ -80,6 +80,12 @@ public interface ApiService {
     @GET("user/cloud")
     Observable<UserCloudBean> getUserCloudMusic();
 
+    @GET("dj/detail")
+    Observable<DjDetailBean> getRadioDetail(@Query("rid") String id);
+
+    @GET("dj/program")
+    Observable<DjProgramBean> getRadioProgram(@Query("rid") String id, @Query("asc") boolean asc);
+
     @GET("album")
     Observable<AlbumDetailBean> getAlbumDetail(@Query("id") long id);
 
@@ -267,11 +273,7 @@ public interface ApiService {
     Observable<DjCatelistBean> getDjCatelist();
 
     @GET("dj/sub")
-    Observable<DjSubBean> subDj(@Query("rid") long rid, @Query("t") int isSub);
+        // 1 订阅 0取消订阅
+    Observable<DjSubBean> getSubRadio(@Query("rid") String rid, @Query("t") int isSub);
 
-    @GET("dj/program")
-    Observable<DjProgramBean> getDjProgram(@Query("rid") long rid);
-
-    @GET("dj/detail")
-    Observable<DjDetailBean> getDjDetail(@Query("rid") long rid);
 }

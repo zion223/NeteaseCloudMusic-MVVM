@@ -22,7 +22,7 @@ ext{
         greendao       : '3.2.2',
         design         : '28.0.0',
         cardview       : '25.3.1',
-        xpopup         : '1.8.10',
+        xpopup         : '2.0.8-rc5',
         multidex       : '1.0.1',
         easypermission : '1.0.1',
         tinypinyin     : '2.0.3',
