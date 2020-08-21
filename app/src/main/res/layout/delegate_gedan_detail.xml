@@ -136,10 +136,11 @@
 
                                 <ImageView
                                     android:id="@+id/iv_gedan_detail_avatar_img"
-                                    circleImageUrl="@{vm.creatorImgUrl}"
-                                    visible="@{vm.type == TYPE.PLAYLIST}"
                                     android:layout_width="25dp"
                                     android:layout_height="25dp"
+                                    onClickWithDebouncing="@{() -> proxy.userInfo()}"
+                                    circleImageUrl="@{vm.creatorImgUrl}"
+                                    visible="@{vm.type == TYPE.PLAYLIST}"
                                     android:layout_marginRight="10dp" />
 
                                 <TextView
@@ -149,6 +150,7 @@
                                     android:layout_gravity="center_vertical"
                                     android:text='@{vm.type == TYPE.ALBUM? "歌手: " + vm.creator : vm.creator}'
                                     android:textColor="@color/white"
+                                    onClickWithDebouncing="@{() -> proxy.userInfo()}"
                                     android:textSize="12sp" />
 
                                 <ImageView

@@ -19,6 +19,7 @@ import com.netease.music.BR;
 import com.netease.music.R;
 import com.netease.music.data.config.TYPE;
 import com.netease.music.ui.page.adapter.PlayMusicListAdapter;
+import com.netease.music.ui.page.discover.user.UserDetailActivity;
 import com.netease.music.ui.state.SonglistDeatilViewModel;
 import com.netease.music.util.TimeUtil;
 
@@ -83,6 +84,9 @@ public class SongListDetailActivity extends BaseActivity {
             mViewModel.creatorImgUrl.set(playlist.getCreator().getAvatarUrl());
             //背景图
             mViewModel.backgroundImgUrl.set(playlist.getCoverImgUrl());
+
+            //用户ID
+            mViewModel.creatorId.set(playlist.getCreator().getUserId());
         });
         //专辑相关
         mViewModel.songListRequest.getAlbumDetailLiveData().observe(this, albumDetailBean -> {
@@ -115,6 +119,8 @@ public class SongListDetailActivity extends BaseActivity {
             mViewModel.coverImgUrl.set(album.getPicUrl());
             //背景图  暂时不显示背景图片
             //mViewModel.backgroundImgUrl.set(album.getPicUrl());
+
+            mViewModel.creatorId.set(album.getArtist().getId());
 
         });
 
@@ -172,6 +178,16 @@ public class SongListDetailActivity extends BaseActivity {
         public void comment() {
             //专辑评论 或者歌单评论
             CommentActivity.startActivity(SongListDetailActivity.this, mViewModel.listId.get().toString(), mViewModel.type.get().getValue(), mViewModel.coverImgUrl.get(), mViewModel.title.get(), mViewModel.creator.get());
+        }
+
+        //查看用户详情或者歌手详情
+        public void userInfo() {
+            if (mViewModel.type.get() == TYPE.PLAYLIST) {
+                //查看用户
+                UserDetailActivity.startActivity(SongListDetailActivity.this, mViewModel.creatorId.get());
+            } else {
+                //查看歌手
+            }
         }
     }
 }

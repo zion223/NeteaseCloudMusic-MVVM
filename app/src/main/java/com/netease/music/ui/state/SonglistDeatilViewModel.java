@@ -20,6 +20,8 @@ public class SonglistDeatilViewModel extends BaseLoadingViewModel {
     public final ObservableField<String> reason = new ObservableField<>();
     //歌单 或者专辑ID
     public final ObservableField<Long> listId = new ObservableField<>();
+    //当前歌手或用户的Id
+    public final ObservableField<Long> creatorId = new ObservableField<>();
 
     //标题
     public final ObservableField<String> title = new ObservableField<>();
