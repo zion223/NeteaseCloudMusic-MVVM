@@ -74,6 +74,11 @@ public class CommonBindingAdapter {
         view.setAlpha(alpha);
     }
 
+    @BindingAdapter(value = {"leftCompoundDrawable"}, requireAll = false)
+    public static void setCompoundDrawables(TextView view, Drawable drawable) {
+        view.setCompoundDrawables(drawable, null, null, null);
+    }
+
     @BindingAdapter(value = {"backgroundDrawable"}, requireAll = false)
     public static void setBackGround(View view, Drawable alpha) {
         view.setBackground(alpha);

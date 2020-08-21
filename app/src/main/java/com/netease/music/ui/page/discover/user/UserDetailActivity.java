@@ -31,7 +31,8 @@ public class UserDetailActivity extends BaseActivity {
 
     @Override
     protected DataBindingConfig getDataBindingConfig() {
-        return new DataBindingConfig(R.layout.delegate_user_detail, BR.vm, mUserDetailViewModel);
+        return new DataBindingConfig(R.layout.delegate_user_detail, BR.vm, mUserDetailViewModel)
+                .addBindingParam(BR.proxy, new ClickProxy());
     }
 
     @Override
@@ -41,6 +42,14 @@ public class UserDetailActivity extends BaseActivity {
             long userId = getIntent().getBundleExtra("data").getLong("userId");
             mUserDetailViewModel.userId.set(userId);
 
+            mUserDetailViewModel.request.getUserFollowLiveData().observe(this, followBean -> {
+                mUserDetailViewModel.followed.set(!mUserDetailViewModel.followed.get());
+                //关注成功则提示一下
+                if (mUserDetailViewModel.followed.get()) {
+                    showShortToast(followBean.getFollowContent());
+                }
+            });
+
             mUserDetailViewModel.request.getUserDeatailLiveData().observe(this, userDetailBean -> {
                 mUserDetailViewModel.user.set(userDetailBean);
                 mUserDetailViewModel.followed.set(userDetailBean.getProfile().isFollowed());
@@ -48,6 +57,18 @@ public class UserDetailActivity extends BaseActivity {
 
             //获取用户详情
             mUserDetailViewModel.request.requestUserDetail(mUserDetailViewModel.userId.get());
+        }
+    }
+
+
+    public class ClickProxy {
+        public void back() {
+            finish();
+        }
+
+        //关注或者取消关注
+        public void changefollowStatus() {
+            mUserDetailViewModel.request.requestUserFollow(mUserDetailViewModel.userId.get(), !mUserDetailViewModel.followed.get());
         }
     }
 }

@@ -80,7 +80,11 @@ public class UserDetailRequest extends BaseRequest {
         Disposable subscribe = ApiEngine.getInstance().getApiService().getUserFollow(uid, follow ? 1 : 0)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(bean -> userFollowLiveData.postValue(bean));
+                .subscribe(bean -> {
+                    if (bean.getCode() == 200) {
+                        userFollowLiveData.postValue(bean);
+                    }
+                });
     }
 
     public void requestUserFollower(long uid) {

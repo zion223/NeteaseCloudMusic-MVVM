@@ -9,259 +9,275 @@
             name="vm"
             type="com.netease.music.ui.state.UserDetailViewModel" />
 
+        <variable
+            name="proxy"
+            type="com.netease.music.ui.page.discover.user.UserDetailActivity.ClickProxy" />
+
         <import type="com.netease.music.util.SearchUtil" />
     </data>
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/appbar"
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:elevation="0dp">
+            android:layout_height="match_parent">
 
-            <com.google.android.material.appbar.CollapsingToolbarLayout
+            <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/appbar"
                 android:layout_width="match_parent"
-                android:layout_height="290dp"
-                android:fitsSystemWindows="true"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed">
+                android:layout_height="wrap_content"
+                app:elevation="0dp">
 
-                <ImageView
-                    android:id="@+id/iv_user_detail_background"
+                <com.google.android.material.appbar.CollapsingToolbarLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@color/gray"
-                    android:scaleType="centerCrop"
-                    app:layout_collapseMode="parallax"
-                    imageUrl="@{vm.user.profile.backgroundUrl}"
-                    radis="@{125}" />
-
-                <ImageView
-                    android:id="@+id/iv_user_detail_background_cover"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
-                    app:layout_collapseMode="parallax"
-                    imageUrl="@{vm.user.profile.backgroundUrl}" />
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:layout_collapseMode="parallax">
+                    android:layout_height="290dp"
+                    android:fitsSystemWindows="true"
+                    app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
                     <ImageView
-                        android:id="@+id/iv_user_detail_avatar"
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginTop="100dp"
-                        circleImageUrl="@{vm.user.profile.avatarUrl}" />
-
-                    <TextView
-                        android:id="@+id/tv_user_detail_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/iv_user_detail_avatar"
-                        android:layout_alignLeft="@+id/iv_user_detail_avatar"
-                        android:layout_marginTop="10dp"
-                        android:layout_toEndOf="@+id/tv_day"
-                        android:textColor="#f0f0f0"
-                        android:text="@{vm.user.profile.nickname}"
-                        android:textSize="17sp"
-                        android:textStyle="bold"
-                        android:typeface="monospace" />
-
-                    <TextView
-                        android:id="@+id/tv_user_detail_sub"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/tv_user_detail_name"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:textColor="#f0f0f0"
-                        android:text='@{"关注 " + vm.user.profile.follows + " 粉丝" + vm.user.profile.followeds}'
-                        android:textSize="13sp" />
+                        android:id="@+id/iv_user_detail_background"
+                        imageUrl="@{vm.user.profile.backgroundUrl}"
+                        radis="@{125}"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/gray"
+                        android:scaleType="centerCrop"
+                        app:layout_collapseMode="parallax" />
 
                     <ImageView
-                        android:id="@+id/iv_user_detail_vip"
-                        android:layout_width="30dp"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/tv_user_detail_sub"
-                        android:layout_alignLeft="@+id/tv_user_detail_sub"
-                        android:layout_alignTop="@+id/tv_user_level"
-                        android:layout_alignBottom="@+id/tv_user_level"
-                        android:layout_marginLeft="5dp"
-                        android:src="@drawable/ic_vip" />
+                        android:id="@+id/iv_user_detail_background_cover"
+                        imageUrl="@{vm.user.profile.backgroundUrl}"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        app:layout_collapseMode="parallax" />
 
-                    <TextView
-                        android:id="@+id/tv_user_level"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/tv_user_detail_sub"
-                        android:layout_marginLeft="10dp"
-                        android:layout_toRightOf="@+id/iv_user_detail_vip"
-                        android:background="@drawable/bg_round_white"
-                        android:text='@{"Lv." + vm.user.level}'
-                        android:textColor="@color/white"
-                        android:textSize="11sp"
-                        android:textStyle="bold|italic" />
-
-                    <LinearLayout
-                        android:id="@+id/ll_user_detail_follow"
-                        android:layout_width="70dp"
-                        android:layout_height="30dp"
-                        android:layout_alignBottom="@+id/iv_user_detail_vip"
-                        android:layout_marginRight="20dp"
-                        android:layout_toLeftOf="@+id/tv_user_detail_send_msg"
-                        android:background="@drawable/bg_round_red"
-                        visible="@{!vm.followed}">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:layout_collapseMode="parallax">
 
                         <ImageView
-                            android:layout_width="13dp"
-                            android:layout_height="13dp"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginLeft="5dp"
-                            android:layout_marginRight="5dp"
-                            android:src="@drawable/ic_add_white" />
+                            android:id="@+id/iv_user_detail_avatar"
+                            circleImageUrl="@{vm.user.profile.avatarUrl}"
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="100dp" />
 
                         <TextView
-                            android:id="@+id/tv_item_search_user_follow"
+                            android:id="@+id/tv_user_detail_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical|right"
-                            android:layout_marginRight="5dp"
-                            android:text="关注"
-                            android:textColor="@color/white"
-                            android:textSize="11sp" />
-                    </LinearLayout>
-
-                    <FrameLayout
-                        android:id="@+id/fl_user_detail_followed"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_alignBottom="@+id/iv_user_detail_vip"
-                        android:layout_marginRight="10dp"
-                        android:layout_toLeftOf="@+id/tv_user_detail_send_msg"
-                        android:background="@drawable/bg_user_detail_followed"
-                        visible="@{vm.followed}">
-
-                        <ImageView
-                            android:layout_width="15dp"
-                            android:layout_height="15dp"
-                            android:layout_gravity="center"
-                            android:src="@drawable/ic_followed" />
-                    </FrameLayout>
-
-                    <TextView
-                        android:id="@+id/tv_user_detail_send_msg"
-                        android:layout_width="80dp"
-                        android:layout_height="30dp"
-                        android:layout_alignTop="@+id/ll_user_detail_follow"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="20dp"
-                        android:background="@drawable/bg_round_white"
-                        android:gravity="center"
-                        android:text="发私信"
-                        android:textColor="@color/white"
-                        android:textSize="11sp" />
-                </RelativeLayout>
-
-                <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/toolbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="55dp"
-                    app:contentInsetEnd="0dp"
-                    app:contentInsetLeft="0dp"
-                    app:contentInsetStart="0dp"
-                    app:layout_collapseMode="pin"
-                    app:maxButtonHeight="20dp"
-                    app:titleMargin="0dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:id="@+id/img_user_detail_back"
-                            android:layout_width="25dp"
-                            android:layout_height="25dp"
-                            android:layout_marginLeft="10dp"
+                            android:layout_below="@+id/iv_user_detail_avatar"
+                            android:layout_alignLeft="@+id/iv_user_detail_avatar"
                             android:layout_marginTop="10dp"
-                            android:layout_marginBottom="10dp"
-                            android:src="@drawable/ic_left_arrow_white" />
+                            android:layout_toEndOf="@+id/tv_day"
+                            android:text="@{vm.user.profile.nickname}"
+                            android:textColor="#f0f0f0"
+                            android:textSize="17sp"
+                            android:textStyle="bold"
+                            android:typeface="monospace" />
 
                         <TextView
-                            android:id="@+id/tv_left_title"
-                            android:layout_width="0dp"
+                            android:id="@+id/tv_user_detail_sub"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginStart="15sp"
-                            android:layout_toEndOf="@id/img_daily_back"
-                            android:layout_weight="1"
-                            android:textColor="@color/white"
-                            android:textSize="18sp"
-                            android:typeface="monospace"
-                            android:visibility="visible" />
+                            android:layout_below="@id/tv_user_detail_name"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:text='@{"关注 " + vm.user.profile.follows + "  粉丝" + vm.user.profile.followeds}'
+                            android:textColor="#f0f0f0"
+                            android:textSize="13sp" />
 
                         <ImageView
-                            android:id="@+id/img_tab_more"
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_gravity="center_vertical"
+                            android:id="@+id/iv_user_detail_vip"
+                            android:layout_width="30dp"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tv_user_detail_sub"
+                            android:layout_alignLeft="@+id/tv_user_detail_sub"
+                            android:layout_alignTop="@+id/tv_user_level"
+                            android:layout_alignBottom="@+id/tv_user_level"
+                            android:layout_marginLeft="5dp"
+                            android:src="@drawable/ic_vip" />
+
+                        <TextView
+                            android:id="@+id/tv_user_level"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tv_user_detail_sub"
+                            android:layout_marginLeft="10dp"
+                            android:layout_toRightOf="@+id/iv_user_detail_vip"
+                            android:background="@drawable/bg_round_white"
+                            android:text='@{"Lv." + vm.user.level}'
+                            android:textColor="@color/white"
+                            android:textSize="11sp"
+                            android:textStyle="bold|italic" />
+
+                        <LinearLayout
+                            android:id="@+id/ll_user_detail_follow"
+                            onClickWithDebouncing="@{() -> proxy.changefollowStatus()}"
+                            visible="@{!vm.followed}"
+                            android:layout_width="70dp"
+                            android:layout_height="30dp"
+                            android:layout_alignBottom="@+id/iv_user_detail_vip"
+                            android:layout_marginRight="20dp"
+                            android:layout_toLeftOf="@+id/tv_user_detail_send_msg"
+                            android:background="@drawable/bg_round_red"
+                            android:visibility="gone">
+
+                            <ImageView
+                                android:layout_width="13dp"
+                                android:layout_height="13dp"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginRight="5dp"
+                                android:src="@drawable/ic_add_white" />
+
+                            <TextView
+                                android:id="@+id/tv_item_search_user_follow"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical|right"
+                                android:layout_marginRight="5dp"
+                                android:text="关注"
+                                android:textColor="@color/white"
+                                android:textSize="11sp" />
+                        </LinearLayout>
+
+                        <FrameLayout
+                            android:id="@+id/fl_user_detail_followed"
+                            onClickWithDebouncing="@{() -> proxy.changefollowStatus()}"
+                            visible="@{vm.followed}"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_alignBottom="@+id/iv_user_detail_vip"
                             android:layout_marginRight="10dp"
-                            android:src="@drawable/ic_more_white" />
-                    </LinearLayout>
-                </androidx.appcompat.widget.Toolbar>
+                            android:layout_toLeftOf="@+id/tv_user_detail_send_msg"
+                            android:background="@drawable/bg_user_detail_followed">
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="15dp"
-                    android:layout_marginTop="650dp"
-                    android:background="@drawable/bg_dailyrecommend"
-                    app:layout_collapseMode="pin" />
-            </com.google.android.material.appbar.CollapsingToolbarLayout>
-        </com.google.android.material.appbar.AppBarLayout>
+                            <ImageView
+                                android:layout_width="23dp"
+                                android:layout_height="23dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_followed" />
+                        </FrameLayout>
 
-        <RelativeLayout
-            android:id="@+id/rl_user_detail_bottom"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#ffffff"
-            android:paddingBottom="40dp"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+                        <TextView
+                            android:id="@+id/tv_user_detail_send_msg"
+                            alpha="@{200}"
+                            leftCompoundDrawable="@{vm.sendMsgDrawable}"
+                            android:layout_width="80dp"
+                            android:layout_height="30dp"
+                            android:layout_alignBottom="@+id/ll_user_detail_follow"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginRight="20dp"
+                            android:background="@drawable/bg_round_white"
+                            android:gravity="center"
+                            android:text="发私信"
+                            android:textColor="@color/white"
+                            android:textSize="11sp" />
+                    </RelativeLayout>
 
-            <LinearLayout
-                android:id="@+id/ll_user_magicindicator"
-                android:layout_width="match_parent"
-                android:layout_height="25dp"
-                android:orientation="horizontal"
-                tools:ignore="RtlSymmetry">
+                    <androidx.appcompat.widget.Toolbar
+                        android:id="@+id/toolbar"
+                        android:layout_width="match_parent"
+                        android:layout_height="55dp"
+                        app:contentInsetEnd="0dp"
+                        app:contentInsetLeft="0dp"
+                        app:contentInsetStart="0dp"
+                        app:layout_collapseMode="pin"
+                        app:maxButtonHeight="20dp"
+                        app:titleMargin="0dp">
 
-                <net.lucode.hackware.magicindicator.MagicIndicator
-                    android:id="@+id/magic_user_indicator"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center" />
-            </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/tv_gap"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_below="@id/ll_user_magicindicator"
-                android:background="#f0f0f0" />
+                            <ImageView
+                                android:id="@+id/img_user_detail_back"
+                                onClickWithDebouncing="@{() -> proxy.back()}"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginBottom="10dp"
+                                android:src="@drawable/ic_left_arrow_white" />
 
-            <androidx.viewpager.widget.ViewPager
-                android:id="@+id/view_pager_user_detail"
+                            <TextView
+                                android:id="@+id/tv_left_title"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginStart="15sp"
+                                android:layout_toEndOf="@id/img_daily_back"
+                                android:layout_weight="1"
+                                android:textColor="@color/white"
+                                android:textSize="18sp"
+                                android:typeface="monospace"
+                                android:visibility="visible" />
+
+                            <ImageView
+                                android:id="@+id/img_tab_more"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginRight="10dp"
+                                android:src="@drawable/ic_more_white" />
+                        </LinearLayout>
+                    </androidx.appcompat.widget.Toolbar>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="15dp"
+                        android:layout_marginTop="650dp"
+                        android:background="@drawable/bg_dailyrecommend"
+                        app:layout_collapseMode="pin" />
+                </com.google.android.material.appbar.CollapsingToolbarLayout>
+            </com.google.android.material.appbar.AppBarLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_user_detail_bottom"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_below="@+id/tv_gap" />
-        </RelativeLayout>
+                android:background="#ffffff"
+                android:paddingBottom="40dp"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+                <LinearLayout
+                    android:id="@+id/ll_user_magicindicator"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:orientation="horizontal"
+                    tools:ignore="RtlSymmetry">
+
+                    <net.lucode.hackware.magicindicator.MagicIndicator
+                        android:id="@+id/magic_user_indicator"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_gap"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@id/ll_user_magicindicator"
+                    android:background="#f0f0f0" />
+
+                <androidx.viewpager.widget.ViewPager
+                    android:id="@+id/view_pager_user_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/tv_gap" />
+            </RelativeLayout>
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </LinearLayout>
 </layout>
