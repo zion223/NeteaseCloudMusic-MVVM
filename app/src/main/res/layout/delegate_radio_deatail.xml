@@ -214,6 +214,7 @@
                             android:layout_marginLeft="15dp"
                             android:layout_marginTop="10dp"
                             circleImageUrl="@{vm.radio.dj.avatarUrl}"
+                            onClickWithDebouncing="@{() -> proxy.userInfo()}"
                             android:src="@drawable/ic_test" />
 
                         <TextView
@@ -224,6 +225,7 @@
                             android:layout_marginLeft="10dp"
                             android:layout_toRightOf="@+id/iv_radio_info_img"
                             android:text="@{vm.radio.dj.nickname}"
+                            onClickWithDebouncing="@{() -> proxy.userInfo()}"
                             android:textColor="@color/black"
                             android:textSize="16sp" />
 

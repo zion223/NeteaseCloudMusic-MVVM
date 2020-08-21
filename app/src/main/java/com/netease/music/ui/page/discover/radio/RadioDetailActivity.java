@@ -21,6 +21,8 @@ import com.netease.music.BR;
 import com.netease.music.R;
 import com.netease.music.databinding.ItemRadioProgramHeaderBinding;
 import com.netease.music.ui.page.adapter.RadioProgramAdapter;
+import com.netease.music.ui.page.discover.square.detail.SongListDetailActivity;
+import com.netease.music.ui.page.discover.user.UserDetailActivity;
 import com.netease.music.ui.state.RadioDetailViewModel;
 
 import java.util.List;
@@ -113,7 +115,7 @@ public class RadioDetailActivity extends BaseActivity {
     }
 
     //取消订阅对话框  TODO Context.getResources() on a null object reference
-    UnsubscribeRadioDialog dialog = new UnsubscribeRadioDialog(RadioDetailActivity.this, () -> mRadioDetailViewModel.request.requestSubRadio(mRadioDetailViewModel.radioId.get(), !mRadioDetailViewModel.isSub.get()));
+    //UnsubscribeRadioDialog dialog = new UnsubscribeRadioDialog(RadioDetailActivity.this, () -> mRadioDetailViewModel.request.requestSubRadio(mRadioDetailViewModel.radioId.get(), !mRadioDetailViewModel.isSub.get()));
 
     public class ClickProxy {
         //改变排序
@@ -139,6 +141,11 @@ public class RadioDetailActivity extends BaseActivity {
             //状态取反
             mRadioDetailViewModel.request.requestSubRadio(mRadioDetailViewModel.radioId.get(), !mRadioDetailViewModel.isSub.get());
             //}
+        }
+
+
+        public void userInfo() {
+            UserDetailActivity.startActivity(RadioDetailActivity.this, mRadioDetailViewModel.radio.get().getDj().getUserId());
         }
     }
 }

@@ -370,7 +370,7 @@ public class AlbumSearchBean {
                     this.name = name;
                 }
 
-                public int getId() {
+                public long getId() {
                     return id;
                 }
 

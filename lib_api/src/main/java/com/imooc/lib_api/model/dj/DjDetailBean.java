@@ -520,7 +520,7 @@ public class DjDetailBean implements Serializable {
                 this.birthday = birthday;
             }
 
-            public int getUserId() {
+            public long getUserId() {
                 return userId;
             }
 
