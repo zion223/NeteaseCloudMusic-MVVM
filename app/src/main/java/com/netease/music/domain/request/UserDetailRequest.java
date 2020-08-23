@@ -7,6 +7,7 @@ import com.imooc.lib_api.model.user.UserDetailBean;
 import com.imooc.lib_api.model.user.UserEventBean;
 import com.imooc.lib_api.model.user.UserFollowedBean;
 import com.imooc.lib_api.model.user.UserFollowerBean;
+import com.imooc.lib_api.model.user.UserPlaylistBean;
 import com.imooc.lib_network.ApiEngine;
 import com.kunminx.architecture.domain.request.BaseRequest;
 
@@ -26,6 +27,8 @@ public class UserDetailRequest extends BaseRequest {
     private MutableLiveData<UserFollowedBean> userFollowedLiveData;
     //用户动态
     private MutableLiveData<UserEventBean> userEventLiveData;
+    //用户歌单
+    private MutableLiveData<UserPlaylistBean> userPlayListLiveData;
 
     public MutableLiveData<UserDetailBean> getUserDeatailLiveData() {
         if (userDeatailLiveData == null) {
@@ -99,6 +102,14 @@ public class UserDetailRequest extends BaseRequest {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(bean -> userFollowedLiveData.postValue(bean));
+    }
+
+    //查询用户歌单
+    public void requestUserPlaylist(long uid) {
+        Disposable subscribe = ApiEngine.getInstance().getApiService().getUserPlaylist(uid)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(bean -> userPlayListLiveData.postValue(bean));
     }
 
 }
