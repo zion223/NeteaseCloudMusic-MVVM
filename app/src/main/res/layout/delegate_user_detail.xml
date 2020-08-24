@@ -14,6 +14,7 @@
             type="com.netease.music.ui.page.discover.user.UserDetailActivity.ClickProxy" />
 
         <import type="com.netease.music.util.SearchUtil" />
+        <import type="com.netease.music.util.TimeUtil" />
     </data>
 
     <LinearLayout
@@ -261,7 +262,8 @@
                         android:id="@+id/magic_user_indicator"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center" />
+                        android:layout_gravity="center"
+                        initTabAndPage="@{vm.indicatorTitle}" />
                 </LinearLayout>
 
                 <TextView
@@ -275,7 +277,160 @@
                     android:id="@+id/view_pager_user_detail"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_below="@+id/tv_gap" />
+                    android:layout_below="@+id/tv_gap">
+
+                    <androidx.core.widget.NestedScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:paddingLeft="15dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="20dp"
+                                    android:text="基本信息"
+                                    android:textColor="@color/black"
+                                    android:textSize="17sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/tv_user_detail_createtime"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="15dp"
+                                    android:text="村龄:  1年 (1082年11月注册)"
+                                    android:textSize="13sp" />
+
+                                <TextView
+                                    android:id="@+id/tv_user_detail_age"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="10dp"
+                                    android:text="年龄:  95后 天蝎座"
+                                    android:textSize="13sp" />
+
+                                <TextView
+                                    android:id="@+id/tv_user_detail_area"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_marginBottom="15dp"
+                                    android:text="地区:  北京市"
+                                    android:textSize="13sp" />
+
+                                <include layout="@layout/item_more_info" />
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="30dp"
+                                    android:layout_marginRight="10dp">
+
+                                    <ImageView
+                                        android:id="@+id/iv_user_info_listen_rank"
+                                        android:layout_width="50dp"
+                                        android:layout_height="50dp"
+                                        android:layout_centerVertical="true"
+                                        android:src="@drawable/ic_listen_rank" />
+
+                                    <TextView
+                                        android:id="@+id/tv_user_info_toptext"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignTop="@+id/iv_user_info_listen_rank"
+                                        android:layout_marginLeft="10dp"
+                                        android:layout_marginTop="5dp"
+                                        android:layout_marginRight="10dp"
+                                        android:layout_toRightOf="@+id/iv_user_info_listen_rank"
+                                        android:maxLines="2"
+                                        android:text='@{vm.user.profile.nickname + "的听歌排行"}'
+                                        android:textColor="@color/black"
+                                        android:textSize="14sp" />
+
+                                    <TextView
+                                        android:id="@+id/tv_user_info_bottomtext"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@+id/tv_user_info_toptext"
+                                        android:layout_marginLeft="10dp"
+                                        android:layout_marginTop="10dp"
+                                        android:layout_marginBottom="5dp"
+                                        android:layout_toRightOf="@+id/iv_user_info_listen_rank"
+                                        android:text='@{"累计听歌" + vm.user.listenSongs + "首"}'
+                                        android:textSize="11sp" />
+
+                                </RelativeLayout>
+
+                                <RelativeLayout
+                                    android:id="@+id/rl_user_info_likemusic"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_marginRight="10dp"
+                                    android:layout_marginBottom="10dp">
+
+                                    <ImageView
+                                        android:id="@+id/iv_user_info_like"
+                                        android:layout_width="50dp"
+                                        android:layout_height="50dp"
+                                        android:layout_centerVertical="true"
+                                        android:src="@drawable/ic_listen_rank" />
+
+                                    <TextView
+                                        android:id="@+id/tv_user_info_toplike"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignTop="@+id/iv_user_info_like"
+                                        android:layout_marginLeft="10dp"
+                                        android:layout_marginTop="5dp"
+                                        android:layout_marginRight="10dp"
+                                        android:layout_toRightOf="@+id/iv_user_info_like"
+                                        android:maxLines="2"
+                                        android:text='@{vm.user.profile.nickname + "喜欢的音乐"}'
+                                        android:textColor="@color/black"
+                                        android:textSize="14sp" />
+
+                                    <TextView
+                                        android:id="@+id/tv_user_info_bottomlike"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@+id/tv_user_info_toplike"
+                                        android:layout_marginLeft="10dp"
+                                        android:layout_marginTop="10dp"
+                                        android:layout_marginBottom="5dp"
+                                        android:layout_toRightOf="@+id/iv_user_info_like"
+                                        android:text="累计听歌 播放次数"
+                                        android:textSize="11sp" />
+
+                                </RelativeLayout>
+
+                            </LinearLayout>
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/rv_user_info_playlist"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginBottom="10dp" />
+
+                        </LinearLayout>
+                    </androidx.core.widget.NestedScrollView>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </androidx.viewpager.widget.ViewPager>
             </RelativeLayout>
 
         </androidx.coordinatorlayout.widget.CoordinatorLayout>

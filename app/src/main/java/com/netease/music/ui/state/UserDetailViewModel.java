@@ -28,6 +28,8 @@ public class UserDetailViewModel extends ViewModel {
     public final ObservableField<Drawable> sendMsgDrawable = new ObservableField<>();
 
     public final UserDetailRequest request = new UserDetailRequest();
+    // 主页  动态()
+    public ObservableField<CharSequence[]> indicatorTitle = new ObservableField<>();
 
     {
         Drawable drawable = Utils.getApp().getResources().getDrawable(R.drawable.ic_notification_msg_white);
