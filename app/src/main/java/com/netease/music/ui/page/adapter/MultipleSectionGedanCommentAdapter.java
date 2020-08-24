@@ -32,23 +32,23 @@ public class MultipleSectionGedanCommentAdapter extends BaseSectionQuickAdapter<
         resourceId = commentId;
         mContext = context;
         commentType = type;
-        //TODO 不好使
-//        addChildClickViewIds(R.id.iv_item_gedan_comment_avatar_img, R.id.tv_item_gedan_comment_avatar_name, R.id.iv_item_gedan_comment_zan);
-//        setOnItemClickListener((adapter, view, position) -> {
-//            switch (view.getId()) {
-//                case R.id.iv_item_gedan_comment_avatar_img:
-//                case R.id.tv_item_gedan_comment_avatar_name:
-//                    //点击进入用户详情
-//                    UserDetailActivity.startActivity(context, data.get(position).getComment().getUser().getUserId());
-//                    break;
-//                case R.id.iv_item_gedan_comment_zan:
-//                    //点赞
-//                    break;
-//                default:
-//                    break;
-//
-//            }
-//        });
+        //setOnItemChildClickListener 而不是setOnItemClickListener
+        addChildClickViewIds(R.id.iv_item_gedan_comment_avatar_img, R.id.tv_item_gedan_comment_avatar_name, R.id.iv_item_gedan_comment_zan);
+        setOnItemChildClickListener((adapter, view, position) -> {
+            switch (view.getId()) {
+                case R.id.iv_item_gedan_comment_avatar_img:
+                case R.id.tv_item_gedan_comment_avatar_name:
+                    //点击进入用户详情
+                    UserDetailActivity.startActivity(context, data.get(position).getComment().getUser().getUserId());
+                    break;
+                case R.id.iv_item_gedan_comment_zan:
+                    //点赞
+                    break;
+                default:
+                    break;
+
+            }
+        });
     }
 
     @Override
@@ -94,11 +94,6 @@ public class MultipleSectionGedanCommentAdapter extends BaseSectionQuickAdapter<
         praiseView.setTag(bean.isLiked());
         praiseView.setImageResource(bean.isLiked() ? R.drawable.ic_parise_red : R.drawable.ic_parise);
 
-        View avtarView = baseViewHolder.getView(R.id.iv_item_gedan_comment_avatar_img);
-        View nameView = baseViewHolder.getView(R.id.tv_item_gedan_comment_avatar_name);
-        //点击进入用户详情
-        avtarView.setOnClickListener(v -> UserDetailActivity.startActivity(mContext, playListCommentEntity.getComment().getUser().getUserId()));
-        nameView.setOnClickListener(v -> UserDetailActivity.startActivity(mContext, playListCommentEntity.getComment().getUser().getUserId()));
         //TODO  评论点赞和取消点赞
 //        baseViewHolder.setOnClickListener(R.id.iv_item_gedan_comment_zan, new View.OnClickListener() {
 //            @Override
