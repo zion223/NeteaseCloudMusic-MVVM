@@ -146,19 +146,24 @@ public class UserDetailRequest extends BaseRequest {
                     int createPlaylistSize = subIndex - 1;
                     final List<UserPlaylistEntity> playListData = new ArrayList<>();
                     playListData.add(new UserPlaylistEntity("创建的歌单", createPlaylistSize));
-                    for (int i = 1; i < 4; i++) {
+                    //创建的歌单数量小于等于5个则直接全部显示出来
+                    for (int i = 1; i < (createPlaylistSize <= 5 ? createPlaylistSize : 4); i++) {
                         playListData.add(new UserPlaylistEntity(UserPlaylistEntity.TYPE.TYPE_CREATE, playList.getPlaylist().get(i)));
                     }
-                    playListData.add(new UserPlaylistEntity("更多歌单"));
+                    //多余5个数量的歌单时显示 更多歌单
+                    if (createPlaylistSize > 5) {
+                        playListData.add(new UserPlaylistEntity("更多歌单"));
+                    }
 
                     int collectPlayListSize = size - subIndex;
                     playListData.add(new UserPlaylistEntity("收藏的歌单", collectPlayListSize));
-
-                    for (int i = subIndex; i < subIndex + 3; i++) {
+                    //收藏的歌单数量小于等于5个则直接全部显示出来
+                    for (int i = subIndex; i < (collectPlayListSize <= 5 ? subIndex + collectPlayListSize : subIndex + 3); i++) {
                         playListData.add(new UserPlaylistEntity(UserPlaylistEntity.TYPE.TYPE_SUBSCRIBE, playList.getPlaylist().get(i)));
                     }
-                    playListData.add(new UserPlaylistEntity("更多歌单"));
-
+                    if (collectPlayListSize > 5) {
+                        playListData.add(new UserPlaylistEntity("更多歌单"));
+                    }
                     userPlayListLiveData.postValue(playListData);
                 });
     }
