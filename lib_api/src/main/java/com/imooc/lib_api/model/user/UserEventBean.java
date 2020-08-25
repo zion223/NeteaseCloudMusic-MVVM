@@ -383,8 +383,8 @@ public class UserEventBean {
                 this.birthday = birthday;
             }
 
-            public String getUserId() {
-                return userId;
+            public long getUserId() {
+                return Long.parseLong(userId);
             }
 
             public void setUserId(String userId) {

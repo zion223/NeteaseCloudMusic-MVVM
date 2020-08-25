@@ -239,6 +239,19 @@ public interface ApiService {
     @GET("comment/like")
     Observable<CommentLikeBean> likeComment(@Query("id") String id, @Query("cid") long cid, @Query("t") int t, @Query("type") int type);
 
+    /**
+     * 给资源点赞
+     * type : 资源类型 1: mv 4: 电台 5: 视频 6: 动态
+     * t : 是否点赞 ,1 为点赞 ,0 为取消点赞
+     * id: 资源 id
+     * PS  注意：如给动态点赞，不需要传入 id，需要传入 threadId,可通过 event,/user/event 接口获取，如： /resource/like?t=1&type=6&threadId=A_EV_2_6559519868_32953014
+     */
+    @GET("resource/like")
+    Observable<CommentLikeBean> likeResource(@Query("id") long id, @Query("t") int t, @Query("type") int type);
+
+    @GET("resource/like")
+    Observable<CommentLikeBean> likeEventResource(@Query("threadId") String id, @Query("t") int t, @Query("type") int type);
+
     @GET("playmode/intelligence/list")
     Observable<PlayModeIntelligenceBean> getIntelligenceList(@Query("id") long id, @Query("pid") long pid);
 

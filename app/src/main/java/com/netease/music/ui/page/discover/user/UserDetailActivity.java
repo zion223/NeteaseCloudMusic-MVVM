@@ -73,7 +73,7 @@ public class UserDetailActivity extends BaseActivity {
                 mUserDetailViewModel.indicatorTitle.set(mTitleDataList);
             });
             //用户动态
-            mUserDetailViewModel.request.getUserEventLiveData().observe(this, userEventBean -> mUserDetailViewModel.eventAdapter.set(new EventAdapter(userEventBean.getEvents())));
+            mUserDetailViewModel.request.getUserEventLiveData().observe(this, userEventBean -> mUserDetailViewModel.eventAdapter.set(new EventAdapter(UserDetailActivity.this, userEventBean.getEvents())));
             //歌单
             mUserDetailViewModel.request.getUserPlayListLiveData().observe(this, playList -> {
                 mUserDetailViewModel.playListAdapter.set(new UserHomePagePlayListAdapter(UserDetailActivity.this, playList));

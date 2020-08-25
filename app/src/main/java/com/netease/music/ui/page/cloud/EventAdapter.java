@@ -1,22 +1,32 @@
 package com.netease.music.ui.page.cloud;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
+import com.imooc.lib_api.HttpConstants;
+import com.imooc.lib_api.model.playlist.DailyRecommendBean;
+import com.imooc.lib_api.model.song.AudioBean;
+import com.imooc.lib_api.model.song.CommentLikeBean;
 import com.imooc.lib_api.model.user.UserEventBean;
 import com.imooc.lib_api.model.user.UserEventJsonBean;
 import com.imooc.lib_common_ui.utils.GsonUtil;
 import com.imooc.lib_image_loader.app.ImageLoaderManager;
 import com.imooc.lib_network.ApiEngine;
 import com.imooc.lib_video.videoplayer.CustomJzVideoView;
+import com.netease.lib_audio.app.AudioHelper;
 import com.netease.music.R;
+import com.netease.music.data.config.TYPE;
+import com.netease.music.ui.page.discover.square.detail.SongListDetailActivity;
+import com.netease.music.ui.page.discover.user.UserDetailActivity;
 import com.netease.music.util.TimeUtil;
 
 import java.util.ArrayList;
@@ -24,18 +34,67 @@ import java.util.List;
 
 import cn.jzvd.Jzvd;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 //用户动态适配器
-public class EventAdapter extends BaseQuickAdapter<UserEventBean.EventsBean, BaseViewHolder> implements View.OnClickListener {
+public class EventAdapter extends BaseQuickAdapter<UserEventBean.EventsBean, BaseViewHolder> {
 
     //图片加载
     private ImageLoaderManager manager;
     private List<Integer> imgList = new ArrayList<>();
 
-    public EventAdapter(@Nullable List<UserEventBean.EventsBean> data) {
+    public EventAdapter(Context context, @Nullable List<UserEventBean.EventsBean> data) {
         super(R.layout.item_user_event, data);
         manager = ImageLoaderManager.getInstance();
+        addChildClickViewIds(R.id.rl_share, R.id.iv_avatar, R.id.iv_like, R.id.tv_nickname);
+        setOnItemChildClickListener((adapter, view, position) -> {
+            final UserEventBean.EventsBean event = (UserEventBean.EventsBean) adapter.getItem(position);
+
+            switch (view.getId()) {
+                case R.id.iv_avatar:
+                case R.id.tv_nickname:
+                    //跳入用户详情
+                    UserDetailActivity.startActivity(context, event.getUser().getUserId());
+                    break;
+                case R.id.rl_share:
+                    UserEventJsonBean jsonBean = GsonUtil.fromJSON(event.getJson(), UserEventJsonBean.class);
+                    if (jsonBean != null && jsonBean.getSong() != null && !TextUtils.isEmpty(jsonBean.getSong().getName())) {
+                        //播放歌曲
+                        DailyRecommendBean.RecommendBean item = jsonBean.getSong();
+                        String songPlayUrl = HttpConstants.getSongPlayUrl(item.getId());
+                        AudioHelper.addAudio(new AudioBean(String.valueOf(item.getId()), songPlayUrl, item.getName(), item.getArtists().get(0).getName(), item.getAlbum().getName(), item.getAlbum().getName(), item.getAlbum().getPicUrl(), TimeUtil.getTimeNoYMDH(item.getDuration())));
+                    } else if (jsonBean.getAlbum() != null) {
+                        //查看专辑
+                        SongListDetailActivity.startActivity(context, TYPE.ALBUM_ID, jsonBean.getAlbum().getId(), "");
+                    } else if (jsonBean.getPlaylist() != null) {
+                        //查看歌单
+                        SongListDetailActivity.startActivity(context, TYPE.PLAYLIST_ID, jsonBean.getPlaylist().getId(), "");
+                    }
+                    break;
+                case R.id.iv_like:
+                    //给资源点赞
+                    ImageView likeView = (ImageView) adapter.getViewByPosition(position, R.id.iv_like);
+                    TextView countTextview = (TextView) adapter.getViewByPosition(position, R.id.tv_like_count);
+                    Boolean parise = (Boolean) likeView.getTag();
+                    Disposable subscribe = ApiEngine.getInstance().getApiService()
+                            .likeEventResource(event.getInfo().getThreadId(), !parise ? 1 : 2, TYPE.EVENT_ID)
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe(commentLikeBean -> {
+                                if (commentLikeBean.getCode() == 200) {
+                                    likeView.setImageResource(!parise ? R.drawable.ic_parise_red : R.drawable.ic_parise);
+                                    countTextview.setText(!parise ? event.getInfo().getLikedCount() + 1 : event.getInfo().getLikedCount());
+                                    //状态取反
+                                    likeView.setTag(!parise);
+                                }
+                            });
+                    break;
+                default:
+                    break;
+            }
+        });
     }
 
     @Override
@@ -51,6 +110,10 @@ public class EventAdapter extends BaseQuickAdapter<UserEventBean.EventsBean, Bas
         adapter.setText(R.id.tv_relayout_count, item.getInfo().getShareCount() == 0 ? "" : String.valueOf(item.getInfo().getShareCount()));
         adapter.setText(R.id.tv_comment_count, item.getInfo().getCommentCount() == 0 ? "" : String.valueOf(item.getInfo().getCommentCount()));
         adapter.setText(R.id.tv_like_count, item.getInfo().getLikedCount() == 0 ? "" : String.valueOf(item.getInfo().getLikedCount()));
+        //是否点赞
+        adapter.setImageResource(R.id.iv_like, item.getInfo().isLiked() ? R.drawable.ic_parise_red : R.drawable.ic_parise);
+        ImageView likeView = adapter.getView(R.id.iv_like);
+        likeView.setTag(item.getInfo().isLiked());
 
         //解析JSON
         String jsonEvnet = item.getJson();
@@ -228,11 +291,6 @@ public class EventAdapter extends BaseQuickAdapter<UserEventBean.EventsBean, Bas
         } else {
             adapter.setVisible(R.id.rl_share, false);
         }
-    }
-
-    @Override
-    public void onClick(View view) {
-
     }
 
 //	static class ImageLoader implements XPopupImageLoader {
