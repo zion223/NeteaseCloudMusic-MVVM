@@ -72,6 +72,8 @@ dependencies {
     // eventBus
     implementation this.rootProject.depsLibs.eventbus
     implementation this.rootProject.depsLibs.vptransforms
+    //拼音库
+    implementation this.rootProject.depsLibs.tinypinyin
     //rxjava库
     implementation this.rootProject.depsLibs.rxjava
     implementation this.rootProject.depsLibs.rxandroid
