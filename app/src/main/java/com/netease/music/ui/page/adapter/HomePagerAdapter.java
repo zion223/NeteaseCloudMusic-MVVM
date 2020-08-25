@@ -16,7 +16,7 @@ public class HomePagerAdapter extends FragmentPagerAdapter {
 
     private CHANNEL[] data;
 
-    //https://www.jianshu.com/p/cfe74762edcc Androidx懒加载方案
+    //https://www.jianshu.com/p/cfe74762edcc Androidx懒加载方案 在onResume()方法中进行网络请求
     public HomePagerAdapter(FragmentManager fm, CHANNEL[] channels) {
         super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         this.data = channels;

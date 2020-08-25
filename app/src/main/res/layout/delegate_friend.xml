@@ -28,16 +28,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_delegate_friend"
-            linearAdapter="@{vm.adapter}"
-            visible="@{!vm.loadingVisible}"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent">
 
-        <include
-            bind:loading="@{vm.loadingVisible}"
-            bind:visible="@{vm.loadingVisible}"
-            layout="@layout/delegate_normal_loading" />
+            <include
+                bind:loading="@{vm.loadingVisible}"
+                bind:visible="@{vm.loadingVisible}"
+                layout="@layout/delegate_normal_loading" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_delegate_friend"
+                linearAdapter="@{vm.adapter}"
+                visible="@{!vm.loadingVisible}"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </RelativeLayout>
+
+
     </com.scwang.smart.refresh.layout.SmartRefreshLayout>
 </layout>

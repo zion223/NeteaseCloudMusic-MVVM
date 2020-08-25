@@ -80,8 +80,12 @@ public class CloudVillageFragment extends BaseFragment implements OnRefreshListe
             mViewModel.loadingVisible.set(false);
         });
 
-        mViewModel.eventRequest.requestUserEventData();
+    }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        mViewModel.eventRequest.requestUserEventData();
     }
 
     //默认都加载成功

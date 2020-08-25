@@ -34,11 +34,14 @@ public class MineFragment extends BaseFragment {
         mMineViewModel.mineRequest.getUserPlaylist().observe(this, playlistBeans -> {
 
             mMineViewModel.playlistAdapter.set(new MultiplePlaylistAdapter(getContext(), playlistBeans));
+            mMineViewModel.loadingVisible.set(false);
         });
-
-        mMineViewModel.mineRequest.requestUserPlaylist(mMineViewModel.user.get().getProfile().getUserId());
 
     }
 
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        mMineViewModel.mineRequest.requestUserPlaylist(mMineViewModel.user.get().getProfile().getUserId());
+    }
 }
