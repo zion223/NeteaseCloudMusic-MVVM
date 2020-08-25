@@ -19,7 +19,7 @@ import net.lucode.hackware.magicindicator.buildins.commonnavigator.CommonNavigat
  */
 public class TabPageBindingAdapter {
 
-    //适用于ViewPager只含有两个的情况
+    //适用于ViewPager只含有两个的情况   viewPager的id必须为R.id.view_pager
     @BindingAdapter(value = {"initTabAndPage", "currentItem"}, requireAll = false)
     public static void initTabAndPage(MagicIndicator indicator, CharSequence[] title, int currentItem) {
         if (title != null) {
@@ -29,9 +29,11 @@ public class TabPageBindingAdapter {
             CommonNavigator commonNavigator = CommonNavigatorCreater.setDefaultNavigator(indicator.getContext(), title, viewPager);
             commonNavigator.setAdjustMode(true);
             indicator.setNavigator(commonNavigator);
-            indicator.onPageSelected(1);
+            //indicator位置
+            indicator.onPageSelected(currentItem);
             ViewPagerHelper.bind(indicator, viewPager);
             viewPager.setAdapter(new CommonViewPagerAdapter(title.length, false, title));
+            //viewpager位置
             viewPager.setCurrentItem(currentItem);
         }
 
