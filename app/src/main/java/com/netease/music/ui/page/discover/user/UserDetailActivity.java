@@ -14,6 +14,10 @@ import com.kunminx.architecture.ui.page.BaseActivity;
 import com.kunminx.architecture.ui.page.DataBindingConfig;
 import com.netease.music.BR;
 import com.netease.music.R;
+import com.netease.music.data.config.TYPE;
+import com.netease.music.ui.page.adapter.UserHomePagePlayListAdapter;
+import com.netease.music.ui.page.cloud.EventAdapter;
+import com.netease.music.ui.page.discover.square.detail.SongListDetailActivity;
 import com.netease.music.ui.state.UserDetailViewModel;
 
 public class UserDetailActivity extends BaseActivity {
@@ -53,7 +57,7 @@ public class UserDetailActivity extends BaseActivity {
                     showShortToast(followBean.getFollowContent());
                 }
             });
-
+            //用户详情  TODO 解析省份和市 https://blog.csdn.net/u014686875/article/details/78489668
             mUserDetailViewModel.request.getUserDeatailLiveData().observe(this, userDetailBean -> {
                 mUserDetailViewModel.user.set(userDetailBean);
                 mUserDetailViewModel.followed.set(userDetailBean.getProfile().isFollowed());
@@ -64,13 +68,25 @@ public class UserDetailActivity extends BaseActivity {
                 mTitleDataList[1] = SpanUtil.newInstance().appendText(eventText)
                         .setFlag(Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
                         .setFontSize(35, 3, eventText.toString().length())
-                        .setBgColor(Color.GRAY, 3, eventText.toString().length())
+                        .setFontColor(Color.GRAY, 3, eventText.toString().length())
                         .getBuilder();
                 mUserDetailViewModel.indicatorTitle.set(mTitleDataList);
             });
+            //用户动态
+            mUserDetailViewModel.request.getUserEventLiveData().observe(this, userEventBean -> mUserDetailViewModel.eventAdapter.set(new EventAdapter(userEventBean.getEvents())));
+            //歌单
+            mUserDetailViewModel.request.getUserPlayListLiveData().observe(this, playList -> {
+                mUserDetailViewModel.playListAdapter.set(new UserHomePagePlayListAdapter(UserDetailActivity.this, playList));
+            });
+            //喜欢的歌单
+            mUserDetailViewModel.request.getUserLikePlayListLiveData().observe(this, playList -> mUserDetailViewModel.likePlayList.set(playList));
 
             //获取用户详情
             mUserDetailViewModel.request.requestUserDetail(mUserDetailViewModel.userId.get());
+            //用户动态
+            mUserDetailViewModel.request.requestUserEvent(mUserDetailViewModel.userId.get());
+            //用户歌单
+            mUserDetailViewModel.request.requestUserPlaylist(mUserDetailViewModel.userId.get());
         }
     }
 
@@ -83,6 +99,12 @@ public class UserDetailActivity extends BaseActivity {
         //关注或者取消关注
         public void changefollowStatus() {
             mUserDetailViewModel.request.requestUserFollow(mUserDetailViewModel.userId.get(), !mUserDetailViewModel.followed.get());
+        }
+
+
+        //查看用户喜欢的歌单
+        public void userLikePlaylist() {
+            SongListDetailActivity.startActivity(UserDetailActivity.this, TYPE.PLAYLIST_ID, mUserDetailViewModel.likePlayList.get().getId(), "");
         }
     }
 }

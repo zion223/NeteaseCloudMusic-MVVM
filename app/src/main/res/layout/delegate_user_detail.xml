@@ -308,7 +308,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="15dp"
-                                    android:text="村龄:  1年 (1082年11月注册)"
+                                    android:text='@{"村龄:  " + TimeUtil.getUserCloudAge(vm.user.createTime) +"年 "+ " ("+TimeUtil.getTimeStandardOnlyYMD(vm.user.createTime)+"注册)"}'
                                     android:textSize="13sp" />
 
                                 <TextView
@@ -316,7 +316,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="10dp"
-                                    android:text="年龄:  95后 天蝎座"
+                                    android:text='@{"年龄:  " + TimeUtil.getUserAgeTag(vm.user.profile.birthday)}'
                                     android:textSize="13sp" />
 
                                 <TextView
@@ -325,7 +325,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="10dp"
                                     android:layout_marginBottom="15dp"
-                                    android:text="地区:  北京市"
+                                    android:text='@{"地区: 省份码 " + vm.user.profile.province + "市码 " + vm.user.profile.city}'
                                     android:textSize="13sp" />
 
                                 <include layout="@layout/item_more_info" />
@@ -377,14 +377,15 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="10dp"
                                     android:layout_marginRight="10dp"
-                                    android:layout_marginBottom="10dp">
+                                    android:layout_marginBottom="10dp"
+                                    onClickWithDebouncing="@{() -> proxy.userLikePlaylist()}">
 
                                     <ImageView
                                         android:id="@+id/iv_user_info_like"
                                         android:layout_width="50dp"
                                         android:layout_height="50dp"
                                         android:layout_centerVertical="true"
-                                        android:src="@drawable/ic_listen_rank" />
+                                        cornerImageUrl="@{vm.likePlayList.coverImgUrl}" />
 
                                     <TextView
                                         android:id="@+id/tv_user_info_toplike"
@@ -409,7 +410,7 @@
                                         android:layout_marginTop="10dp"
                                         android:layout_marginBottom="5dp"
                                         android:layout_toRightOf="@+id/iv_user_info_like"
-                                        android:text="累计听歌 播放次数"
+                                        android:text='@{vm.likePlayList.trackCount + "首,  播放" + SearchUtil.getCorresPondingString(vm.likePlayList.playCount) + "次"}'
                                         android:textSize="11sp" />
 
                                 </RelativeLayout>
@@ -420,6 +421,7 @@
                                 android:id="@+id/rv_user_info_playlist"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                linearAdapter="@{vm.playListAdapter}"
                                 android:layout_marginTop="10dp"
                                 android:layout_marginBottom="10dp" />
 
@@ -428,7 +430,8 @@
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        linearAdapter="@{vm.eventAdapter}" />
 
                 </androidx.viewpager.widget.ViewPager>
             </RelativeLayout>
