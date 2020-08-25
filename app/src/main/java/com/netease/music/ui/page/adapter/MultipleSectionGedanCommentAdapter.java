@@ -1,37 +1,40 @@
 package com.netease.music.ui.page.adapter;
 
 import android.content.Context;
-import android.view.View;
+import android.graphics.Color;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseSectionQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.imooc.lib_api.model.playlist.PlayListCommentEntity;
 import com.imooc.lib_api.model.song.MusicCommentBean;
 import com.imooc.lib_image_loader.app.ImageLoaderManager;
+import com.imooc.lib_network.ApiEngine;
 import com.netease.music.R;
 import com.netease.music.ui.page.discover.user.UserDetailActivity;
+import com.netease.music.util.AnimUtil;
 import com.netease.music.util.TimeUtil;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
+
 public class MultipleSectionGedanCommentAdapter extends BaseSectionQuickAdapter<PlayListCommentEntity, BaseViewHolder> {
 
 
     private ImageLoaderManager manager;
-    private String resourceId;
-    private Context mContext;
-    private int commentType;
 
+    //资源Id, 资源类型 ,context, 数据
     public MultipleSectionGedanCommentAdapter(String commentId, int type, Context context, List<PlayListCommentEntity> data) {
         super(R.layout.item_gedan_comment_header, R.layout.item_gedan_detail_comment, data);
         setNormalLayout(R.layout.item_gedan_detail_comment);
         manager = ImageLoaderManager.getInstance();
-        resourceId = commentId;
-        mContext = context;
-        commentType = type;
         //setOnItemChildClickListener 而不是setOnItemClickListener
         addChildClickViewIds(R.id.iv_item_gedan_comment_avatar_img, R.id.tv_item_gedan_comment_avatar_name, R.id.iv_item_gedan_comment_zan);
         setOnItemChildClickListener((adapter, view, position) -> {
@@ -43,6 +46,29 @@ public class MultipleSectionGedanCommentAdapter extends BaseSectionQuickAdapter<
                     break;
                 case R.id.iv_item_gedan_comment_zan:
                     //点赞
+                    PlayListCommentEntity entity = (PlayListCommentEntity) adapter.getItem(position);
+                    //点赞数量
+                    TextView zanCountText = (TextView) adapter.getViewByPosition(position, R.id.tv_item_gedan_comment_zan_count);
+                    ImageView praiseView = (ImageView) adapter.getViewByPosition(position, R.id.iv_item_gedan_comment_zan);
+                    Boolean parise = (Boolean) praiseView.getTag();
+
+                    Disposable subscribe = ApiEngine.getInstance().getApiService()
+                            .likeComment(commentId, entity.getComment().getCommentId(), !parise ? 1 : 2, type)
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe(commentLikeBean -> {
+                                if (commentLikeBean.getCode() == 200) {
+                                    //操作成功
+                                    praiseView.setTag(!parise);
+                                    praiseView.setImageResource(!parise ? R.drawable.ic_parise_red : R.drawable.ic_parise);
+                                    zanCountText.setText(!parise ? String.valueOf(entity.getComment().getLikedCount() + 1) : String.valueOf(entity.getComment().getLikedCount()));
+                                    zanCountText.setTextColor(!parise ? Color.parseColor("#FF3A3A") : Color.GRAY);
+                                    Toast.makeText(context, !parise ? "点赞成功" : "取消赞成功", Toast.LENGTH_SHORT).show();
+                                    if (!parise) {
+                                        AnimUtil.getLikeAnim(praiseView).start();
+                                    }
+                                }
+                            });
                     break;
                 default:
                     break;
@@ -69,6 +95,7 @@ public class MultipleSectionGedanCommentAdapter extends BaseSectionQuickAdapter<
         if (bean.getUser().getVipType() == 11 && bean.getUser().getVipRights() != null) {
             if (bean.getUser().getVipRights().getRedVipAnnualCount() == 1) {
                 //年费vip TODO 年vip 图片
+                baseViewHolder.setVisible(R.id.iv_item_gedan_comment_avatar_vip, true);
             } else {
                 //普通vip
                 baseViewHolder.setVisible(R.id.iv_item_gedan_comment_avatar_vip, true);
@@ -94,45 +121,5 @@ public class MultipleSectionGedanCommentAdapter extends BaseSectionQuickAdapter<
         praiseView.setTag(bean.isLiked());
         praiseView.setImageResource(bean.isLiked() ? R.drawable.ic_parise_red : R.drawable.ic_parise);
 
-        //TODO  评论点赞和取消点赞
-//        baseViewHolder.setOnClickListener(R.id.iv_item_gedan_comment_zan, new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                //是否已经点过赞
-//                Boolean parise = (Boolean) praiseView.getTag();
-//                //点赞或取消点赞
-//                RequestCenter.getlikeComment(commentId, bean.getCommentId(), !parise, commentType, new DisposeDataListener() {
-//                    @Override
-//                    public void onSuccess(Object responseObj) {
-//                        CommentLikeBean result = (CommentLikeBean) responseObj;
-//                        if (result.getCode() == 200) {
-//                            praiseView.setTag(!parise);
-//                            if (!parise) {
-//                                praiseView.setImageResource(R.drawable.ic_parise_red);
-//                                //点赞
-//                                AnimUtil.getLikeAnim(praiseView).start();
-//                                baseViewHolder.setText(R.id.tv_item_gedan_comment_zan_count, String.valueOf(bean.getLikedCount() + 1));
-//                                baseViewHolder.setTextColor(R.id.tv_item_gedan_comment_zan_count, Color.parseColor("#FF3A3A"));
-//                                Toast.makeText(mContext, "点赞成功", Toast.LENGTH_SHORT).show();
-//                            } else {
-//                                baseViewHolder.setText(R.id.tv_item_gedan_comment_zan_count, String.valueOf(bean.getLikedCount()));
-//                                praiseView.setImageResource(R.drawable.ic_parise);
-//                                baseViewHolder.setTextColor(R.id.tv_item_gedan_comment_zan_count, Color.GRAY);
-//                                Toast.makeText(mContext, "取消赞成功", Toast.LENGTH_SHORT).show();
-//                            }
-//
-//                        } else {
-//                            Toast.makeText(mContext, "点赞或取消赞失败", Toast.LENGTH_SHORT).show();
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onFailure(Object reasonObj) {
-//                        Toast.makeText(mContext, "点赞或取消赞失败", Toast.LENGTH_SHORT).show();
-//                    }
-//                });
-//
-//            }
-//        });
     }
 }
