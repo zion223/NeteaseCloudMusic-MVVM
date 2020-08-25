@@ -19,7 +19,6 @@ package com.netease.music;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
@@ -75,7 +74,13 @@ public class MainActivity extends BaseActivity {
                 mSharedViewModel.openOrCloseDrawer.setValue(false);
 
             } else {
-                super.onBackPressed();
+                if (System.currentTimeMillis() - firstTime > 2000) {
+                    showShortToast("再按一次退出程序");
+                    firstTime = System.currentTimeMillis();
+                } else {
+                    finish();
+                }
+                //super.onBackPressed();
             }
         });
 
@@ -143,6 +148,7 @@ public class MainActivity extends BaseActivity {
         // TODO 同 tip 2
 
         mSharedViewModel.closeSlidePanelIfExpanded.setValue(true);
+        mSharedViewModel.activityCanBeClosedDirectly.setValue(true);
     }
 
     @Override
