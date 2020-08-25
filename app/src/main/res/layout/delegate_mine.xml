@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <data>
+
+        <variable
+            name="vm"
+            type="com.netease.music.ui.state.MineViewModel" />
+    </data>
+
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -243,7 +250,8 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_mine_create_gedan"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                linearAdapter="@{vm.playlistAdapter}" />
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

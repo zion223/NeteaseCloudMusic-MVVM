@@ -7,6 +7,7 @@ import android.widget.ImageView;
 
 public class AnimUtil {
 
+	//评论点赞动画
 	public static AnimatorSet getLikeAnim(ImageView view) {
 		AnimatorSet animatorSetsuofang = new AnimatorSet();//组合动画
 		ObjectAnimator scaleX = ObjectAnimator.ofFloat(view, "scaleX", 1f, 1.5f, 1f);

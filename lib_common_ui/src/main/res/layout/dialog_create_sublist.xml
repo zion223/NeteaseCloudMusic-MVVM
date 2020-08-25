@@ -44,7 +44,7 @@
         android:textSize="12sp"
         android:text="0/16"/>
 
-    <android.support.v7.widget.AppCompatButton
+    <Button
         android:id="@+id/tv_create_playlist_cancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -57,7 +57,8 @@
         android:text="取消"
         android:textSize="14sp"
         android:textColor="#FE3A3C"/>
-    <android.support.v7.widget.AppCompatButton
+
+    <Button
         android:id="@+id/tv_create_playlist_confirm"
         android:layout_width="70dp"
         android:layout_height="wrap_content"

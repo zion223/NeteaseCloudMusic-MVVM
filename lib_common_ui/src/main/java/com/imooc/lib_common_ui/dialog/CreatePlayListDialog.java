@@ -1,25 +1,26 @@
 package com.imooc.lib_common_ui.dialog;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.AppCompatButton;
 
 import com.imooc.lib_common_ui.R;
 import com.lxj.xpopup.core.CenterPopupView;
 
 //创建歌单
-public class CreatePlayListDialog extends CenterPopupView implements View.OnClickListener{
+public class CreatePlayListDialog extends CenterPopupView implements View.OnClickListener {
 
     private EditText mEtName;
     private TextView mTvTextSize;
-    private AppCompatButton mButtonCancel;
-    private AppCompatButton mButtonConfirm;
+    private Button mButtonCancel;
+    private Button mButtonConfirm;
     OnConfirmListener listener;
 
     public CreatePlayListDialog(@NonNull Context context, OnConfirmListener listener) {
@@ -55,6 +56,7 @@ public class CreatePlayListDialog extends CenterPopupView implements View.OnClic
 
             }
 
+            @SuppressLint("SetTextI18n")
             @Override
             public void afterTextChanged(Editable editable) {
 
@@ -84,6 +86,7 @@ public class CreatePlayListDialog extends CenterPopupView implements View.OnClic
             dismiss();
         }else if(view.getId() == R.id.tv_create_playlist_confirm){
             listener.onConfirm(mEtName.getText().toString());
+            mEtName.setFocusable(false);
             dismiss();
         }
     }

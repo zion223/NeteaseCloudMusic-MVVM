@@ -246,6 +246,9 @@ public interface ApiService {
         // t=1 收藏 2 取消收藏
     Observable<CommonMessageBean> subscribePlayList(@Query("id") long id, @Query("t") long t);
 
+    @GET("playlist/create")
+    Observable<CommonMessageBean> createPlayList(@Query("name") String name);
+
     @GET("album/sub")
         // t=1 收藏 2 取消收藏
     Observable<CommonMessageBean> subscribeAlbum(@Query("id") long id, @Query("t") long t);
