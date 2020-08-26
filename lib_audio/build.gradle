@@ -45,7 +45,8 @@ dependencies {
     //占位主工程的rxjava库
     compileOnly this.rootProject.depsLibs.rxjava
     compileOnly this.rootProject.depsLibs.rxandroid
-
+    //Room
+    implementation this.rootProject.depsLibs.room
     //占位主工程自己源码库
     compileOnly project(':lib_image_loader')
     compileOnly project(':lib_common_ui')

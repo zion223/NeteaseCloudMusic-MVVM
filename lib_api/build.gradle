@@ -25,5 +25,7 @@ dependencies {
     api rootProject.depsLibs.gson
     implementation this.rootProject.depsLibs.BaseRecyclerViewAdapterHelper
     implementation this.rootProject.depsLibs.greendao
-    //implementation project(path: ':lib_network')
+    //Room
+    implementation this.rootProject.depsLibs.room
+    implementation this.rootProject.depsLibs.room_rxjava2
 }
