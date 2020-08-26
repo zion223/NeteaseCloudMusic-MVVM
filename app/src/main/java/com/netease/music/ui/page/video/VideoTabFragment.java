@@ -12,6 +12,7 @@ import com.kunminx.architecture.ui.page.DataBindingConfig;
 import com.netease.music.BR;
 import com.netease.music.R;
 import com.netease.music.ui.page.drawer.DrawerFragment;
+import com.netease.music.ui.page.video.mv.MvFragment;
 import com.netease.music.ui.state.VideoTabViewModel;
 
 import org.jetbrains.annotations.NotNull;
@@ -63,7 +64,7 @@ public class VideoTabFragment extends BaseFragment {
         @Override
         public Fragment getItem(int i) {
             if (mTabIdArray[i] == 1000) {
-                return new DrawerFragment();
+                return new MvFragment();
             } else {
                 return VideoFragment.newInstance(mTabIdArray[i]);
             }

@@ -15,7 +15,9 @@ import com.imooc.lib_api.model.dj.DjProgramBean;
 import com.imooc.lib_api.model.dj.DjRecommendBean;
 import com.imooc.lib_api.model.dj.DjRecommendTypeBean;
 import com.imooc.lib_api.model.dj.DjSubBean;
+import com.imooc.lib_api.model.mv.MvBean;
 import com.imooc.lib_api.model.mv.MvSublistBean;
+import com.imooc.lib_api.model.mv.MvTopBean;
 import com.imooc.lib_api.model.mv.VideoBean;
 import com.imooc.lib_api.model.mv.VideoDetailBean;
 import com.imooc.lib_api.model.mv.VideoGroupBean;
@@ -145,8 +147,8 @@ public interface ApiService {
     @GET("user/detail")
     Observable<UserDetailBean> getUserDetail(@Query("uid") long uid);
 
+    // t:1关注 0:取消关注
     @GET("follow")
-        // t:1关注 0:取消关注
     Observable<FollowBean> getUserFollow(@Query("id") long uid, @Query("t") int t);
 
 
@@ -255,15 +257,15 @@ public interface ApiService {
     @GET("playmode/intelligence/list")
     Observable<PlayModeIntelligenceBean> getIntelligenceList(@Query("id") long id, @Query("pid") long pid);
 
+    // t=1 收藏 2 取消收藏
     @GET("playlist/subscribe")
-        // t=1 收藏 2 取消收藏
     Observable<CommonMessageBean> subscribePlayList(@Query("id") long id, @Query("t") long t);
 
     @GET("playlist/create")
     Observable<CommonMessageBean> createPlayList(@Query("name") String name);
 
+    // t=1 收藏 2 取消收藏
     @GET("album/sub")
-        // t=1 收藏 2 取消收藏
     Observable<CommonMessageBean> subscribeAlbum(@Query("id") long id, @Query("t") long t);
 
     @GET("top/album")
@@ -272,8 +274,8 @@ public interface ApiService {
     @GET("album/newest")
     Observable<AlbumSearchBean.ResultBean> getNewAlbum();
 
+    //PS.全部:0 华语:7  欧美:96 日本:8 韩国:16
     @GET("top/song")
-        //PS.全部:0 华语:7  欧美:96 日本:8 韩国:16
     Observable<NewSongBean> getTopSong(@Query("type") int type);
 
     @GET("album/sublist")
@@ -309,8 +311,29 @@ public interface ApiService {
     @GET("dj/catelist")
     Observable<DjCatelistBean> getDjCatelist();
 
+    // 1 订阅 0取消订阅
     @GET("dj/sub")
-        // 1 订阅 0取消订阅
     Observable<DjSubBean> getSubRadio(@Query("rid") String rid, @Query("t") int isSub);
+
+    @GET("top/mv")
+    Observable<MvTopBean> getMvTop();
+
+    @GET("top/mv")
+    Observable<MvTopBean> getMvTop(@Query("area") String area);
+
+    @GET("mv/first")
+    Observable<MvBean> getFirstMv(@Query("area") String area, @Query("limit") int limit);
+
+    /**
+     * 获取全部MV
+     * area: 地区,可选值为全部,内地,港台,欧美,日本,韩国,不填则为全部
+     * type: 类型,可选值为全部,官方版,原生,现场版,网易出品,不填则为全部
+     * order: 排序,可选值为上升最快,最热,最新,不填则为上升最快
+     * limit: 取出数量 , 默认为 30
+     * offset: 偏移数量 , 用于分页 , 如 :( 页数 -1)*50, 其中 50 为 limit 的值 , 默认 为 0
+     */
+    @GET("mv/all")
+    Observable<MvBean> getAllMv(@Query("area") String area, @Query("type") String type, @Query("order") String order, @Query("limit") int limit);
+
 
 }
