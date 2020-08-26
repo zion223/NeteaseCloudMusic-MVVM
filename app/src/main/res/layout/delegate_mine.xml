@@ -6,6 +6,10 @@
         <variable
             name="vm"
             type="com.netease.music.ui.state.MineViewModel" />
+
+        <variable
+            name="proxy"
+            type="com.netease.music.ui.page.mine.MineFragment.ClickProxy" />
     </data>
 
     <androidx.core.widget.NestedScrollView
@@ -34,7 +38,8 @@
                 android:id="@+id/ll_mine_local_music"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                onClickWithDebouncing="@{() -> proxy.localMusic()}">
 
                 <ImageView
                     android:id="@+id/fragment_main_item_img"
@@ -64,7 +69,8 @@
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
                     android:paddingLeft="5dp"
-                    android:text="(8)"
+                    android:text='@{"(" + vm.localMusicSize + ")"}'
+                    onClickWithDebouncing="@{}"
                     android:textSize="12sp" />
             </LinearLayout>
 
@@ -107,7 +113,7 @@
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
                     android:paddingLeft="5dp"
-                    android:text="(8)"
+                    android:text="(0)"
                     android:textSize="12sp" />
             </LinearLayout>
 
@@ -149,7 +155,7 @@
                     android:layout_height="40dp"
                     android:gravity="center_vertical"
                     android:paddingLeft="5dp"
-                    android:text="(8)"
+                    android:text="(0)"
                     android:textSize="12sp" />
 
             </LinearLayout>
@@ -164,7 +170,8 @@
                 android:id="@+id/ll_mine_radio"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                onClickWithDebouncing="@{() -> proxy.myRadio()}">
 
                 <ImageView
                     android:id="@+id/fragment_main_item_img3"
@@ -208,7 +215,8 @@
                 android:id="@+id/ll_mine_collect"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                onClickWithDebouncing="@{() -> proxy.myCollect()}">
 
                 <ImageView
                     android:id="@+id/fragment_main_item_im5"

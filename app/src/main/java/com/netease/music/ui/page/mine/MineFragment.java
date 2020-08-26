@@ -23,7 +23,8 @@ public class MineFragment extends BaseFragment {
 
     @Override
     protected DataBindingConfig getDataBindingConfig() {
-        return new DataBindingConfig(R.layout.delegate_mine, BR.vm, mMineViewModel);
+        return new DataBindingConfig(R.layout.delegate_mine, BR.vm, mMineViewModel)
+                .addBindingParam(BR.proxy, new ClickProxy());
     }
 
     @Override
@@ -43,5 +44,26 @@ public class MineFragment extends BaseFragment {
     public void onResume() {
         super.onResume();
         mMineViewModel.mineRequest.requestUserPlaylist(mMineViewModel.user.get().getProfile().getUserId());
+    }
+
+
+    public class ClickProxy {
+
+        //本地音乐
+        public void localMusic() {
+
+        }
+
+
+        //我的电台
+        public void myRadio() {
+
+        }
+
+
+        //我的收藏
+        public void myCollect() {
+
+        }
     }
 }

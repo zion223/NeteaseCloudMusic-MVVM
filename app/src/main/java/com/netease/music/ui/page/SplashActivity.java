@@ -15,6 +15,7 @@ import com.kunminx.architecture.utils.Utils;
 import com.netease.music.MainActivity;
 import com.netease.music.R;
 import com.netease.music.ui.page.login.LoginActivity;
+import com.netease.music.util.MusicUtils;
 
 import java.util.concurrent.TimeUnit;
 
@@ -31,7 +32,10 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         BarUtils.setStatusBarColor(this, Color.TRANSPARENT);
-
+        //初始化本地音乐数量
+        if (SharePreferenceUtil.getInstance(Utils.getApp()).getLocalMusicCount() == -1) {
+            SharePreferenceUtil.getInstance(Utils.getApp()).saveLocalMusicCount(MusicUtils.queryMusicSize(Utils.getApp(), MusicUtils.START_FROM_LOCAL));
+        }
         setContentView(R.layout.delegate_splash);
         String[] perms = {Manifest.permission.READ_PHONE_STATE
                 , Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION

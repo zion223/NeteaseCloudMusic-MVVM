@@ -51,26 +51,27 @@ public class SharePreferenceUtil {
 
 	int getSelectLanguage() {
 		return getInt(Constants.SpKey.TAG_LANGUAGE, 0);
-	}
+    }
 
-	Locale getSystemCurrentLocal() {
-		return systemCurrentLocal;
-	}
+    Locale getSystemCurrentLocal() {
+        return systemCurrentLocal;
+    }
 
-	public int getLocalMusicCount() {
-		return Integer.parseInt(getString(Constants.SpKey.LOCAL_MUSIC_COUNT, "0"));
-	}
+    public int getLocalMusicCount() {
+        return Integer.parseInt(getString(Constants.SpKey.LOCAL_MUSIC_COUNT, "-1"));
+    }
 
-	public void saveLocalMusicCount(int count) {
-		saveString(Constants.SpKey.LOCAL_MUSIC_COUNT, String.valueOf(count));
-	}
+    //本地音乐数量
+    public void saveLocalMusicCount(int count) {
+        saveString(Constants.SpKey.LOCAL_MUSIC_COUNT, String.valueOf(count));
+    }
 
-	/**
-	 * 保存用户的信息以及电话号码（因为bean里的电话号码要处理字符串，所以这里直接暴力传比较高效）
-	 *
-	 * @param bean
-	 */
-	public void saveUserInfo(LoginBean bean, String phoneNumber) {
+    /**
+     * 保存用户的信息以及电话号码（因为bean里的电话号码要处理字符串，所以这里直接暴力传比较高效）
+     *
+     * @param bean
+     */
+    public void saveUserInfo(LoginBean bean, String phoneNumber) {
 		if (bean.getBindings() != null && bean.getBindings().size() > 1) {
 			saveAuthToken(bean.getBindings().get(1).getTokenJsonStr());
 		}
@@ -124,26 +125,31 @@ public class SharePreferenceUtil {
 	 */
 	public String getAuthToken(String defaultValue) {
 		return getString(Constants.SpKey.AUTH_TOKEN, defaultValue);
-	}
+    }
 
 
-	/*
-	 * 存储最近一次听过的歌曲
-	 */
+    /*
+     * 存储最近一次听过的歌曲
+     */
     public void saveLatestSong(AudioBean songInfo) {
         String song = GsonUtil.toJson(songInfo);
         saveString(Constants.SpKey.LATEST_SONG, song);
     }
 
+    /**
+     * 获取最近一次听过的歌曲
+     *
+     * @return
+     */
     public AudioBean getLatestSong() {
         return GsonUtil.fromJSON(getString(Constants.SpKey.LATEST_SONG, ""), AudioBean.class);
     }
 
-	/**
-	 * 保存上次获取日推的时间
-	 */
-	public void saveDailyUpdateTime(long updateTime) {
-		saveLong(Constants.SpKey.DAILY_UPDATE_TIME, updateTime);
+    /**
+     * 保存上次获取日推的时间
+     */
+    public void saveDailyUpdateTime(long updateTime) {
+        saveLong(Constants.SpKey.DAILY_UPDATE_TIME, updateTime);
 	}
 
 	/**

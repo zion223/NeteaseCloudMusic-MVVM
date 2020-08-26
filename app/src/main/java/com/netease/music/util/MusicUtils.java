@@ -128,6 +128,11 @@ public class MusicUtils {
         return queryMusic(context, null, from);
     }
 
+    //音乐数量
+    public static int queryMusicSize(Context context, int from) {
+        return queryMusic(context, null, from).size();
+    }
+
 
     public static ArrayList<MusicInfo> queryMusic(Context context, String id, int from) {
 
