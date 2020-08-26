@@ -18,6 +18,8 @@ public class MineViewModel extends BaseLoadingViewModel {
     public final ObservableField<LoginBean> user = new ObservableField<>();
     //本地音乐数量
     public final ObservableInt localMusicSize = new ObservableInt();
+    //最近播放音乐数量
+    public final ObservableInt recentPlaySongSize = new ObservableInt();
 
     public final ObservableField<BaseQuickAdapter> playlistAdapter = new ObservableField<>();
 

@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 
+import com.imooc.lib_api.model.room.AppDatabase;
 import com.kunminx.architecture.ui.page.BaseFragment;
 import com.kunminx.architecture.ui.page.DataBindingConfig;
 import com.netease.music.BR;
@@ -30,6 +31,11 @@ public class MineFragment extends BaseFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //最近播放的音乐数量  实时更新
+        AppDatabase.getInstance(getContext()).getLatestSongDao().getRecentSongSize().observe(this, size -> {
+            mMineViewModel.recentPlaySongSize.set(size);
+        });
 
         //用户歌单
         mMineViewModel.mineRequest.getUserPlaylist().observe(this, playlistBeans -> {
@@ -63,6 +69,11 @@ public class MineFragment extends BaseFragment {
 
         //我的收藏
         public void myCollect() {
+
+        }
+
+        //最近播放
+        public void recentPlay() {
 
         }
     }

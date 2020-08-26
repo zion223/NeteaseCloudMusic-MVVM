@@ -2,6 +2,8 @@ package com.netease.lib_audio.mediaplayer.core;
 
 import android.util.Log;
 
+import com.imooc.lib_api.model.room.AppDatabase;
+import com.imooc.lib_api.model.room.LatestDataDao;
 import com.imooc.lib_api.model.song.AudioBean;
 import com.imooc.lib_common_ui.utils.SharePreferenceUtil;
 import com.netease.lib_audio.app.AudioHelper;
@@ -129,6 +131,8 @@ public class AudioController {
         mQueue.clear();
         //不删除当前播放的歌曲
         mQueue.add(currentBean);
+        //更新播放索引
+        mQueueIndex = 0;
         SharePreferenceUtil.getInstance(AudioHelper.getContext()).saveMusicList(mQueue);
     }
 
@@ -161,11 +165,25 @@ public class AudioController {
         play();
     }
 
+    //播放歌曲
     public void play() {
         final AudioBean currentPlaying = getCurrentPlaying();
+        mAudioPlayer.load(currentPlaying);
         //播放时存储最近一次播放的歌曲
         SharePreferenceUtil.getInstance(AudioHelper.getContext()).saveLatestSong(currentPlaying);
-        mAudioPlayer.load(currentPlaying);
+        //添加到最近播放歌曲中(不能再主线程中访问)
+        new Thread() {
+            @Override
+            public void run() {
+                LatestDataDao dao = AppDatabase.getInstance(AudioHelper.getContext()).getLatestSongDao();
+                //当前存储中没有该歌曲 则添加该歌曲
+                if (dao.getAudioBeanById(currentPlaying.getId()) == null) {
+                    dao.insertRecentSong(currentPlaying);
+                } else {
+                    //更新在存储中的顺序
+                }
+            }
+        }.start();
     }
 
     private AudioBean getCurrentPlaying() {

@@ -1,39 +1,29 @@
 package com.imooc.lib_api.model.playlist;
 
-import org.greenrobot.greendao.annotation.Entity;
-import org.greenrobot.greendao.annotation.Generated;
-import org.greenrobot.greendao.annotation.Property;
+import androidx.room.Entity;
+
 
 /**
  * 用来存储 日推 的greendao bean
  */
 @Entity
 public class DRGreenDaoBean {
-    @Property
     private String songId;
 
-    @Property
     private long duration;
 
-    @Property
     private String songCover;
 
-    @Property
     private String artist;
 
-    @Property
     private String songName;
 
-    @Property
     private String songUrl;
 
-    @Property
     private String artistId;
 
-    @Property
     private String artistAvatar;
 
-    @Generated(hash = 262069606)
     public DRGreenDaoBean(String songId, long duration, String songCover,
             String artist, String songName, String songUrl, String artistId,
             String artistAvatar) {
@@ -47,7 +37,6 @@ public class DRGreenDaoBean {
         this.artistAvatar = artistAvatar;
     }
 
-    @Generated(hash = 1046166768)
     public DRGreenDaoBean() {
     }
 

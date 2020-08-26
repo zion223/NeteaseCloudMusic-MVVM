@@ -169,7 +169,7 @@ public class NotificationHelper {
 	public void showLoadStatus(AudioBean bean) {
 		//防止空指针crash
 		mAudioBean = bean;
-		if (mBigRemoteViews != null) {
+		if (mBigRemoteViews != null && mAudioBean != null) {
 			mBigRemoteViews.setImageViewResource(R.id.play_view, R.mipmap.note_btn_pause_white);
 			mBigRemoteViews.setTextViewText(R.id.title_view, mAudioBean.getName());
 			mBigRemoteViews.setTextViewText(R.id.tip_view, mAudioBean.getAlbum());

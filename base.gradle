@@ -65,6 +65,8 @@ ext{
             cardview       : "com.android.support:cardview-v7:${depsVersion.cardview}",
             room           : "androidx.room:room-runtime:${depsVersion.room_version}",
             room_rxjava2   : "androidx.room:room-rxjava2:${depsVersion.room_version}",
+            room_compiler  : "androidx.room:room-compiler:${depsVersion.room_version}",
+            room_guava     : "androidx.room:room-guava:${depsVersion.room_version}",
             cookieJar      : "com.github.franmontiel:PersistentCookieJar:${depsVersion.cookiejar}",
             GroupedRecyclerViewAdapter            : "com.github.donkingliang:GroupedRecyclerViewAdapter:${depsVersion.GroupedRecyclerViewAdapter}",
             BaseRecyclerViewAdapterHelper         : "com.github.CymChad:BaseRecyclerViewAdapterHelper:${depsVersion.BaseRVAdapterHelper}",
