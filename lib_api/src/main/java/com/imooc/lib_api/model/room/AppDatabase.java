@@ -23,7 +23,6 @@ public abstract class AppDatabase extends RoomDatabase {
                     //允许在主线程访问数据库
                     //.allowMainThreadQueries()
                     .build();
-            ;
         }
         return instance;
     }

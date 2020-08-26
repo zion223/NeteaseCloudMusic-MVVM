@@ -130,9 +130,7 @@ public class SongListDetailActivity extends BaseActivity {
             playMusicListAdapter.setOnItemClickListener((adapter, view, position) -> {
                 //加入播放队列
                 SongDetailBean.SongsBean item = (SongDetailBean.SongsBean) adapter.getItem(position);
-                String songPlayUrl = HttpConstants.getSongPlayUrl(item.getId());
-                AudioHelper.addAudio(new AudioBean(String.valueOf(item.getId()), songPlayUrl, item.getName(), item.getAr().get(0).getName(), item.getAl().getName(), item.getAl().getName(), item.getAl().getPicUrl(), TimeUtil.getTimeNoYMDH(item.getDt())));
-
+                AudioHelper.addAudio(AudioBean.convertSongToAudioBean(item));
             });
             mViewModel.adapter.set(playMusicListAdapter);
             //延迟1s 显示加载动画
