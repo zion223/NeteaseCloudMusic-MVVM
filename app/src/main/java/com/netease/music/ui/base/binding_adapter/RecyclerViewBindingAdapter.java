@@ -15,8 +15,10 @@ public class RecyclerViewBindingAdapter {
 
     @BindingAdapter(value = {"linearAdapter", "cannotScrollVertically"}, requireAll = false)
     public static void initRecyclerViewWithLinearLayoutManager(RecyclerView recyclerView, RecyclerView.Adapter adapter, boolean can) {
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()) {
+        if (adapter != null) {
+            recyclerView.setAdapter(adapter);
+        }
+        recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getRootView().getContext()) {
             @Override
             public boolean canScrollVertically() {
                 return !can;

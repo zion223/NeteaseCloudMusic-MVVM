@@ -48,13 +48,14 @@ public class VideoDetailActivity extends BaseActivity {
             mViewModel.request.getVideoRelatedLiveData().observe(this, relatedVideoBean -> {
 
             });
-            //视频播放地址
+            //视频播放地址 TODO
             mViewModel.request.getVideoUrlLiveData().observe(this, urlBean -> {
 
             });
+            //视频评论 无法禁止滑动 TODO
             mViewModel.request.getVideoCommentLiveData().observe(this, commentBean -> {
 
-                mViewModel.commentAdapter.set(new MultipleSectionGedanCommentAdapter(videoId, TYPE.VIDEO_ID, this.getBaseContext(), commentBean));
+                mViewModel.commentAdapter.set(new MultipleSectionGedanCommentAdapter(videoId, TYPE.VIDEO_ID, VideoDetailActivity.this, commentBean));
 
                 mViewModel.loadingVisible.set(false);
             });
@@ -69,5 +70,28 @@ public class VideoDetailActivity extends BaseActivity {
             mViewModel.request.requestVideoComment(videoId);
 
         }
+    }
+
+
+    public class ClickProxy {
+        public void back() {
+            finish();
+        }
+
+        //点赞 TODO
+        public void parise() {
+
+        }
+
+        //收藏MV TODO
+        public void collect() {
+
+        }
+
+        //关注或取消关注作者 TODO
+        public void changeSubscribeStatus() {
+
+        }
+
     }
 }

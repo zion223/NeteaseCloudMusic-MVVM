@@ -8,6 +8,10 @@
             name="vm"
             type="com.netease.music.ui.state.VideoDetailViewModel" />
 
+        <variable
+            name="proxy"
+            type="com.netease.music.ui.page.video.VideoDetailActivity.ClickProxy" />
+
         <import type="com.netease.music.util.SearchUtil" />
     </data>
 
@@ -40,6 +44,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
+                    onClickWithDebouncing="@{() -> proxy.back()}"
                     android:src="@drawable/ic_left_arrow_black" />
 
 
@@ -141,6 +146,7 @@
                                     android:layout_height="23dp"
                                     android:layout_gravity="center_horizontal"
                                     android:layout_marginTop="10dp"
+                                    onClickWithDebouncing="@{() -> proxy.parise()}"
                                     android:src="@drawable/ic_parise" />
 
                                 <TextView
@@ -167,6 +173,7 @@
                                     android:layout_height="23dp"
                                     android:layout_gravity="center_horizontal"
                                     android:layout_marginTop="10dp"
+                                    onClickWithDebouncing="@{() -> proxy.collect()}"
                                     android:src="@drawable/ic_collect" />
 
                                 <TextView
@@ -280,6 +287,7 @@
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
                         android:layout_marginRight="20dp"
+                        onClickWithDebouncing="@{() -> proxy.changeSubscribeStatus()}"
                         android:background="@drawable/bg_round_red_14dp">
 
                         <ImageView
@@ -310,6 +318,7 @@
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
                         android:layout_marginRight="20dp"
+                        onClickWithDebouncing="@{() -> proxy.changeSubscribeStatus()}"
                         android:background="@drawable/bg_gray_border">
 
                         <ImageView
@@ -359,7 +368,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         linearAdapter="@{vm.commentAdapter}"
-                        cannotScrollVertically="@{Boolean.TRUE}" />
+                        cannotScrollVertically="@{Boolean.TRUE}"
+                        visible="@{!vm.loadingVisible}" />
                 </LinearLayout>
             </androidx.core.widget.NestedScrollView>
 

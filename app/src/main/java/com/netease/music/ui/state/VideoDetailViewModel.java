@@ -16,3 +16,4 @@ public class VideoDetailViewModel extends BaseLoadingViewModel {
 
     public final VideoRequest request = new VideoRequest();
 }
+
