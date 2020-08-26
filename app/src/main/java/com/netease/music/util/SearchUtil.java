@@ -28,7 +28,8 @@ public class SearchUtil {
 
 	}
 
-	public static String getCorresPondingString(int num) {
+	//使用长整型 避免溢出
+	public static String getCorresPondingString(long num) {
 		String text;
 		//大于1亿
 		if (num > 100000000) {
@@ -44,12 +45,8 @@ public class SearchUtil {
 		return text;
 	}
 
-	public static String getCorresPondingString(long num) {
-		return getCorresPondingString(((Long) num).intValue());
-	}
-
 	public static String getCorresPondingString(String num) {
-		return getCorresPondingString((Integer.parseInt(num)));
+		return getCorresPondingString((Long.parseLong(num)));
 	}
 
 	//根据用户类型 设置不同的用户专属图标
