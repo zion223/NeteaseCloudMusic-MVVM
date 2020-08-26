@@ -27,5 +27,5 @@ dependencies {
     //Room
     implementation this.rootProject.depsLibs.room
     implementation this.rootProject.depsLibs.room_rxjava2
-    implementation this.rootProject.depsLibs.room_compiler
+    annotationProcessor this.rootProject.depsLibs.room_compiler
 }
