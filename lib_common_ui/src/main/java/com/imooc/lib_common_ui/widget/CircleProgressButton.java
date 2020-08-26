@@ -25,7 +25,8 @@ public class CircleProgressButton extends View {
 	private int progressMax = 100;
 	private Paint paint;
 	private RectF rectF;
-	private Status playOrPause = Status.PLAY;
+	//默认处于暂停状态
+	private Status playOrPause = Status.PAUSE;
 
 	public CircleProgressButton(Context context) {
 		this(context, null, 0);

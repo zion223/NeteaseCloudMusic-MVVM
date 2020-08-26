@@ -92,27 +92,25 @@ public class BottomMusicView extends RelativeLayout {
         mTitleView = rootView.findViewById(R.id.audio_name_view);
         mAlbumView = rootView.findViewById(R.id.audio_album_view);
         mPlayView = rootView.findViewById(R.id.play_view);
-        mPlayView.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //处理播放暂停事件
+        mPlayView.setOnClickListener(v -> {
+            //处理播放暂停事件
+            if (AudioController.getInstance().getQueue().size() != 0) {
                 AudioController.getInstance().playOrPause();
+            } else {
+                Toast.makeText(getContext(), "当前播放队列没有歌曲", Toast.LENGTH_SHORT).show();
             }
         });
         mRightView = rootView.findViewById(R.id.show_list_view);
-        mRightView.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //显示音乐列表对话框
-                if (AudioController.getInstance().getQueue().size() != 0) {
-                    new XPopup.Builder(getContext())
-                            .asCustom(new MusicListDialog(getContext()))
-                            .show();
-                } else {
-                    Toast.makeText(getContext(), "当前播放队列没有歌曲", Toast.LENGTH_SHORT).show();
-                }
-
+        mRightView.setOnClickListener(v -> {
+            //显示音乐列表对话框
+            if (AudioController.getInstance().getQueue().size() != 0) {
+                new XPopup.Builder(getContext())
+                        .asCustom(new MusicListDialog(getContext()))
+                        .show();
+            } else {
+                Toast.makeText(getContext(), "当前播放队列没有歌曲", Toast.LENGTH_SHORT).show();
             }
+
         });
         //显示上次退出时播放的歌曲
         mAudioBean = SharePreferenceUtil.getInstance(mContext).getLatestSong();
