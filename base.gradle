@@ -24,7 +24,7 @@ ext{
         cardview       : '25.3.1',
         xpopup         : '2.0.8-rc5',
         multidex       : '1.0.1',
-        easypermission : '1.0.1',
+        easypermission : '3.0.0',
         tinypinyin     : '2.0.3',
         videoplayer    : '7.2.4',
         butterknife    : '8.4.0',
