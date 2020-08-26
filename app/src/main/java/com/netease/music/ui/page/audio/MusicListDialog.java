@@ -18,6 +18,7 @@ import com.imooc.lib_api.model.song.AudioBean;
 import com.imooc.lib_audio.R;
 import com.lxj.xpopup.XPopup;
 import com.lxj.xpopup.core.BottomPopupView;
+import com.netease.lib_audio.app.AudioHelper;
 import com.netease.lib_audio.mediaplayer.core.AudioController;
 import com.netease.lib_audio.mediaplayer.events.AudioLoadEvent;
 import com.netease.lib_audio.mediaplayer.events.AudioPlayModeEvent;
@@ -150,14 +151,12 @@ public class MusicListDialog extends BottomPopupView {
         //定位当前播放的音乐的位置
         int currentPosition = mQueue.indexOf(mAudioBean);
         mMusicListAdapter = new MusicListAdapter(mQueue, mAudioBean);
-//        mMusicListAdapter.setOnItemClickListener(new BaseQuickAdapter() {
-//            @Override
-//            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-//                AudioBean entity = (AudioBean) adapter.getItem(position);
-//                AudioHelper.addAudio(entity);
-//                dismiss();
-//            }
-//        });
+        //切换播放歌曲
+        mMusicListAdapter.setOnItemClickListener((adapter, view, position) -> {
+            AudioBean entity = (AudioBean) adapter.getItem(position);
+            AudioHelper.addAudio(entity);
+            dismiss();
+        });
 
         mRecyclerView.setAdapter(mMusicListAdapter);
         mRecyclerView.setLayoutManager(linearLayoutManager);
