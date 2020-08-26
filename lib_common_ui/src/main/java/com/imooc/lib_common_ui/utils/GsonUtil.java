@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.imooc.lib_api.model.song.AudioBean;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -39,9 +40,10 @@ public class GsonUtil {
     /**
      * 将字符串转换成对应的Java对象
      */
-    public static List<AudioBean> fromAudioJSON(String json) {
+    public static ArrayList<AudioBean> fromAudioJSON(String json) {
         try {
-            return createGson().fromJson(json, new TypeToken<List<AudioBean>>() {}.getType());
+            return createGson().fromJson(json, new TypeToken<ArrayList<AudioBean>>() {
+            }.getType());
         } catch (Exception e) {
             e.printStackTrace();
         }

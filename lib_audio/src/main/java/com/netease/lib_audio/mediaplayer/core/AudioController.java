@@ -2,24 +2,23 @@ package com.netease.lib_audio.mediaplayer.core;
 
 import android.util.Log;
 
+import com.imooc.lib_api.model.song.AudioBean;
+import com.imooc.lib_common_ui.utils.SharePreferenceUtil;
 import com.netease.lib_audio.app.AudioHelper;
 import com.netease.lib_audio.mediaplayer.events.AudioCompleteEvent;
 import com.netease.lib_audio.mediaplayer.events.AudioErrorEvent;
 import com.netease.lib_audio.mediaplayer.events.AudioPlayModeEvent;
 import com.netease.lib_audio.mediaplayer.events.AudioRemoveEvent;
 import com.netease.lib_audio.mediaplayer.exception.AudioQueueEmptyException;
-import com.imooc.lib_api.model.song.AudioBean;
-import com.imooc.lib_common_ui.utils.SharePreferenceUtil;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
-//不允许在包外的类访问
+//不允许在模块外的类访问
 public class AudioController {
 
     private static final String TAG = "AudioController";
@@ -36,7 +35,7 @@ public class AudioController {
     //播放器
     private final AudioPlayer mAudioPlayer;
     //当前播放队列
-    private final ArrayList<AudioBean> mQueue = new ArrayList<>();
+    private final ArrayList<AudioBean> mQueue = SharePreferenceUtil.getInstance(AudioHelper.getContext()).getMusicList() == null ? new ArrayList<AudioBean>() : SharePreferenceUtil.getInstance(AudioHelper.getContext()).getMusicList();
     //播放模式
     private PlayMode mPlayMode;
     //当前播放索引
@@ -45,17 +44,14 @@ public class AudioController {
     private AudioController() {
         mAudioPlayer = new AudioPlayer();
         final AudioBean audio = SharePreferenceUtil.getInstance(AudioHelper.getContext()).getLatestSong();
-        final List<AudioBean> list = SharePreferenceUtil.getInstance(AudioHelper.getContext()).getMusicList();
-        if (audio != null && list != null) {
-            mQueue.add(audio);
-            list.remove(audio);
-            //上次保存的播放列表
-            mQueue.addAll(list);
+        if (audio != null && mQueue.size() > 0 && mQueue.contains(audio)) {
+            //当前是否有歌曲
+            mQueueIndex = mQueue.indexOf(audio);
+        } else {
+            mQueueIndex = 0;
         }
-        mQueueIndex = 0;
         mPlayMode = PlayMode.LOOP;
         EventBus.getDefault().register(this);
-
     }
 
     public static AudioController getInstance() {
@@ -90,8 +86,10 @@ public class AudioController {
         addAudio(0, bean);
     }
 
+    //添加Audio集合
     public void addAudio(ArrayList<AudioBean> list) {
         mQueue.addAll(list);
+        SharePreferenceUtil.getInstance(AudioHelper.getContext()).saveMusicList(mQueue);
     }
 
     public void addAudio(int index, AudioBean bean) {
@@ -100,6 +98,7 @@ public class AudioController {
         if (query <= -1) {
             //当前播放列表中没有此歌曲
             mQueue.add(index, bean);
+            SharePreferenceUtil.getInstance(AudioHelper.getContext()).saveMusicList(mQueue);
             setPlayIndex(index);
         } else {
             //当前播放列表中有这个歌曲
@@ -116,6 +115,7 @@ public class AudioController {
             throw new AudioQueueEmptyException("");
         }
         if (mQueue.remove(bean)) {
+            SharePreferenceUtil.getInstance(AudioHelper.getContext()).saveMusicList(mQueue);
             EventBus.getDefault().post(new AudioRemoveEvent());
         }
     }
@@ -129,7 +129,7 @@ public class AudioController {
         mQueue.clear();
         //不删除当前播放的歌曲
         mQueue.add(currentBean);
-
+        SharePreferenceUtil.getInstance(AudioHelper.getContext()).saveMusicList(mQueue);
     }
 
     public void setQueue(ArrayList<AudioBean> bean) {
@@ -139,6 +139,7 @@ public class AudioController {
     public void setQueue(ArrayList<AudioBean> bean, int index) {
         mQueue.addAll(bean);
         mQueueIndex = index;
+        SharePreferenceUtil.getInstance(AudioHelper.getContext()).saveMusicList(mQueue);
     }
 
     public PlayMode getPlayMode() {
@@ -161,7 +162,10 @@ public class AudioController {
     }
 
     public void play() {
-        mAudioPlayer.load(getCurrentPlaying());
+        final AudioBean currentPlaying = getCurrentPlaying();
+        //播放时存储最近一次播放的歌曲
+        SharePreferenceUtil.getInstance(AudioHelper.getContext()).saveLatestSong(currentPlaying);
+        mAudioPlayer.load(currentPlaying);
     }
 
     private AudioBean getCurrentPlaying() {

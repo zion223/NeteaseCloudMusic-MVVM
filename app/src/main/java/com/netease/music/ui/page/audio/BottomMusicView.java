@@ -115,11 +115,11 @@ public class BottomMusicView extends RelativeLayout {
             }
         });
         //显示上次退出时播放的歌曲
-        AudioBean latestSong = SharePreferenceUtil.getInstance(mContext).getLatestSong();
-        if (latestSong != null) {
-            mTitleView.setText(latestSong.getName());
-            mAlbumView.setText(latestSong.getAlbum());
-            ImageLoaderManager.getInstance().displayImageForCircle(mLeftView, latestSong.getAlbumPic());
+        mAudioBean = SharePreferenceUtil.getInstance(mContext).getLatestSong();
+        if (mAudioBean != null) {
+            mTitleView.setText(mAudioBean.getName());
+            mAlbumView.setText(mAudioBean.getAlbum());
+            ImageLoaderManager.getInstance().displayImageForCircle(mLeftView, mAudioBean.getAlbumPic());
         }
     }
 

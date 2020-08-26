@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import com.imooc.lib_api.model.song.AudioBean;
 import com.imooc.lib_api.model.user.LoginBean;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -172,7 +173,7 @@ public class SharePreferenceUtil {
 	}
 
 	/**
-	 * 保存播放歌曲列表
+	 * 保存播放歌曲列表  在更新播放队列时更新
 	 */
 	public void saveMusicList(List<AudioBean> likeList) {
 		String likeListString = GsonUtil.toJson(likeList);
@@ -180,9 +181,9 @@ public class SharePreferenceUtil {
 	}
 
 	/**
-	 * 	获取播放列表
+	 * 获取播放列表
 	 */
-	public List<AudioBean> getMusicList() {
+	public ArrayList<AudioBean> getMusicList() {
 		String likeListString = getString(Constants.SpKey.LIKE_LIST, "");
 		return GsonUtil.fromAudioJSON(likeListString);
 	}
