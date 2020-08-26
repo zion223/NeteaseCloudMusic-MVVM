@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.google.android.material.appbar.AppBarLayout;
+import com.imooc.lib_api.model.song.AudioBean;
 import com.imooc.lib_api.model.song.SongDetailBean;
 import com.imooc.lib_common_ui.appbar.AppBarStateChangeListener;
 import com.imooc.lib_common_ui.utils.StatusBarUtil;
@@ -20,6 +21,7 @@ import com.kunminx.architecture.ui.page.BaseActivity;
 import com.kunminx.architecture.ui.page.DataBindingConfig;
 import com.kunminx.architecture.utils.BarUtils;
 import com.kunminx.architecture.utils.Utils;
+import com.netease.lib_audio.app.AudioHelper;
 import com.netease.music.BR;
 import com.netease.music.R;
 import com.netease.music.ui.state.DailyRecommendViewModel;
@@ -57,6 +59,7 @@ public class DailyRecommendActivity extends BaseActivity {
         dailyRecommendAdapter.setOnItemClickListener((adapter, view, position) -> {
             //播放音乐
             SongDetailBean.SongsBean entity = (SongDetailBean.SongsBean) adapter.getItem(position);
+            AudioHelper.addAudio(AudioBean.convertSongToAudioBean(entity));
         });
         mViewModel.recommendRequest.getDailRecommendLiveData().observe(this, dailyRecommendBean -> {
             dailyRecommendAdapter.addData(dailyRecommendBean.getData().getDailySongs());
