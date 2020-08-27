@@ -24,10 +24,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.ActivityOptionsCompat;
 
-import com.netease.lib_api.model.song.AudioBean;
 import com.imooc.lib_audio.R;
-import com.netease.lib_common_ui.lrc.LrcView;
 import com.kunminx.architecture.utils.BarUtils;
+import com.lxj.xpopup.XPopup;
+import com.netease.lib_api.model.song.AudioBean;
 import com.netease.lib_audio.mediaplayer.core.AudioController;
 import com.netease.lib_audio.mediaplayer.core.CustomMediaPlayer;
 import com.netease.lib_audio.mediaplayer.events.AudioBufferUpdateEvent;
@@ -37,6 +37,8 @@ import com.netease.lib_audio.mediaplayer.events.AudioPlayModeEvent;
 import com.netease.lib_audio.mediaplayer.events.AudioProgressEvent;
 import com.netease.lib_audio.mediaplayer.events.AudioStartEvent;
 import com.netease.lib_audio.mediaplayer.view.IndictorView;
+import com.netease.lib_common_ui.lrc.LrcView;
+import com.netease.lib_network.ApiEngine;
 import com.netease.music.data.config.TYPE;
 import com.netease.music.ui.page.discover.square.detail.CommentActivity;
 import com.netease.music.util.TimeUtil;
@@ -47,6 +49,10 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 
 public class MusicPlayerActivity extends AppCompatActivity {
@@ -129,52 +135,31 @@ public class MusicPlayerActivity extends AppCompatActivity {
         mCommentNum = findViewById(R.id.tv_comment_num);
         //歌词
         lrcView = findViewById(R.id.lrc_view);
-        lrcView.setOnSingerClickListener(new LrcView.OnSingleClickListener() {
-            @Override
-            public void onClick() {
-                //隐藏歌词布局
-                lrcView.setVisibility(View.GONE);
-                mNeddleiew.setVisibility(View.VISIBLE);
-                mIndictorView.setVisibility(View.VISIBLE);
-                mLlOpreationView.setVisibility(View.VISIBLE);
-            }
+        lrcView.setOnSingerClickListener(() -> {
+            //隐藏歌词布局
+            lrcView.setVisibility(View.GONE);
+            mNeddleiew.setVisibility(View.VISIBLE);
+            mIndictorView.setVisibility(View.VISIBLE);
+            mLlOpreationView.setVisibility(View.VISIBLE);
         });
 
         //拖动歌词条
-        lrcView.setDraggable(true, new LrcView.OnPlayClickListener() {
-            @Override
-            public boolean onPlayClick(long time) {
-                AudioController.getInstance().seekTo(time);
-                return true;
-            }
+        lrcView.setDraggable(true, time -> {
+            AudioController.getInstance().seekTo(time);
+            return true;
         });
         mLlOpreationView = findViewById(R.id.operation_view);
         //背景虚化图
         //ImageLoaderManager.getInstance().displayImageForViewGroup(mBgView, mAudioBean.getAlbumPic(), 100);
         //返回按钮
-        findViewById(R.id.back_view).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
+        findViewById(R.id.back_view).setOnClickListener(v -> onBackPressed());
 
         //分享
-        findViewById(R.id.share_view).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                shareMusic(mAudioBean.getUrl(), mAudioBean.getName());
-            }
-        });
+        findViewById(R.id.share_view).setOnClickListener(v -> shareMusic(mAudioBean.getUrl(), mAudioBean.getName()));
         //显示歌曲列表 Dialog
-        findViewById(R.id.show_list_view).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//				new XPopup.Builder(MusicPlayerActivity.this)
-//						.asCustom(new MusicListDialog(MusicPlayerActivity.this))
-//						.show();
-            }
-        });
+        findViewById(R.id.show_list_view).setOnClickListener(v -> new XPopup.Builder(MusicPlayerActivity.this)
+                .asCustom(new MusicListDialog(MusicPlayerActivity.this))
+                .show());
         //歌曲信息
         mInfoView = findViewById(R.id.album_view);
         mInfoView.setText(mAudioBean.getName());
@@ -194,13 +179,8 @@ public class MusicPlayerActivity extends AppCompatActivity {
         mFavouriteView = findViewById(R.id.favourite_view);
         //设置喜欢标志为 默认为false
         mFavouriteView.setTag(false);
-        mFavouriteView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //收藏与否
-                changeFavouriteStatus();
-            }
-        });
+        //收藏与否
+        mFavouriteView.setOnClickListener(v -> changeFavouriteStatus());
         //是否喜欢该音乐
         loadFavouriteStatus();
         mStartTimeView = findViewById(R.id.start_time_view);
@@ -230,45 +210,27 @@ public class MusicPlayerActivity extends AppCompatActivity {
             }
         });
         mPlayModeView = findViewById(R.id.play_mode_view);
-        mPlayModeView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //切换播放模式 LOOP --> RANDOM --> REPEAT --> LOOP
-                switch (mPlayMode) {
-                    case LOOP:
-                        AudioController.getInstance().setPlayMode(AudioController.PlayMode.RANDOM);
-                        break;
-                    case RANDOM:
-                        AudioController.getInstance().setPlayMode(AudioController.PlayMode.REPEAT);
-                        break;
-                    case REPEAT:
-                        AudioController.getInstance().setPlayMode(AudioController.PlayMode.LOOP);
-                        break;
-                }
+        mPlayModeView.setOnClickListener(v -> {
+            //切换播放模式 LOOP --> RANDOM --> REPEAT --> LOOP
+            switch (mPlayMode) {
+                case LOOP:
+                    AudioController.getInstance().setPlayMode(AudioController.PlayMode.RANDOM);
+                    break;
+                case RANDOM:
+                    AudioController.getInstance().setPlayMode(AudioController.PlayMode.REPEAT);
+                    break;
+                case REPEAT:
+                    AudioController.getInstance().setPlayMode(AudioController.PlayMode.LOOP);
+                    break;
             }
         });
 
         mPreViousView = findViewById(R.id.previous_view);
-        mPreViousView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AudioController.getInstance().previous();
-            }
-        });
+        mPreViousView.setOnClickListener(v -> AudioController.getInstance().previous());
         mPlayView = findViewById(R.id.play_view);
-        mPlayView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AudioController.getInstance().playOrPause();
-            }
-        });
+        mPlayView.setOnClickListener(v -> AudioController.getInstance().playOrPause());
         mNextView = findViewById(R.id.next_view);
-        mNextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AudioController.getInstance().next();
-            }
-        });
+        mNextView.setOnClickListener(v -> AudioController.getInstance().next());
         mIndictorView = findViewById(R.id.indictor_view);
         mIndictorView.setListaner(new IndictorView.OnIndicatorViewStatusChangeListener() {
             @Override
@@ -400,36 +362,16 @@ public class MusicPlayerActivity extends AppCompatActivity {
         mAudioBean = AudioController.getInstance().getNowPlaying();
         mPlayMode = AudioController.getInstance().getPlayMode();
         //获取歌词
-//		RequestCenter.getLyric(mAudioBean.getId(), new DisposeDataListener() {
-//			@Override
-//			public void onSuccess(Object responseObj) {
-//				LyricBean lyric = (LyricBean) responseObj;
-//				lrcView.loadLrc(lyric.getLrc().getLyric(), lyric.getTlyric().getLyric());
-//			}
-//
-//			@Override
-//			public void onFailure(Object reasonObj) {
-//
-//			}
-//		});
-//		//获取评论数量
-//		RequestCenter.getMusicComment(mAudioBean.getId(), new DisposeDataListener() {
-//			@SuppressLint("SetTextI18n")
-//			@Override
-//			public void onSuccess(Object responseObj) {
-//				PlayListCommentBean commentBean = (PlayListCommentBean) responseObj;
-//				if(commentBean.getTotal() > 1000){
-//					mCommentNum.setText("999+");
-//				}else{
-//					mCommentNum.setText(String.valueOf(commentBean.getTotal()));
-//				}
-//			}
-//
-//			@Override
-//			public void onFailure(Object reasonObj) {
-//
-//			}
-//		});
+        Disposable subscribe = ApiEngine.getInstance().getApiService().getLyric(mAudioBean.getId())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(lyricBean -> lrcView.loadLrc(lyricBean.getLrc().getLyric(), lyricBean.getTlyric().getLyric()));
+
+        //获取评论数量
+        Disposable subscribecomment = ApiEngine.getInstance().getApiService().getMusicComment(mAudioBean.getId())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(bean -> mCommentNum.setText(bean.getTotal() > 1000 ? "999+" : String.valueOf(bean.getTotal())));
 
     }
 

@@ -310,7 +310,7 @@ public interface ApiService {
     Observable<MainEventBean> getMainEvent();
 
     @GET("lyric")
-    Observable<LyricBean> getLyric(@Query("id") long id);
+    Observable<LyricBean> getLyric(@Query("id") String id);
 
     @GET("comment/playlist")
     Observable<PlayListCommentBean> getPlaylistComment(@Query("id") long id);
