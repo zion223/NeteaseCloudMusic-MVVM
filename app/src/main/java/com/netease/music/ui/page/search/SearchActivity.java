@@ -1,5 +1,6 @@
 package com.netease.music.ui.page.search;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.inputmethod.EditorInfo;
@@ -14,6 +15,7 @@ import com.kunminx.architecture.utils.Utils;
 import com.netease.music.BR;
 import com.netease.music.R;
 import com.netease.music.ui.helper.DrawerCoordinateHelper;
+import com.netease.music.ui.page.search.artist.ArtistSortActivity;
 import com.netease.music.ui.state.MainActivityViewModel;
 import com.netease.music.ui.state.SearchViewModel;
 
@@ -80,7 +82,7 @@ public class SearchActivity extends BaseActivity {
 
         //打开歌手分类页面
         public void navToArtist() {
-
+            startActivity(new Intent(SearchActivity.this, ArtistSortActivity.class));
         }
 
     }

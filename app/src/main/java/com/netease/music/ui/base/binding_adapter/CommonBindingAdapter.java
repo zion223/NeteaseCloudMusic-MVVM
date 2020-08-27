@@ -37,6 +37,7 @@ import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.google.android.material.appbar.AppBarLayout;
 import com.imooc.lib_common_ui.bannder.HolderCreator;
+import com.imooc.lib_common_ui.widget.ArtistSortView;
 import com.imooc.lib_common_ui.widget.CaptchaView;
 import com.kunminx.architecture.utils.ClickUtils;
 import com.kunminx.architecture.utils.Utils;
@@ -170,6 +171,10 @@ public class CommonBindingAdapter {
                 .setCanLoop(true);
     }
 
+    @BindingAdapter(value = "onChooseAreaListener")
+    public static void setOnChooseListener(ArtistSortView sortView, ArtistSortView.OnChooseArtistSortListener listener) {
+        sortView.setOnChooseArtistSortListener(listener);
+    }
 
 
 }

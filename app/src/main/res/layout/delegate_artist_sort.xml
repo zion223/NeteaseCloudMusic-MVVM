@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.netease.music.ui.state.ArtistSortViewModel" />
+
+        <variable
+            name="listener"
+            type="com.imooc.lib_common_ui.widget.ArtistSortView.OnChooseArtistSortListener" />
+
+        <variable
+            name="adapter"
+            type="com.chad.library.adapter.base.BaseQuickAdapter" />
+
+        <variable
+            name="proxy"
+            type="com.netease.music.ui.page.search.artist.ArtistSortActivity.ClickProxy" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/img_artist_sort_back"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_margin="10dp"
+                onClickWithDebouncing="@{() -> proxy.back()}"
+                android:src="@drawable/ic_left_arrow_black" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="7"
+                android:gravity="center_vertical"
+                android:text="歌手分类"
+                android:textColor="@color/black"
+                android:textSize="19sp" />
+
+        </LinearLayout>
+
+
+        <com.imooc.lib_common_ui.widget.ArtistSortView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            onChooseAreaListener="@{listener}" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginTop="15dp"
+            android:background="#F4F4F4"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:text="热门歌手"
+            android:textSize="12sp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_artist_sort"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            linearAdapter="@{adapter}"
+            submitList="@{vm.artistData}" />
+    </LinearLayout>
+</layout>

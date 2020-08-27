@@ -4,6 +4,7 @@ package com.imooc.lib_network;
 import com.imooc.lib_api.model.album.AlbumDetailBean;
 import com.imooc.lib_api.model.album.AlbumDynamicBean;
 import com.imooc.lib_api.model.album.AlbumSublistBean;
+import com.imooc.lib_api.model.artist.ArtistListBean;
 import com.imooc.lib_api.model.artist.ArtistSublistBean;
 import com.imooc.lib_api.model.banner.BannerBean;
 import com.imooc.lib_api.model.dj.DjBannerBean;
@@ -126,6 +127,9 @@ public interface ApiService {
     @GET("top/playlist")
     Observable<RecommendPlayListBean> getPlayList(@Query("cat") String type, @Query("limit") int limit);
 
+    @GET("top/artists")
+    Observable<ArtistListBean> getHotSingerList();
+
     @GET("top/playlist/highquality")
     Observable<HighQualityPlayListBean> getHighquality(@Query("limit") int limit, @Query("before") long before);
 
@@ -187,6 +191,14 @@ public interface ApiService {
 
     @GET("artists")
     Observable<SingerSongSearchBean> getSingerHotSong(@Query("id") long id);
+
+    /**
+     * 歌手分类
+     * type 1:男歌手 2:女歌手 3:乐队
+     * area  -1:全部 7:华语(1) 96:欧美(2) 8:日本(3) 16韩国(4) 0:其他
+     */
+    @GET("artist/list")
+    Observable<ArtistListBean> getSingerList(@Query("type") int type, @Query("area") int area);
 
     @GET("artist/album")
     Observable<SingerAblumSearchBean> getSingerAlbum(@Query("id") long id);
@@ -283,6 +295,10 @@ public interface ApiService {
 
     @GET("artist/sublist")
     Observable<ArtistSublistBean> getArtistSublist();
+
+    @GET("artist/sub")
+        //t =1 true  0 = false
+    Observable<DjSubBean> getSubArtist(@Query("id") int id, @Query("t") int t);
 
     @GET("mv/sublist")
     Observable<MvSublistBean> getMvSublist();
