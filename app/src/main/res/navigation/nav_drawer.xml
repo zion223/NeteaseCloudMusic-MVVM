@@ -13,14 +13,14 @@
         tools:layout="@layout/fragment_drawer">
 
         <action
-            android:id="@+id/action_drawerFragment_to_messageTabFragment"
-            app:destination="@id/messageTabFragment"
+            android:id="@+id/action_drawerFragment_to_messageTabActivity"
+            app:destination="@id/messageTabActivity"
             app:enterAnim="@anim/h_fragment_enter"
             app:exitAnim="@anim/h_fragment_exit"
             app:popEnterAnim="@anim/h_fragment_pop_enter"
             app:popExitAnim="@anim/h_fragment_pop_exit" />
         <action
-            android:id="@+id/action_drawerFragment_to_cloudFragment"
+            android:id="@+id/action_drawerFragment_to_cloudActivity"
             app:destination="@id/cloudActivity"
             app:enterAnim="@anim/h_fragment_enter"
             app:exitAnim="@anim/h_fragment_exit"
@@ -29,7 +29,7 @@
 
         <action
             android:id="@+id/action_drawerFragment_to_loginActivity"
-            app:destination="@id/loginFragment"
+            app:destination="@id/loginActivity"
             app:enterAnim="@anim/h_fragment_enter"
             app:exitAnim="@anim/h_fragment_exit"
             app:popEnterAnim="@anim/h_fragment_pop_enter"
@@ -37,10 +37,10 @@
     </fragment>
 
     <activity
-        android:id="@+id/messageTabFragment"
+        android:id="@+id/messageTabActivity"
         android:name="com.netease.music.ui.page.drawer.MessageTabActivity"
-        android:label="messageFragment"
-        tools:layout="@layout/fragment_login" />
+        android:label="messageActivity"
+        tools:layout="@layout/delegate_message_tab" />
 
     <activity
         android:id="@+id/cloudActivity"
@@ -49,8 +49,8 @@
         tools:layout="@layout/delegate_user_cloud" />
 
     <activity
-        android:id="@+id/loginFragment"
+        android:id="@+id/loginActivity"
         android:name="com.netease.music.ui.page.login.PhoneLoginActivity"
-        android:label="phoneLoginFragment"
+        android:label="phoneLoginActivity"
         tools:layout="@layout/delegate_phone_login" />
 </navigation>

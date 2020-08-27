@@ -13,7 +13,7 @@
         tools:layout="@layout/fragment_main">
 
         <action
-            android:id="@+id/action_mainFragment_to_searchFragment"
+            android:id="@+id/action_mainFragment_to_searchActivity"
             app:destination="@id/searchActivity"
             app:enterAnim="@anim/h_fragment_enter"
             app:exitAnim="@anim/h_fragment_exit"
@@ -21,8 +21,8 @@
             app:popExitAnim="@anim/h_fragment_pop_exit" />
 
         <action
-            android:id="@+id/action_mainFragment_to_loginFragment"
-            app:destination="@id/loginFragment"
+            android:id="@+id/action_mainFragment_to_loginActivity"
+            app:destination="@id/loginActivity"
             app:enterAnim="@anim/h_fragment_enter"
             app:exitAnim="@anim/h_fragment_exit"
             app:popEnterAnim="@anim/h_fragment_pop_enter"
@@ -35,28 +35,12 @@
         android:name="com.netease.music.ui.page.search.SearchActivity"
         android:label="activity_search"
         tools:layout="@layout/fragment_search">
-
-        <!--<action
-            android:id="@+id/action_searchActiviy_to_searchResultActivity"
-            app:destination="@id/searchResultActivity"
-            app:enterAnim="@anim/h_fragment_enter"
-            app:exitAnim="@anim/h_fragment_exit"
-            app:popEnterAnim="@anim/h_fragment_pop_enter"
-            app:popExitAnim="@anim/h_fragment_pop_exit" />-->
     </activity>
 
     <activity
-        android:id="@+id/searchResultActivity"
-        android:name="com.netease.music.ui.page.search.SearchResultActivity"
-        android:label="activity_search_result"
-        tools:layout="@layout/fragment_search">
-
-    </activity>
-
-    <activity
-        android:id="@+id/loginFragment"
+        android:id="@+id/loginActivity"
         android:name="com.netease.music.ui.page.login.LoginActivity"
-        android:label="LoginFragment"
+        android:label="LoginActivity"
         tools:layout="@layout/fragment_login" />
 
 </navigation>
