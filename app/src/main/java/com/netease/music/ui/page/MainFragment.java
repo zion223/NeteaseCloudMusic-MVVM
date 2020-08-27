@@ -54,11 +54,11 @@ public class MainFragment extends BaseFragment {
         }
 
         public void login() {
-            nav().navigate(R.id.action_mainFragment_to_loginFragment);
+            nav().navigate(R.id.action_mainFragment_to_loginActivity);
         }
 
         public void search() {
-            nav().navigate(R.id.action_mainFragment_to_searchFragment);
+            nav().navigate(R.id.action_mainFragment_to_searchActivity);
         }
 
     }

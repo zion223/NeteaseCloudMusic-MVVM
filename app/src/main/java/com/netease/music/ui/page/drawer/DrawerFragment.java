@@ -1,9 +1,7 @@
 package com.netease.music.ui.page.drawer;
 
 import android.os.Bundle;
-import android.view.View;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.kunminx.architecture.ui.page.BaseFragment;
@@ -40,12 +38,12 @@ public class DrawerFragment extends BaseFragment {
 
         //查看消息
         public void searchMessage() {
-            nav().navigate(R.id.action_drawerFragment_to_messageTabFragment);
+            nav().navigate(R.id.action_drawerFragment_to_messageTabActivity);
         }
 
         //查看音乐云盘
         public void searchCloud() {
-            nav().navigate(R.id.action_drawerFragment_to_cloudFragment);
+            nav().navigate(R.id.action_drawerFragment_to_cloudActivity);
         }
 
         //登录界面
