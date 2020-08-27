@@ -26,9 +26,10 @@ class ResponseInterceptor implements Interceptor {
     public Response intercept(Chain chain) throws IOException {
         Request request = chain.request();
 
+        long t1 = System.nanoTime();
         Response response = chain.proceed(request);
 
-
+        long t2 = System.nanoTime();
         ResponseBody responseBody = response.body();
         if (response.code() != 200) {
             return response;
@@ -55,6 +56,7 @@ class ResponseInterceptor implements Interceptor {
                 String result = buffer.clone().readString(charset);
                 Log.d(TAG, " response.url():" + response.request().url());
                 Log.d(TAG, " response.body():" + result);
+                Log.d(TAG, " 响应时间: " + (t2 - t1) / 1e6d + "ms");
             }
         }
 
