@@ -14,10 +14,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
-import com.netease.lib_api.model.song.AudioBean;
 import com.imooc.lib_audio.R;
 import com.lxj.xpopup.XPopup;
 import com.lxj.xpopup.core.BottomPopupView;
+import com.netease.lib_api.model.song.AudioBean;
 import com.netease.lib_audio.app.AudioHelper;
 import com.netease.lib_audio.mediaplayer.core.AudioController;
 import com.netease.lib_audio.mediaplayer.events.AudioLoadEvent;
@@ -204,7 +204,7 @@ public class MusicListDialog extends BottomPopupView {
     public void onAudioRemoveEvent(AudioRemoveEvent event) {
         mQueue = AudioController.getInstance().getQueue();
         mPlayNumView.setText("(" + mQueue.size() + ")");
-        mMusicListAdapter.setNewData(mQueue);
+        mMusicListAdapter.setNewInstance(mQueue);
     }
 
     @Override
@@ -220,6 +220,15 @@ public class MusicListDialog extends BottomPopupView {
         MusicListAdapter(@Nullable List<AudioBean> data, AudioBean currentBean) {
             super(R.layout.dialog_bottom_sheet_item, data);
             mCurrentBean = currentBean;
+            addChildClickViewIds(R.id.item_delete);
+            setOnItemChildClickListener((adapter, view, position) -> {
+                AudioBean item = (AudioBean) adapter.getItem(position);
+                AudioController.getInstance().removeAudio(item);
+                if (mCurrentBean == item) {
+                    //如果是移除当前播放的音乐则切换到下一首
+                    AudioController.getInstance().next();
+                }
+            });
         }
 
         @Override
@@ -236,17 +245,6 @@ public class MusicListDialog extends BottomPopupView {
                 helper.setTextColor(R.id.item_name, Color.parseColor("#333333"));
                 helper.setTextColor(R.id.item_author, Color.parseColor("#999999"));
             }
-
-//            helper.setOnClickListener(R.id.item_delete, new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    AudioController.getInstance().removeAudio(item);
-//                    if(mCurrentBean == item){
-//                        //如果是移除当前播放的音乐则切换到下一首
-//                        AudioController.getInstance().next();
-//                    }
-//                }
-//            });
         }
 
         void updateAdapter(AudioBean mAudioBean) {

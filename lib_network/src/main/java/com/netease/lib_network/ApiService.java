@@ -145,6 +145,15 @@ public interface ApiService {
     @GET("user/playlist")
     Observable<UserPlaylistBean> getUserPlaylist(@Query("uid") long uid);
 
+    /**
+     * 对歌单添加或删除歌曲
+     * 参数:op: 从歌单增加单曲为 add, 删除为 del
+     * pid: 歌单 id
+     * tracks: 歌曲 id,可多个,用逗号隔开
+     */
+    @GET("playlist/tracks")
+    Observable<CommonMessageBean> trackPlayList(@Query("pid") long id, @Query("tracks") String tracksId, @Query("op") String op);
+
     @GET("user/event")
     Observable<UserEventBean> getUserEvent(@Query("uid") long uid, @Query("limit") int limit, @Query("lasttime") long time);
 
