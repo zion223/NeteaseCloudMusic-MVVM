@@ -117,8 +117,8 @@ public class AudioController {
             throw new AudioQueueEmptyException("");
         }
         if (mQueue.remove(bean)) {
-            SharePreferenceUtil.getInstance(AudioHelper.getContext()).saveMusicList(mQueue);
             EventBus.getDefault().post(new AudioRemoveEvent());
+            SharePreferenceUtil.getInstance(AudioHelper.getContext()).saveMusicList(mQueue);
         }
     }
 
@@ -208,7 +208,9 @@ public class AudioController {
     }
 
     public void next() {
-        mAudioPlayer.load(getNextPlaying());
+        if (mQueue != null && mQueue.size() > 0) {
+            mAudioPlayer.load(getNextPlaying());
+        }
     }
 
     //获取下一首歌曲

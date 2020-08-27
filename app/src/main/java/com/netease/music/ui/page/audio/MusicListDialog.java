@@ -204,7 +204,7 @@ public class MusicListDialog extends BottomPopupView {
     public void onAudioRemoveEvent(AudioRemoveEvent event) {
         mQueue = AudioController.getInstance().getQueue();
         mPlayNumView.setText("(" + mQueue.size() + ")");
-        mMusicListAdapter.setNewInstance(mQueue);
+        mMusicListAdapter.setList(mQueue);
     }
 
     @Override
@@ -222,11 +222,13 @@ public class MusicListDialog extends BottomPopupView {
             mCurrentBean = currentBean;
             addChildClickViewIds(R.id.item_delete);
             setOnItemChildClickListener((adapter, view, position) -> {
-                AudioBean item = (AudioBean) adapter.getItem(position);
-                AudioController.getInstance().removeAudio(item);
-                if (mCurrentBean == item) {
-                    //如果是移除当前播放的音乐则切换到下一首
-                    AudioController.getInstance().next();
+                if (view.getId() == R.id.item_delete) {
+                    AudioBean item = (AudioBean) adapter.getItem(position);
+                    AudioController.getInstance().removeAudio(item);
+                    if (mCurrentBean == item) {
+                        //如果是移除当前播放的音乐则切换到下一首
+                        AudioController.getInstance().next();
+                    }
                 }
             });
         }
