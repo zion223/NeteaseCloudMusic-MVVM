@@ -12,20 +12,21 @@ import androidx.annotation.Nullable;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.google.android.material.appbar.AppBarLayout;
-import com.netease.lib_api.model.song.AudioBean;
-import com.netease.lib_api.model.song.SongDetailBean;
-import com.netease.lib_common_ui.appbar.AppBarStateChangeListener;
-import com.netease.lib_common_ui.utils.StatusBarUtil;
-import com.netease.lib_image_loader.app.ImageLoaderManager;
 import com.kunminx.architecture.ui.page.BaseActivity;
 import com.kunminx.architecture.ui.page.DataBindingConfig;
 import com.kunminx.architecture.utils.BarUtils;
 import com.kunminx.architecture.utils.Utils;
+import com.netease.lib_api.model.song.AudioBean;
+import com.netease.lib_api.model.song.SongDetailBean;
 import com.netease.lib_audio.app.AudioHelper;
+import com.netease.lib_common_ui.appbar.AppBarStateChangeListener;
+import com.netease.lib_common_ui.utils.StatusBarUtil;
+import com.netease.lib_image_loader.app.ImageLoaderManager;
 import com.netease.music.BR;
 import com.netease.music.R;
 import com.netease.music.ui.state.DailyRecommendViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 //每日推荐界面
@@ -66,6 +67,8 @@ public class DailyRecommendActivity extends BaseActivity {
             mViewModel.adapter.set(dailyRecommendAdapter);
             //延迟1s显示加载动画
             new Handler().postDelayed(() -> mViewModel.loadingVisible.set(false), 1000);
+            mViewModel.recommendMusic.set(dailyRecommendBean.getData().getDailySongs());
+
         });
         //请求数据
         mViewModel.recommendRequest.requestDailyRecommendMusic();
@@ -109,7 +112,14 @@ public class DailyRecommendActivity extends BaseActivity {
 
         //播放全部音乐
         public void playAll() {
-
+            if (mViewModel.recommendMusic.get() != null && mViewModel.recommendMusic.get().size() > 0) {
+                final ArrayList<AudioBean> audioList = new ArrayList<>();
+                int size = mViewModel.recommendMusic.get().size();
+                for (int i = 0; i < size; i++) {
+                    audioList.add(AudioBean.convertSongToAudioBean(mViewModel.recommendMusic.get().get(i)));
+                }
+                AudioHelper.addAudio(audioList);
+            }
         }
     }
 
