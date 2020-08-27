@@ -2,7 +2,7 @@ package com.netease.lib_audio.app;
 
 import android.content.Context;
 
-import com.imooc.lib_api.model.song.AudioBean;
+import com.netease.lib_api.model.song.AudioBean;
 import com.netease.lib_audio.mediaplayer.core.AudioController;
 
 import java.util.ArrayList;

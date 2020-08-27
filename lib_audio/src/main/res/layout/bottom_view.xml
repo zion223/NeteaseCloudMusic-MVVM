@@ -66,7 +66,7 @@
             android:paddingTop="-10dp">
 
 
-            <com.imooc.lib_common_ui.widget.CircleProgressButton
+            <com.netease.lib_common_ui.widget.CircleProgressButton
                 android:id="@+id/play_view"
                 android:layout_width="28dp"
                 android:layout_height="28dp"

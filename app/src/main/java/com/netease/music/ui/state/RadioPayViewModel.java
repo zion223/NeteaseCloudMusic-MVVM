@@ -3,7 +3,7 @@ package com.netease.music.ui.state;
 import androidx.databinding.ObservableField;
 import androidx.databinding.ObservableInt;
 
-import com.imooc.lib_api.model.dj.DjPaygiftBean;
+import com.netease.lib_api.model.dj.DjPaygiftBean;
 import com.netease.music.domain.request.RadioPayRequest;
 import com.netease.music.ui.state.load.BaseLoadingViewModel;
 

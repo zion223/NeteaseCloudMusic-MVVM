@@ -25,9 +25,9 @@ import com.bumptech.glide.request.target.NotificationTarget;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.target.Target;
 import com.bumptech.glide.request.transition.Transition;
-import com.imooc.lib_image_loader.image.CornerTransform;
-import com.imooc.lib_image_loader.image.CustomRequestListener;
-import com.imooc.lib_image_loader.image.ImageUtils;
+import com.netease.lib_image_loader.image.CornerTransform;
+import com.netease.lib_image_loader.image.CustomRequestListener;
+import com.netease.lib_image_loader.image.ImageUtils;
 import com.netease.music.R;
 
 import java.io.File;

@@ -11,10 +11,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
-import com.imooc.lib_api.model.mv.VideoBean;
-import com.imooc.lib_image_loader.app.ImageLoaderManager;
-import com.imooc.lib_network.ApiEngine;
-import com.imooc.lib_video.videoplayer.CustomJzVideoView;
+import com.netease.lib_api.model.mv.VideoBean;
+import com.netease.lib_image_loader.app.ImageLoaderManager;
+import com.netease.lib_network.ApiEngine;
+import com.netease.lib_video.videoplayer.CustomJzVideoView;
 import com.kunminx.architecture.ui.page.BaseFragment;
 import com.kunminx.architecture.ui.page.DataBindingConfig;
 import com.netease.music.BR;

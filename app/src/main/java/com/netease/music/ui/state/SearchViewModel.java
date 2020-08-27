@@ -4,8 +4,7 @@ import androidx.databinding.ObservableField;
 import androidx.lifecycle.ViewModel;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.imooc.lib_api.model.search.HotSearchDetailBean;
-import com.netease.music.domain.request.DownloadRequest;
+import com.netease.lib_api.model.search.HotSearchDetailBean;
 import com.netease.music.domain.request.SearchRequest;
 
 import java.util.List;

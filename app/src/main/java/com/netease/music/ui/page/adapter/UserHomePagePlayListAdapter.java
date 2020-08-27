@@ -5,9 +5,9 @@ import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
-import com.imooc.lib_api.model.user.UserPlaylistBean;
-import com.imooc.lib_api.model.user.UserPlaylistEntity;
-import com.imooc.lib_image_loader.app.ImageLoaderManager;
+import com.netease.lib_api.model.user.UserPlaylistBean;
+import com.netease.lib_api.model.user.UserPlaylistEntity;
+import com.netease.lib_image_loader.app.ImageLoaderManager;
 import com.netease.music.R;
 import com.netease.music.data.config.TYPE;
 import com.netease.music.ui.page.discover.square.detail.SongListDetailActivity;

@@ -4,7 +4,7 @@ import android.content.Context;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.imooc.lib_api.model.album.AlbumOrSongBean;
+import com.netease.lib_api.model.album.AlbumOrSongBean;
 import com.kunminx.architecture.ui.adapter.SimpleDataBindingAdapter;
 import com.netease.music.R;
 import com.netease.music.data.config.TYPE;

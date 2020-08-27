@@ -3,7 +3,7 @@ package com.netease.music.ui.state;
 import androidx.databinding.ObservableField;
 import androidx.lifecycle.ViewModel;
 
-import com.imooc.lib_api.model.playlist.TopListDetailBean;
+import com.netease.lib_api.model.playlist.TopListDetailBean;
 import com.netease.music.domain.request.ArtistRequest;
 
 import java.util.List;

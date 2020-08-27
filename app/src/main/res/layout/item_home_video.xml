@@ -20,7 +20,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp">
 
-            <com.imooc.lib_video.videoplayer.CustomJzVideoView
+            <com.netease.lib_video.videoplayer.CustomJzVideoView
                 android:id="@+id/videoplayer"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />

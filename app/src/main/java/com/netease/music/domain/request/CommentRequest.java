@@ -3,9 +3,9 @@ package com.netease.music.domain.request;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.imooc.lib_api.model.playlist.PlayListCommentEntity;
-import com.imooc.lib_api.model.song.PlayListCommentBean;
-import com.imooc.lib_network.ApiEngine;
+import com.netease.lib_api.model.playlist.PlayListCommentEntity;
+import com.netease.lib_api.model.song.PlayListCommentBean;
+import com.netease.lib_network.ApiEngine;
 import com.kunminx.architecture.domain.request.BaseRequest;
 import com.netease.music.data.config.TYPE;
 

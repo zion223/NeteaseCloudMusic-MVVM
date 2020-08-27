@@ -11,7 +11,6 @@ import android.text.style.ForegroundColorSpan;
 
 import androidx.annotation.Nullable;
 
-import com.imooc.lib_api.model.playlist.PlayListCommentEntity;
 import com.kunminx.architecture.ui.page.BaseActivity;
 import com.kunminx.architecture.ui.page.DataBindingConfig;
 import com.netease.music.BR;
@@ -19,8 +18,6 @@ import com.netease.music.R;
 import com.netease.music.data.config.TYPE;
 import com.netease.music.ui.page.adapter.MultipleSectionGedanCommentAdapter;
 import com.netease.music.ui.state.CommentViewModel;
-
-import java.util.ArrayList;
 
 //评论  音乐评论 歌单评论 专辑评论
 public class CommentActivity extends BaseActivity {

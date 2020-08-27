@@ -12,10 +12,10 @@ import android.provider.MediaStore.Files.FileColumns;
 
 
 import com.github.promeg.pinyinhelper.Pinyin;
-import com.imooc.lib_api.model.info.AlbumInfo;
-import com.imooc.lib_api.model.info.ArtistInfo;
-import com.imooc.lib_api.model.info.FolderInfo;
-import com.imooc.lib_api.model.info.MusicInfo;
+import com.netease.lib_api.model.info.AlbumInfo;
+import com.netease.lib_api.model.info.ArtistInfo;
+import com.netease.lib_api.model.info.FolderInfo;
+import com.netease.lib_api.model.info.MusicInfo;
 
 import java.io.File;
 import java.util.ArrayList;

@@ -19,8 +19,8 @@ package com.netease.music.ui.page.adapter;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 
-import com.imooc.lib_api.model.album.AlbumOrSongBean;
-import com.imooc.lib_api.model.playlist.MainRecommendPlayListBean;
+import com.netease.lib_api.model.album.AlbumOrSongBean;
+import com.netease.lib_api.model.playlist.MainRecommendPlayListBean;
 import com.netease.music.data.bean.LibraryInfo;
 import com.netease.music.data.bean.TestAlbum;
 

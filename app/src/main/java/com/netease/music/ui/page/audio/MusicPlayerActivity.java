@@ -24,9 +24,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.ActivityOptionsCompat;
 
-import com.imooc.lib_api.model.song.AudioBean;
+import com.netease.lib_api.model.song.AudioBean;
 import com.imooc.lib_audio.R;
-import com.imooc.lib_common_ui.lrc.LrcView;
+import com.netease.lib_common_ui.lrc.LrcView;
 import com.kunminx.architecture.utils.BarUtils;
 import com.netease.lib_audio.mediaplayer.core.AudioController;
 import com.netease.lib_audio.mediaplayer.core.CustomMediaPlayer;

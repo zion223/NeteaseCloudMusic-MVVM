@@ -10,7 +10,7 @@ import android.widget.LinearLayout;
 import androidx.databinding.BindingAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import com.imooc.lib_common_ui.navigator.CommonNavigatorCreater;
+import com.netease.lib_common_ui.navigator.CommonNavigatorCreater;
 import com.kunminx.architecture.utils.Utils;
 import com.netease.music.R;
 import com.netease.music.data.config.CHANNEL;

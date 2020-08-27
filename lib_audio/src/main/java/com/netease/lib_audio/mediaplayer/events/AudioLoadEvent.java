@@ -1,6 +1,6 @@
 package com.netease.lib_audio.mediaplayer.events;
 
-import com.imooc.lib_api.model.song.AudioBean;
+import com.netease.lib_api.model.song.AudioBean;
 
 public class AudioLoadEvent {
     public AudioBean mAudioBean;

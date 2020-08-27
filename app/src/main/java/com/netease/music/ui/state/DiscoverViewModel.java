@@ -3,8 +3,8 @@ package com.netease.music.ui.state;
 import androidx.databinding.ObservableField;
 import androidx.lifecycle.ViewModel;
 
-import com.imooc.lib_api.model.album.AlbumOrSongBean;
-import com.imooc.lib_api.model.banner.BannerBean;
+import com.netease.lib_api.model.album.AlbumOrSongBean;
+import com.netease.lib_api.model.banner.BannerBean;
 import com.kunminx.architecture.ui.adapter.SimpleDataBindingAdapter;
 import com.netease.music.data.config.TYPE;
 import com.netease.music.domain.request.DiscoverRequest;

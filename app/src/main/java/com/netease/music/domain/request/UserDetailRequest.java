@@ -2,14 +2,14 @@ package com.netease.music.domain.request;
 
 import androidx.lifecycle.MutableLiveData;
 
-import com.imooc.lib_api.model.user.FollowBean;
-import com.imooc.lib_api.model.user.UserDetailBean;
-import com.imooc.lib_api.model.user.UserEventBean;
-import com.imooc.lib_api.model.user.UserFollowedBean;
-import com.imooc.lib_api.model.user.UserFollowerBean;
-import com.imooc.lib_api.model.user.UserPlaylistBean;
-import com.imooc.lib_api.model.user.UserPlaylistEntity;
-import com.imooc.lib_network.ApiEngine;
+import com.netease.lib_api.model.user.FollowBean;
+import com.netease.lib_api.model.user.UserDetailBean;
+import com.netease.lib_api.model.user.UserEventBean;
+import com.netease.lib_api.model.user.UserFollowedBean;
+import com.netease.lib_api.model.user.UserFollowerBean;
+import com.netease.lib_api.model.user.UserPlaylistBean;
+import com.netease.lib_api.model.user.UserPlaylistEntity;
+import com.netease.lib_network.ApiEngine;
 import com.kunminx.architecture.domain.request.BaseRequest;
 
 import java.util.ArrayList;

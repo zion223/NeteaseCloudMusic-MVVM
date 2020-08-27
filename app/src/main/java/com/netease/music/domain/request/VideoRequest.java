@@ -2,13 +2,13 @@ package com.netease.music.domain.request;
 
 import androidx.lifecycle.MutableLiveData;
 
-import com.imooc.lib_api.model.mv.VideoBean;
-import com.imooc.lib_api.model.mv.VideoDetailBean;
-import com.imooc.lib_api.model.mv.VideoGroupBean;
-import com.imooc.lib_api.model.mv.VideoRelatedBean;
-import com.imooc.lib_api.model.mv.VideoUrlBean;
-import com.imooc.lib_api.model.playlist.PlayListCommentEntity;
-import com.imooc.lib_network.ApiEngine;
+import com.netease.lib_api.model.mv.VideoBean;
+import com.netease.lib_api.model.mv.VideoDetailBean;
+import com.netease.lib_api.model.mv.VideoGroupBean;
+import com.netease.lib_api.model.mv.VideoRelatedBean;
+import com.netease.lib_api.model.mv.VideoUrlBean;
+import com.netease.lib_api.model.playlist.PlayListCommentEntity;
+import com.netease.lib_network.ApiEngine;
 import com.kunminx.architecture.domain.request.BaseRequest;
 
 import java.util.ArrayList;

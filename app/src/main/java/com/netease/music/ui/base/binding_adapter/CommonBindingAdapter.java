@@ -26,27 +26,21 @@ import android.widget.TextView;
 
 import androidx.databinding.BindingAdapter;
 import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import com.ToxicBakery.viewpager.transforms.DefaultTransformer;
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.listener.OnItemClickListener;
-import com.bumptech.glide.Glide;
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.google.android.material.appbar.AppBarLayout;
-import com.imooc.lib_common_ui.bannder.HolderCreator;
-import com.imooc.lib_common_ui.widget.ArtistSortView;
-import com.imooc.lib_common_ui.widget.CaptchaView;
+import com.netease.lib_common_ui.bannder.HolderCreator;
+import com.netease.lib_common_ui.widget.ArtistSortView;
+import com.netease.lib_common_ui.widget.CaptchaView;
 import com.kunminx.architecture.utils.ClickUtils;
-import com.kunminx.architecture.utils.Utils;
 import com.netease.music.R;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
 import com.scwang.smart.refresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smart.refresh.layout.listener.OnRefreshListener;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

@@ -9,7 +9,7 @@ import android.text.Spanned;
 
 import androidx.annotation.Nullable;
 
-import com.imooc.lib_common_ui.utils.SpanUtil;
+import com.netease.lib_common_ui.utils.SpanUtil;
 import com.kunminx.architecture.ui.page.BaseActivity;
 import com.kunminx.architecture.ui.page.DataBindingConfig;
 import com.netease.music.BR;

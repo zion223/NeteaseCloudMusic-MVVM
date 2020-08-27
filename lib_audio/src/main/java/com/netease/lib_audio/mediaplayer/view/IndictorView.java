@@ -17,7 +17,7 @@ import com.netease.lib_audio.mediaplayer.core.AudioController;
 import com.netease.lib_audio.mediaplayer.events.AudioLoadEvent;
 import com.netease.lib_audio.mediaplayer.events.AudioPauseEvent;
 import com.netease.lib_audio.mediaplayer.events.AudioStartEvent;
-import com.imooc.lib_api.model.song.AudioBean;
+import com.netease.lib_api.model.song.AudioBean;
 import com.netease.lib_audio.mediaplayer.view.adapter.IndictorViewPager;
 import com.netease.lib_audio.mediaplayer.view.adapter.MusicPagerAdapter;
 

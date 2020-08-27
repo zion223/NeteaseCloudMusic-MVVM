@@ -8,10 +8,10 @@ import androidx.annotation.Nullable;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
-import com.imooc.lib_api.model.playlist.TopListDetailBean;
-import com.imooc.lib_common_ui.widget.ArtistSortView;
-import com.imooc.lib_image_loader.app.ImageLoaderManager;
-import com.imooc.lib_network.ApiEngine;
+import com.netease.lib_api.model.playlist.TopListDetailBean;
+import com.netease.lib_common_ui.widget.ArtistSortView;
+import com.netease.lib_image_loader.app.ImageLoaderManager;
+import com.netease.lib_network.ApiEngine;
 import com.kunminx.architecture.ui.page.BaseActivity;
 import com.kunminx.architecture.ui.page.DataBindingConfig;
 import com.netease.music.BR;

@@ -12,11 +12,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.imooc.lib_api.model.song.AudioBean;
+import com.netease.lib_api.model.song.AudioBean;
 import com.imooc.lib_audio.R;
-import com.imooc.lib_common_ui.utils.SharePreferenceUtil;
-import com.imooc.lib_common_ui.widget.CircleProgressButton;
-import com.imooc.lib_image_loader.app.ImageLoaderManager;
+import com.netease.lib_common_ui.utils.SharePreferenceUtil;
+import com.netease.lib_common_ui.widget.CircleProgressButton;
+import com.netease.lib_image_loader.app.ImageLoaderManager;
 import com.lxj.xpopup.XPopup;
 import com.netease.lib_audio.mediaplayer.core.AudioController;
 import com.netease.lib_audio.mediaplayer.events.AudioLoadEvent;

@@ -12,16 +12,14 @@ import androidx.annotation.Nullable;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
-import com.imooc.lib_api.HttpConstants;
-import com.imooc.lib_api.model.playlist.DailyRecommendBean;
-import com.imooc.lib_api.model.song.AudioBean;
-import com.imooc.lib_api.model.song.CommentLikeBean;
-import com.imooc.lib_api.model.user.UserEventBean;
-import com.imooc.lib_api.model.user.UserEventJsonBean;
-import com.imooc.lib_common_ui.utils.GsonUtil;
-import com.imooc.lib_image_loader.app.ImageLoaderManager;
-import com.imooc.lib_network.ApiEngine;
-import com.imooc.lib_video.videoplayer.CustomJzVideoView;
+import com.netease.lib_api.model.playlist.DailyRecommendBean;
+import com.netease.lib_api.model.song.AudioBean;
+import com.netease.lib_api.model.user.UserEventBean;
+import com.netease.lib_api.model.user.UserEventJsonBean;
+import com.netease.lib_common_ui.utils.GsonUtil;
+import com.netease.lib_image_loader.app.ImageLoaderManager;
+import com.netease.lib_network.ApiEngine;
+import com.netease.lib_video.videoplayer.CustomJzVideoView;
 import com.netease.lib_audio.app.AudioHelper;
 import com.netease.music.R;
 import com.netease.music.data.config.TYPE;
@@ -35,7 +33,6 @@ import java.util.List;
 import cn.jzvd.Jzvd;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 //用户动态适配器

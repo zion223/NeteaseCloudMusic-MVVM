@@ -8,8 +8,8 @@ import androidx.databinding.ObservableLong;
 import androidx.lifecycle.ViewModel;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.imooc.lib_api.model.user.UserDetailBean;
-import com.imooc.lib_api.model.user.UserPlaylistBean;
+import com.netease.lib_api.model.user.UserDetailBean;
+import com.netease.lib_api.model.user.UserPlaylistBean;
 import com.kunminx.architecture.utils.Utils;
 import com.netease.music.R;
 import com.netease.music.domain.request.UserDetailRequest;

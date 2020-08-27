@@ -2,8 +2,8 @@ package com.netease.music.domain.request;
 
 import androidx.lifecycle.MutableLiveData;
 
-import com.imooc.lib_api.model.playlist.TopListDetailBean;
-import com.imooc.lib_network.ApiEngine;
+import com.netease.lib_api.model.playlist.TopListDetailBean;
+import com.netease.lib_network.ApiEngine;
 import com.kunminx.architecture.domain.request.BaseRequest;
 
 import java.util.List;

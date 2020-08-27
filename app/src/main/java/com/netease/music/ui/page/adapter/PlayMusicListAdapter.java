@@ -4,8 +4,8 @@ import android.content.Context;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
-import com.imooc.lib_api.model.song.SongDetailBean;
-import com.imooc.lib_common_ui.dialog.MusicPopUpDialog;
+import com.netease.lib_api.model.song.SongDetailBean;
+import com.netease.lib_common_ui.dialog.MusicPopUpDialog;
 import com.netease.music.R;
 
 import org.jetbrains.annotations.NotNull;

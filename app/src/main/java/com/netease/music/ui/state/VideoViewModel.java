@@ -4,7 +4,7 @@ import androidx.databinding.ObservableField;
 import androidx.lifecycle.ViewModel;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.imooc.lib_api.model.mv.VideoBean;
+import com.netease.lib_api.model.mv.VideoBean;
 import com.netease.music.domain.request.VideoRequest;
 
 import java.util.List;

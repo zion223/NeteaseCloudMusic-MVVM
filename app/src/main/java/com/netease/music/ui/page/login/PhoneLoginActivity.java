@@ -6,9 +6,9 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 
-import com.imooc.lib_common_ui.utils.SharePreferenceUtil;
-import com.imooc.lib_common_ui.utils.ValidateUtils;
-import com.imooc.lib_common_ui.widget.CaptchaView;
+import com.netease.lib_common_ui.utils.SharePreferenceUtil;
+import com.netease.lib_common_ui.utils.ValidateUtils;
+import com.netease.lib_common_ui.widget.CaptchaView;
 import com.kunminx.architecture.ui.page.BaseActivity;
 import com.kunminx.architecture.ui.page.DataBindingConfig;
 import com.kunminx.architecture.utils.Utils;

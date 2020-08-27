@@ -5,7 +5,7 @@ import androidx.annotation.Nullable;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
-import com.imooc.lib_api.model.dj.DjProgramBean;
+import com.netease.lib_api.model.dj.DjProgramBean;
 import com.netease.music.R;
 import com.netease.music.util.SearchUtil;
 import com.netease.music.util.TimeUtil;

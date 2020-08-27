@@ -9,7 +9,7 @@
 
         <variable
             name="listener"
-            type="com.imooc.lib_common_ui.widget.ArtistSortView.OnChooseArtistSortListener" />
+            type="com.netease.lib_common_ui.widget.ArtistSortView.OnChooseArtistSortListener" />
 
         <variable
             name="adapter"
@@ -52,7 +52,7 @@
         </LinearLayout>
 
 
-        <com.imooc.lib_common_ui.widget.ArtistSortView
+        <com.netease.lib_common_ui.widget.ArtistSortView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             onChooseAreaListener="@{listener}" />

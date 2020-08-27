@@ -164,7 +164,7 @@
                         android:paddingLeft="15dp"
                         android:paddingRight="15dp">
 
-                        <com.imooc.lib_common_ui.VerticalItemView
+                        <com.netease.lib_common_ui.VerticalItemView
                             android:id="@+id/icon_notification_msg"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -184,7 +184,7 @@
                             app:tipTextColor="@color/color_white"
                             app:tipTextSize="7sp" />
 
-                        <com.imooc.lib_common_ui.VerticalItemView
+                        <com.netease.lib_common_ui.VerticalItemView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -202,7 +202,7 @@
                             app:tipTextColor="@color/color_white"
                             app:tipTextSize="7sp" />
 
-                        <com.imooc.lib_common_ui.VerticalItemView
+                        <com.netease.lib_common_ui.VerticalItemView
                             android:id="@+id/icon_notification_listen"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -221,7 +221,7 @@
                             app:tipTextColor="@color/color_white"
                             app:tipTextSize="7sp" />
 
-                        <com.imooc.lib_common_ui.VerticalItemView
+                        <com.netease.lib_common_ui.VerticalItemView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -247,7 +247,7 @@
                         android:layout_margin="20dp"
                         android:background="#dddddd" />
 
-                    <com.imooc.lib_common_ui.HornizeItemView
+                    <com.netease.lib_common_ui.HornizeItemView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:hIcon="@drawable/ic_perform"
@@ -257,7 +257,7 @@
                         app:rightText="周杰伦青岛"
                         app:tileText="演出" />
 
-                    <com.imooc.lib_common_ui.HornizeItemView
+                    <com.netease.lib_common_ui.HornizeItemView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:hIcon="@drawable/ic_shop"
@@ -267,7 +267,7 @@
                         app:rightText="Freelace耳机728元"
                         app:tileText="商城" />
 
-                    <com.imooc.lib_common_ui.HornizeItemView
+                    <com.netease.lib_common_ui.HornizeItemView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:hIcon="@drawable/ic_position"
@@ -276,7 +276,7 @@
                         app:paddingRight="30dp"
                         app:tileText="附近的人" />
 
-                    <com.imooc.lib_common_ui.HornizeItemView
+                    <com.netease.lib_common_ui.HornizeItemView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:hIcon="@drawable/ic_lingsheng"
@@ -291,7 +291,7 @@
                         android:layout_margin="20dp"
                         android:background="#dddddd" />
 
-                    <com.imooc.lib_common_ui.HornizeItemView
+                    <com.netease.lib_common_ui.HornizeItemView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:hIcon="@drawable/ic_timer"
@@ -300,7 +300,7 @@
                         app:paddingRight="30dp"
                         app:tileText="定时停止播放" />
 
-                    <com.imooc.lib_common_ui.HornizeItemView
+                    <com.netease.lib_common_ui.HornizeItemView
                         android:id="@+id/home_qrcode"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -310,7 +310,7 @@
                         app:paddingRight="30dp"
                         app:tileText="扫一扫" />
 
-                    <com.imooc.lib_common_ui.HornizeItemView
+                    <com.netease.lib_common_ui.HornizeItemView
                         android:id="@+id/home_music"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -320,7 +320,7 @@
                         app:paddingRight="30dp"
                         app:tileText="音乐闹钟" />
 
-                    <com.imooc.lib_common_ui.HornizeItemView
+                    <com.netease.lib_common_ui.HornizeItemView
                         android:id="@+id/online_music_view"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -330,7 +330,7 @@
                         app:paddingRight="30dp"
                         app:tileText="在线听歌免流量" />
 
-                    <com.imooc.lib_common_ui.HornizeItemView
+                    <com.netease.lib_common_ui.HornizeItemView
                         android:id="@+id/icon_cloud_music"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -341,7 +341,7 @@
                         onClickWithDebouncing="@{() -> click.searchCloud()}"
                         app:tileText="音乐云盘" />
 
-                    <com.imooc.lib_common_ui.HornizeItemView
+                    <com.netease.lib_common_ui.HornizeItemView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:hIcon="@drawable/ic_discount"
@@ -350,7 +350,7 @@
                         app:paddingRight="30dp"
                         app:tileText="优惠卷" />
 
-                    <com.imooc.lib_common_ui.HornizeItemView
+                    <com.netease.lib_common_ui.HornizeItemView
                         android:id="@+id/check_update_view"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

@@ -4,9 +4,9 @@ import androidx.databinding.ObservableField;
 import androidx.databinding.ObservableInt;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.imooc.lib_api.model.user.LoginBean;
-import com.imooc.lib_common_ui.utils.GsonUtil;
-import com.imooc.lib_common_ui.utils.SharePreferenceUtil;
+import com.netease.lib_api.model.user.LoginBean;
+import com.netease.lib_common_ui.utils.GsonUtil;
+import com.netease.lib_common_ui.utils.SharePreferenceUtil;
 import com.kunminx.architecture.utils.Utils;
 import com.netease.music.domain.request.MineRequest;
 import com.netease.music.ui.state.load.BaseLoadingViewModel;

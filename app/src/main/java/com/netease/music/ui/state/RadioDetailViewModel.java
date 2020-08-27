@@ -6,8 +6,8 @@ import androidx.databinding.ObservableInt;
 import androidx.lifecycle.ViewModel;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.imooc.lib_api.model.dj.DjDetailBean;
-import com.imooc.lib_api.model.dj.DjProgramBean;
+import com.netease.lib_api.model.dj.DjDetailBean;
+import com.netease.lib_api.model.dj.DjProgramBean;
 import com.netease.music.domain.request.RadioRequest;
 
 import java.util.List;

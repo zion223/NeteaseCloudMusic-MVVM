@@ -4,9 +4,9 @@ package com.netease.music.ui.state;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.imooc.lib_api.model.user.LoginBean;
-import com.imooc.lib_common_ui.utils.GsonUtil;
-import com.imooc.lib_common_ui.utils.SharePreferenceUtil;
+import com.netease.lib_api.model.user.LoginBean;
+import com.netease.lib_common_ui.utils.GsonUtil;
+import com.netease.lib_common_ui.utils.SharePreferenceUtil;
 import com.kunminx.architecture.utils.Utils;
 
 

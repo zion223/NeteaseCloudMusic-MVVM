@@ -6,7 +6,7 @@ import androidx.databinding.BindingAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
-import com.imooc.lib_common_ui.navigator.CommonNavigatorCreater;
+import com.netease.lib_common_ui.navigator.CommonNavigatorCreater;
 import com.kunminx.architecture.ui.adapter.CommonViewPagerAdapter;
 import com.netease.music.R;
 

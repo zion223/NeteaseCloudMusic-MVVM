@@ -16,8 +16,8 @@ import com.imooc.lib_audio.R;
 import com.netease.lib_audio.app.AudioHelper;
 import com.netease.lib_audio.mediaplayer.core.AudioController;
 import com.netease.music.service.MusicService;
-import com.imooc.lib_api.model.song.AudioBean;
-import com.imooc.lib_image_loader.app.ImageLoaderManager;
+import com.netease.lib_api.model.song.AudioBean;
+import com.netease.lib_image_loader.app.ImageLoaderManager;
 
 public class NotificationHelper {
 

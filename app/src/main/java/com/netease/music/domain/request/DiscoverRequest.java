@@ -3,14 +3,14 @@ package com.netease.music.domain.request;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.imooc.lib_api.model.album.AlbumOrSongBean;
-import com.imooc.lib_api.model.banner.BannerBean;
-import com.imooc.lib_api.model.playlist.DailyRecommendBean;
-import com.imooc.lib_api.model.playlist.MainRecommendPlayListBean;
-import com.imooc.lib_api.model.search.AlbumSearchBean;
-import com.imooc.lib_api.model.song.NewSongBean;
-import com.imooc.lib_api.model.song.SongDetailBean;
-import com.imooc.lib_network.ApiEngine;
+import com.netease.lib_api.model.album.AlbumOrSongBean;
+import com.netease.lib_api.model.banner.BannerBean;
+import com.netease.lib_api.model.playlist.DailyRecommendBean;
+import com.netease.lib_api.model.playlist.MainRecommendPlayListBean;
+import com.netease.lib_api.model.search.AlbumSearchBean;
+import com.netease.lib_api.model.song.NewSongBean;
+import com.netease.lib_api.model.song.SongDetailBean;
+import com.netease.lib_network.ApiEngine;
 import com.kunminx.architecture.domain.request.BaseRequest;
 import com.netease.music.data.config.TYPE;
 

@@ -83,7 +83,7 @@
         android:layout_below="@id/title_layout"
         android:visibility="visible" />
 
-    <com.imooc.lib_common_ui.lrc.LrcView
+    <com.netease.lib_common_ui.lrc.LrcView
         android:id="@+id/lrc_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -3,9 +3,9 @@ package com.netease.music.domain.request;
 import androidx.lifecycle.MutableLiveData;
 
 import com.chad.library.adapter.base.entity.node.BaseNode;
-import com.imooc.lib_api.model.user.UserPlayListHeader;
-import com.imooc.lib_api.model.user.UserPlaylistBean;
-import com.imooc.lib_network.ApiEngine;
+import com.netease.lib_api.model.user.UserPlayListHeader;
+import com.netease.lib_api.model.user.UserPlaylistBean;
+import com.netease.lib_network.ApiEngine;
 import com.kunminx.architecture.domain.request.BaseRequest;
 
 import java.util.ArrayList;
@@ -13,7 +13,6 @@ import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 public class MineRequest extends BaseRequest {

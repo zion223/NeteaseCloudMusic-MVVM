@@ -5,12 +5,12 @@ import android.annotation.SuppressLint;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.imooc.lib_api.model.album.AlbumDetailBean;
-import com.imooc.lib_api.model.album.AlbumDynamicBean;
-import com.imooc.lib_api.model.notification.CommonMessageBean;
-import com.imooc.lib_api.model.playlist.PlaylistDetailBean;
-import com.imooc.lib_api.model.song.SongDetailBean;
-import com.imooc.lib_network.ApiEngine;
+import com.netease.lib_api.model.album.AlbumDetailBean;
+import com.netease.lib_api.model.album.AlbumDynamicBean;
+import com.netease.lib_api.model.notification.CommonMessageBean;
+import com.netease.lib_api.model.playlist.PlaylistDetailBean;
+import com.netease.lib_api.model.song.SongDetailBean;
+import com.netease.lib_network.ApiEngine;
 import com.kunminx.architecture.domain.request.BaseRequest;
 import com.netease.music.data.config.TYPE;
 

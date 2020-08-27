@@ -7,11 +7,10 @@ import android.os.Handler;
 
 import androidx.annotation.Nullable;
 
-import com.imooc.lib_api.HttpConstants;
-import com.imooc.lib_api.model.playlist.PlaylistDetailBean;
-import com.imooc.lib_api.model.search.AlbumSearchBean;
-import com.imooc.lib_api.model.song.AudioBean;
-import com.imooc.lib_api.model.song.SongDetailBean;
+import com.netease.lib_api.model.playlist.PlaylistDetailBean;
+import com.netease.lib_api.model.search.AlbumSearchBean;
+import com.netease.lib_api.model.song.AudioBean;
+import com.netease.lib_api.model.song.SongDetailBean;
 import com.kunminx.architecture.ui.page.BaseActivity;
 import com.kunminx.architecture.ui.page.DataBindingConfig;
 import com.netease.lib_audio.app.AudioHelper;
@@ -21,7 +20,6 @@ import com.netease.music.data.config.TYPE;
 import com.netease.music.ui.page.adapter.PlayMusicListAdapter;
 import com.netease.music.ui.page.discover.user.UserDetailActivity;
 import com.netease.music.ui.state.SonglistDeatilViewModel;
-import com.netease.music.util.TimeUtil;
 
 public class SongListDetailActivity extends BaseActivity {
 

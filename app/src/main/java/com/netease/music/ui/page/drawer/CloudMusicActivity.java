@@ -8,8 +8,8 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
-import com.imooc.lib_api.model.notification.UserCloudBean;
-import com.imooc.lib_api.model.song.SongDetailBean;
+import com.netease.lib_api.model.notification.UserCloudBean;
+import com.netease.lib_api.model.song.SongDetailBean;
 import com.kunminx.architecture.ui.page.BaseActivity;
 import com.kunminx.architecture.ui.page.DataBindingConfig;
 import com.kunminx.architecture.utils.Utils;

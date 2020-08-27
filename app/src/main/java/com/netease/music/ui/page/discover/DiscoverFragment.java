@@ -6,8 +6,8 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 
 import com.bigkoo.convenientbanner.listener.OnItemClickListener;
-import com.imooc.lib_api.model.banner.BannerBean;
-import com.imooc.lib_api.model.song.AudioBean;
+import com.netease.lib_api.model.banner.BannerBean;
+import com.netease.lib_api.model.song.AudioBean;
 import com.kunminx.architecture.ui.page.BaseFragment;
 import com.kunminx.architecture.ui.page.DataBindingConfig;
 import com.netease.lib_audio.app.AudioHelper;

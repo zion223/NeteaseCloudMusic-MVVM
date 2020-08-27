@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
-import com.imooc.lib_api.model.search.HotSearchDetailBean;
+import com.netease.lib_api.model.search.HotSearchDetailBean;
 import com.kunminx.architecture.ui.page.BaseActivity;
 import com.kunminx.architecture.ui.page.DataBindingConfig;
 import com.kunminx.architecture.utils.Utils;

@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.imooc.lib_common_ui.utils.SharePreferenceUtil;
+import com.netease.lib_common_ui.utils.SharePreferenceUtil;
 import com.kunminx.architecture.utils.BarUtils;
 import com.kunminx.architecture.utils.Utils;
 import com.netease.music.MainActivity;

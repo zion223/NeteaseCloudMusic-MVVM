@@ -13,7 +13,7 @@
 
         <variable
             name="listener"
-            type="com.imooc.lib_common_ui.widget.CaptchaView.OnInputListener" />
+            type="com.netease.lib_common_ui.widget.CaptchaView.OnInputListener" />
     </data>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -213,7 +213,7 @@
             android:layout_marginBottom="20dp"
             android:text='@{vm.phone.length() >= 11 ? vm.phone.substring(0,3) + "****" + vm.phone.substring(7) : ""}' />
 
-        <com.imooc.lib_common_ui.widget.CaptchaView
+        <com.netease.lib_common_ui.widget.CaptchaView
             android:id="@+id/captcha_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

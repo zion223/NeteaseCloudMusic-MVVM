@@ -12,8 +12,7 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 
-import com.imooc.lib_api.model.dj.DjDetailBean;
-import com.imooc.lib_common_ui.dialog.UnsubscribeRadioDialog;
+import com.netease.lib_api.model.dj.DjDetailBean;
 import com.kunminx.architecture.ui.page.BaseActivity;
 import com.kunminx.architecture.ui.page.DataBindingConfig;
 import com.kunminx.architecture.utils.BarUtils;
@@ -21,7 +20,6 @@ import com.netease.music.BR;
 import com.netease.music.R;
 import com.netease.music.databinding.ItemRadioProgramHeaderBinding;
 import com.netease.music.ui.page.adapter.RadioProgramAdapter;
-import com.netease.music.ui.page.discover.square.detail.SongListDetailActivity;
 import com.netease.music.ui.page.discover.user.UserDetailActivity;
 import com.netease.music.ui.state.RadioDetailViewModel;
 

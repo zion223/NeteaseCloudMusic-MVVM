@@ -10,8 +10,8 @@ import androidx.annotation.Nullable;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
-import com.imooc.lib_api.model.search.HotSearchDetailBean;
-import com.imooc.lib_image_loader.app.ImageLoaderManager;
+import com.netease.lib_api.model.search.HotSearchDetailBean;
+import com.netease.lib_image_loader.app.ImageLoaderManager;
 import com.netease.music.R;
 
 import java.util.List;

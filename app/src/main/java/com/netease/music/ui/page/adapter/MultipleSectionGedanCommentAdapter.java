@@ -8,10 +8,10 @@ import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseSectionQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
-import com.imooc.lib_api.model.playlist.PlayListCommentEntity;
-import com.imooc.lib_api.model.song.MusicCommentBean;
-import com.imooc.lib_image_loader.app.ImageLoaderManager;
-import com.imooc.lib_network.ApiEngine;
+import com.netease.lib_api.model.playlist.PlayListCommentEntity;
+import com.netease.lib_api.model.song.MusicCommentBean;
+import com.netease.lib_image_loader.app.ImageLoaderManager;
+import com.netease.lib_network.ApiEngine;
 import com.netease.music.R;
 import com.netease.music.ui.page.discover.user.UserDetailActivity;
 import com.netease.music.util.AnimUtil;

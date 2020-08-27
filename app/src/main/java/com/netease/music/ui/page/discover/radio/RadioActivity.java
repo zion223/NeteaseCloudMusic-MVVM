@@ -3,16 +3,14 @@ package com.netease.music.ui.page.discover.radio;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
-import com.imooc.lib_api.model.dj.DjRecommendBean;
-import com.imooc.lib_image_loader.app.ImageLoaderManager;
+import com.netease.lib_api.model.dj.DjRecommendBean;
+import com.netease.lib_image_loader.app.ImageLoaderManager;
 import com.kunminx.architecture.ui.page.BaseActivity;
 import com.kunminx.architecture.ui.page.DataBindingConfig;
 import com.netease.music.BR;
