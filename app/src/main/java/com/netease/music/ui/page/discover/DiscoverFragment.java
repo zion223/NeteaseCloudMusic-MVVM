@@ -120,7 +120,7 @@ public class DiscoverFragment extends BaseFragment {
         public void changeAlbumOrSong() {
             if (mDiscoverViewModel.type.get().getValue() == TYPE.ALBUM.getValue()) {
                 //切换到新歌
-                mDiscoverViewModel.type.set(TYPE.PLAYLIST);
+                mDiscoverViewModel.type.set(TYPE.SONG);
                 mDiscoverViewModel.currentAlbumOrSongLiveData.set(mDiscoverViewModel.albumOrSongLiveData.get().subList(3, 6));
             } else {
                 //切换到新碟
@@ -131,7 +131,7 @@ public class DiscoverFragment extends BaseFragment {
 
         public void clickAlbumOrSongDetail() {
             //新歌推荐
-            if (mDiscoverViewModel.type.get() == TYPE.PLAYLIST) {
+            if (mDiscoverViewModel.type.get() == TYPE.SONG) {
 
             } else {
                 //新碟上架
