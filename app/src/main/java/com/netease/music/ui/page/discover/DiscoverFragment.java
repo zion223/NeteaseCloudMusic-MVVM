@@ -7,8 +7,10 @@ import androidx.annotation.Nullable;
 
 import com.bigkoo.convenientbanner.listener.OnItemClickListener;
 import com.imooc.lib_api.model.banner.BannerBean;
+import com.imooc.lib_api.model.song.AudioBean;
 import com.kunminx.architecture.ui.page.BaseFragment;
 import com.kunminx.architecture.ui.page.DataBindingConfig;
+import com.netease.lib_audio.app.AudioHelper;
 import com.netease.music.BR;
 import com.netease.music.R;
 import com.netease.music.data.config.TYPE;
@@ -69,7 +71,8 @@ public class DiscoverFragment extends BaseFragment {
             //前三位是新碟的数据
             mDiscoverViewModel.currentAlbumOrSongLiveData.set(albumOrSongBeans.subList(0, 3));
         });
-
+        //Banner中的歌曲
+        mDiscoverViewModel.discoverRequest.getSongDetailLiveData().observe(this, songDetailBean -> AudioHelper.addAudio(AudioBean.convertSongToAudioBean(songDetailBean)));
         //请求Banner数据
         mDiscoverViewModel.discoverRequest.requestBannerData();
         //请求歌单数据
@@ -87,27 +90,14 @@ public class DiscoverFragment extends BaseFragment {
             //歌曲
             if (item.getTargetType() == 4 || item.getTargetType() == 1) {
                 long songId = item.getTargetId();
-//                RequestCenter.getSongDetail(String.valueOf(songId), new DisposeDataListener() {
-//                    @Override
-//                    public void onSuccess(Object responseObj) {
-//                        SongDetailBean songBean = (SongDetailBean) responseObj;
-//                        //只有一首歌
-//                        SongDetailBean.SongsBean bean = songBean.getSongs().get(0);
-//                        String songPlayUrl = HttpConstants.getSongPlayUrl(bean.getId());
-//                        AudioHelper.addAudio(getProxyActivity(), new AudioBean(String.valueOf(bean.getId()), songPlayUrl, bean.getName(), bean.getAr().get(0).getName(), bean.getAl().getName(), bean.getAl().getName(), bean.getAl().getPicUrl(), TimeUtil.getTimeNoYMDH(bean.getDt())));
-//                    }
-//
-//                    @Override
-//                    public void onFailure(Object reasonObj) {
-//
-//                    }
-//                });
+                mDiscoverViewModel.discoverRequest.requestSongDetailData(songId);
             } else if (item.getTargetType() == 10) {
                 //专辑
-                //getParentDelegate().getSupportDelegate().start(SongListDetailDelegate.newInstance(ALBUM, item.getTargetId()));
+                SongListDetailActivity.startActivity(getContext(), TYPE.ALBUM_ID, item.getTargetId(), "");
             }
             //网页
             if (item.getUrl() != null) {
+                //TODO
                 //getParentDelegate().getSupportDelegate().start(WebContainerDelegate.newInstance(item.getUrl()));
             }
         }

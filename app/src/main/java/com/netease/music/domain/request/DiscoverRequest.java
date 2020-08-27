@@ -9,6 +9,7 @@ import com.imooc.lib_api.model.playlist.DailyRecommendBean;
 import com.imooc.lib_api.model.playlist.MainRecommendPlayListBean;
 import com.imooc.lib_api.model.search.AlbumSearchBean;
 import com.imooc.lib_api.model.song.NewSongBean;
+import com.imooc.lib_api.model.song.SongDetailBean;
 import com.imooc.lib_network.ApiEngine;
 import com.kunminx.architecture.domain.request.BaseRequest;
 import com.netease.music.data.config.TYPE;
@@ -20,6 +21,7 @@ import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 public class DiscoverRequest extends BaseRequest {
@@ -28,6 +30,8 @@ public class DiscoverRequest extends BaseRequest {
     private MutableLiveData<BannerBean> mBannerLiveData;
     //推荐歌曲数据
     private MutableLiveData<List<MainRecommendPlayListBean.RecommendBean>> mRecommendPlayListLiveData;
+    //歌曲详情
+    private MutableLiveData<SongDetailBean.SongsBean> mSongDetailLiveData;
 
     //新歌和新碟数据
     private MutableLiveData<List<AlbumOrSongBean>> mAlbumOrSongLiveData;
@@ -51,6 +55,13 @@ public class DiscoverRequest extends BaseRequest {
             mRecommendPlayListLiveData = new MutableLiveData<>();
         }
         return mRecommendPlayListLiveData;
+    }
+
+    public MutableLiveData<SongDetailBean.SongsBean> getSongDetailLiveData() {
+        if (mSongDetailLiveData == null) {
+            mSongDetailLiveData = new MutableLiveData<>();
+        }
+        return mSongDetailLiveData;
     }
 
     public void requestBannerData() {
@@ -143,6 +154,18 @@ public class DiscoverRequest extends BaseRequest {
                 .subscribe(albumOrSongBeans -> {
                     if (albumOrSongBeans.size() >= 5) {
                         mAlbumOrSongLiveData.postValue(albumOrSongBeans);
+                    }
+                });
+    }
+
+    public void requestSongDetailData(long id) {
+        ApiEngine.getInstance().getApiService().getSongDetail(String.valueOf(id))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<SongDetailBean>() {
+                    @Override
+                    public void accept(SongDetailBean songDetailBean) throws Exception {
+                        mSongDetailLiveData.postValue(songDetailBean.getSongs().get(0));
                     }
                 });
     }
