@@ -1,5 +1,6 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
 apply from: this.rootProject.file('base.gradle')
+
 buildscript {
     repositories {
         maven{ url 'https://maven.aliyun.com/repository/public/' }

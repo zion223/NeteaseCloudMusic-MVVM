@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="Gradle: me.yokeyword:fragmentation:1.2.4@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/24d0371a41ddfbe258ffbac10627a6fe/jetified-fragmentation-1.2.4/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/24d0371a41ddfbe258ffbac10627a6fe/jetified-fragmentation-1.2.4/res" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/me.yokeyword/fragmentation/1.2.4/67bdee62cb0f65a7c5f7454eb6880db1def56496/fragmentation-1.2.4-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/me.yokeyword/fragmentation/1.2.4/e7c87fd6d727ec325c7d86555acba2ca1bc73a0/fragmentation-1.2.4-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

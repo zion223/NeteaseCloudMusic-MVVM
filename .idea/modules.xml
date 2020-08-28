@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/NeteaseCloudMusic.iml" filepath="$PROJECT_DIR$/.idea/modules/NeteaseCloudMusic.iml" group="NeteaseCloudMusic" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/app.iml" group="NeteaseCloudMusic/app" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/architecture/architecture.iml" filepath="$PROJECT_DIR$/.idea/modules/architecture/architecture.iml" group="NeteaseCloudMusic/architecture" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lib_api/lib_api.iml" filepath="$PROJECT_DIR$/.idea/modules/lib_api/lib_api.iml" group="NeteaseCloudMusic/lib_api" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lib_audio/lib_audio.iml" filepath="$PROJECT_DIR$/.idea/modules/lib_audio/lib_audio.iml" group="NeteaseCloudMusic/lib_audio" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lib_common_ui/lib_common_ui.iml" filepath="$PROJECT_DIR$/.idea/modules/lib_common_ui/lib_common_ui.iml" group="NeteaseCloudMusic/lib_common_ui" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lib_image_loader/lib_image_loader.iml" filepath="$PROJECT_DIR$/.idea/modules/lib_image_loader/lib_image_loader.iml" group="NeteaseCloudMusic/lib_image_loader" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lib_network/lib_network.iml" filepath="$PROJECT_DIR$/.idea/modules/lib_network/lib_network.iml" group="NeteaseCloudMusic/lib_network" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lib_video/lib_video.iml" filepath="$PROJECT_DIR$/.idea/modules/lib_video/lib_video.iml" group="NeteaseCloudMusic/lib_video" />
+    </modules>
+  </component>
+</project>
