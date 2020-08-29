@@ -32,6 +32,6 @@ dependencies {
     //rxjava库
     implementation this.rootProject.depsLibs.rxjava
     implementation this.rootProject.depsLibs.rxandroid
-    compileOnly project(':lib_api')
     implementation project(':architecture')
+	compileOnly project(':lib_api')
 }
