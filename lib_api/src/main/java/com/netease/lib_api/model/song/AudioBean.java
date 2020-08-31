@@ -5,7 +5,6 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
-import com.netease.lib_api.HttpConstants;
 import com.netease.lib_api.model.playlist.DailyRecommendBean;
 
 import org.jetbrains.annotations.NotNull;
@@ -73,12 +72,12 @@ public class AudioBean {
 
     //将歌单中的SongsBean转化成AudioBean
     public static AudioBean convertSongToAudioBean(SongDetailBean.SongsBean item) {
-        return new AudioBean(String.valueOf(item.getId()), HttpConstants.getSongPlayUrl(item.getId()), item.getName(), item.getAr().get(0).getName(), item.getAl().getName(), item.getAl().getName(), item.getAl().getPicUrl(), new SimpleDateFormat("mm:ss", Locale.getDefault()).format(item.getDt()));
+        return new AudioBean(String.valueOf(item.getId()), getSongPlayUrl(item.getId()), item.getName(), item.getAr().get(0).getName(), item.getAl().getName(), item.getAl().getName(), item.getAl().getPicUrl(), new SimpleDateFormat("mm:ss", Locale.getDefault()).format(item.getDt()));
     }
 
     //将动态中的RecommendBean转化成AudioBean
     public static AudioBean convertSongToAudioBean(DailyRecommendBean.RecommendBean item) {
-        return new AudioBean(String.valueOf(item.getId()), HttpConstants.getSongPlayUrl(item.getId()), item.getName(), item.getArtists().get(0).getName(), item.getAlbum().getName(), item.getAlbum().getName(), item.getAlbum().getPicUrl(), new SimpleDateFormat("mm:ss", Locale.getDefault()).format(item.getDuration()));
+        return new AudioBean(String.valueOf(item.getId()), getSongPlayUrl(item.getId()), item.getName(), item.getArtists().get(0).getName(), item.getAlbum().getName(), item.getAlbum().getName(), item.getAlbum().getPicUrl(), new SimpleDateFormat("mm:ss", Locale.getDefault()).format(item.getDuration()));
     }
 
     public int getUid() {
@@ -184,5 +183,10 @@ public class AudioBean {
                 ", albumPic='" + albumPic + '\'' +
                 ", totalTime='" + totalTime + '\'' +
                 '}';
+    }
+
+
+    private static String getSongPlayUrl(long id) {
+        return "https://music.163.com/song/media/outer/url?id=" + id + ".mp3";
     }
 }
