@@ -6,6 +6,8 @@ import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
 import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
 import com.google.gson.Gson;
 import com.kunminx.architecture.utils.Utils;
+import com.netease.lib_network.interceptor.NetWorkInterceptor;
+import com.netease.lib_network.interceptor.ResponseInterceptor;
 
 import java.util.concurrent.TimeUnit;
 

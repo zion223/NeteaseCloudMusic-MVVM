@@ -1,4 +1,4 @@
-package com.netease.lib_network;
+package com.netease.lib_network.interceptor;
 
 
 import android.util.Log;
@@ -17,7 +17,7 @@ import okhttp3.ResponseBody;
 import okio.Buffer;
 import okio.BufferedSource;
 
-class ResponseInterceptor implements Interceptor {
+public class ResponseInterceptor implements Interceptor {
     private static final String TAG = "ResponseInterceptor";
 
     private final Charset UTF8 = StandardCharsets.UTF_8;
