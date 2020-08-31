@@ -13,7 +13,8 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.imooc.lib_common_ui.R;
+
+import com.netease.lib_common_ui.R;
 
 import java.util.ArrayList;
 import java.util.List;

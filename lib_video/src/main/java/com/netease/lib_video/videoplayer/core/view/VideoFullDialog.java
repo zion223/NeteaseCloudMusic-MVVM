@@ -11,7 +11,7 @@ import android.view.WindowManager;
 import android.view.animation.LinearInterpolator;
 import android.widget.RelativeLayout;
 
-import com.imooc.lib_video.R;
+import com.netease.lib_video.R;
 import com.netease.lib_video.videoplayer.core.VideoAdSlot;
 import com.netease.lib_video.videoplayer.utils.Utils;
 

@@ -11,12 +11,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
-import com.imooc.lib_audio.R;
 import com.lxj.xpopup.core.CenterPopupView;
 import com.netease.lib_api.model.user.UserPlaylistBean;
 import com.netease.lib_common_ui.utils.SharePreferenceUtil;
 import com.netease.lib_image_loader.app.ImageLoaderManager;
 import com.netease.lib_network.ApiEngine;
+import com.netease.music.R;
 
 import java.util.List;
 

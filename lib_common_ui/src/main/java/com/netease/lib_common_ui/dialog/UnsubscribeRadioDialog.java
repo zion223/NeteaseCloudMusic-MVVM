@@ -5,8 +5,8 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 
-import com.imooc.lib_common_ui.R;
 import com.lxj.xpopup.core.CenterPopupView;
+import com.netease.lib_common_ui.R;
 
 //取消订阅电台
 public class UnsubscribeRadioDialog extends CenterPopupView {
@@ -16,6 +16,10 @@ public class UnsubscribeRadioDialog extends CenterPopupView {
     public UnsubscribeRadioDialog(@NonNull Context context, IConfirmListener listener) {
         super(context);
         this.listener = listener;
+    }
+
+    public UnsubscribeRadioDialog(@NonNull Context context) {
+        super(context);
     }
 
     @Override

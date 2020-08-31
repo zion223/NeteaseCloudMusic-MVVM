@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
-import com.imooc.lib_audio.R;
+import com.netease.lib_audio.R;
 import com.netease.lib_audio.mediaplayer.core.AudioController;
 import com.netease.lib_api.model.song.AudioBean;
 import com.netease.lib_image_loader.app.ImageLoaderManager;

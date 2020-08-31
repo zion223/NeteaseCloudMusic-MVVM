@@ -5,9 +5,7 @@ import android.os.Bundle;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
-//import com.alibaba.android.arouter.facade.annotation.Autowired;
-//import com.alibaba.android.arouter.launcher.ARouter;
-//import com.imooc.lib_base.service.audio.AudioService;
+
 import com.netease.lib_video.videoplayer.core.view.CustomVideoView;
 import com.netease.lib_video.videoplayer.core.view.VideoFullDialog;
 import com.netease.lib_video.videoplayer.utils.Utils;

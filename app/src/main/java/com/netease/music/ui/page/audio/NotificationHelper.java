@@ -12,9 +12,9 @@ import android.widget.RemoteViews;
 
 import androidx.core.app.NotificationCompat;
 
-import com.imooc.lib_audio.R;
 import com.netease.lib_audio.app.AudioHelper;
 import com.netease.lib_audio.mediaplayer.core.AudioController;
+import com.netease.music.R;
 import com.netease.music.service.MusicService;
 import com.netease.lib_api.model.song.AudioBean;
 import com.netease.lib_image_loader.app.ImageLoaderManager;

@@ -20,7 +20,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
-import com.imooc.lib_video.R;
+import com.netease.lib_video.R;
 
 /**
  * 负责视频播放，暂停，事件触发

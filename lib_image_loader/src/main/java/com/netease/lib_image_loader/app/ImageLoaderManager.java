@@ -24,7 +24,7 @@ import com.bumptech.glide.request.target.NotificationTarget;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.target.Target;
 import com.bumptech.glide.request.transition.Transition;
-import com.imooc.lib_image_loader.R;
+import com.netease.lib_image_loader.R;
 import com.netease.lib_image_loader.image.CornerTransform;
 import com.netease.lib_image_loader.image.CustomRequestListener;
 import com.netease.lib_image_loader.image.ImageUtils;

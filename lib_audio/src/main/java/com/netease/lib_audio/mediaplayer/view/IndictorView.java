@@ -12,7 +12,7 @@ import android.widget.RelativeLayout;
 
 import androidx.viewpager.widget.ViewPager;
 
-import com.imooc.lib_audio.R;
+import com.netease.lib_audio.R;
 import com.netease.lib_audio.mediaplayer.core.AudioController;
 import com.netease.lib_audio.mediaplayer.events.AudioLoadEvent;
 import com.netease.lib_audio.mediaplayer.events.AudioPauseEvent;

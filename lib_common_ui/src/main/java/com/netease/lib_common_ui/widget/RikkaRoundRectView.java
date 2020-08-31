@@ -10,7 +10,7 @@ import android.util.AttributeSet;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
 
-import com.imooc.lib_common_ui.R;
+import com.netease.lib_common_ui.R;
 
 
 /**

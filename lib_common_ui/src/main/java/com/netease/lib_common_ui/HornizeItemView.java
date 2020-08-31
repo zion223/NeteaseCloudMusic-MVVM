@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.imooc.lib_common_ui.R;
 
 public class HornizeItemView extends RelativeLayout {
 

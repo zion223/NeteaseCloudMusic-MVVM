@@ -24,7 +24,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.ActivityOptionsCompat;
 
-import com.imooc.lib_audio.R;
 import com.kunminx.architecture.utils.BarUtils;
 import com.lxj.xpopup.XPopup;
 import com.netease.lib_api.model.song.AudioBean;
@@ -39,6 +38,7 @@ import com.netease.lib_audio.mediaplayer.events.AudioStartEvent;
 import com.netease.lib_audio.mediaplayer.view.IndictorView;
 import com.netease.lib_common_ui.lrc.LrcView;
 import com.netease.lib_network.ApiEngine;
+import com.netease.music.R;
 import com.netease.music.data.config.TYPE;
 import com.netease.music.ui.page.discover.square.detail.CommentActivity;
 import com.netease.music.util.TimeUtil;

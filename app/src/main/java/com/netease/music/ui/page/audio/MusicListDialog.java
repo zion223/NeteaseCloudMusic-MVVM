@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
-import com.imooc.lib_audio.R;
 import com.lxj.xpopup.XPopup;
 import com.lxj.xpopup.core.BottomPopupView;
 import com.netease.lib_api.model.song.AudioBean;
@@ -23,6 +22,7 @@ import com.netease.lib_audio.mediaplayer.core.AudioController;
 import com.netease.lib_audio.mediaplayer.events.AudioLoadEvent;
 import com.netease.lib_audio.mediaplayer.events.AudioPlayModeEvent;
 import com.netease.lib_audio.mediaplayer.events.AudioRemoveEvent;
+import com.netease.music.R;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;

@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 
-import com.imooc.lib_common_ui.R;
+import com.netease.lib_common_ui.R;
 import com.netease.lib_image_loader.app.ImageLoaderManager;
 
 

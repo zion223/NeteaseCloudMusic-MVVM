@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
-import com.imooc.lib_common_ui.R;
 
 
 /**

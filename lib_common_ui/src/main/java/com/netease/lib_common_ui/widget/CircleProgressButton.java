@@ -11,16 +11,17 @@ import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.imooc.lib_common_ui.R;
+import com.netease.lib_common_ui.R;
+
 
 public class CircleProgressButton extends View {
 
 
-	private int bgColor;
-	private int progressColor;
-	private int viewWidth;
-	private int viewHeight;
-	private float viewRoundWidth;
+    private int bgColor;
+    private int progressColor;
+    private int viewWidth;
+    private int viewHeight;
+    private float viewRoundWidth;
 	private float progressValue = 0;
 	private int progressMax = 100;
 	private Paint paint;

@@ -7,9 +7,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import com.imooc.lib_common_ui.R;
 import com.lxj.xpopup.core.PositionPopupView;
 import com.lxj.xpopup.util.XPopupUtils;
+import com.netease.lib_common_ui.R;
 
 //MV分类Dialog
 public class MvSortDialog extends PositionPopupView implements View.OnClickListener {

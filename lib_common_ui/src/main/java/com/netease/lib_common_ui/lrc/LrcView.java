@@ -22,7 +22,8 @@ import android.view.View;
 import android.view.animation.LinearInterpolator;
 import android.widget.Scroller;
 
-import com.imooc.lib_common_ui.R;
+
+import com.netease.lib_common_ui.R;
 
 import java.io.File;
 import java.util.ArrayList;

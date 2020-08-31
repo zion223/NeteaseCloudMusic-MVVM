@@ -13,7 +13,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.netease.lib_api.model.song.AudioBean;
-import com.imooc.lib_audio.R;
 import com.netease.lib_common_ui.utils.SharePreferenceUtil;
 import com.netease.lib_common_ui.widget.CircleProgressButton;
 import com.netease.lib_image_loader.app.ImageLoaderManager;
@@ -23,6 +22,7 @@ import com.netease.lib_audio.mediaplayer.events.AudioLoadEvent;
 import com.netease.lib_audio.mediaplayer.events.AudioPauseEvent;
 import com.netease.lib_audio.mediaplayer.events.AudioProgressEvent;
 import com.netease.lib_audio.mediaplayer.events.AudioStartEvent;
+import com.netease.music.R;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
