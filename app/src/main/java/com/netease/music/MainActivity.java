@@ -17,7 +17,6 @@
 package com.netease.music;
 
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.View;
 
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -80,7 +79,6 @@ public class MainActivity extends BaseActivity {
                 } else {
                     finish();
                 }
-                //super.onBackPressed();
             }
         });
 
@@ -151,20 +149,6 @@ public class MainActivity extends BaseActivity {
         mSharedViewModel.activityCanBeClosedDirectly.setValue(true);
     }
 
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-//        if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
-//            if (System.currentTimeMillis() - firstTime > 2000) {
-//                showLongToast("再按一次退出程序");
-//                firstTime = System.currentTimeMillis();
-//            } else {
-//                finish();
-//                System.exit(0);
-//            }
-//            return true;
-//        }
-        return super.onKeyDown(keyCode, event);
-    }
 
     public class EventHandler extends DrawerLayout.SimpleDrawerListener {
         @Override

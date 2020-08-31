@@ -95,8 +95,8 @@ public class PhoneLoginActivity extends BaseActivity {
                 mPhoneLoginViewModel.enableCaptureButton.set(false);
 
             } else {
-                //验证码发送失败
-
+                //验证码发送失败 给予失败信息提示
+                showLongToast(message.getMessage());
             }
         });
     }
