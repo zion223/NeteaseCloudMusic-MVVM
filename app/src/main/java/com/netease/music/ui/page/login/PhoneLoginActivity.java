@@ -154,10 +154,5 @@ public class PhoneLoginActivity extends BaseActivity {
             //注册(更改密码)
             mPhoneLoginViewModel.accountRequest.register(mPhoneLoginViewModel.phone.get(), mPhoneLoginViewModel.password.get(), code);
         }
-
-        @Override
-        public void onInput() {
-
-        }
     };
 }

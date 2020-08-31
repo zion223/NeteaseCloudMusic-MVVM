@@ -161,16 +161,13 @@ public class CaptchaView extends RelativeLayout {
 		}
 		if (codes.size() == 4) {
 			onInputListener.onSucess(getPhoneCode());
-		} else {
-			onInputListener.onInput();
 		}
 	}
 
 	//定义回调
 	public interface OnInputListener {
-		void onSucess(String code);
 
-		void onInput();
+		void onSucess(String code);
 	}
 
 	private OnInputListener onInputListener;
@@ -201,9 +198,6 @@ public class CaptchaView extends RelativeLayout {
 	 */
 	public String getPhoneCode() {
 		StringBuilder sb = new StringBuilder();
-		if (codes.size() != 4) {
-			return "";
-		}
 		for (String code : codes) {
 			sb.append(code);
 		}
