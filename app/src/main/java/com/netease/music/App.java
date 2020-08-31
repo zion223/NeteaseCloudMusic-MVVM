@@ -19,7 +19,6 @@ package com.netease.music;
 import com.netease.lib_audio.app.AudioHelper;
 import com.kunminx.architecture.BaseApplication;
 import com.kunminx.architecture.utils.Utils;
-import com.netease.music.player.PlayerManager;
 import com.netease.music.service.MusicService;
 
 public class App extends BaseApplication {
@@ -33,7 +32,6 @@ public class App extends BaseApplication {
         AudioHelper.init(this);
         MusicService.startMusicService();
         Utils.init(this);
-        PlayerManager.getInstance().init(this);
     }
 
 }
