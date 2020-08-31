@@ -1,4 +1,4 @@
-package com.netease.lib_network;
+package com.netease.lib_network.utils;
 
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -25,9 +25,7 @@ public class NetUtil {
         if (null != connectivity) {
             NetworkInfo info = connectivity.getActiveNetworkInfo();
             if (null != info && info.isConnected()) {
-                if (info.getState() == NetworkInfo.State.CONNECTED) {
-                    return true;
-                }
+                return info.getState() == NetworkInfo.State.CONNECTED;
             }
         }
         return false;

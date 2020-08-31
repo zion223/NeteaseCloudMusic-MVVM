@@ -1,5 +1,7 @@
-package com.netease.lib_network;
+package com.netease.lib_network.interceptor;
 
+
+import com.netease.lib_network.utils.NetUtil;
 
 import java.io.IOException;
 
@@ -8,7 +10,8 @@ import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
 
-class NetWorkInterceptor implements Interceptor {
+public class NetWorkInterceptor implements Interceptor {
+
     @Override
     public Response intercept(Chain chain) throws IOException {
         Request request = chain.request();
