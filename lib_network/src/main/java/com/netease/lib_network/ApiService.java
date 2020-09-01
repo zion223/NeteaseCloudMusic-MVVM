@@ -178,11 +178,18 @@ public interface ApiService {
     @GET("search/hot/detail")
     Observable<HotSearchDetailBean> getSearchHotDetail();
 
+    /**
+     * 搜索
+     * PS.type: 搜索类型；默认为 1 即单曲 , 取值意义 :
+     * 1: 单曲, 10: 专辑, 100: 歌手, 1000: 歌单,
+     * 1002: 用户, 1004: MV, 1006: 歌词, 1009: 电台,
+     * 1014: 视频, 1018:综合
+     */
     @GET("search")
     Observable<SongSearchBean> getSongSearch(@Query("keywords") String keywords, @Query("type") int type);
 
     @GET("search")
-    Observable<FeedSearchBean> getFeedSearch(@Query("keywords") String keywords, @Query("type") int type);
+    Observable<FeedSearchBean> getVideoSearch(@Query("keywords") String keywords, @Query("type") int type);
 
     @GET("search")
     Observable<SingerSearchBean> getSingerSearch(@Query("keywords") String keywords, @Query("type") int type);
