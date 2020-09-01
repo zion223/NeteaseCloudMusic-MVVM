@@ -52,6 +52,7 @@
         <activity android:name=".ui.page.discover.user.UserDetailActivity" />
         <activity android:name=".ui.page.video.mv.MvSortActivity" />
         <activity android:name=".ui.page.search.artist.ArtistSortActivity" />
+        <activity android:name=".ui.page.mine.radio.MyRadioActivity" />
         <!-- 闪屏界面作为应用的入口-->
         <activity android:name=".ui.page.SplashActivity">
             <intent-filter>

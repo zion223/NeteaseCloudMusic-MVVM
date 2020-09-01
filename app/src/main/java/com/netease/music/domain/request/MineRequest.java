@@ -3,6 +3,7 @@ package com.netease.music.domain.request;
 import androidx.lifecycle.MutableLiveData;
 
 import com.chad.library.adapter.base.entity.node.BaseNode;
+import com.netease.lib_api.model.dj.DjSubListBean;
 import com.netease.lib_api.model.user.UserPlayListHeader;
 import com.netease.lib_api.model.user.UserPlaylistBean;
 import com.netease.lib_network.ApiEngine;
@@ -20,10 +21,19 @@ public class MineRequest extends BaseRequest {
 
     //用户歌单
     private MutableLiveData<List<BaseNode>> userPlaylist;
+
     //用户的电台数量
+    private MutableLiveData<DjSubListBean> djSubList;
 
 
-    public MutableLiveData<List<BaseNode>> getUserPlaylist() {
+    public MutableLiveData<DjSubListBean> getDjSubListLiveData() {
+        if (djSubList == null) {
+            djSubList = new MutableLiveData<>();
+        }
+        return djSubList;
+    }
+
+    public MutableLiveData<List<BaseNode>> getUserPlaylistLiveData() {
         if (userPlaylist == null) {
             userPlaylist = new MutableLiveData<>();
         }
@@ -57,5 +67,12 @@ public class MineRequest extends BaseRequest {
 
                     userPlaylist.postValue(nodeList);
                 });
+    }
+
+    public void requestSubLuist() {
+        Disposable subscribe = ApiEngine.getInstance().getApiService().getDjSubList()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(djSubListBean -> djSubList.postValue(djSubListBean));
     }
 }

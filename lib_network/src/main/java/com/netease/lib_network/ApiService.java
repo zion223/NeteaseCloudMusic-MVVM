@@ -16,6 +16,7 @@ import com.netease.lib_api.model.dj.DjProgramBean;
 import com.netease.lib_api.model.dj.DjRecommendBean;
 import com.netease.lib_api.model.dj.DjRecommendTypeBean;
 import com.netease.lib_api.model.dj.DjSubBean;
+import com.netease.lib_api.model.dj.DjSubListBean;
 import com.netease.lib_api.model.mv.MvBean;
 import com.netease.lib_api.model.mv.MvSublistBean;
 import com.netease.lib_api.model.mv.MvTopBean;
@@ -87,6 +88,9 @@ public interface ApiService {
 
     @GET("dj/detail")
     Observable<DjDetailBean> getRadioDetail(@Query("rid") String id);
+
+    @GET("dj/sublist")
+    Observable<DjSubListBean> getDjSubList();
 
     @GET("dj/program")
     Observable<DjProgramBean> getRadioProgram(@Query("rid") String id, @Query("asc") boolean asc);
