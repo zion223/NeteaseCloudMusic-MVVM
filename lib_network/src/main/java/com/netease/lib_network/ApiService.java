@@ -281,7 +281,7 @@ public interface ApiService {
      * PS  注意：如给动态点赞，不需要传入 id，需要传入 threadId,可通过 event,/user/event 接口获取，如： /resource/like?t=1&type=6&threadId=A_EV_2_6559519868_32953014
      */
     @GET("resource/like")
-    Observable<CommentLikeBean> likeResource(@Query("id") long id, @Query("t") int t, @Query("type") int type);
+    Observable<CommentLikeBean> likeResource(@Query("id") String id, @Query("t") int t, @Query("type") int type);
 
     @GET("resource/like")
     Observable<CommentLikeBean> likeEventResource(@Query("threadId") String id, @Query("t") int t, @Query("type") int type);
@@ -299,6 +299,10 @@ public interface ApiService {
     // t=1 收藏 2 取消收藏
     @GET("album/sub")
     Observable<CommonMessageBean> subscribeAlbum(@Query("id") long id, @Query("t") long t);
+
+    // t=1 收藏 2 取消收藏
+    @GET("video/sub")
+    Observable<CommonMessageBean> subscribeVideo(@Query("id") String id, @Query("t") long t);
 
     @GET("top/album")
     Observable<AlbumSearchBean.ResultBean> getTopAlbum(@Query("limit") int limit);

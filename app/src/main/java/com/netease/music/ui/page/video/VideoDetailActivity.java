@@ -33,7 +33,8 @@ public class VideoDetailActivity extends BaseActivity {
 
     @Override
     protected DataBindingConfig getDataBindingConfig() {
-        return new DataBindingConfig(R.layout.delegate_video_detail, BR.vm, mViewModel);
+        return new DataBindingConfig(R.layout.delegate_video_detail, BR.vm, mViewModel)
+                .addBindingParam(BR.proxy, new ClickProxy());
     }
 
     @Override
@@ -42,7 +43,13 @@ public class VideoDetailActivity extends BaseActivity {
         if (getIntent().getBundleExtra("data") != null) {
             String videoId = getIntent().getBundleExtra("data").getString("videoId");
             //视频详情
-            mViewModel.request.getVideoDetailLiveData().observe(this, videoDetailBean -> mViewModel.video.set(videoDetailBean.getData()));
+            mViewModel.request.getVideoDetailLiveData().observe(this, videoDetailBean -> {
+                mViewModel.video.set(videoDetailBean.getData());
+                //单独赋值
+                mViewModel.isParised.set(videoDetailBean.getData().getPraised());
+                mViewModel.isSubscribed.set(videoDetailBean.getData().getSubscribed());
+                mViewModel.isFollowed.set(videoDetailBean.getData().getCreator().getFollowed());
+            });
 
             //相关视频
             mViewModel.request.getVideoRelatedLiveData().observe(this, relatedVideoBean -> {
@@ -59,6 +66,15 @@ public class VideoDetailActivity extends BaseActivity {
 
                 mViewModel.loadingVisible.set(false);
             });
+            //点赞和收藏状态取反
+            mViewModel.request.getSubscribeStatusLiveData().observe(this, aBoolean -> {
+                mViewModel.isSubscribed.set(!mViewModel.isSubscribed.get());
+                showShortToast(mViewModel.isSubscribed.get() ? "收藏成功" : "取消收藏成功");
+            });
+
+            mViewModel.request.getLikeStatusLiveData().observe(this, aBoolean -> mViewModel.isParised.set(!mViewModel.isParised.get()));
+            //关注去取消关注用户
+            mViewModel.request.getFollowStatusLiveData().observe(this, aBoolean -> mViewModel.isFollowed.set(!mViewModel.isFollowed.get()));
 
             //视频详情
             mViewModel.request.requestVideoDeatail(videoId);
@@ -78,19 +94,19 @@ public class VideoDetailActivity extends BaseActivity {
             finish();
         }
 
-        //点赞 TODO
+        //点赞
         public void parise() {
-
+            mViewModel.request.requestLikeVideo(mViewModel.video.get().getVid(), !mViewModel.isParised.get());
         }
 
-        //收藏MV TODO
+        //收藏MV
         public void collect() {
-
+            mViewModel.request.requestSubscribeVideo(mViewModel.video.get().getVid(), !mViewModel.isSubscribed.get());
         }
 
-        //关注或取消关注作者 TODO
+        //关注或取消关注作者
         public void changeSubscribeStatus() {
-
+            mViewModel.request.requestFollowUser(mViewModel.video.get().getCreator().getUserid(), !mViewModel.isFollowed.get());
         }
 
     }

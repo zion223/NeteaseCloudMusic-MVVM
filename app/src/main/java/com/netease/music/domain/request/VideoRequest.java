@@ -31,6 +31,10 @@ public class VideoRequest extends BaseRequest {
     private MutableLiveData<ArrayList<PlayListCommentEntity>> mVideoCommentLiveData = new MutableLiveData<>();
     private MutableLiveData<VideoUrlBean> mVideoUrlLiveData = new MutableLiveData<>();
 
+    //给视频点赞  收藏视频 状态   关注或取消关注用户
+    private MutableLiveData<Boolean> mChangeLikeStatusLiveData = new MutableLiveData<>();
+    private MutableLiveData<Boolean> mChangeSubscribeStatusLiveData = new MutableLiveData<>();
+    private MutableLiveData<Boolean> mChangeFollowStatusLiveData = new MutableLiveData<>();
 
     public MutableLiveData<long[]> getVideoTabIdLiveData() {
         if (mVideoTabIdLiveData == null) {
@@ -80,6 +84,27 @@ public class VideoRequest extends BaseRequest {
             mVideoUrlLiveData = new MutableLiveData<>();
         }
         return mVideoUrlLiveData;
+    }
+
+    public MutableLiveData<Boolean> getSubscribeStatusLiveData() {
+        if (mChangeSubscribeStatusLiveData != null) {
+            mChangeSubscribeStatusLiveData = new MutableLiveData<>();
+        }
+        return mChangeSubscribeStatusLiveData;
+    }
+
+    public MutableLiveData<Boolean> getLikeStatusLiveData() {
+        if (mChangeLikeStatusLiveData != null) {
+            mChangeLikeStatusLiveData = new MutableLiveData<>();
+        }
+        return mChangeLikeStatusLiveData;
+    }
+
+    public MutableLiveData<Boolean> getFollowStatusLiveData() {
+        if (mChangeFollowStatusLiveData == null) {
+            mChangeFollowStatusLiveData = new MutableLiveData<>();
+        }
+        return mChangeFollowStatusLiveData;
     }
 
     public void requestVideoGroup() {
@@ -206,6 +231,36 @@ public class VideoRequest extends BaseRequest {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(videoUrlBean -> {
                     mVideoUrlLiveData.postValue(videoUrlBean);
+                });
+    }
+
+    //给视频点赞
+    public void requestLikeVideo(String videoId, boolean like) {
+        Disposable subscribe = ApiEngine.getInstance().getApiService().likeResource(videoId, like ? 1 : 0, 5)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(commentLikeBean -> {
+                    mChangeLikeStatusLiveData.setValue(commentLikeBean.getCode() == 200);
+                });
+    }
+
+    //收藏或取消收藏
+    public void requestSubscribeVideo(String videoId, boolean subscribe) {
+        Disposable dis = ApiEngine.getInstance().getApiService().subscribeVideo(videoId, subscribe ? 1 : 0)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(commentLikeBean -> {
+                    mChangeSubscribeStatusLiveData.setValue(commentLikeBean.getCode() == 200);
+                });
+    }
+
+
+    public void requestFollowUser(long userid, boolean followed) {
+        Disposable dis = ApiEngine.getInstance().getApiService().getUserFollow(userid, followed ? 1 : 0)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(commentLikeBean -> {
+                    mChangeFollowStatusLiveData.setValue(commentLikeBean.getCode() == 200);
                 });
     }
 }

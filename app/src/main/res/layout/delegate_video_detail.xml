@@ -141,7 +141,7 @@
 
                                 <ImageView
                                     android:id="@+id/iv_video_detail_praise"
-                                    imageRes="@{vm.video.praised ? @drawable/ic_parise_red: @drawable/ic_parise}"
+                                    imageRes="@{vm.isParised ? @drawable/ic_parise_red: @drawable/ic_parise}"
                                     android:layout_width="23dp"
                                     android:layout_height="23dp"
                                     android:layout_gravity="center_horizontal"
@@ -168,7 +168,7 @@
 
                                 <ImageView
                                     android:id="@+id/iv_video_detail_collect"
-                                    imageRes="@{vm.video.subscribed? @drawable/ic_collected: @drawable/ic_collect}"
+                                    imageRes="@{vm.isSubscribed? @drawable/ic_collected: @drawable/ic_collect}"
                                     android:layout_width="23dp"
                                     android:layout_height="23dp"
                                     android:layout_gravity="center_horizontal"
@@ -281,7 +281,7 @@
 
                     <LinearLayout
                         android:id="@+id/ll_singer_follow"
-                        visible="@{!vm.video.creator.followed}"
+                        visible="@{!vm.isFollowed}"
                         android:layout_width="65dp"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
@@ -312,7 +312,7 @@
 
                     <LinearLayout
                         android:id="@+id/ll_singer_followed"
-                        visible="@{vm.video.creator.followed}"
+                        visible="@{vm.isFollowed}"
                         android:layout_width="65dp"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
