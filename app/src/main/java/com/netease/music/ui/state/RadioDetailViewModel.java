@@ -23,7 +23,10 @@ public class RadioDetailViewModel extends ViewModel {
     public ObservableInt currentItem = new ObservableInt();
     //电台的节目
     public ObservableField<List<DjProgramBean.ProgramsBean>> programList = new ObservableField<>();
+    //电台节目Adapter
     public ObservableField<BaseQuickAdapter> programAdapter = new ObservableField<>();
+    //热门评论Adapter
+    public ObservableField<BaseQuickAdapter> hotCommentAdapter = new ObservableField<>();
 
     //电台信息
     public ObservableField<DjDetailBean.DjRadioBean> radio = new ObservableField<>();

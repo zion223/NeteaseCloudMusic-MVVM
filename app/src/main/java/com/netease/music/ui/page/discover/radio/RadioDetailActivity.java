@@ -12,10 +12,13 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.netease.lib_api.model.dj.DjDetailBean;
 import com.kunminx.architecture.ui.page.BaseActivity;
 import com.kunminx.architecture.ui.page.DataBindingConfig;
 import com.kunminx.architecture.utils.BarUtils;
+import com.netease.lib_image_loader.app.ImageLoaderManager;
 import com.netease.music.BR;
 import com.netease.music.R;
 import com.netease.music.databinding.ItemRadioProgramHeaderBinding;
@@ -70,8 +73,7 @@ public class RadioDetailActivity extends BaseActivity {
                 mRadioDetailViewModel.indicatorTitle.set(mTitleDataList);
 
                 //热门评论
-                List<DjDetailBean.DjRadioBean.CommentDatasBean> commentDatas = djDetailBean.getDjRadio().getCommentDatas();
-
+                mRadioDetailViewModel.hotCommentAdapter.set(new RadioHotCommentAdapter(RadioDetailActivity.this, djDetailBean.getDjRadio().getCommentDatas()));
             });
 
             //电台节目
@@ -144,6 +146,34 @@ public class RadioDetailActivity extends BaseActivity {
 
         public void userInfo() {
             UserDetailActivity.startActivity(RadioDetailActivity.this, mRadioDetailViewModel.radio.get().getDj().getUserId());
+        }
+    }
+
+
+    static class RadioHotCommentAdapter extends BaseQuickAdapter<DjDetailBean.DjRadioBean.CommentDatasBean, BaseViewHolder> {
+
+        RadioHotCommentAdapter(Context context, @Nullable List<DjDetailBean.DjRadioBean.CommentDatasBean> data) {
+            super(R.layout.item_radio_hot_comment, data);
+            addChildClickViewIds(R.id.tv_item_hot_comment_avatar_name, R.id.iv_item_hot_comment_avatar_img);
+            setOnItemChildClickListener((adapter, view, position) -> {
+                DjDetailBean.DjRadioBean.CommentDatasBean entity = (DjDetailBean.DjRadioBean.CommentDatasBean) adapter.getItem(position);
+                if (view.getId() == R.id.tv_item_hot_comment_avatar_name || view.getId() == R.id.iv_item_hot_comment_avatar_img) {
+                    UserDetailActivity.startActivity(context, Long.parseLong(entity.getUserProfile().getUserId()));
+                }
+            });
+        }
+
+
+        @Override
+        protected void convert(BaseViewHolder helper, DjDetailBean.DjRadioBean.CommentDatasBean item) {
+            //评论者昵称
+            helper.setText(R.id.tv_item_hot_comment_avatar_name, item.getUserProfile().getNickname());
+            //评论者头像
+            ImageLoaderManager.getInstance().displayImageForCircle(helper.getView(R.id.iv_item_hot_comment_avatar_img), item.getUserProfile().getAvatarUrl());
+            //评论内容
+            helper.setText(R.id.tv_item_hot_comment_content, item.getContent());
+            //评论来源
+            helper.setText(R.id.tv_item_hot_comment_from, item.getProgramName());
         }
     }
 }
