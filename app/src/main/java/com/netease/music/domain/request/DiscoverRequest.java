@@ -159,15 +159,10 @@ public class DiscoverRequest extends BaseRequest {
     }
 
     public void requestSongDetailData(long id) {
-        ApiEngine.getInstance().getApiService().getSongDetail(String.valueOf(id))
+        Disposable subscribe = ApiEngine.getInstance().getApiService().getSongDetail(String.valueOf(id))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<SongDetailBean>() {
-                    @Override
-                    public void accept(SongDetailBean songDetailBean) throws Exception {
-                        mSongDetailLiveData.postValue(songDetailBean.getSongs().get(0));
-                    }
-                });
+                .subscribe(songDetailBean -> mSongDetailLiveData.postValue(songDetailBean.getSongs().get(0)));
     }
 }
 
