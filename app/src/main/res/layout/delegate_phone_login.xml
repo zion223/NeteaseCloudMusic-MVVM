@@ -132,7 +132,6 @@
                 android:layout_weight="8"
                 android:background="@null"
                 android:inputType="textPassword"
-
                 android:hint="@{vm.passwordHint}"
                 android:text="@={vm.password}"
                 android:paddingLeft="10dp" />
@@ -171,7 +170,7 @@
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
             onClickWithDebouncing="@{() -> proxy.login()}"
-            android:text='@{!vm.showForgetPassword? "登录":"下一步"}'
+            android:text='@{vm.showForgetPassword? "下一步": "登录"}'
             android:textColor="@android:color/white"
             android:textSize="15sp" />
     </LinearLayout>

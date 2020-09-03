@@ -103,10 +103,23 @@ public class PhoneLoginActivity extends BaseActivity {
 
 
     public class ClickProxy {
-        //返回按钮 TODO
+        //返回按钮
         public void back() {
             //判断当前状态   输入手机号状态  输入密码状态  忘记密码状态 输入验证码状态
             //PhoneLoginActivity.this.finish();
+            if (mPhoneLoginViewModel.showInputPhone.get()) {
+                //在输入手机号界面 直接结束Activity
+                finish();
+            } else if (mPhoneLoginViewModel.showForgetPassword.get() && mPhoneLoginViewModel.showInputPassword.get()) {
+                //当前在忘记密码界面 返回时显示输入密码界面
+                mPhoneLoginViewModel.showForgetPassword.set(false);
+                mPhoneLoginViewModel.title.set("手机号登录");
+                mPhoneLoginViewModel.passwordHint.set("请输入密码");
+            } else if (mPhoneLoginViewModel.showInputPassword.get() && !mPhoneLoginViewModel.showForgetPassword.get()) {
+                //当前在输入密码界面 返回时显示输入手机号界面
+                mPhoneLoginViewModel.showInputPassword.set(false);
+                mPhoneLoginViewModel.showInputPhone.set(true);
+            }
         }
 
         //下一步
@@ -115,6 +128,7 @@ public class PhoneLoginActivity extends BaseActivity {
             if (ValidateUtils.isMobile(mPhoneLoginViewModel.phone.get())) {
                 mPhoneLoginViewModel.showInputPhone.set(false);
                 mPhoneLoginViewModel.showInputPassword.set(true);
+                mPhoneLoginViewModel.passwordHint.set("请输入密码");
                 //密码框获取到焦点
             } else {
                 //手机号格式不正确
