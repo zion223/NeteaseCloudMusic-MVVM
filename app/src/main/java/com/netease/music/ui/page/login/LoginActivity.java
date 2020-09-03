@@ -27,7 +27,12 @@ public class LoginActivity extends BaseActivity {
     public class ClickProxy {
 
         public void phone() {
-            startActivity(new Intent(LoginActivity.this, PhoneLoginActivity.class));
+            if (mLoginViewModel.argeeRule.get()) {
+                startActivity(new Intent(LoginActivity.this, PhoneLoginActivity.class));
+            } else {
+                //提示用户点击同意条款
+                showShortToast("请点击同意《用户协议》和《隐私政策》《儿童隐私政策》");
+            }
         }
 
         //TODO 体验

@@ -30,7 +30,9 @@
                 app:spread_delay_milliseconds="150"
                 app:spread_distance="5"
                 app:spread_max_radius="90"
-                app:spread_radius="100" />
+                app:spread_radius="100"
+                app:spread_center_color="@color/red"
+                app:spread_spread_color="@color/white" />
 
             <com.netease.lib_common_ui.circle_image_view.CircleImageView
                 android:layout_width="70dp"
@@ -74,14 +76,28 @@
             android:textColor="@android:color/white"
             android:textSize="15sp" />
 
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/tv_rule"
+            android:layout_alignTop="@+id/tv_rule"
+            android:layout_alignBottom="@+id/tv_rule"
+            android:buttonTint="@color/white"
+            android:layout_margin="1dp"
+            android:checked="@={vm.argeeRule}" />
+
         <TextView
-            android:layout_width="match_parent"
+            android:id="@+id/tv_rule"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
             android:layout_marginBottom="20dp"
+            android:paddingTop="1dp"
+            android:paddingBottom="1dp"
             android:gravity="center"
             android:text="同意《用户协议》和《隐私政策》《儿童隐私政策》"
             android:textColor="@android:color/white"
-            android:textSize="10sp" />
+            android:textSize="12sp" />
     </RelativeLayout>
 </layout>
