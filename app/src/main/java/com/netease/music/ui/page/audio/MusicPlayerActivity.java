@@ -2,6 +2,7 @@ package com.netease.music.ui.page.audio;
 
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
+import android.animation.PropertyValuesHolder;
 import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -12,6 +13,7 @@ import android.transition.TransitionInflater;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.AccelerateInterpolator;
 import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -37,6 +39,7 @@ import com.netease.lib_audio.mediaplayer.events.AudioProgressEvent;
 import com.netease.lib_audio.mediaplayer.events.AudioStartEvent;
 import com.netease.lib_audio.mediaplayer.view.IndictorView;
 import com.netease.lib_common_ui.lrc.LrcView;
+import com.netease.lib_common_ui.utils.SharePreferenceUtil;
 import com.netease.lib_network.ApiEngine;
 import com.netease.music.R;
 import com.netease.music.data.config.TYPE;
@@ -292,70 +295,50 @@ public class MusicPlayerActivity extends AppCompatActivity {
 
     //是否喜欢该音乐
     void loadFavouriteStatus() {
-//		RequestCenter.getLikeList(SharePreferenceUtil.getInstance(getBaseContext()).getUserId(), new DisposeDataListener() {
-//			@Override
-//			public void onSuccess(Object responseObj) {
-//				LikeListBean bean = (LikeListBean) responseObj;
-//				likeList = bean.getIds();
-//				for (String id : likeList) {
-//					if (mAudioBean.getId().equals(id)) {
-//						//设置红心
-//						mFavouriteView.setImageResource(R.mipmap.audio_aeh);
-//						//已喜欢音乐标识
-//						mFavouriteView.setTag(true);
-//						return;
-//					}else{
-//						//设置红心
-//						mFavouriteView.setImageResource(R.mipmap.audio_aef);
-//						//已喜欢音乐标识
-//						mFavouriteView.setTag(false);
-//					}
-//				}
-//			}
-//
-//			@Override
-//			public void onFailure(Object reasonObj) {
-//
-//			}
-//		});
+        Disposable subscribe = ApiEngine.getInstance().getApiService().getLikeList(SharePreferenceUtil.getInstance(getBaseContext()).getUserId())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(likeListBean -> {
+                    likeList = likeListBean.getIds();
+                    boolean likeMusic = false;
+                    for (String id : likeList) {
+                        if (mAudioBean.getId().equals(id)) {
+                            likeMusic = true;
+                            break;
+                        }
+                    }
+                    //设置红心
+                    mFavouriteView.setImageResource(likeMusic ? R.mipmap.audio_aeh : R.mipmap.audio_aef);
+                    //已喜欢音乐标识
+                    mFavouriteView.setTag(likeMusic);
+                });
     }
 
     //喜欢或取消喜欢该音乐
     private void changeFavouriteStatus() {
         final boolean liked = (boolean) mFavouriteView.getTag();
-
-//		RequestCenter.getlikeMusic(mAudioBean.getId(), !liked, new DisposeDataListener() {
-//			@Override
-//			public void onSuccess(Object responseObj) {
-//				LikeMusicBean bean = (LikeMusicBean) responseObj;
-//				if (liked && bean.getCode() == 200) {
-//					//设置为不喜欢
-//					mFavouriteView.setImageResource(R.mipmap.audio_aef);
-//				} else {
-//					//设置为喜欢
-//					mFavouriteView.setImageResource(R.mipmap.audio_aeh);
-//				}
-//				if (mFavAnimator != null)
-//					mFavAnimator.end();
-//				//缩放	SCALE_X、SCALE_Y   1.0 -> 1.2 -> 1.0 动画
-//				PropertyValuesHolder animX =
-//						PropertyValuesHolder.ofFloat(View.SCALE_X.getName(), 1.0f, 1.2f, 1.0f);
-//				PropertyValuesHolder animY =
-//						PropertyValuesHolder.ofFloat(View.SCALE_Y.getName(), 1.0f, 1.2f, 1.0f);
-//				//属性动画
-//				mFavAnimator = ObjectAnimator.ofPropertyValuesHolder(mFavouriteView, animX, animY);
-//				//持续加速差值器
-//				mFavAnimator.setInterpolator(new AccelerateInterpolator());
-//				mFavAnimator.setDuration(300);
-//				mFavAnimator.start();
-//			}
-//
-//			@Override
-//			public void onFailure(Object reasonObj) {
-//
-//			}
-//		});
-
+        Disposable subscribe = ApiEngine.getInstance().getApiService().likeMusic(mAudioBean.getId(), !liked)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(likeMusicBean -> {
+                    if (likeMusicBean.getCode() == 200) {
+                        mFavouriteView.setImageResource(liked ? R.mipmap.audio_aef : R.mipmap.audio_aeh);
+                        mFavouriteView.setTag(!liked);
+                        if (mFavAnimator != null)
+                            mFavAnimator.end();
+                        //缩放	SCALE_X、SCALE_Y   1.0 -> 1.2 -> 1.0 动画
+                        PropertyValuesHolder animX =
+                                PropertyValuesHolder.ofFloat(View.SCALE_X.getName(), 1.0f, 1.2f, 1.0f);
+                        PropertyValuesHolder animY =
+                                PropertyValuesHolder.ofFloat(View.SCALE_Y.getName(), 1.0f, 1.2f, 1.0f);
+                        //属性动画
+                        mFavAnimator = ObjectAnimator.ofPropertyValuesHolder(mFavouriteView, animX, animY);
+                        //持续加速差值器
+                        mFavAnimator.setInterpolator(new AccelerateInterpolator());
+                        mFavAnimator.setDuration(300);
+                        mFavAnimator.start();
+                    }
+                });
     }
 
     private void initData() {

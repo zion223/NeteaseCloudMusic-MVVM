@@ -236,7 +236,7 @@ public interface ApiService {
     Observable<SongDetailBean> getSongDetail(@Query("ids") String ids);
 
     @GET("like")
-    Observable<LikeMusicBean> likeMusice(@Query("id") long id);
+    Observable<LikeMusicBean> likeMusic(@Query("id") String id, @Query("like") boolean like);
 
     @GET("comment/music")
     Observable<PlayListCommentBean> getMusicComment(@Query("id") String id);
