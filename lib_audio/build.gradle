@@ -15,7 +15,6 @@ android {
         targetSdkVersion rootProject.android.targetSdkVersion
         versionCode versionNumber
         versionName versionString
-
     }
 
     buildTypes {
@@ -34,12 +33,7 @@ dependencies {
     implementation this.rootProject.depsLibs.gson
 
     //占位主工程android原生库
-    //compileOnly this.rootProject.depsLibs.appcompat
     compileOnly this.rootProject.depsLibs.BaseRecyclerViewAdapterHelper
-    //compileOnly this.rootProject.depsLibs.design
-    //compileOnly this.rootProject.depsLibs.recyclerview
-    //占位主工程的greenDao类库
-    //compileOnly this.rootProject.depsLibs.greendao
     //占位主工程的eventbus库
     compileOnly this.rootProject.depsLibs.eventbus
     //占位主工程的rxjava库
