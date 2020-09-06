@@ -42,7 +42,6 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation project(':architecture')
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.0.10'
 
     testImplementation 'junit:junit:4.13'
@@ -94,5 +93,7 @@ dependencies {
     implementation project(path: ':lib_video')
     implementation project(path: ':lib_api')
     implementation project(path: ':lib_network')
+    implementation project(':architecture')
+
     //implementation project(path: ':lib_share')
 }
