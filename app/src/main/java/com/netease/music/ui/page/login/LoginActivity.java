@@ -29,6 +29,7 @@ public class LoginActivity extends BaseActivity {
         public void phone() {
             if (mLoginViewModel.argeeRule.get()) {
                 startActivity(new Intent(LoginActivity.this, PhoneLoginActivity.class));
+                finish();
             } else {
                 //提示用户点击同意条款
                 showShortToast("请点击同意《用户协议》和《隐私政策》《儿童隐私政策》");
