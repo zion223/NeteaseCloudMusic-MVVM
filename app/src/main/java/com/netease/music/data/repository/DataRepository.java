@@ -63,9 +63,8 @@ public class DataRepository implements ILocalSource, IRemoteSource {
         Gson gson = new Gson();
         Type type = new TypeToken<List<LibraryInfo>>() {
         }.getType();
-        List<LibraryInfo> list = gson.fromJson(Utils.getApp().getString(R.string.library_json), type);
 
-        result.setResult(list, new NetState());
+        result.setResult(null, new NetState());
     }
 
     /**
