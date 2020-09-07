@@ -41,5 +41,6 @@
     <string name="user_name">请输入用户名</string>
     <string name="user_password">请输入密码</string>
     <string name="login">登录</string>
+    <string name="reuqest_permission">为保证应用正常运行, 请打开相关权限</string>
 
 </resources>
