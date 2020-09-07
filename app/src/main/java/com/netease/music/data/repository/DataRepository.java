@@ -28,7 +28,6 @@ import com.kunminx.architecture.utils.Utils;
 import com.netease.music.R;
 import com.netease.music.data.bean.DownloadFile;
 import com.netease.music.data.bean.LibraryInfo;
-import com.netease.music.data.bean.TestAlbum;
 import com.netease.music.data.bean.User;
 
 import java.lang.reflect.Type;
@@ -58,16 +57,6 @@ public class DataRepository implements ILocalSource, IRemoteSource {
         return responseCodeLiveData;
     }
 
-    @Override
-    public void getFreeMusic(DataResult<TestAlbum> result) {
-
-        Gson gson = new Gson();
-        Type type = new TypeToken<TestAlbum>() {
-        }.getType();
-        TestAlbum testAlbum = gson.fromJson(Utils.getApp().getString(R.string.free_music_json), type);
-
-        result.setResult(testAlbum, new NetState());
-    }
 
     @Override
     public void getLibraryInfo(DataResult<List<LibraryInfo>> result) {

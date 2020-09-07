@@ -22,7 +22,6 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.kunminx.architecture.data.repository.DataResult;
 import com.kunminx.architecture.domain.request.BaseRequest;
-import com.netease.music.data.bean.TestAlbum;
 import com.netease.music.data.repository.DataRepository;
 
 /**
@@ -41,21 +40,9 @@ import com.netease.music.data.repository.DataRepository;
  */
 public class MusicRequest extends BaseRequest {
 
-    private MutableLiveData<TestAlbum> mFreeMusicsLiveData;
 
     //TODO tip 向 ui 层提供的 request LiveData，使用抽象的 LiveData 而不是 MutableLiveData
     // 如此是为了来自数据层的数据，在 ui 层中只读，以避免团队新手不可预期的误用
 
-    public LiveData<TestAlbum> getFreeMusicsLiveData() {
-        if (mFreeMusicsLiveData == null) {
-            mFreeMusicsLiveData = new MutableLiveData<>();
-        }
-        return mFreeMusicsLiveData;
-    }
 
-    public void requestFreeMusics() {
-        DataRepository.getInstance().getFreeMusic(new DataResult<>((testAlbum, netState) -> {
-            mFreeMusicsLiveData.setValue(testAlbum);
-        }));
-    }
 }

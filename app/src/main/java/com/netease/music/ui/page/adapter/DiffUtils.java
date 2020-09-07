@@ -22,13 +22,11 @@ import androidx.recyclerview.widget.DiffUtil;
 import com.netease.lib_api.model.album.AlbumOrSongBean;
 import com.netease.lib_api.model.playlist.MainRecommendPlayListBean;
 import com.netease.music.data.bean.LibraryInfo;
-import com.netease.music.data.bean.TestAlbum;
 
 public class DiffUtils {
 
     private DiffUtil.ItemCallback<LibraryInfo> mLibraryInfoItemCallback;
 
-    private DiffUtil.ItemCallback<TestAlbum.TestMusic> mTestMusicItemCallback;
 
     private DiffUtil.ItemCallback<MainRecommendPlayListBean.RecommendBean> mRecommendPlaylistItemCallback;
 
@@ -60,22 +58,6 @@ public class DiffUtils {
         return mLibraryInfoItemCallback;
     }
 
-    public DiffUtil.ItemCallback<TestAlbum.TestMusic> getTestMusicItemCallback() {
-        if (mTestMusicItemCallback == null) {
-            mTestMusicItemCallback = new DiffUtil.ItemCallback<TestAlbum.TestMusic>() {
-                @Override
-                public boolean areItemsTheSame(@NonNull TestAlbum.TestMusic oldItem, @NonNull TestAlbum.TestMusic newItem) {
-                    return oldItem.equals(newItem);
-                }
-
-                @Override
-                public boolean areContentsTheSame(@NonNull TestAlbum.TestMusic oldItem, @NonNull TestAlbum.TestMusic newItem) {
-                    return oldItem.getMusicId().equals(newItem.getMusicId());
-                }
-            };
-        }
-        return mTestMusicItemCallback;
-    }
 
     public DiffUtil.ItemCallback<MainRecommendPlayListBean.RecommendBean> getRecommendPlayListItemCallback() {
         if (mRecommendPlaylistItemCallback == null) {

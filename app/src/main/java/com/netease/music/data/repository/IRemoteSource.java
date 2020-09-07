@@ -19,7 +19,6 @@ package com.netease.music.data.repository;
 import com.kunminx.architecture.data.repository.DataResult;
 import com.netease.music.data.bean.DownloadFile;
 import com.netease.music.data.bean.LibraryInfo;
-import com.netease.music.data.bean.TestAlbum;
 import com.netease.music.data.bean.User;
 
 import java.util.List;
@@ -28,8 +27,6 @@ import java.util.List;
  * Create by KunMinX at 19/10/29
  */
 public interface IRemoteSource {
-
-    void getFreeMusic(DataResult<TestAlbum> result);
 
     void getLibraryInfo(DataResult<List<LibraryInfo>> result);
 

@@ -33,9 +33,9 @@ dependencies {
     api 'androidx.lifecycle:lifecycle-viewmodel:2.2.0'
     api 'androidx.lifecycle:lifecycle-livedata:2.2.0'
     api 'androidx.navigation:navigation-runtime:2.3.0'
-    implementation 'androidx.recyclerview:recyclerview:1.2.0-alpha05'
-    implementation this.rootProject.depsLibs.easypermission
     api 'com.kunminx.archi:unpeek-livedata:3.2.3-beta10'
     api 'com.kunminx.archi:smooth-navigation:2.9.7-beta4'
     api 'com.kunminx.archi:strict-databinding:3.0.2-beta1'
+    implementation this.rootProject.depsLibs.easypermission
+    implementation this.rootProject.depsLibs.recyclerview
 }
