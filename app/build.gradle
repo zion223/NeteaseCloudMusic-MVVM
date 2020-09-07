@@ -61,7 +61,7 @@ dependencies {
     implementation this.rootProject.depsLibs.vptransforms
     //glide
     annotationProcessor this.rootProject.depsLibs.glidecompiler
-    annotationProcessor this.rootProject.depsLibs.glide
+    implementation this.rootProject.depsLibs.glide
     //gson
     annotationProcessor this.rootProject.depsLibs.gson
     //拼音库
