@@ -60,8 +60,6 @@ public class DiscoverFragment extends BaseFragment {
         mDiscoverViewModel.discoverRequest.getRecommendPlaylistLiveData().observe(this, recommendBeans -> {
             final RecommendPlayListAdapter playListAdapter = new RecommendPlayListAdapter(getContext());
             playListAdapter.submitList(recommendBeans);
-            //打开歌单详情界面
-            playListAdapter.setOnItemClickListener((item, position) -> SongListDetailActivity.startActivity(getContext(), TYPE.PLAYLIST_ID, item.getId(), item.getCopywriter()));
             mDiscoverViewModel.playListAdapter.set(playListAdapter);
         });
         //新歌和新碟的数据 新碟在前三个 新歌在后三个
