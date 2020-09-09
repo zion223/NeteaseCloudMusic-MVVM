@@ -29,7 +29,6 @@ dependencies {
     implementation this.rootProject.depsLibs.gson
     implementation this.rootProject.depsLibs.recyclerview
     implementation this.rootProject.depsLibs.magicindicator
-    implementation this.rootProject.depsLibs.GroupedRecyclerViewAdapter
     implementation this.rootProject.depsLibs.BaseRecyclerViewAdapterHelper
     implementation this.rootProject.depsLibs.multidex
     implementation this.rootProject.depsLibs.xpopup
