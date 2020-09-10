@@ -40,7 +40,7 @@ public class SplashActivity extends AppCompatActivity implements EasyPermissions
         setContentView(R.layout.delegate_splash);
 
         if (!EasyPermissions.hasPermissions(this, perms)) {
-            EasyPermissions.requestPermissions(this, "请打开相关权限", 1, perms);
+            EasyPermissions.requestPermissions(this, getString(R.string.reuqest_permission), 1, perms);
         } else {
             jumpIntoMainActivity();
         }
