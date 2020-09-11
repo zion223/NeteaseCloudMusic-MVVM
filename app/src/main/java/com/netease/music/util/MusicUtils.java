@@ -31,7 +31,6 @@ public class MusicUtils {
     public static final int START_FROM_ALBUM = 2;
     public static final int START_FROM_LOCAL = 3;
     public static final int START_FROM_FOLDER = 4;
-    public static final int START_FROM_FAVORITE = 5;
 
     public static final int FILTER_SIZE = 1024 * 1024;// 1MB
     public static final int FILTER_DURATION = 60 * 1000;// 1分钟
@@ -54,8 +53,7 @@ public class MusicUtils {
     /**
      * 获取包含音频文件的文件夹信息
      *
-     * @param context
-     * @return
+     * @param context context
      */
     public static List<FolderInfo> queryFolder(Context context) {
 
@@ -78,8 +76,7 @@ public class MusicUtils {
     /**
      * 获取歌手信息
      *
-     * @param context
-     * @return
+     * @param context context
      */
     public static List<ArtistInfo> queryArtist(Context context) {
 
@@ -100,8 +97,7 @@ public class MusicUtils {
     /**
      * 获取专辑信息
      *
-     * @param context
-     * @return
+     * @param context context
      */
     public static List<AlbumInfo> queryAlbums(Context context) {
 
@@ -120,9 +116,8 @@ public class MusicUtils {
 
 
     /**
-     * @param context
+     * @param context context
      * @param from    不同的界面进来要做不同的查询
-     * @return
      */
     public static List<MusicInfo> queryMusic(Context context, int from) {
         return queryMusic(context, null, from);
@@ -456,20 +451,5 @@ public class MusicUtils {
         cursor.close();
         return music;
     }
-
-
-//    public static String makeShortTimeString(final Context context, long secs) {
-//        long hours, mins;
-//
-//        hours = secs / 3600;
-//        secs %= 3600;
-//        mins = secs / 60;
-//        secs %= 60;
-//
-//        final String durationFormat = context.getResources().getString(hours == 0 ? R.string.durationformatshort : R.string.durationformatlong);
-//        return String.format(durationFormat, hours, mins, secs);
-//    }
-
-
 }
 
