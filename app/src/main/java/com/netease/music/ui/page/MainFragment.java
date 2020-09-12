@@ -1,8 +1,5 @@
 package com.netease.music.ui.page;
 
-import android.os.Bundle;
-
-import androidx.annotation.Nullable;
 
 import com.kunminx.architecture.ui.page.BaseFragment;
 import com.kunminx.architecture.ui.page.DataBindingConfig;
@@ -30,13 +27,6 @@ public class MainFragment extends BaseFragment {
                 .addBindingParam(BR.click, new ClickProxy())
                 .addBindingParam(BR.adapter, new HomePagerAdapter(getChildFragmentManager(), mMainViewModel.channelArray.get()));
     }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-    }
-
 
     public class ClickProxy {
 
