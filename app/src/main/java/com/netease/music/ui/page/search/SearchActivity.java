@@ -22,12 +22,10 @@ import com.netease.music.ui.state.SearchViewModel;
 public class SearchActivity extends BaseActivity {
 
     private SearchViewModel mSearchViewModel;
-    private MainActivityViewModel mMainActivityViewModel;
 
     @Override
     protected void initViewModel() {
         mSearchViewModel = getActivityViewModel(SearchViewModel.class);
-        mMainActivityViewModel = getActivityViewModel(MainActivityViewModel.class);
     }
 
     @Override
