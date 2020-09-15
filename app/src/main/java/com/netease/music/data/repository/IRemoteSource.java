@@ -16,21 +16,11 @@
 
 package com.netease.music.data.repository;
 
-import com.kunminx.architecture.data.repository.DataResult;
-import com.netease.music.data.bean.DownloadFile;
-import com.netease.music.data.bean.LibraryInfo;
-import com.netease.music.data.bean.User;
-
-import java.util.List;
 
 /**
  * Create by KunMinX at 19/10/29
  */
 public interface IRemoteSource {
 
-    void getLibraryInfo(DataResult<List<LibraryInfo>> result);
 
-    void downloadFile(DataResult<DownloadFile> result);
-
-    void login(User user, DataResult<String> result);
 }
