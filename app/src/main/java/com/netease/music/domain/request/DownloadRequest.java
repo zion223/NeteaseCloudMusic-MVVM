@@ -59,9 +59,7 @@ public class DownloadRequest extends BaseRequest {
     }
 
     public void requestDownloadFile() {
-        DataRepository.getInstance().downloadFile(new DataResult<>((downloadFile, netState) -> {
-            mDownloadFileLiveData.postValue(downloadFile);
-        }));
+
     }
 
     //TODO tip2：
