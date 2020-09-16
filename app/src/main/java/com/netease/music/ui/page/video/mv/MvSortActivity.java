@@ -1,5 +1,6 @@
 package com.netease.music.ui.page.video.mv;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 
@@ -37,7 +38,7 @@ public class MvSortActivity extends BaseActivity {
     protected DataBindingConfig getDataBindingConfig() {
         return new DataBindingConfig(R.layout.delegate_mv_sort, BR.vm, mvSortViewModel)
                 .addBindingParam(BR.proxy, new ClickProxy())
-                .addBindingParam(BR.adapter, new MvSortAdapter(null));
+                .addBindingParam(BR.adapter, new MvSortAdapter(this, null));
     }
 
     @Override
@@ -77,10 +78,12 @@ public class MvSortActivity extends BaseActivity {
 
     static class MvSortAdapter extends BaseQuickAdapter<MvBean.MvDetailBean, BaseViewHolder> implements LoadMoreModule {
 
-        MvSortAdapter(@Nullable List<MvBean.MvDetailBean> data) {
+        MvSortAdapter(Context context, @Nullable List<MvBean.MvDetailBean> data) {
             super(R.layout.item_mv_normal, data);
             setOnItemClickListener((adapter, view, position) -> {
-                //查看MV详情  TODO
+                //查看MV详情
+                MvBean.MvDetailBean entity = (MvBean.MvDetailBean) adapter.getItem(position);
+                MvDetailActivity.startActivity(context, entity.getId(), entity.getArtistId());
             });
         }
 

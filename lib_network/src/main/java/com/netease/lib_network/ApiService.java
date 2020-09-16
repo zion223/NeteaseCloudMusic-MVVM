@@ -18,6 +18,7 @@ import com.netease.lib_api.model.dj.DjRecommendTypeBean;
 import com.netease.lib_api.model.dj.DjSubBean;
 import com.netease.lib_api.model.dj.DjSubListBean;
 import com.netease.lib_api.model.mv.MvBean;
+import com.netease.lib_api.model.mv.MvInfoBean;
 import com.netease.lib_api.model.mv.MvSublistBean;
 import com.netease.lib_api.model.mv.MvTopBean;
 import com.netease.lib_api.model.mv.VideoBean;
@@ -210,7 +211,7 @@ public interface ApiService {
     Observable<SynthesisSearchBean> getSynthesisSearch(@Query("keywords") String keywords, @Query("type") int type);
 
     @GET("artists")
-    Observable<SingerSongSearchBean> getSingerHotSong(@Query("id") long id);
+    Observable<SingerSongSearchBean> getSingerHotSong(@Query("id") String id);
 
     /**
      * 歌手分类
@@ -246,6 +247,9 @@ public interface ApiService {
 
     @GET("comment/album")
     Observable<PlayListCommentBean> getAlbumComment(@Query("id") String id);
+
+    @GET("comment/mv")
+    Observable<PlayListCommentBean> getMvComment(@Query("id") String id);
 
     @GET("video/group/list")
     Observable<VideoGroupBean> getVideoGroup();
@@ -357,6 +361,9 @@ public interface ApiService {
 
     @GET("top/mv")
     Observable<MvTopBean> getMvTop();
+
+    @GET("mv/detail")
+    Observable<MvInfoBean> getMvDetail(@Query("mvid") String mvId);
 
     @GET("top/mv")
     Observable<MvTopBean> getMvTop(@Query("area") String area);
