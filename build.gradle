@@ -3,13 +3,11 @@ apply from: this.rootProject.file('base.gradle')
 
 buildscript {
     repositories {
-        maven{ url 'https://maven.aliyun.com/repository/public/' }
-        maven{ url 'https://maven.aliyun.com/repository/google' }
-        maven{ url 'https://maven.aliyun.com/repository/jcenter' }
+        maven { url 'https://maven.aliyun.com/repository/public/' }
+        maven { url 'https://maven.aliyun.com/repository/google' }
+        maven { url 'https://maven.aliyun.com/repository/jcenter' }
         google()
-        maven {
-            url "https://jitpack.io"
-        }
+        maven { url "https://jitpack.io"}
         maven { url "https://maven.aliyun.com/repository/public" }
     }
     dependencies {
@@ -19,12 +17,10 @@ buildscript {
 
 allprojects {
     repositories {
-        maven{ url 'https://maven.aliyun.com/repository/public/' }
-        maven{ url 'https://maven.aliyun.com/repository/google' }
-        maven{ url 'https://maven.aliyun.com/repository/jcenter' }
-        maven {
-            url "https://jitpack.io"
-        }
+        maven { url 'https://maven.aliyun.com/repository/public/' }
+        maven { url 'https://maven.aliyun.com/repository/google' }
+        maven { url 'https://maven.aliyun.com/repository/jcenter' }
+        maven { url "https://jitpack.io" }
         google()
         maven { url "https://maven.aliyun.com/repository/public" }
         flatDir { dirs 'libs' }
