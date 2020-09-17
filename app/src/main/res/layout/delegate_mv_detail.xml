@@ -137,7 +137,8 @@
                                 android:layout_width="fill_parent"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
-                                android:orientation="vertical">
+                                android:orientation="vertical"
+                                onClickWithDebouncing="@{() -> proxy.parise()}">
 
                                 <ImageView
                                     android:id="@+id/iv_video_detail_praise"
@@ -162,7 +163,8 @@
                                 android:layout_width="fill_parent"
                                 android:layout_height="50dp"
                                 android:layout_weight="1"
-                                android:orientation="vertical">
+                                android:orientation="vertical"
+                                onClickWithDebouncing="@{() -> proxy.collectMv()}">
 
                                 <ImageView
                                     android:id="@+id/iv_video_detail_collect"
@@ -283,6 +285,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginRight="20dp"
                         android:background="@drawable/bg_round_red_14dp"
+                        onClickWithDebouncing="@{() -> proxy.subArtist()}"
                         visible="@{!vm.isFollowed}">
 
                         <ImageView
@@ -313,6 +316,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginRight="20dp"
                         android:background="@drawable/bg_gray_border"
+                        onClickWithDebouncing="@{() -> proxy.subArtist()}"
                         visible="@{vm.isFollowed}">
 
                         <ImageView

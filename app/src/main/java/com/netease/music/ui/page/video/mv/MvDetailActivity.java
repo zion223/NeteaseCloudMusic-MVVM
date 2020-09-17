@@ -49,7 +49,6 @@ public class MvDetailActivity extends BaseActivity {
 
             mMvDetailViewModel.request.getMvDetailLiveData().observe(this, mvDetailBean -> {
                 mMvDetailViewModel.mvData.set(mvDetailBean);
-
             });
 
             mMvDetailViewModel.request.getArtistInfoLiveData().observe(this, artistInfo -> {
@@ -78,5 +77,17 @@ public class MvDetailActivity extends BaseActivity {
         }
 
         //TODO 关注歌手 收藏MV 点赞
+
+        public void subArtist() {
+
+        }
+
+        public void parise() {
+
+        }
+
+        public void collectMv() {
+
+        }
     }
 }
