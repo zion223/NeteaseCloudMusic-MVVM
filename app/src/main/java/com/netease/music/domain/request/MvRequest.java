@@ -59,6 +59,7 @@ public class MvRequest extends BaseRequest {
         return mArtistInfoLiveData;
     }
 
+    //请求MV详情
     public void requestMvDetail(String mvId) {
         Disposable requestMvDetail = ApiEngine.getInstance().getApiService().getMvDetail(mvId)
                 .subscribeOn(Schedulers.io())
@@ -66,6 +67,7 @@ public class MvRequest extends BaseRequest {
                 .subscribe(mvDetail -> mMvDetailLiveData.postValue(mvDetail.getData()));
     }
 
+    //请求MV评论
     public void requestMvComment(String mvId) {
         Disposable requestMvComment = ApiEngine.getInstance().getApiService().getMvComment(mvId)
                 .subscribeOn(Schedulers.io())
@@ -86,6 +88,7 @@ public class MvRequest extends BaseRequest {
                 });
     }
 
+    //请求歌手信息
     public void requestArtistInfo(String artisdId) {
         Disposable subscribe = ApiEngine.getInstance().getApiService().getSingerHotSong(artisdId)
                 .subscribeOn(Schedulers.io())
@@ -93,6 +96,7 @@ public class MvRequest extends BaseRequest {
                 .subscribe(artistInfo -> mArtistInfoLiveData.postValue(artistInfo));
     }
 
+    //请求MV排行榜
     public void requestMvTop() {
         Disposable subscribe = ApiEngine.getInstance().getApiService().getMvTop()
                 .subscribeOn(Schedulers.io())
@@ -100,6 +104,7 @@ public class MvRequest extends BaseRequest {
                 .subscribe(mvTopBean -> mvTopBeanLiveData.postValue(mvTopBean));
     }
 
+    //请求全部MV
     public void requestAllMv(String area, String type, String order, int limit) {
         Disposable subscribe = ApiEngine.getInstance().getApiService().getAllMv(area, type, order, limit)
                 .subscribeOn(Schedulers.io())
