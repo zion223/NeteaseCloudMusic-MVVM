@@ -331,6 +331,9 @@ public interface ApiService {
     @GET("mv/sublist")
     Observable<MvSublistBean> getMvSublist();
 
+    @GET("mv/sub")
+    Observable<CommentLikeBean> getMvSub(@Query("id") int id, @Query("t") int t);
+
     @GET("personal_fm")
     Observable<MyFmBean> getMyFm();
 
