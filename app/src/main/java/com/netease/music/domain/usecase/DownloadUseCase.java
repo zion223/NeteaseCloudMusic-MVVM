@@ -1,7 +1,6 @@
 package com.netease.music.domain.usecase;
 
 import com.kunminx.architecture.domain.usecase.UseCase;
-import com.netease.music.data.config.Configs;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -20,7 +19,7 @@ public class DownloadUseCase extends UseCase<DownloadUseCase.RequestValues, Down
         try {
             URL url = new URL(requestValues.url);
             InputStream is = url.openStream();
-            File file = new File(Configs.COVER_PATH, requestValues.path);
+            File file = new File("", requestValues.path);
             OutputStream os = new FileOutputStream(file);
             byte[] buffer = new byte[1024];
             int len = 0;
