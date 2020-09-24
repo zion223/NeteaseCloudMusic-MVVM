@@ -16,8 +16,9 @@
 
 package com.netease.music.data.repository;
 
-import androidx.lifecycle.MutableLiveData;
+import android.os.Handler;
 
+import androidx.lifecycle.MutableLiveData;
 
 
 /**
@@ -40,6 +41,11 @@ public class DataRepository implements ILocalSource, IRemoteSource {
             responseCodeLiveData = new MutableLiveData<>();
         }
         return responseCodeLiveData;
+    }
+
+    public void requestResponseCode() {
+        //模拟2s中后返回数据
+        new Handler().postDelayed(() -> responseCodeLiveData.postValue("code"), 2000);
     }
 
 }
