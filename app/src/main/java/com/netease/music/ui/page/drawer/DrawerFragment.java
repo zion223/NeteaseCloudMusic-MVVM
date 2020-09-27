@@ -1,9 +1,5 @@
 package com.netease.music.ui.page.drawer;
 
-import android.os.Bundle;
-
-import androidx.annotation.Nullable;
-
 import com.kunminx.architecture.ui.page.BaseFragment;
 import com.kunminx.architecture.ui.page.DataBindingConfig;
 import com.netease.music.R;
@@ -26,12 +22,6 @@ public class DrawerFragment extends BaseFragment {
         return new DataBindingConfig(R.layout.fragment_drawer, BR.vm, mDrawerViewModel)
                 .addBindingParam(BR.click, new ClickProxy())
                 .addBindingParam(BR.adapter, new DrawerAdapter(getContext()));
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
     }
 
     public class ClickProxy {
