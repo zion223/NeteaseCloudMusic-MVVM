@@ -54,7 +54,7 @@
             android:gravity="center"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
-            onClickWithDebouncing="@{() -> click.phone()}"
+            onClickWithDebouncing="@{() -> click.phoneLogin()}"
             android:text="手机号登陆"
             android:textColor="@android:color/holo_red_light"
             android:textSize="15sp" />

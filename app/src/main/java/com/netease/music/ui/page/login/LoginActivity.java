@@ -26,7 +26,7 @@ public class LoginActivity extends BaseActivity {
 
     public class ClickProxy {
 
-        public void phone() {
+        public void phoneLogin() {
             if (mLoginViewModel.argeeRule.get()) {
                 startActivity(new Intent(LoginActivity.this, PhoneLoginActivity.class));
                 finish();
