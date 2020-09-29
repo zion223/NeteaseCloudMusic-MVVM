@@ -63,6 +63,13 @@ public class MvDetailActivity extends BaseActivity {
 
                 mMvDetailViewModel.loadingVisible.set(false);
             });
+            //点赞数据
+            mMvDetailViewModel.request.getChangeLikeStatusLiveData().observe(this, aBoolean -> {
+                if (aBoolean) {
+                    //状态取反
+                    mMvDetailViewModel.isParised.set(!mMvDetailViewModel.isParised.get());
+                }
+            });
 
             mMvDetailViewModel.request.requestMvDetail(mvId);
             mMvDetailViewModel.request.requestArtistInfo(artistId);
@@ -76,14 +83,14 @@ public class MvDetailActivity extends BaseActivity {
             finish();
         }
 
-        //TODO 关注歌手 收藏MV 点赞
+        //TODO 关注歌手 收藏MV
 
         public void subArtist() {
 
         }
 
         public void parise() {
-
+            mMvDetailViewModel.request.requestLikeMv(mMvDetailViewModel.mvData.get().getId(), !mMvDetailViewModel.isParised.get());
         }
 
         public void collectMv() {

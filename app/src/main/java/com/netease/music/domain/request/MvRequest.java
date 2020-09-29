@@ -23,6 +23,7 @@ public class MvRequest extends BaseRequest {
     private MutableLiveData<MvBean.MvDetailBean> mMvDetailLiveData;
     private MutableLiveData<SingerSongSearchBean> mArtistInfoLiveData;
     private MutableLiveData<ArrayList<PlayListCommentEntity>> mMvCommentLiveData;
+    private MutableLiveData<Boolean> mChangeLikeStatusLiveData;
 
     public MutableLiveData<MvTopBean> getMvTopBeanLiveData() {
         if (mvTopBeanLiveData == null) {
@@ -57,6 +58,13 @@ public class MvRequest extends BaseRequest {
             mArtistInfoLiveData = new MutableLiveData<>();
         }
         return mArtistInfoLiveData;
+    }
+
+    public MutableLiveData<Boolean> getChangeLikeStatusLiveData() {
+        if (mChangeLikeStatusLiveData == null) {
+            mChangeLikeStatusLiveData = new MutableLiveData<>();
+        }
+        return mChangeLikeStatusLiveData;
     }
 
     //请求MV详情
@@ -110,5 +118,15 @@ public class MvRequest extends BaseRequest {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(mvTopBean -> mAllMvLiveData.postValue(mvTopBean));
+    }
+
+    //给MV点赞
+    public void requestLikeMv(String mvId, boolean like) {
+        Disposable subscribe = ApiEngine.getInstance().getApiService().likeResource(mvId, like ? 1 : 0, 1)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(commentLikeBean -> {
+                    mChangeLikeStatusLiveData.setValue(commentLikeBean.getCode() == 200);
+                });
     }
 }
