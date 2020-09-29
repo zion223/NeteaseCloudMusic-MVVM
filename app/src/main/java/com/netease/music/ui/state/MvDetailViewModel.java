@@ -4,7 +4,9 @@ import androidx.databinding.ObservableBoolean;
 import androidx.databinding.ObservableField;
 
 import com.chad.library.adapter.base.BaseSectionQuickAdapter;
+import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.netease.lib_api.model.mv.MvBean;
+import com.netease.lib_api.model.playlist.PlayListCommentEntity;
 import com.netease.music.domain.request.MvRequest;
 import com.netease.music.ui.state.load.BaseLoadingViewModel;
 
@@ -24,7 +26,7 @@ public class MvDetailViewModel extends BaseLoadingViewModel {
     //是否关注歌手
     public final ObservableBoolean isFollowed = new ObservableBoolean();
 
-    public final ObservableField<BaseSectionQuickAdapter> commentAdapter = new ObservableField<>();
+    public final ObservableField<BaseSectionQuickAdapter<PlayListCommentEntity, BaseViewHolder>> commentAdapter = new ObservableField<>();
 
     public final MvRequest request = new MvRequest();
 }
