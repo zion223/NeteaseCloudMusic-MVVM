@@ -6,7 +6,7 @@ import com.netease.lib_api.model.dj.DjBannerBean;
 import com.netease.lib_api.model.dj.DjDetailBean;
 import com.netease.lib_api.model.dj.DjProgramBean;
 import com.netease.lib_api.model.dj.DjRecommendBean;
-import com.netease.lib_api.model.dj.DjSubBean;
+import com.netease.lib_api.model.notification.CommonMessageBean;
 import com.netease.lib_network.ApiEngine;
 import com.kunminx.architecture.domain.request.BaseRequest;
 
@@ -24,7 +24,7 @@ public class RadioRequest extends BaseRequest {
     private MutableLiveData<DjDetailBean> mRadioDetailLiveData;
     private MutableLiveData<DjProgramBean> mRadioProgramLiveData;
     //订阅或取消订阅
-    private MutableLiveData<DjSubBean> mRadioSubLiveData;
+    private MutableLiveData<CommonMessageBean> mRadioSubLiveData;
 
     public MutableLiveData<DjBannerBean> getBannerLiveData() {
         if (mBannerLiveData == null) {
@@ -54,7 +54,7 @@ public class RadioRequest extends BaseRequest {
         return mRadioProgramLiveData;
     }
 
-    public MutableLiveData<DjSubBean> getRadioSubLiveData() {
+    public MutableLiveData<CommonMessageBean> getRadioSubLiveData() {
         if (mRadioSubLiveData == null) {
             mRadioSubLiveData = new MutableLiveData<>();
         }

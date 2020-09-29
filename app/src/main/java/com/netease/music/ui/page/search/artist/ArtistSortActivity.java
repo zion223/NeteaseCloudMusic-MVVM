@@ -71,11 +71,10 @@ public class ArtistSortActivity extends BaseActivity {
             addChildClickViewIds(R.id.ll_singer_followed, R.id.ll_singer_follow);
             setOnItemChildClickListener((adapter, view, position) -> {
                 TopListDetailBean.Artist entity = (TopListDetailBean.Artist) adapter.getItem(position);
-                View followedView = adapter.getViewByPosition(position, R.id.ll_singer_followed);
-                View followView = adapter.getViewByPosition(position, R.id.ll_singer_follow);
+                final View followedView = adapter.getViewByPosition(position, R.id.ll_singer_followed);
+                final View followView = adapter.getViewByPosition(position, R.id.ll_singer_follow);
                 //点击事件发生 则该View处于可见状态
                 int id = view.getId();
-                view.getVisibility();
                 boolean isSubed = (id == R.id.ll_singer_followed);
                 Disposable subscribe = ApiEngine.getInstance().getApiService().getSubArtist(entity.getId(), !isSubed ? 1 : 0)
                         .subscribeOn(Schedulers.io())

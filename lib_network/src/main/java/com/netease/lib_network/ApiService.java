@@ -15,7 +15,6 @@ import com.netease.lib_api.model.dj.DjPaygiftBean;
 import com.netease.lib_api.model.dj.DjProgramBean;
 import com.netease.lib_api.model.dj.DjRecommendBean;
 import com.netease.lib_api.model.dj.DjRecommendTypeBean;
-import com.netease.lib_api.model.dj.DjSubBean;
 import com.netease.lib_api.model.dj.DjSubListBean;
 import com.netease.lib_api.model.mv.MvBean;
 import com.netease.lib_api.model.mv.MvInfoBean;
@@ -326,7 +325,7 @@ public interface ApiService {
 
     @GET("artist/sub")
         //t =1 true  0 = false
-    Observable<DjSubBean> getSubArtist(@Query("id") int id, @Query("t") int t);
+    Observable<CommonMessageBean> getSubArtist(@Query("id") int id, @Query("t") int t);
 
     @GET("mv/sublist")
     Observable<MvSublistBean> getMvSublist();
@@ -360,7 +359,7 @@ public interface ApiService {
 
     // 1 订阅 0取消订阅
     @GET("dj/sub")
-    Observable<DjSubBean> getSubRadio(@Query("rid") String rid, @Query("t") int isSub);
+    Observable<CommonMessageBean> getSubRadio(@Query("rid") String rid, @Query("t") int isSub);
 
     @GET("top/mv")
     Observable<MvTopBean> getMvTop();
