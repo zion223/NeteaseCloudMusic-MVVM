@@ -48,6 +48,7 @@ public class MineFragment extends BaseFragment {
 
     }
 
+    //https://www.jianshu.com/p/cfe74762edcc Androidx懒加载方案 在onResume()方法中进行网络请求
     @Override
     public void onResume() {
         super.onResume();
