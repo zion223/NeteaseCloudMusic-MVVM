@@ -118,7 +118,7 @@ public class DiscoverFragment extends BaseFragment {
         }
 
         public void clickAlbumOrSongDetail() {
-            //新歌推荐
+            //新歌推荐 TODO
             if (mDiscoverViewModel.type.get() == TYPE.SONG) {
 
             } else {

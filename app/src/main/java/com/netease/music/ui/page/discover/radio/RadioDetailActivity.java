@@ -89,11 +89,7 @@ public class RadioDetailActivity extends BaseActivity {
                 View programHeaderView = inflate.getRoot();
                 //新 -> 老  排序序号
                 RadioProgramAdapter radioProgramAdapter;
-                if (mRadioDetailViewModel.asc.get()) {
-                    radioProgramAdapter = new RadioProgramAdapter(0, djProgramBean.getPrograms());
-                } else {
-                    radioProgramAdapter = new RadioProgramAdapter(djProgramBean.getCount(), djProgramBean.getPrograms());
-                }
+                radioProgramAdapter = new RadioProgramAdapter(mRadioDetailViewModel.asc.get() ? 0 : djProgramBean.getCount(), djProgramBean.getPrograms());
                 radioProgramAdapter.setHeaderView(programHeaderView);
                 mRadioDetailViewModel.programAdapter.set(radioProgramAdapter);
 

@@ -88,11 +88,7 @@ public class MusicListDialog extends BottomPopupView {
 
         for (int i = 0; i < mQueue.size(); i++) {
             //最后一个参数不加逗号
-            if (i == mQueue.size() - 1) {
-                tracks.append(mQueue.get(i).getId());
-            } else {
-                tracks.append(mQueue.get(i).getId()).append(",");
-            }
+            tracks.append(i == mQueue.size() - 1 ? mQueue.get(i).getId() : tracks.append(mQueue.get(i).getId()).append(","));
         }
     }
 

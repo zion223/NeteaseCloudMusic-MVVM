@@ -47,13 +47,6 @@ public class MusicService extends Service implements NotificationHelper.Notifica
 	}
 
 	@Override
-	public void onDestroy() {
-		super.onDestroy();
-		EventBus.getDefault().unregister(this);
-		unRegisterBroadcastReceiver();
-	}
-
-	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		if (intent != null) {
 			if (ACTION_START.equals(intent.getAction())) {
@@ -62,6 +55,13 @@ public class MusicService extends Service implements NotificationHelper.Notifica
 			}
 		}
 		return super.onStartCommand(intent, flags, startId);
+	}
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		EventBus.getDefault().unregister(this);
+		unRegisterBroadcastReceiver();
 	}
 
 	private void registerBroadcastReceiver() {
