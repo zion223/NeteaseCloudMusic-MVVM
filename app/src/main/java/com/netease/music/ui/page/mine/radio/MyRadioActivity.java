@@ -44,7 +44,7 @@ public class MyRadioActivity extends BaseActivity {
             myRadioViewModel.subRadioSize.set(djSubListBean.getDjRadios().size());
         });
 
-        myRadioViewModel.request.requestSubLuist();
+        myRadioViewModel.request.requestSubList();
     }
 
     class MineRadioAdapter extends BaseQuickAdapter<DjSubListBean.DjRadios, BaseViewHolder> {

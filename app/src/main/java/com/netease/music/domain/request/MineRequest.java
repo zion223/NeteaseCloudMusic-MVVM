@@ -69,7 +69,7 @@ public class MineRequest extends BaseRequest {
                 });
     }
 
-    public void requestSubLuist() {
+    public void requestSubList() {
         Disposable subscribe = ApiEngine.getInstance().getApiService().getDjSubList()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
