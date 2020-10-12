@@ -62,7 +62,7 @@ public class PhoneLoginActivity extends BaseActivity {
                 finish();
             } else {
                 //登陆失败
-                showLongToast("手机号或密码输入错误");
+                showLongToast(loginBean.getMsg());
             }
         });
         //观察验证码发送状态  成功后显示验证码输入界面 并且倒计时启动
