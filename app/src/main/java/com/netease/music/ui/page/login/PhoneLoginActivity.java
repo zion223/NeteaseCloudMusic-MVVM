@@ -18,6 +18,8 @@ import com.netease.music.R;
 import com.netease.music.ui.state.PhoneLoginViewModel;
 
 import java.util.concurrent.TimeUnit;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -132,7 +134,7 @@ public class PhoneLoginActivity extends BaseActivity {
                 //密码框获取到焦点
             } else {
                 //手机号格式不正确
-                showShortToast("请正确输入手机号");
+                showShortToast("请输入正确格式的手机号");
             }
         }
 
@@ -140,8 +142,13 @@ public class PhoneLoginActivity extends BaseActivity {
         public void login() {
             //判断是要发送验证码  还是直接登录
             if (mPhoneLoginViewModel.showForgetPassword.get()) {
-                //发送验证码 显示倒计时 显示验证码输入框
-                mPhoneLoginViewModel.accountRequest.sendCapture(mPhoneLoginViewModel.phone.get());
+                //校验新输入的密码格式
+                if (mPhoneLoginViewModel.password.get().length() > 2 && mPhoneLoginViewModel.password.get().length() < 20
+                        && isPassword(mPhoneLoginViewModel.password.get())) {
+                    //发送验证码 显示倒计时 显示验证码输入框
+                    mPhoneLoginViewModel.accountRequest.sendCapture(mPhoneLoginViewModel.phone.get());
+                }
+
             } else {
                 //登录请求
                 mPhoneLoginViewModel.accountRequest.requestLogin(mPhoneLoginViewModel.phone.get(), mPhoneLoginViewModel.password.get());
@@ -152,7 +159,7 @@ public class PhoneLoginActivity extends BaseActivity {
         public void forgetPassword() {
             mPhoneLoginViewModel.showForgetPassword.set(true);
             mPhoneLoginViewModel.title.set("忘记密码");
-            mPhoneLoginViewModel.passwordHint.set("设置登录密码,密码不少于六位");
+            mPhoneLoginViewModel.passwordHint.set("请设置登录密码,8-20位字符,至少字母/数字/符号两种组合");
         }
 
         //重新获取验证码  只有在倒计时结束 显示重新获取 后才可以点击此按钮
@@ -169,4 +176,12 @@ public class PhoneLoginActivity extends BaseActivity {
             mPhoneLoginViewModel.accountRequest.register(mPhoneLoginViewModel.phone.get(), mPhoneLoginViewModel.password.get(), code);
         }
     };
+
+
+    public boolean isPassword(String password) {
+        String regex = "^[a-zA-Z0-9\\u4E00-\\u9FA5]+$";
+        Pattern p = Pattern.compile(regex);
+        Matcher m = p.matcher(password);
+        return m.matches();
+    }
 }
