@@ -18,8 +18,6 @@ import com.netease.music.R;
 import com.netease.music.ui.state.PhoneLoginViewModel;
 
 import java.util.concurrent.TimeUnit;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -144,7 +142,7 @@ public class PhoneLoginActivity extends BaseActivity {
             if (mPhoneLoginViewModel.showForgetPassword.get()) {
                 //校验新输入的密码格式
                 if (mPhoneLoginViewModel.password.get().length() > 2 && mPhoneLoginViewModel.password.get().length() < 20
-                        && isPassword(mPhoneLoginViewModel.password.get())) {
+                        && ValidateUtils.isPassword(mPhoneLoginViewModel.password.get())) {
                     //发送验证码 显示倒计时 显示验证码输入框
                     mPhoneLoginViewModel.accountRequest.sendCapture(mPhoneLoginViewModel.phone.get());
                 }
@@ -178,10 +176,4 @@ public class PhoneLoginActivity extends BaseActivity {
     };
 
 
-    public boolean isPassword(String password) {
-        String regex = "^[a-zA-Z0-9\\u4E00-\\u9FA5]+$";
-        Pattern p = Pattern.compile(regex);
-        Matcher m = p.matcher(password);
-        return m.matches();
-    }
 }

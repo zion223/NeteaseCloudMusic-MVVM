@@ -2,6 +2,7 @@ package com.netease.lib_common_ui.utils;
 
 import android.text.TextUtils;
 
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ValidateUtils {
@@ -18,5 +19,18 @@ public class ValidateUtils {
 			return false;
 		}
 		return Pattern.matches(REGEX_MOBILE, tel);
+	}
+
+	/**
+	 * 判断密码是否符合规范
+	 *
+	 * @param password 输入的密码
+	 * @return boolean true:是  false:否
+	 */
+	public static boolean isPassword(String password) {
+		String regex = "^[a-zA-Z0-9\\u4E00-\\u9FA5]+$";
+		Pattern p = Pattern.compile(regex);
+		Matcher m = p.matcher(password);
+		return m.matches();
 	}
 }
