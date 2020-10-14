@@ -46,6 +46,7 @@ public class MineRequest extends BaseRequest {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(playlistBeans -> {
                     List<UserPlaylistBean.PlaylistBean> playlist = playlistBeans.getPlaylist();
+                    //创建的歌单和收藏的歌单的分界索引值
                     int subIndex = 0;
                     for (int i = 0; i < playlist.size(); i++) {
                         if (playlist.get(i).getCreator().getUserId() != uid) {
@@ -54,18 +55,24 @@ public class MineRequest extends BaseRequest {
                         }
                     }
                     List<BaseNode> nodeList = new ArrayList<>();
+
                     List<BaseNode> nodeContextList = new ArrayList<>();
                     List<BaseNode> nodeContext2List = new ArrayList<>();
-                    for (int i = 0; i < 3; i++) {
+                    //防止出现创建的歌单数量少于3个时 数据异常
+                    for (int i = 0; i < Math.min(subIndex, 3); i++) {
                         nodeContextList.add(new UserPlayListHeader.UserPlayListContext(playlist.get(i)));
                     }
+
                     for (int i = subIndex; i < playlist.size(); i++) {
                         nodeContext2List.add(new UserPlayListHeader.UserPlayListContext(playlist.get(i)));
                     }
                     nodeList.add(new UserPlayListHeader("创建的歌单", subIndex, nodeContextList));
                     nodeList.add(new UserPlayListHeader("收藏的歌单", playlist.size() - subIndex, nodeContext2List));
 
+
                     userPlaylist.postValue(nodeList);
+
+
                 });
     }
 
