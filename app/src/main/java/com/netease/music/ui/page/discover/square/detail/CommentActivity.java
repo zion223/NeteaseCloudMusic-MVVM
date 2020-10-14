@@ -24,19 +24,17 @@ public class CommentActivity extends BaseActivity {
 
     private CommentViewModel mCommentViewModel;
 
-
-    private static final String TYPEID = "TYPE_ID";
-    private static final String LISTID = "LIST_ID";
+    private static final String TYPE_ID = "TYPE_ID";
+    private static final String LIST_ID = "LIST_ID";
     private static final String IMG_ID = "IMG_ID";
     private static final String TOP_TEXT_ID = "TOP_TEXT_ID";
     private static final String BOTTOM_TEXT_ID = "BOTTOM_TEXT_ID";
 
 
-
     public static void startActivity(Context context, String listId, int type, String img, String creator, String title) {
         Bundle bundle = new Bundle();
-        bundle.putInt(TYPEID, type);
-        bundle.putString(LISTID, listId);
+        bundle.putInt(TYPE_ID, type);
+        bundle.putString(LIST_ID, listId);
         bundle.putString(IMG_ID, img);
         bundle.putString(TOP_TEXT_ID, creator);
         bundle.putString(BOTTOM_TEXT_ID, title);
@@ -62,8 +60,8 @@ public class CommentActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         Bundle data = getIntent().getBundleExtra("data");
         if (data != null) {
-            mCommentViewModel.type.set(TYPE.getTypeByID(data.getInt(TYPEID)));
-            mCommentViewModel.listId.set(data.getString(LISTID));
+            mCommentViewModel.type.set(TYPE.getTypeByID(data.getInt(TYPE_ID)));
+            mCommentViewModel.listId.set(data.getString(LIST_ID));
             mCommentViewModel.imgUrl.set(data.getString(IMG_ID));
             mCommentViewModel.titile.set(data.getString(TOP_TEXT_ID));
             String creator = data.getString(BOTTOM_TEXT_ID);
