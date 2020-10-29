@@ -65,10 +65,6 @@
         <attr name="spread_delay_milliseconds" format="integer" />
     </declare-styleable>
 
-    <declare-styleable name="RikkaRoundRectView">
-        <attr name="roundRatio" format="float" />
-    </declare-styleable>
-
     <declare-styleable name="CircleProgressButton">
         <attr name="bgColor" format="color" />
         <attr name="progressColor" format="color" />
