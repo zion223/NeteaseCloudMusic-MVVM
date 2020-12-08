@@ -1,6 +1,14 @@
 package com.netease.music.ui.page;
 
 
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.kunminx.architecture.ui.page.BaseFragment;
 import com.kunminx.architecture.ui.page.DataBindingConfig;
 import com.netease.music.BR;
@@ -16,8 +24,8 @@ public class MainFragment extends BaseFragment {
 
     @Override
     protected void initViewModel() {
-        mMainViewModel = getFragmentViewModel(MainViewModel.class);
-        mSharedViewModel = getAppViewModelProvider().get(SharedViewModel.class);
+        mMainViewModel = getFragmentScopeViewModel(MainViewModel.class);
+        mSharedViewModel = getApplicationScopeViewModel(SharedViewModel.class);
     }
 
     @Override
@@ -26,6 +34,14 @@ public class MainFragment extends BaseFragment {
         return new DataBindingConfig(R.layout.fragment_main, BR.vm, mMainViewModel)
                 .addBindingParam(BR.click, new ClickProxy())
                 .addBindingParam(BR.adapter, new HomePagerAdapter(getChildFragmentManager(), mMainViewModel.channelArray.get()));
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mSharedViewModel.isToCloseSlidePanelIfExpanded().observeInFragment(this, aBoolean -> {
+            mSharedViewModel.requestToCloseActivityIfAllowed(true);
+        });
     }
 
     public class ClickProxy {
@@ -40,7 +56,7 @@ public class MainFragment extends BaseFragment {
             // Activity 内部的事情在 Activity 内部消化，不要试图在 fragment 中调用和操纵 Activity 内部的东西。
             // 因为 Activity 端的处理后续可能会改变，并且可受用于更多的 fragment，而不单单是本 fragment。
 
-            mSharedViewModel.openOrCloseDrawer.setValue(true);
+            mSharedViewModel.requestToOpenOrCloseDrawer(true);
         }
 
         public void login() {

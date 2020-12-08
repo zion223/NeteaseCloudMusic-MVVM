@@ -10,6 +10,7 @@ import androidx.navigation.Navigation;
 import com.kunminx.architecture.ui.page.BaseActivity;
 import com.kunminx.architecture.ui.page.DataBindingConfig;
 import com.netease.music.ui.callback.SharedViewModel;
+import com.netease.music.ui.helper.DrawerCoordinateHelper;
 import com.netease.music.ui.state.MainActivityViewModel;
 
 
@@ -22,8 +23,8 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initViewModel() {
-        mMainActivityViewModel = getActivityViewModel(MainActivityViewModel.class);
-        mSharedViewModel = getAppViewModelProvider().get(SharedViewModel.class);
+        mMainActivityViewModel = getActivityScopeViewModel(MainActivityViewModel.class);
+        mSharedViewModel = getApplicationScopeViewModel(SharedViewModel.class);
     }
 
     @Override
@@ -45,16 +46,16 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mSharedViewModel.activityCanBeClosedDirectly.observe(this, aBoolean -> {
+        mSharedViewModel.isToCloseActivityIfAllowed().observeInActivity(this, aBoolean -> {
             NavController nav = Navigation.findNavController(this, R.id.main_fragment_host);
             if (nav.getCurrentDestination() != null && nav.getCurrentDestination().getId() != R.id.mainFragment) {
                 nav.navigateUp();
 
-            } else if (mSharedViewModel.isDrawerOpened.get()) {
+            } else if (mMainActivityViewModel.isDrawerOpened.get()) {
 
                 //TODO 同 tip 2
 
-                mSharedViewModel.openOrCloseDrawer.setValue(false);
+                mSharedViewModel.requestToOpenOrCloseDrawer(false);
 
             } else {
                 if (System.currentTimeMillis() - firstTime > 2000) {
@@ -66,7 +67,7 @@ public class MainActivity extends BaseActivity {
             }
         });
 
-        mSharedViewModel.openOrCloseDrawer.observe(this, aBoolean -> {
+        mSharedViewModel.isToOpenOrCloseDrawer().observeInActivity(this, aBoolean -> {
 
             //TODO yes：同 tip 1: 此处将 drawer 的 open 和 close 都放在 drawerBindingAdapter 中操作，规避了视图调用的一致性问题，
 
@@ -89,7 +90,7 @@ public class MainActivity extends BaseActivity {
             }*/
         });
 
-        SharedViewModel.ENABLE_SWIPE_DRAWER.observe(this, aBoolean -> {
+        DrawerCoordinateHelper.getInstance().isEnableSwipeDrawer().observeInActivity(this, aBoolean -> {
 
             //TODO yes: 同 tip 1
 
@@ -118,7 +119,7 @@ public class MainActivity extends BaseActivity {
             // fragment 内部的事情在 fragment 内部消化，不要试图在 Activity 中调用和操纵 Fragment 内部的东西。
             // 因为 fragment 端的处理后续可能会改变，并且可受用于更多的 Activity，而不单单是本 Activity。
 
-            mSharedViewModel.timeToAddSlideListener.setValue(true);
+            mSharedViewModel.requestToAddSlideListener(true);
 
             mIsListened = true;
         }
@@ -129,8 +130,7 @@ public class MainActivity extends BaseActivity {
 
         // TODO 同 tip 2
 
-        mSharedViewModel.closeSlidePanelIfExpanded.setValue(true);
-        mSharedViewModel.activityCanBeClosedDirectly.setValue(true);
+        mSharedViewModel.requestToCloseSlidePanelIfExpanded(true);
     }
 
 
@@ -138,13 +138,13 @@ public class MainActivity extends BaseActivity {
         @Override
         public void onDrawerOpened(View drawerView) {
             super.onDrawerOpened(drawerView);
-            mSharedViewModel.isDrawerOpened.set(true);
+            mMainActivityViewModel.isDrawerOpened.set(true);
         }
 
         @Override
         public void onDrawerClosed(View drawerView) {
             super.onDrawerClosed(drawerView);
-            mSharedViewModel.isDrawerOpened.set(false);
+            mMainActivityViewModel.isDrawerOpened.set(false);
             mMainActivityViewModel.openDrawer.setValue(false);
         }
     }

@@ -26,7 +26,7 @@ public class NewAlbumActivity extends BaseActivity {
 
     @Override
     protected void initViewModel() {
-        mViewModel = getActivityViewModel(NewAlbumViewModel.class);
+        mViewModel = getActivityScopeViewModel(NewAlbumViewModel.class);
     }
 
     @Override

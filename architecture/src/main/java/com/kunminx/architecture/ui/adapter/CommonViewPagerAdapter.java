@@ -31,9 +31,9 @@ public class CommonViewPagerAdapter extends PagerAdapter {
 
     private final int count;
     private final boolean enableDestroyItem;
-    private final CharSequence[] title;
+    private final String[] title;
 
-    public CommonViewPagerAdapter(int count, boolean enableDestroyItem, CharSequence[] title) {
+    public CommonViewPagerAdapter(int count, boolean enableDestroyItem, String[] title) {
         this.count = count;
         this.enableDestroyItem = enableDestroyItem;
         this.title = title;

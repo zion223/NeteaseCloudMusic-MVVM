@@ -26,7 +26,7 @@ public class RadioActivity extends BaseActivity {
 
     @Override
     protected void initViewModel() {
-        mRadioViewModel = getActivityViewModel(RadioViewModel.class);
+        mRadioViewModel = getActivityScopeViewModel(RadioViewModel.class);
     }
 
     @Override

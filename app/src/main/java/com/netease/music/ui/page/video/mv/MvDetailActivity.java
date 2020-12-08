@@ -31,7 +31,7 @@ public class MvDetailActivity extends BaseActivity {
 
     @Override
     protected void initViewModel() {
-        mMvDetailViewModel = getActivityViewModel(MvDetailViewModel.class);
+        mMvDetailViewModel = getActivityScopeViewModel(MvDetailViewModel.class);
     }
 
     @Override

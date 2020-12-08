@@ -43,7 +43,7 @@ public class SongListDetailActivity extends BaseActivity {
 
     @Override
     protected void initViewModel() {
-        mViewModel = getActivityViewModel(SonglistDeatilViewModel.class);
+        mViewModel = getActivityScopeViewModel(SonglistDeatilViewModel.class);
     }
 
     @Override

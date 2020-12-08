@@ -30,7 +30,7 @@ public class ArtistSortActivity extends BaseActivity {
 
     @Override
     protected void initViewModel() {
-        mViewModel = getActivityViewModel(ArtistSortViewModel.class);
+        mViewModel = getActivityScopeViewModel(ArtistSortViewModel.class);
     }
 
     @Override

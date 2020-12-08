@@ -38,7 +38,7 @@ public class DailyRecommendActivity extends BaseActivity {
 
     @Override
     protected void initViewModel() {
-        mViewModel = getActivityViewModel(DailyRecommendViewModel.class);
+        mViewModel = getActivityScopeViewModel(DailyRecommendViewModel.class);
     }
 
     @Override

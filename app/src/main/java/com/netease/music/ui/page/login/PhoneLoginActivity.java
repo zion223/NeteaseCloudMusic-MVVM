@@ -39,7 +39,7 @@ public class PhoneLoginActivity extends BaseActivity {
 
     @Override
     protected void initViewModel() {
-        mPhoneLoginViewModel = getActivityViewModel(PhoneLoginViewModel.class);
+        mPhoneLoginViewModel = getActivityScopeViewModel(PhoneLoginViewModel.class);
     }
 
     @Override

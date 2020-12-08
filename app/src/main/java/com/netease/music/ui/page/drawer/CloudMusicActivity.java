@@ -27,7 +27,7 @@ public class CloudMusicActivity extends BaseActivity {
 
     @Override
     protected void initViewModel() {
-        mCloudMusicViewModel = getActivityViewModel(CloudMusicViewModel.class);
+        mCloudMusicViewModel = getActivityScopeViewModel(CloudMusicViewModel.class);
     }
 
     @Override

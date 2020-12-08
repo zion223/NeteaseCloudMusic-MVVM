@@ -25,7 +25,7 @@ public class CloudVillageFragment extends BaseFragment implements OnRefreshListe
 
     @Override
     protected void initViewModel() {
-        mViewModel = getFragmentViewModel(CloudVillageFragmentViewModel.class);
+        mViewModel = getFragmentScopeViewModel(CloudVillageFragmentViewModel.class);
     }
 
     @Override

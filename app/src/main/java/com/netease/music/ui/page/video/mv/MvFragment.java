@@ -18,7 +18,7 @@ public class MvFragment extends BaseFragment {
 
     @Override
     protected void initViewModel() {
-        mViewModel = getFragmentViewModel(MvViewModel.class);
+        mViewModel = getFragmentScopeViewModel(MvViewModel.class);
     }
 
     @Override

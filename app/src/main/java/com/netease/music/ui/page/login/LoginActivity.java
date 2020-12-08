@@ -14,7 +14,7 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     protected void initViewModel() {
-        mLoginViewModel = getActivityViewModel(LoginViewModel.class);
+        mLoginViewModel = getActivityScopeViewModel(LoginViewModel.class);
     }
 
     @Override

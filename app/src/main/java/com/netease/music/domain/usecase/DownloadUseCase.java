@@ -19,7 +19,7 @@ public class DownloadUseCase extends UseCase<DownloadUseCase.RequestValues, Down
         try {
             URL url = new URL(requestValues.url);
             InputStream is = url.openStream();
-            File file = new File("", requestValues.path);
+            File file = new File("/paht", requestValues.path);
             OutputStream os = new FileOutputStream(file);
             byte[] buffer = new byte[1024];
             int len = 0;

@@ -48,6 +48,7 @@ import com.netease.lib_api.model.search.SingerSearchBean;
 import com.netease.lib_api.model.search.SingerSongSearchBean;
 import com.netease.lib_api.model.search.SongSearchBean;
 import com.netease.lib_api.model.search.SynthesisSearchBean;
+import com.netease.lib_api.model.search.TopAlbumBean;
 import com.netease.lib_api.model.search.UserSearchBean;
 import com.netease.lib_api.model.song.CommentLikeBean;
 import com.netease.lib_api.model.song.LikeMusicBean;
@@ -72,7 +73,7 @@ import retrofit2.http.Query;
 
 public interface ApiService {
 
-    String BASE_URL = "http://62.234.57.125:3000/";
+    String BASE_URL = "http://192.168.1.5:3000/";
 
     @GET("login/cellphone")
     Observable<LoginBean> login(@Query("phone") String phone, @Query("password") String password);
@@ -308,7 +309,7 @@ public interface ApiService {
     Observable<CommonMessageBean> subscribeVideo(@Query("id") String id, @Query("t") long t);
 
     @GET("top/album")
-    Observable<AlbumSearchBean.ResultBean> getTopAlbum(@Query("limit") int limit);
+    Observable<TopAlbumBean> getTopAlbum(@Query("limit") int limit);
 
     @GET("album/newest")
     Observable<AlbumSearchBean.ResultBean> getNewAlbum();

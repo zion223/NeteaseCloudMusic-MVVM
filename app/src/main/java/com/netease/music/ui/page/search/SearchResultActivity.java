@@ -16,7 +16,7 @@ public class SearchResultActivity extends BaseActivity {
 
     @Override
     protected void initViewModel() {
-        mSearchResultViewModel = getActivityViewModel(SearchResultViewModel.class);
+        mSearchResultViewModel = getActivityScopeViewModel(SearchResultViewModel.class);
     }
 
     @Override

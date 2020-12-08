@@ -34,7 +34,7 @@ public class UserDetailActivity extends BaseActivity {
 
     @Override
     protected void initViewModel() {
-        mUserDetailViewModel = getActivityViewModel(UserDetailViewModel.class);
+        mUserDetailViewModel = getActivityScopeViewModel(UserDetailViewModel.class);
     }
 
     @Override

@@ -44,7 +44,7 @@ public class RadioDetailActivity extends BaseActivity {
 
     @Override
     protected void initViewModel() {
-        mRadioDetailViewModel = getActivityViewModel(RadioDetailViewModel.class);
+        mRadioDetailViewModel = getActivityScopeViewModel(RadioDetailViewModel.class);
     }
 
     @Override

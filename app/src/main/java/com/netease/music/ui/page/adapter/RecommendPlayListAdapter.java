@@ -4,8 +4,8 @@ import android.content.Context;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.netease.lib_api.model.playlist.MainRecommendPlayListBean;
 import com.kunminx.architecture.ui.adapter.SimpleDataBindingAdapter;
+import com.netease.lib_api.model.playlist.MainRecommendPlayListBean;
 import com.netease.music.R;
 import com.netease.music.data.config.TYPE;
 import com.netease.music.databinding.ItemDiscoverGedanBinding;

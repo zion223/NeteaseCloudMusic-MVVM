@@ -20,10 +20,8 @@ package com.netease.music.domain.request;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.kunminx.architecture.data.repository.DataResult;
 import com.kunminx.architecture.domain.request.BaseRequest;
 import com.netease.music.data.bean.LibraryInfo;
-import com.netease.music.data.repository.DataRepository;
 
 import java.util.List;
 

@@ -32,7 +32,7 @@ public class DiscoverFragment extends BaseFragment {
 
     @Override
     protected void initViewModel() {
-        mDiscoverViewModel = getFragmentViewModel(DiscoverViewModel.class);
+        mDiscoverViewModel = getFragmentScopeViewModel(DiscoverViewModel.class);
     }
 
     @Override

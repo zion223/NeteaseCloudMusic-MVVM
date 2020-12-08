@@ -46,7 +46,7 @@ public class VideoFragment extends BaseFragment {
 
     @Override
     protected void initViewModel() {
-        mVideoViewModel = getFragmentViewModel(VideoViewModel.class);
+        mVideoViewModel = getFragmentScopeViewModel(VideoViewModel.class);
     }
 
     @Override

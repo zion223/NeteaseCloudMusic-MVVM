@@ -28,7 +28,7 @@ public class VideoDetailActivity extends BaseActivity {
 
     @Override
     protected void initViewModel() {
-        mViewModel = getActivityViewModel(VideoDetailViewModel.class);
+        mViewModel = getActivityScopeViewModel(VideoDetailViewModel.class);
     }
 
     @Override

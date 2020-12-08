@@ -25,7 +25,7 @@ public class RadioPayActivity extends BaseActivity {
 
     @Override
     protected void initViewModel() {
-        mViewModel = getActivityViewModel(RadioPayViewModel.class);
+        mViewModel = getActivityScopeViewModel(RadioPayViewModel.class);
     }
 
     @Override

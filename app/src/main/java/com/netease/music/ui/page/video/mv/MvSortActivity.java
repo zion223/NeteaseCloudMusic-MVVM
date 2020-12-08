@@ -31,7 +31,7 @@ public class MvSortActivity extends BaseActivity {
 
     @Override
     protected void initViewModel() {
-        mvSortViewModel = getActivityViewModel(MvSortViewModel.class);
+        mvSortViewModel = getActivityScopeViewModel(MvSortViewModel.class);
     }
 
     @Override

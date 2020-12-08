@@ -21,7 +21,7 @@ public class MineFragment extends BaseFragment {
 
     @Override
     protected void initViewModel() {
-        mMineViewModel = getFragmentViewModel(MineViewModel.class);
+        mMineViewModel = getFragmentScopeViewModel(MineViewModel.class);
     }
 
     @Override

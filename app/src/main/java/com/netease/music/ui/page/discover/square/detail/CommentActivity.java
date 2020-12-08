@@ -46,7 +46,7 @@ public class CommentActivity extends BaseActivity {
 
     @Override
     protected void initViewModel() {
-        mCommentViewModel = getActivityViewModel(CommentViewModel.class);
+        mCommentViewModel = getActivityScopeViewModel(CommentViewModel.class);
     }
 
     @Override

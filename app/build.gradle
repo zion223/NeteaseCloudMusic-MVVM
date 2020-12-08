@@ -54,6 +54,7 @@ dependencies {
 
     implementation  'com.scwang.smart:refresh-layout-kernel:2.0.1'      //核心必须依赖
     implementation  'com.scwang.smart:refresh-header-classics:2.0.1'    //经典刷新头
+    //implementation 'com.kunminx.archi:binding-recyclerview:3.3.2-beta3'
     // eventBus
     implementation this.rootProject.depsLibs.eventbus
     implementation this.rootProject.depsLibs.vptransforms

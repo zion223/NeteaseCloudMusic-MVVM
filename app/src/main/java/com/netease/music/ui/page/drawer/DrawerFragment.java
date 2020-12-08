@@ -13,7 +13,7 @@ public class DrawerFragment extends BaseFragment {
 
     @Override
     protected void initViewModel() {
-        mDrawerViewModel = getFragmentViewModel(DrawerViewModel.class);
+        mDrawerViewModel = getFragmentScopeViewModel(DrawerViewModel.class);
     }
 
     @Override
