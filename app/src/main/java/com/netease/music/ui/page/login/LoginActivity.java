@@ -38,7 +38,7 @@ public class LoginActivity extends BaseActivity {
 
         //TODO 体验
         public void experience() {
-            showShortToast("此功能暂时无实现");
+            showShortToast(getString(R.string.function_not_completed));
         }
 
     }

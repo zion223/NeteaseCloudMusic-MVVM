@@ -60,7 +60,7 @@ public class MineFragment extends BaseFragment {
 
         //本地音乐
         public void localMusic() {
-
+            showShortToast(R.string.function_not_completed);
         }
 
 
@@ -72,12 +72,12 @@ public class MineFragment extends BaseFragment {
 
         //我的收藏
         public void myCollect() {
-
+            showShortToast(R.string.function_not_completed);
         }
 
         //最近播放
         public void recentPlay() {
-
+            showShortToast(R.string.function_not_completed);
         }
     }
 }

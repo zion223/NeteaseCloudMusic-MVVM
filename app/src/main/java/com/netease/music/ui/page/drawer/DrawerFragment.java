@@ -4,7 +4,6 @@ import com.kunminx.architecture.ui.page.BaseFragment;
 import com.kunminx.architecture.ui.page.DataBindingConfig;
 import com.netease.music.R;
 import com.netease.music.BR;
-import com.netease.music.ui.page.adapter.DrawerAdapter;
 import com.netease.music.ui.state.DrawerViewModel;
 
 public class DrawerFragment extends BaseFragment {
@@ -20,8 +19,7 @@ public class DrawerFragment extends BaseFragment {
     protected DataBindingConfig getDataBindingConfig() {
 
         return new DataBindingConfig(R.layout.fragment_drawer, BR.vm, mDrawerViewModel)
-                .addBindingParam(BR.click, new ClickProxy())
-                .addBindingParam(BR.adapter, new DrawerAdapter(getContext()));
+                .addBindingParam(BR.click, new ClickProxy());
     }
 
     public class ClickProxy {

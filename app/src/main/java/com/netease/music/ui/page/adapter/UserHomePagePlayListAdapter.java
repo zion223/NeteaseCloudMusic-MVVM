@@ -38,7 +38,7 @@ public class UserHomePagePlayListAdapter extends BaseMultiItemQuickAdapter<UserP
                     break;
                 case UserPlaylistEntity.TYPE_FOOTER:
                     //查看更多歌单 TODO
-                    Toast.makeText(context, "此功能暂时未实现", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, R.string.function_not_completed, Toast.LENGTH_SHORT).show();
                     break;
                 default:
                     break;
