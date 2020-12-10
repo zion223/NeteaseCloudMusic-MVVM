@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.ActivityNavigator;
 
 import com.kunminx.architecture.ui.adapter.MultiFragmentPagerAdapter;
 import com.kunminx.architecture.ui.page.BaseActivity;
@@ -46,6 +47,11 @@ public class MessageTabActivity extends BaseActivity {
         mState.adapter.set(multiFragmentPagerAdapter);
     }
 
+    @Override
+    public void finish() {
+        super.finish();
+        ActivityNavigator.applyPopAnimationsToPendingTransition(this);
+    }
 
     public class ClickProxy {
         //返回
