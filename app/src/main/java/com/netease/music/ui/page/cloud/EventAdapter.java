@@ -83,7 +83,8 @@ public class EventAdapter extends BaseQuickAdapter<UserEventBean.EventsBean, Bas
                             .subscribe(commentLikeBean -> {
                                 if (commentLikeBean.getCode() == 200) {
                                     likeView.setImageResource(!parise ? R.drawable.ic_parise_red : R.drawable.ic_parise);
-                                    countTextview.setText(!parise ? event.getInfo().getLikedCount() + 1 : event.getInfo().getLikedCount());
+                                    // fix bug: android.content.res.Resources$NotFoundException
+                                    countTextview.setText(String.valueOf(!parise ? event.getInfo().getLikedCount() + 1 : event.getInfo().getLikedCount()));
                                     //状态取反
                                     likeView.setTag(!parise);
                                 }
