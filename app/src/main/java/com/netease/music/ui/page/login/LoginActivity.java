@@ -38,7 +38,7 @@ public class LoginActivity extends BaseActivity {
 
         //TODO 体验
         public void experience() {
-
+            showShortToast("此功能暂时无实现");
         }
 
     }
