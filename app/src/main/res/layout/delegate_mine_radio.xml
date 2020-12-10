@@ -10,6 +10,10 @@
         <variable
             name="subAdapter"
             type="com.chad.library.adapter.base.BaseQuickAdapter" />
+
+        <variable
+            name="proxy"
+            type="com.netease.music.ui.page.mine.radio.MyRadioActivity.ClickProxy" />
     </data>
 
     <LinearLayout
@@ -27,6 +31,7 @@
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_margin="10dp"
+                onClickWithDebouncing="@{() -> proxy.back()}"
                 android:src="@drawable/ic_left_arrow_black" />
 
             <TextView

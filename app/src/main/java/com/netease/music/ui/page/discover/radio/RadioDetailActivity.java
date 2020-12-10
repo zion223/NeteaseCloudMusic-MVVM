@@ -28,6 +28,8 @@ import com.netease.music.ui.state.RadioDetailViewModel;
 
 import java.util.List;
 
+import static com.netease.lib_audio.app.AudioHelper.getContext;
+
 //电台详情
 public class RadioDetailActivity extends BaseActivity {
 
@@ -62,18 +64,20 @@ public class RadioDetailActivity extends BaseActivity {
             mRadioDetailViewModel.radioId.set(radioId);
             //电台详情  电台热评详情
             mRadioDetailViewModel.request.getRadioDetailLiveData().observe(this, djDetailBean -> {
-                mRadioDetailViewModel.radio.set(djDetailBean.getDjRadio());
+                mRadioDetailViewModel.radio.set(djDetailBean.getData());
                 //是否已订阅
-                mRadioDetailViewModel.isSub.set(djDetailBean.getDjRadio().isSubed());
+                mRadioDetailViewModel.isSub.set(djDetailBean.getData().isSubed());
                 final CharSequence[] mTitleDataList = new CharSequence[2];
                 mTitleDataList[0] = "详情";
-                SpannableString msp = new SpannableString("节目" + djDetailBean.getDjRadio().getProgramCount());
+                SpannableString msp = new SpannableString("节目" + djDetailBean.getData().getProgramCount());
                 msp.setSpan(new AbsoluteSizeSpan(30), 2, msp.toString().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 mTitleDataList[1] = msp;
                 mRadioDetailViewModel.indicatorTitle.set(mTitleDataList);
 
                 //热门评论
-                mRadioDetailViewModel.hotCommentAdapter.set(new RadioHotCommentAdapter(RadioDetailActivity.this, djDetailBean.getDjRadio().getCommentDatas()));
+                final RadioHotCommentAdapter radioHotCommentAdapter = new RadioHotCommentAdapter(RadioDetailActivity.this, djDetailBean.getData().getCommentDatas());
+                radioHotCommentAdapter.addHeaderView(LayoutInflater.from(getContext()).inflate(R.layout.item_gedan_comment_header, null, false));
+                mRadioDetailViewModel.hotCommentAdapter.set(radioHotCommentAdapter);
             });
 
             //电台节目

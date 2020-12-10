@@ -32,7 +32,8 @@ public class MyRadioActivity extends BaseActivity {
     @Override
     protected DataBindingConfig getDataBindingConfig() {
         return new DataBindingConfig(R.layout.delegate_mine_radio, BR.vm, myRadioViewModel)
-                .addBindingParam(BR.subAdapter, new MineRadioAdapter(null));
+                .addBindingParam(BR.subAdapter, new MineRadioAdapter(null))
+                .addBindingParam(BR.proxy, new ClickProxy());
     }
 
     @Override
@@ -45,6 +46,12 @@ public class MyRadioActivity extends BaseActivity {
         });
 
         myRadioViewModel.request.requestSubList();
+    }
+
+    public class ClickProxy {
+        public void back() {
+            finish();
+        }
     }
 
     class MineRadioAdapter extends BaseQuickAdapter<DjSubListBean.DjRadios, BaseViewHolder> {

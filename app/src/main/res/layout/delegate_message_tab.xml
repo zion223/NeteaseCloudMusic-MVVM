@@ -3,12 +3,20 @@
 
     <data>
 
+        <variable
+            name="vm"
+            type="com.netease.music.ui.state.MessageTabViewModel" />
+
+        <variable
+            name="proxy"
+            type="com.netease.music.ui.page.drawer.MessageTabActivity.ClickProxy" />
     </data>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@color/white">
 
         <LinearLayout
             android:id="@+id/ll_delegate_title"
@@ -22,6 +30,7 @@
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_margin="10dp"
+                onClickWithDebouncing="@{() -> proxy.back()}"
                 android:src="@drawable/ic_left_arrow_black" />
 
             <TextView
@@ -32,6 +41,7 @@
                 android:layout_weight="7"
                 android:gravity="center_vertical"
                 android:textColor="@color/black"
+                android:text="@{vm.title}"
                 android:textSize="19sp" />
 
             <TextView
@@ -41,6 +51,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="20dp"
                 android:textColor="@color/black"
+                onClickWithDebouncing="@{() -> proxy.clearMessage()}"
                 android:text="标记已读" />
 
         </LinearLayout>
@@ -49,7 +60,8 @@
             android:id="@+id/delegate_magic_indicator_tab"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_marginTop="5dp" />
+            android:layout_marginTop="5dp"
+            commonIndicatorTitle="@{vm.tabTitles}" />
 
         <View
             android:layout_width="match_parent"
@@ -60,6 +72,7 @@
             android:id="@+id/view_pager_tab"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="10" />
+            android:layout_weight="10"
+            viewPagerAdapter="@{vm.adapter}" />
     </LinearLayout>
 </layout>

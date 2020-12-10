@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
+import com.lxj.xpopup.interfaces.XPopupImageLoader;
 import com.netease.lib_api.model.playlist.DailyRecommendBean;
 import com.netease.lib_api.model.song.AudioBean;
 import com.netease.lib_api.model.user.UserEventBean;
@@ -27,6 +28,7 @@ import com.netease.music.ui.page.discover.square.detail.SongListDetailActivity;
 import com.netease.music.ui.page.discover.user.UserDetailActivity;
 import com.netease.music.util.TimeUtil;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -289,22 +291,22 @@ public class EventAdapter extends BaseQuickAdapter<UserEventBean.EventsBean, Bas
         }
     }
 
-//	static class ImageLoader implements XPopupImageLoader {
-//
-//		@Override
-//		public void loadImage(int position, @NonNull Object uri, @NonNull ImageView imageView) {
-//			ImageLoaderManager.getInstance().displayImageForView(imageView, uri.toString());
-//		}
-//
-//		//必须实现这个方法，返回uri对应的缓存文件，可参照下面的实现，内部保存图片会用到。如果你不需要保存图片这个功能，可以返回null。
-//		@Override
-//		public File getImageFile(@NonNull Context context, @NonNull Object uri) {
-//			try {
-//				return ImageLoaderManager.getInstance().getImageFile(context, uri.toString());
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//			}
-//			return null;
-//		}
-//	}
+    public static class ImageLoader implements XPopupImageLoader {
+
+        @Override
+        public void loadImage(int position, @NonNull Object uri, @NonNull ImageView imageView) {
+            ImageLoaderManager.getInstance().displayImageForView(imageView, uri.toString());
+        }
+
+        //必须实现这个方法，返回uri对应的缓存文件，可参照下面的实现，内部保存图片会用到。如果你不需要保存图片这个功能，可以返回null。
+        @Override
+        public File getImageFile(@NonNull Context context, @NonNull Object uri) {
+            try {
+                return ImageLoaderManager.getInstance().getImageFile(context, uri.toString());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+    }
 }

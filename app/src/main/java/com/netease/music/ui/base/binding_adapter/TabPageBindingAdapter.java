@@ -32,7 +32,7 @@ public class TabPageBindingAdapter {
             //indicator位置
             indicator.onPageSelected(currentItem);
             ViewPagerHelper.bind(indicator, viewPager);
-            viewPager.setAdapter(new CommonViewPagerAdapter(title.length, false, (String[]) title));
+            viewPager.setAdapter(new CommonViewPagerAdapter(title.length, false, title));
             //viewpager位置
             viewPager.setCurrentItem(currentItem);
         }

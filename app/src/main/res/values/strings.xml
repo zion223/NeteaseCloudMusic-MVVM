@@ -6,5 +6,6 @@
     <string name="home_login_tip_2">手机电脑多端同步，尽享海量高品质音乐</string>
 
     <string name="reuqest_permission">为保证应用正常运行, 请打开相关权限</string>
+    <string name="function_not_completed">此功能暂时无实现</string>
 
 </resources>

@@ -11,16 +11,16 @@ public class DjDetailBean implements Serializable {
      * code : 200
      */
 
-    private DjRadioBean djRadio;
+    private DjRadioBean data;
     private String picId;
     private int code;
 
-    public DjRadioBean getDjRadio() {
-        return djRadio;
+    public DjRadioBean getData() {
+        return data;
     }
 
-    public void setDjRadio(DjRadioBean djRadio) {
-        this.djRadio = djRadio;
+    public void setData(DjRadioBean data) {
+        this.data = data;
     }
 
     public String getPicId() {

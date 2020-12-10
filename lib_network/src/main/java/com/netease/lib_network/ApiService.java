@@ -26,6 +26,10 @@ import com.netease.lib_api.model.mv.VideoGroupBean;
 import com.netease.lib_api.model.mv.VideoRelatedBean;
 import com.netease.lib_api.model.mv.VideoUrlBean;
 import com.netease.lib_api.model.notification.CommonMessageBean;
+import com.netease.lib_api.model.notification.ForwardsMeBean;
+import com.netease.lib_api.model.notification.PrivateCommentBean;
+import com.netease.lib_api.model.notification.PrivateMsgBean;
+import com.netease.lib_api.model.notification.PrivateNoticeBean;
 import com.netease.lib_api.model.notification.UserCloudBean;
 import com.netease.lib_api.model.playlist.CatlistBean;
 import com.netease.lib_api.model.playlist.DailyRecommendBean;
@@ -385,5 +389,16 @@ public interface ApiService {
     @GET("mv/all")
     Observable<MvBean> getAllMv(@Query("area") String area, @Query("type") String type, @Query("order") String order, @Query("limit") int limit);
 
+    @GET("msg/comments")
+    Observable<PrivateCommentBean> getPrivateComment(@Query("uid") int userId);
+
+    @GET("msg/private")
+    Observable<PrivateMsgBean> getPrivateLetter(@Query("limit") int limit);
+
+    @GET("msg/notices")
+    Observable<PrivateNoticeBean> getPrivateNotice();
+
+    @GET("msg/forwards")
+    Observable<ForwardsMeBean> getPrivateFowards();
 
 }

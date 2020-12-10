@@ -70,8 +70,9 @@ public class MagicIndicatorBindingAdapter {
     }
 
 
-    @BindingAdapter(value = {"commonIndicatorTitle"}, requireAll = false)
-    public static void bindCommonMagicIndocator(MagicIndicator magicIndicator, String[] channels) {
+    // 带tab间距的 间距设置为20dp 适用于页面展示不开的情况下使用
+    @BindingAdapter(value = {"commonIndicatorTitleWithDivide"}, requireAll = false)
+    public static void bindCommonMagicIndocatorWithDivider(MagicIndicator magicIndicator, String[] channels) {
         if (channels != null) {
             ViewPager viewPager = magicIndicator.getRootView().findViewById(R.id.view_pager_tab);
             magicIndicator.setBackgroundColor(Color.WHITE);
@@ -86,6 +87,19 @@ public class MagicIndicatorBindingAdapter {
                     return UIUtil.dip2px(Utils.getApp(), 20);
                 }
             });
+            ViewPagerHelper.bind(magicIndicator, viewPager);
+        }
+    }
+
+    @BindingAdapter(value = {"commonIndicatorTitle"}, requireAll = false)
+    public static void bindCommonMagicIndocator(MagicIndicator magicIndicator, String[] channels) {
+        if (channels != null) {
+            ViewPager viewPager = magicIndicator.getRootView().findViewById(R.id.view_pager_tab);
+            magicIndicator.setBackgroundColor(Color.WHITE);
+            CommonNavigator commonNavigator = CommonNavigatorCreater.setDefaultNavigator(magicIndicator.getContext(), channels, viewPager);
+            // 自适应模式
+            commonNavigator.setAdjustMode(true);
+            magicIndicator.setNavigator(commonNavigator);
             ViewPagerHelper.bind(magicIndicator, viewPager);
         }
     }
