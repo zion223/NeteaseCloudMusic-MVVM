@@ -1,6 +1,7 @@
 package com.netease.lib_api.model.search;
 
 
+import com.netease.lib_api.model.song.DailyRecommendSongsBean;
 import com.netease.lib_api.model.song.SongDetailBean;
 
 import java.util.List;
@@ -166,7 +167,7 @@ public class SynthesisSearchBean {
             private String moreText;
             private Object highText;
             private boolean more;
-            private List<SongDetailBean.SongsBean> songs;
+            private List<DailyRecommendSongsBean> songs;
 
             public String getMoreText() {
                 return moreText;
@@ -192,11 +193,11 @@ public class SynthesisSearchBean {
                 this.more = more;
             }
 
-            public void setSongs(List<SongDetailBean.SongsBean> songs) {
+            public void setSongs(List<DailyRecommendSongsBean> songs) {
                 this.songs = songs;
             }
 
-            public List<SongDetailBean.SongsBean> getSongs() {
+            public List<DailyRecommendSongsBean> getSongs() {
                 return songs;
             }
         }

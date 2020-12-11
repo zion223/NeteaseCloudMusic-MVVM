@@ -1,6 +1,7 @@
 package com.netease.lib_api.model.search;
 
 
+import com.netease.lib_api.model.song.DailyRecommendSongsBean;
 import com.netease.lib_api.model.song.SongDetailBean;
 
 import java.io.Serializable;
@@ -21,13 +22,13 @@ public class SingerSongSearchBean implements Serializable {
     private ArtistBean artist;
     private boolean more;
     private int code;
-    private List<SongDetailBean.SongsBean> hotSongs;
+    private List<DailyRecommendSongsBean> hotSongs;
 
-    public List<SongDetailBean.SongsBean> getHotSongs() {
+    public List<DailyRecommendSongsBean> getHotSongs() {
         return hotSongs;
     }
 
-    public void setHotSongs(List<SongDetailBean.SongsBean> hotSongs) {
+    public void setHotSongs(List<DailyRecommendSongsBean> hotSongs) {
         this.hotSongs = hotSongs;
     }
 

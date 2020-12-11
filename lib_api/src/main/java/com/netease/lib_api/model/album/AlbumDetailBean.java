@@ -2,6 +2,7 @@ package com.netease.lib_api.model.album;
 
 
 import com.netease.lib_api.model.search.AlbumSearchBean;
+import com.netease.lib_api.model.song.DailyRecommendSongsBean;
 import com.netease.lib_api.model.song.SongDetailBean;
 
 import java.util.ArrayList;
@@ -18,7 +19,7 @@ public class AlbumDetailBean {
     private int shareCount;
     private int subCount;
     private AlbumSearchBean.ResultBean.AlbumsBean album;
-    private ArrayList<SongDetailBean.SongsBean> songs;
+    private ArrayList<DailyRecommendSongsBean> songs;
 
     public boolean isOnSale() {
         return onSale;
@@ -100,11 +101,11 @@ public class AlbumDetailBean {
         this.album = album;
     }
 
-    public ArrayList<SongDetailBean.SongsBean> getSongs() {
+    public ArrayList<DailyRecommendSongsBean> getSongs() {
         return songs;
     }
 
-    public void setSongs(ArrayList<SongDetailBean.SongsBean> songs) {
+    public void setSongs(ArrayList<DailyRecommendSongsBean> songs) {
         this.songs = songs;
     }
 }

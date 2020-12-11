@@ -71,7 +71,7 @@ public class AudioBean {
 
 
     //将歌单中的SongsBean转化成AudioBean
-    public static AudioBean convertSongToAudioBean(SongDetailBean.SongsBean item) {
+    public static AudioBean convertSongToAudioBean(DailyRecommendSongsBean item) {
         return new AudioBean(String.valueOf(item.getId()), getSongPlayUrl(item.getId()), item.getName(), item.getAr().get(0).getName(), item.getAl().getName(), item.getAl().getName(), item.getAl().getPicUrl(), new SimpleDateFormat("mm:ss", Locale.getDefault()).format(item.getDt()));
     }
 

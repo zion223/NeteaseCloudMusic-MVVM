@@ -9,6 +9,7 @@ import com.netease.lib_api.model.album.AlbumDetailBean;
 import com.netease.lib_api.model.album.AlbumDynamicBean;
 import com.netease.lib_api.model.notification.CommonMessageBean;
 import com.netease.lib_api.model.playlist.PlaylistDetailBean;
+import com.netease.lib_api.model.song.DailyRecommendSongsBean;
 import com.netease.lib_api.model.song.SongDetailBean;
 import com.netease.lib_network.ApiEngine;
 import com.kunminx.architecture.domain.request.BaseRequest;
@@ -33,7 +34,7 @@ public class SongListDetailRequest extends BaseRequest {
     private MutableLiveData<AlbumDetailBean> mAlbumDetailLiveData;
 
     //歌曲
-    private MutableLiveData<List<SongDetailBean.SongsBean>> mSongDetailLiveData;
+    private MutableLiveData<List<DailyRecommendSongsBean>> mSongDetailLiveData;
     //改变对专辑或歌单的收藏状态
     private MutableLiveData<Boolean> mChangeSubStatusLiveData;
 
@@ -51,7 +52,7 @@ public class SongListDetailRequest extends BaseRequest {
         return mChangeSubStatusLiveData;
     }
 
-    public LiveData<List<SongDetailBean.SongsBean>> getSongDetailLiveData() {
+    public LiveData<List<DailyRecommendSongsBean>> getSongDetailLiveData() {
         if (mSongDetailLiveData == null) {
             mSongDetailLiveData = new MutableLiveData<>();
         }

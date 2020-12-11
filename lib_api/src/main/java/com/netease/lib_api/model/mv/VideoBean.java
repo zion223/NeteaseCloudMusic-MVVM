@@ -1,6 +1,6 @@
 package com.netease.lib_api.model.mv;
 
-import com.netease.lib_api.model.song.SongDetailBean;
+import com.netease.lib_api.model.song.DailyRecommendSongsBean;
 
 import java.util.List;
 
@@ -1932,7 +1932,7 @@ public class VideoBean {
         private boolean hasRelatedGameAd;
         private Object markTypes;
         //相关歌曲
-        private List<SongDetailBean.SongsBean> relateSong;
+        private List<DailyRecommendSongsBean> relateSong;
         private String relatedInfo;
         private String videoUserLiveInfo;
         private String vid;
@@ -2095,11 +2095,11 @@ public class VideoBean {
             return markTypes;
         }
 
-        public void setRelatesong(List<SongDetailBean.SongsBean> relatesong) {
+        public void setRelatesong(List<DailyRecommendSongsBean> relatesong) {
             this.relateSong = relatesong;
         }
 
-        public List<SongDetailBean.SongsBean> getRelatesong() {
+        public List<DailyRecommendSongsBean> getRelatesong() {
             return relateSong;
         }
 

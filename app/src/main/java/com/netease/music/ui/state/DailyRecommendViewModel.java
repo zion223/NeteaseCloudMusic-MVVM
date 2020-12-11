@@ -5,6 +5,7 @@ import androidx.databinding.ObservableField;
 import androidx.databinding.ObservableFloat;
 import androidx.databinding.ObservableInt;
 
+import com.netease.lib_api.model.song.DailyRecommendSongsBean;
 import com.netease.lib_api.model.song.SongDetailBean;
 import com.netease.lib_api.model.user.LoginBean;
 import com.netease.lib_common_ui.utils.GsonUtil;
@@ -33,7 +34,7 @@ public class DailyRecommendViewModel extends BaseLoadingViewModel {
     //背景图片
     public final ObservableField<String> backgroundImgUrl = new ObservableField<>();
     //音乐数据
-    public final ObservableField<List<SongDetailBean.SongsBean>> recommendMusic = new ObservableField<>();
+    public final ObservableField<List<DailyRecommendSongsBean>> recommendMusic = new ObservableField<>();
 
     public final ObservableInt backgroundImgRadis = new ObservableInt();
 

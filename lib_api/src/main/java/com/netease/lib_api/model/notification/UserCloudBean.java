@@ -1,6 +1,7 @@
 package com.netease.lib_api.model.notification;
 
 
+import com.netease.lib_api.model.song.DailyRecommendSongsBean;
 import com.netease.lib_api.model.song.SongDetailBean;
 
 import java.util.ArrayList;
@@ -81,7 +82,7 @@ public class UserCloudBean {
         private long addTime;
         private long fileSize;
         private String fileName;
-        private SongDetailBean.SongsBean simpleSong;
+        private DailyRecommendSongsBean simpleSong;
 
         public String getAlbum() {
             return album;
@@ -155,11 +156,11 @@ public class UserCloudBean {
             this.fileName = fileName;
         }
 
-        public SongDetailBean.SongsBean getSimpleSong() {
+        public DailyRecommendSongsBean getSimpleSong() {
             return simpleSong;
         }
 
-        public void setSimpleSong(SongDetailBean.SongsBean simpleSong) {
+        public void setSimpleSong(DailyRecommendSongsBean simpleSong) {
             this.simpleSong = simpleSong;
         }
     }

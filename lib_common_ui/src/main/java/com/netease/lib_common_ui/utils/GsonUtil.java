@@ -2,10 +2,6 @@ package com.netease.lib_common_ui.utils;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
-import com.netease.lib_api.model.song.AudioBean;
-
-import java.util.ArrayList;
 
 /**
  * 字符串和Java类的转换工具
@@ -36,16 +32,4 @@ public class GsonUtil {
         return null;
     }
 
-    /**
-     * 将字符串转换成对应的Java对象
-     */
-    public static ArrayList<AudioBean> fromAudioJSON(String json) {
-        try {
-            return createGson().fromJson(json, new TypeToken<ArrayList<AudioBean>>() {
-            }.getType());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
 }

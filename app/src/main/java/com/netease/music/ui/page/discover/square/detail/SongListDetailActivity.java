@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 import com.netease.lib_api.model.playlist.PlaylistDetailBean;
 import com.netease.lib_api.model.search.AlbumSearchBean;
 import com.netease.lib_api.model.song.AudioBean;
-import com.netease.lib_api.model.song.SongDetailBean;
+import com.netease.lib_api.model.song.DailyRecommendSongsBean;
 import com.kunminx.architecture.ui.page.BaseActivity;
 import com.kunminx.architecture.ui.page.DataBindingConfig;
 import com.netease.lib_audio.app.AudioHelper;
@@ -127,7 +127,7 @@ public class SongListDetailActivity extends BaseActivity {
             PlayMusicListAdapter playMusicListAdapter = new PlayMusicListAdapter(songList);
             playMusicListAdapter.setOnItemClickListener((adapter, view, position) -> {
                 //加入播放队列
-                SongDetailBean.SongsBean item = (SongDetailBean.SongsBean) adapter.getItem(position);
+                DailyRecommendSongsBean item = (DailyRecommendSongsBean) adapter.getItem(position);
                 AudioHelper.addAudio(AudioBean.convertSongToAudioBean(item));
             });
             mViewModel.adapter.set(playMusicListAdapter);

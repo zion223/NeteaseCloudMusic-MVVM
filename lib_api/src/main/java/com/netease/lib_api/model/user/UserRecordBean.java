@@ -1,6 +1,6 @@
 package com.netease.lib_api.model.user;
 
-import com.netease.lib_api.model.song.SongDetailBean;
+import com.netease.lib_api.model.song.DailyRecommendSongsBean;
 
 import java.util.ArrayList;
 
@@ -37,7 +37,7 @@ public class UserRecordBean {
     public static class UserRecord {
         private int score;
         private int playCount;
-        private SongDetailBean.SongsBean song;
+        private DailyRecommendSongsBean song;
 
         public int getScore() {
             return score;
@@ -55,11 +55,11 @@ public class UserRecordBean {
             this.playCount = playCount;
         }
 
-        public SongDetailBean.SongsBean getSong() {
+        public DailyRecommendSongsBean getSong() {
             return song;
         }
 
-        public void setSong(SongDetailBean.SongsBean song) {
+        public void setSong(DailyRecommendSongsBean song) {
             this.song = song;
         }
     }

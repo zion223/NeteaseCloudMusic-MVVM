@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
+import com.netease.lib_api.model.song.DailyRecommendSongsBean;
 import com.netease.lib_api.model.song.SongDetailBean;
 import com.netease.lib_common_ui.dialog.MusicPopUpDialog;
 import com.netease.music.R;
@@ -13,7 +14,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 
-public class PlayMusicListAdapter extends BaseQuickAdapter<SongDetailBean.SongsBean, BaseViewHolder> {
+public class PlayMusicListAdapter extends BaseQuickAdapter<DailyRecommendSongsBean, BaseViewHolder> {
 
     private Context mContext;
     //是否有头布局 影响显示序号
@@ -23,16 +24,16 @@ public class PlayMusicListAdapter extends BaseQuickAdapter<SongDetailBean.SongsB
     //在新歌速递中或者每日推荐中显示歌曲的专辑的图片而不是显示序号
     private boolean showAlbumImg = false;
 
-    public PlayMusicListAdapter(List<SongDetailBean.SongsBean> data, boolean hasHeader) {
+    public PlayMusicListAdapter(List<DailyRecommendSongsBean> data, boolean hasHeader) {
         super(R.layout.item_gedan_detail_song, data);
         this.hasHeader = hasHeader;
     }
 
-    public PlayMusicListAdapter(List<SongDetailBean.SongsBean> data) {
+    public PlayMusicListAdapter(List<DailyRecommendSongsBean> data) {
         super(R.layout.item_gedan_detail_song, data);
     }
 
-    public PlayMusicListAdapter(List<SongDetailBean.SongsBean> data, boolean hasHeader, boolean showMoreView) {
+    public PlayMusicListAdapter(List<DailyRecommendSongsBean> data, boolean hasHeader, boolean showMoreView) {
         super(R.layout.item_gedan_detail_song, data);
         this.hasHeader = hasHeader;
         this.showMoreView = showMoreView;
@@ -40,7 +41,7 @@ public class PlayMusicListAdapter extends BaseQuickAdapter<SongDetailBean.SongsB
 
 
     @Override
-    protected void convert(@NotNull BaseViewHolder helper, SongDetailBean.SongsBean item) {
+    protected void convert(@NotNull BaseViewHolder helper, DailyRecommendSongsBean item) {
         if (hasHeader) {
             helper.setText(R.id.item_play_no, String.valueOf(helper.getBindingAdapterPosition()));
         } else {
@@ -72,7 +73,7 @@ public class PlayMusicListAdapter extends BaseQuickAdapter<SongDetailBean.SongsB
     }
 
 
-    private void showMoreDialog(SongDetailBean.SongsBean item) {
+    private void showMoreDialog(DailyRecommendSongsBean item) {
         new MusicPopUpDialog.Builder()
                 .setContext(mContext)
                 //是否显示删除选项

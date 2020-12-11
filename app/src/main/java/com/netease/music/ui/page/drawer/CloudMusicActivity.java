@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 
 import com.netease.lib_api.model.notification.UserCloudBean;
+import com.netease.lib_api.model.song.DailyRecommendSongsBean;
 import com.netease.lib_api.model.song.SongDetailBean;
 import com.kunminx.architecture.ui.page.BaseActivity;
 import com.kunminx.architecture.ui.page.DataBindingConfig;
@@ -49,7 +50,7 @@ public class CloudMusicActivity extends BaseActivity {
             mCloudMusicViewModel.userCloud.set(userCloudBean);
             //获取音乐数据
             ArrayList<UserCloudBean.CloudSong> data = userCloudBean.getData();
-            ArrayList<SongDetailBean.SongsBean> songData = new ArrayList<>();
+            ArrayList<DailyRecommendSongsBean> songData = new ArrayList<>();
             for (int i = 0; i < data.size(); i++) {
                 songData.add(data.get(i).getSimpleSong());
             }

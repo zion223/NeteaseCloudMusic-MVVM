@@ -1,5 +1,6 @@
 package com.netease.lib_api.model.playlist;
 
+import com.netease.lib_api.model.song.DailyRecommendSongsBean;
 import com.netease.lib_api.model.song.SongDetailBean;
 
 import java.util.List;
@@ -39,23 +40,23 @@ public class DailyRecommendBean {
 
 
     public static class RecommendData {
-        private List<SongDetailBean.SongsBean> dailySongs;
-        private List<SongDetailBean.SongsBean> orderSongs;
+        private List<DailyRecommendSongsBean> dailySongs;
+        private List<DailyRecommendSongsBean> orderSongs;
         private List<RecommendReason> recommendReasons;
 
-        public List<SongDetailBean.SongsBean> getDailySongs() {
+        public List<DailyRecommendSongsBean> getDailySongs() {
             return dailySongs;
         }
 
-        public void setDailySongs(List<SongDetailBean.SongsBean> dailySongs) {
+        public void setDailySongs(List<DailyRecommendSongsBean> dailySongs) {
             this.dailySongs = dailySongs;
         }
 
-        public List<SongDetailBean.SongsBean> getOrderSongs() {
+        public List<DailyRecommendSongsBean> getOrderSongs() {
             return orderSongs;
         }
 
-        public void setOrderSongs(List<SongDetailBean.SongsBean> orderSongs) {
+        public void setOrderSongs(List<DailyRecommendSongsBean> orderSongs) {
             this.orderSongs = orderSongs;
         }
 

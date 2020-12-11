@@ -9,6 +9,7 @@ import com.netease.lib_api.model.playlist.DailyRecommendBean;
 import com.netease.lib_api.model.playlist.MainRecommendPlayListBean;
 import com.netease.lib_api.model.search.AlbumSearchBean;
 import com.netease.lib_api.model.search.TopAlbumBean;
+import com.netease.lib_api.model.song.DailyRecommendSongsBean;
 import com.netease.lib_api.model.song.NewSongBean;
 import com.netease.lib_api.model.song.SongDetailBean;
 import com.netease.lib_network.ApiEngine;
@@ -22,7 +23,6 @@ import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 public class DiscoverRequest extends BaseRequest {
@@ -32,7 +32,7 @@ public class DiscoverRequest extends BaseRequest {
     //推荐歌曲数据
     private MutableLiveData<List<MainRecommendPlayListBean.RecommendBean>> mRecommendPlayListLiveData;
     //歌曲详情
-    private MutableLiveData<SongDetailBean.SongsBean> mSongDetailLiveData;
+    private MutableLiveData<DailyRecommendSongsBean> mSongDetailLiveData;
 
     //新歌和新碟数据
     private MutableLiveData<List<AlbumOrSongBean>> mAlbumOrSongLiveData;
@@ -58,7 +58,7 @@ public class DiscoverRequest extends BaseRequest {
         return mRecommendPlayListLiveData;
     }
 
-    public MutableLiveData<SongDetailBean.SongsBean> getSongDetailLiveData() {
+    public MutableLiveData<DailyRecommendSongsBean> getSongDetailLiveData() {
         if (mSongDetailLiveData == null) {
             mSongDetailLiveData = new MutableLiveData<>();
         }

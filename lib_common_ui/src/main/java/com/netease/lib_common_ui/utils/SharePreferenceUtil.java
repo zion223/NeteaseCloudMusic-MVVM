@@ -137,18 +137,25 @@ public class SharePreferenceUtil {
 		saveString(Constants.SpKey.LATEST_SONG, GsonUtil.toJson(songInfo));
     }
 
-    /**
-     * 获取最近一次听过的歌曲
-     */
-    public AudioBean getLatestSong() {
-        return GsonUtil.fromJSON(getString(Constants.SpKey.LATEST_SONG, ""), AudioBean.class);
-    }
+	/**
+	 * 获取最近一次听过的歌曲
+	 */
+	public AudioBean getLatestSong() {
+		return GsonUtil.fromJSON(getString(Constants.SpKey.LATEST_SONG, ""), AudioBean.class);
+	}
 
-    /**
-     * 保存上次获取日推的时间
-     */
-    public void saveDailyUpdateTime(long updateTime) {
-        saveLong(Constants.SpKey.DAILY_UPDATE_TIME, updateTime);
+	/**
+	 * 保存上次获取日推的时间
+	 */
+	public void saveDailyUpdateTime(String updateTime) {
+		saveString(Constants.SpKey.DAILY_UPDATE_TIME, updateTime);
+	}
+
+	/**
+	 * 获取上次获取日推的时间
+	 */
+	public String getDailyUpdateTime() {
+		return getString(Constants.SpKey.DAILY_UPDATE_TIME, "");
 	}
 
 	/**
@@ -164,10 +171,6 @@ public class SharePreferenceUtil {
 
 	public String getCurrentArtistId() {
 		return getString(Constants.SpKey.CURRENT_ARTIST_ID, "");
-	}
-
-	public long getDailyUpdateTime() {
-		return getLong(Constants.SpKey.DAILY_UPDATE_TIME, 0);
 	}
 
 

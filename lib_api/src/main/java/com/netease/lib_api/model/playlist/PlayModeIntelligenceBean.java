@@ -1,5 +1,6 @@
 package com.netease.lib_api.model.playlist;
 
+import com.netease.lib_api.model.song.DailyRecommendSongsBean;
 import com.netease.lib_api.model.song.SongDetailBean;
 
 import java.util.List;
@@ -54,7 +55,7 @@ public class PlayModeIntelligenceBean {
         private long id;
         private String alg;
         private boolean recommended;
-        private SongDetailBean.SongsBean songInfo;
+        private DailyRecommendSongsBean songInfo;
 
         public long getId() {
             return id;
@@ -80,11 +81,11 @@ public class PlayModeIntelligenceBean {
             this.recommended = recommended;
         }
 
-        public SongDetailBean.SongsBean getSongInfo() {
+        public DailyRecommendSongsBean getSongInfo() {
             return songInfo;
         }
 
-        public void setSongInfo(SongDetailBean.SongsBean songInfo) {
+        public void setSongInfo(DailyRecommendSongsBean songInfo) {
             this.songInfo = songInfo;
         }
     }
