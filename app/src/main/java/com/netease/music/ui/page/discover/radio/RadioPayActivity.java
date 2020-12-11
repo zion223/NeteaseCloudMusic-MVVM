@@ -82,7 +82,13 @@ public class RadioPayActivity extends BaseActivity {
         protected void convert(@NonNull BaseViewHolder baseViewHolder, DjPaygiftBean.DataBean.ListBean bean) {
             baseViewHolder.setText(R.id.tv_radio_pay_title, bean.getName());
             baseViewHolder.setText(R.id.tv_radio_pay_desc, bean.getRcmdText());
-            baseViewHolder.setText(R.id.tv_radio_pay_price, "￥" + String.valueOf(bean.getOriginalPrice()).substring(0, String.valueOf(bean.getOriginalPrice()).length() - 2));
+            int radioFeeType = bean.getRadioFeeType();
+            if (radioFeeType == 2) {
+                baseViewHolder.setText(R.id.tv_radio_pay_price, "￥" + bean.getOriginalPrice() / 100);
+            } else if (radioFeeType == 1) {
+                // 分期收费
+                baseViewHolder.setText(R.id.tv_radio_pay_price, "￥" + bean.getOriginalPrice() / 100 + "/期");
+            }
             manager.displayImageForCorner(baseViewHolder.getView(R.id.iv_radio_pay_img), bean.getPicUrl(), 5);
         }
     }

@@ -91,7 +91,7 @@ public class DjPaygiftBean {
             private int programCount;
             private Object playCount;
             private String alg;
-            private int originalPrice;
+            private double originalPrice;
             private Object discountPrice;
             private String lastProgramName;
 
@@ -167,11 +167,11 @@ public class DjPaygiftBean {
                 this.alg = alg;
             }
 
-            public int getOriginalPrice() {
+            public double getOriginalPrice() {
                 return originalPrice;
             }
 
-            public void setOriginalPrice(int originalPrice) {
+            public void setOriginalPrice(double originalPrice) {
                 this.originalPrice = originalPrice;
             }
 
