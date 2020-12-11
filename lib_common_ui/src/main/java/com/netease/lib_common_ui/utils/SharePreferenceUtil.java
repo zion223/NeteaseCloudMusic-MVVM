@@ -95,6 +95,7 @@ public class SharePreferenceUtil {
 		LoginBean loginBean = GsonUtil.fromJSON(userInfo, LoginBean.class);
 		return loginBean.getProfile().getUserId();
 	}
+
 	//退出登录 移除已登录用户信息
 	public void removeUserInfo() {
 		remove(Constants.SpKey.USER_INFO);
@@ -129,18 +130,15 @@ public class SharePreferenceUtil {
     }
 
 
-    /*
+    /**
      * 存储最近一次听过的歌曲
      */
     public void saveLatestSong(AudioBean songInfo) {
-        String song = GsonUtil.toJson(songInfo);
-        saveString(Constants.SpKey.LATEST_SONG, song);
+		saveString(Constants.SpKey.LATEST_SONG, GsonUtil.toJson(songInfo));
     }
 
     /**
      * 获取最近一次听过的歌曲
-     *
-     * @return
      */
     public AudioBean getLatestSong() {
         return GsonUtil.fromJSON(getString(Constants.SpKey.LATEST_SONG, ""), AudioBean.class);
@@ -170,22 +168,6 @@ public class SharePreferenceUtil {
 
 	public long getDailyUpdateTime() {
 		return getLong(Constants.SpKey.DAILY_UPDATE_TIME, 0);
-	}
-
-	/**
-	 * 保存播放歌曲列表  在更新播放队列时更新
-	 */
-	public void saveMusicList(List<AudioBean> likeList) {
-		String likeListString = GsonUtil.toJson(likeList);
-		saveString(Constants.SpKey.LIKE_LIST, likeListString);
-	}
-
-	/**
-	 * 获取播放列表
-	 */
-	public ArrayList<AudioBean> getMusicList() {
-		String likeListString = getString(Constants.SpKey.LIKE_LIST, "");
-		return GsonUtil.fromAudioJSON(likeListString);
 	}
 
 

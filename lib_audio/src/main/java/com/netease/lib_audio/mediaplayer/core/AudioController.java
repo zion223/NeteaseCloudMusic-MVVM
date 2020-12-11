@@ -5,6 +5,7 @@ import android.util.Log;
 import com.netease.lib_api.model.room.AppDatabase;
 import com.netease.lib_api.model.room.LatestDataDao;
 import com.netease.lib_api.model.song.AudioBean;
+import com.netease.lib_api.model.song.LatestAudioBean;
 import com.netease.lib_common_ui.utils.SharePreferenceUtil;
 import com.netease.lib_audio.app.AudioHelper;
 import com.netease.lib_audio.mediaplayer.events.AudioCompleteEvent;
@@ -37,14 +38,21 @@ public class AudioController {
     //播放器
     private final AudioPlayer mAudioPlayer;
     //当前播放队列
-    private final ArrayList<AudioBean> mQueue = SharePreferenceUtil.getInstance(AudioHelper.getContext()).getMusicList() == null ? new ArrayList<AudioBean>() : SharePreferenceUtil.getInstance(AudioHelper.getContext()).getMusicList();
+    //private final ArrayList<AudioBean> mQueue = SharePreferenceUtil.getInstance(AudioHelper.getContext()).getMusicList() == null ? new ArrayList<AudioBean>() : SharePreferenceUtil.getInstance(AudioHelper.getContext()).getMusicList();
+    private ArrayList<AudioBean> mQueue = new ArrayList<>();
     //播放模式
     private PlayMode mPlayMode;
     //当前播放索引
     private int mQueueIndex;
+    // Room数据库
+    private AppDatabase appDatabase;
 
     private AudioController() {
         mAudioPlayer = new AudioPlayer();
+        appDatabase = AppDatabase.getInstance(AudioHelper.getContext());
+        // 获取数据库保存的音乐播放队列
+        mQueue.clear();
+        mQueue.addAll(appDatabase.getMusicPlayListDao().getMusicPlayList());
         final AudioBean audio = SharePreferenceUtil.getInstance(AudioHelper.getContext()).getLatestSong();
         if (audio != null && mQueue.size() > 0 && mQueue.contains(audio)) {
             //当前是否有歌曲
@@ -89,19 +97,35 @@ public class AudioController {
     }
 
     //添加Audio集合
-    public void addAudio(ArrayList<AudioBean> list) {
+    public void addAudio(final ArrayList<AudioBean> list) {
+        mQueue.clear();
         mQueue.addAll(list);
-        SharePreferenceUtil.getInstance(AudioHelper.getContext()).saveMusicList(mQueue);
+        //先清空数据
+        new Thread() {
+            @Override
+            public void run() {
+                appDatabase.getMusicPlayListDao().clearMusicPlayList();
+                for (AudioBean bean : list) {
+                    appDatabase.getMusicPlayListDao().insertMusicPlayList(bean);
+                }
+            }
+        }.start();
     }
 
-    public void addAudio(int index, AudioBean bean) {
+    public void addAudio(int index, final AudioBean bean) {
 
         int query = mQueue.indexOf(bean);
         if (query <= -1) {
             //当前播放列表中没有此歌曲
             mQueue.add(index, bean);
-            SharePreferenceUtil.getInstance(AudioHelper.getContext()).saveMusicList(mQueue);
+            // 插入单个数据
             setPlayIndex(index);
+            new Thread() {
+                @Override
+                public void run() {
+                    appDatabase.getMusicPlayListDao().insertMusicPlayList(bean);
+                }
+            }.start();
         } else {
             //当前播放列表中有这个歌曲
             AudioBean currentPlaying = getCurrentPlaying();
@@ -112,13 +136,19 @@ public class AudioController {
     }
 
     //删除单个Audio
-    public void removeAudio(AudioBean bean) {
+    public void removeAudio(final AudioBean bean) {
         if (mQueue.size() <= 0) {
             throw new AudioQueueEmptyException("");
         }
         if (mQueue.remove(bean)) {
             EventBus.getDefault().post(new AudioRemoveEvent());
-            SharePreferenceUtil.getInstance(AudioHelper.getContext()).saveMusicList(mQueue);
+            // 删除单个数据
+            new Thread() {
+                @Override
+                public void run() {
+                    appDatabase.getMusicPlayListDao().deleteMusicFromPlayList(bean);
+                }
+            }.start();
         }
     }
 
@@ -133,7 +163,13 @@ public class AudioController {
         mQueue.add(currentBean);
         //更新播放索引
         mQueueIndex = 0;
-        SharePreferenceUtil.getInstance(AudioHelper.getContext()).saveMusicList(mQueue);
+        // 删除全部数据
+        new Thread() {
+            @Override
+            public void run() {
+                appDatabase.getMusicPlayListDao().clearMusicPlayList();
+            }
+        }.start();
     }
 
     public void setQueue(ArrayList<AudioBean> bean) {
@@ -143,7 +179,8 @@ public class AudioController {
     public void setQueue(ArrayList<AudioBean> bean, int index) {
         mQueue.addAll(bean);
         mQueueIndex = index;
-        SharePreferenceUtil.getInstance(AudioHelper.getContext()).saveMusicList(mQueue);
+        // 插入集合数据
+        //SharePreferenceUtil.getInstance(AudioHelper.getContext()).saveMusicList(mQueue);
     }
 
     public PlayMode getPlayMode() {
@@ -175,10 +212,10 @@ public class AudioController {
         new Thread() {
             @Override
             public void run() {
-                LatestDataDao dao = AppDatabase.getInstance(AudioHelper.getContext()).getLatestSongDao();
+                LatestDataDao dao = appDatabase.getLatestSongDao();
                 //当前存储中没有该歌曲 则添加该歌曲
                 if (dao.getAudioBeanById(currentPlaying.getId()) == null) {
-                    dao.insertRecentSong(currentPlaying);
+                    dao.insertRecentSong(LatestAudioBean.convertAudioToLatestBean(currentPlaying));
                 } else {
                     //更新在存储中的顺序
                 }
