@@ -33,6 +33,7 @@ import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.listener.OnItemClickListener;
 import com.google.android.material.appbar.AppBarLayout;
 import com.kunminx.architecture.utils.ClickUtils;
+import com.netease.lib_common_ui.HornizeItemView;
 import com.netease.lib_common_ui.bannder.HolderCreator;
 import com.netease.lib_common_ui.widget.ArtistSortView;
 import com.netease.lib_common_ui.widget.CaptchaView;
@@ -168,6 +169,22 @@ public class CommonBindingAdapter {
     @BindingAdapter(value = "onChooseAreaListener")
     public static void setOnChooseListener(ArtistSortView sortView, ArtistSortView.OnChooseArtistSortListener listener) {
         sortView.setOnChooseArtistSortListener(listener);
+    }
+
+    //HornizeItemView 相关的BindingAdapter
+    @BindingAdapter(value = "hornizeItemViewTileText")
+    public static void setHornizeItemViewTileText(HornizeItemView view, CharSequence text) {
+        view.getTileView().setText(text);
+    }
+
+    @BindingAdapter(value = "hornizeItemViewRightText")
+    public static void setHornizeItemViewRightText(HornizeItemView view, CharSequence text) {
+        view.getRightTextView().setText(text);
+    }
+
+    @BindingAdapter(value = "onClickHornizeItemView")
+    public static void setOnClickHornizeItemView(HornizeItemView view, View.OnClickListener listener) {
+        view.setOnClickListener(listener);
     }
 
 

@@ -188,6 +188,21 @@ public class SharePreferenceUtil {
 		return GsonUtil.fromAudioJSON(likeListString);
 	}
 
+
+	/**
+	 * 获取定时停止播放时间
+	 */
+	public int getStopAudioTime() {
+		return getInt(Constants.SpKey.STOP_AUDIO_TIME, 0);
+	}
+
+	/**
+	 * 设置定时停止播放时间
+	 */
+	public void setStopAudioTime(int time) {
+		saveInt(Constants.SpKey.STOP_AUDIO_TIME, time);
+	}
+
 	private void remove(String key) {
 		editor.remove(key).apply();
 	}
@@ -197,7 +212,11 @@ public class SharePreferenceUtil {
 	}
 
 	private void saveLong(String key, long values) {
-		editor.putLong(key, values);
+		editor.putLong(key, values).apply();
+	}
+
+	private void saveInt(String key, int values) {
+		editor.putInt(key, values).apply();
 	}
 
 	private long getLong(String key, long defaultValue) {

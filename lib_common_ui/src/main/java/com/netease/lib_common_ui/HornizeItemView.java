@@ -134,27 +134,27 @@ public class HornizeItemView extends RelativeLayout {
 
 		if (mTipVisiblity) {
 			mTipView = new TextView(mContext);
-			mTipView.setText(mTipText);
-			mTipView.setTextColor(mTipTextColor);
-			mTipView.getPaint().setTextSize(mTipTextSize);
-			LayoutParams tipParams =
-					new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-			tipParams.addRule(RelativeLayout.RIGHT_OF, R.id.hornized_tile_id);
-			tipParams.addRule(RelativeLayout.CENTER_VERTICAL);
-			tipParams.setMargins(mTipPaddingLeft, 0, 0, 0);
-			layout.addView(mTipView, tipParams);
-		}
-		//
-		mRightView = new TextView(mContext);
-		mRightView.setText(mRightText);
-		mRightView.setTextColor(mRightTextColor);
-		mRightView.setTextSize(mRightTextSize);
-		LayoutParams rightParams =
-				new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-		//rightIcon不为空，添加到rightIcon左侧
-		if (mRightIcon != null) {
-			mRightImageView = new ImageView(mContext);
-			mRightImageView.setId(R.id.hornized_right_image_id);
+            mTipView.setText(mTipText);
+            mTipView.setTextColor(mTipTextColor);
+            mTipView.getPaint().setTextSize(mTipTextSize);
+            LayoutParams tipParams =
+                    new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+            tipParams.addRule(RelativeLayout.RIGHT_OF, R.id.hornized_tile_id);
+            tipParams.addRule(RelativeLayout.CENTER_VERTICAL);
+            tipParams.setMargins(mTipPaddingLeft, 0, 0, 0);
+            layout.addView(mTipView, tipParams);
+        }
+        //右边的TextView
+        mRightView = new TextView(mContext);
+        mRightView.setText(mRightText);
+        mRightView.setTextColor(mRightTextColor);
+        mRightView.setTextSize(mRightTextSize);
+        LayoutParams rightParams =
+                new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+        //rightIcon不为空，添加到rightIcon左侧
+        if (mRightIcon != null) {
+            mRightImageView = new ImageView(mContext);
+            mRightImageView.setId(R.id.hornized_right_image_id);
 			mRightImageView.setImageDrawable(mRightIcon);
 			LayoutParams rightImageParams =
 					new LayoutParams(mRightIconWidth, mRightIconHeight);
@@ -167,14 +167,22 @@ public class HornizeItemView extends RelativeLayout {
 			rightParams.addRule(RelativeLayout.CENTER_VERTICAL);
 			rightParams.setMargins(mRightIconMarginLeft, 0, 0, 0);
 		} else {
-			//添加到父布局左侧
-			rightParams.addRule(RelativeLayout.ALIGN_PARENT_END);
-			rightParams.addRule(RelativeLayout.CENTER_VERTICAL);
-		}
-		layout.addView(mRightView, rightParams);
+            //添加到父布局左侧
+            rightParams.addRule(RelativeLayout.ALIGN_PARENT_END);
+            rightParams.addRule(RelativeLayout.CENTER_VERTICAL);
+        }
+        layout.addView(mRightView, rightParams);
 
-		rootLayout.addView(layout, layoutParams);
-		addView(rootLayout, new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-				ViewGroup.LayoutParams.WRAP_CONTENT));
-	}
+        rootLayout.addView(layout, layoutParams);
+        addView(rootLayout, new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT));
+    }
+
+    public TextView getTileView() {
+        return mTileView;
+    }
+
+    public TextView getRightTextView() {
+        return mRightView;
+    }
 }

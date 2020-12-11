@@ -14,6 +14,8 @@ public class DrawerViewModel extends ViewModel {
 
     public final MutableLiveData<LoginBean> user = new MutableLiveData<>();
 
+    // 定时停止播放剩余的时间
+    public final MutableLiveData<String> leftPauseAudioTime = new MutableLiveData<>();
 
     {
         user.setValue(GsonUtil.fromJSON(SharePreferenceUtil.getInstance(Utils.getApp()).getUserInfo(""), LoginBean.class));

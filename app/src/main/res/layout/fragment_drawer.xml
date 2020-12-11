@@ -298,7 +298,9 @@
                         app:hTipVisiblity="false"
                         app:paddingLeft="20dp"
                         app:paddingRight="30dp"
-                        app:tileText="定时停止播放" />
+                        app:tileText="定时停止播放"
+                        onClickHornizeItemView="@{() -> click.openTimerDialog()}"
+                        hornizeItemViewRightText="@{vm.leftPauseAudioTime}" />
 
                     <com.netease.lib_common_ui.HornizeItemView
                         android:id="@+id/home_qrcode"

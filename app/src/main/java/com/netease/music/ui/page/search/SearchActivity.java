@@ -7,6 +7,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.navigation.ActivityNavigator;
 
 import com.netease.lib_api.model.search.HotSearchDetailBean;
 import com.kunminx.architecture.ui.page.BaseActivity;
@@ -55,6 +56,12 @@ public class SearchActivity extends BaseActivity {
         });
 
         mSearchViewModel.searchRequest.requestHotSearch();
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        ActivityNavigator.applyPopAnimationsToPendingTransition(this);
     }
 
     //输入框监听回车按键

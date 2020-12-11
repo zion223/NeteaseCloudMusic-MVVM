@@ -26,5 +26,7 @@ public interface Constants {
 		String LIKE_LIST = "likeList";
 
 		String LOCAL_MUSIC_COUNT = "LOCAL_MUSIC_COUNT";
+
+		String STOP_AUDIO_TIME = "STOP_AUDIO_TIME";
 	}
 }
