@@ -36,7 +36,7 @@ public final class PreferencesUtil {
         mPreferences = PreferenceManager.getDefaultSharedPreferences(context);
     }
 
-    public static final PreferencesUtil getInstance(final Context context) {
+    public static PreferencesUtil getInstance(final Context context) {
         if (sInstance == null) {
             sInstance = new PreferencesUtil(context.getApplicationContext());
         }
@@ -50,11 +50,11 @@ public final class PreferencesUtil {
     public void setExitTime() {
         final SharedPreferences.Editor editor = mPreferences.edit();
         editor.putLong("last_err_exit", System.currentTimeMillis());
-        editor.commit();
+        editor.apply();
     }
 
     public boolean isCurrentDayFirst(String str) {
-        return mPreferences.getString(CURRENT_DATE, "").equals(str);
+        return str.equals(mPreferences.getString(CURRENT_DATE, ""));
     }
 
     public void setCurrentDate(String str) {
@@ -121,16 +121,9 @@ public final class PreferencesUtil {
     }
 
     public void setArtistsInGrid(final boolean b) {
-        new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected Void doInBackground(final Void... unused) {
-                final SharedPreferences.Editor editor = mPreferences.edit();
-                editor.putBoolean(TOGGLE_ARTIST_GRID, b);
-                editor.apply();
-                return null;
-            }
-        }.execute();
-
+        final SharedPreferences.Editor editor = mPreferences.edit();
+        editor.putBoolean(TOGGLE_ARTIST_GRID, b);
+        editor.apply();
     }
 
     public boolean isAlbumsInGrid() {
@@ -138,16 +131,9 @@ public final class PreferencesUtil {
     }
 
     public void setAlbumsInGrid(final boolean b) {
-        new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected Void doInBackground(final Void... unused) {
-                final SharedPreferences.Editor editor = mPreferences.edit();
-                editor.putBoolean(TOGGLE_ALBUM_GRID, b);
-                editor.apply();
-                return null;
-            }
-        }.execute();
-
+        final SharedPreferences.Editor editor = mPreferences.edit();
+        editor.putBoolean(TOGGLE_ALBUM_GRID, b);
+        editor.apply();
     }
 
     public boolean pauseEnabledOnDetach() {
@@ -163,15 +149,9 @@ public final class PreferencesUtil {
     }
 
     public void setStartPageIndex(final int index) {
-        new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected Void doInBackground(final Void... unused) {
-                final SharedPreferences.Editor editor = mPreferences.edit();
-                editor.putInt(START_PAGE_INDEX, index);
-                editor.apply();
-                return null;
-            }
-        }.execute();
+        final SharedPreferences.Editor editor = mPreferences.edit();
+        editor.putInt(START_PAGE_INDEX, index);
+        editor.apply();
     }
 
     public void setLastOpenedAsStartPagePreference(boolean preference) {
@@ -185,16 +165,9 @@ public final class PreferencesUtil {
     }
 
     private void setSortOrder(final String key, final String value) {
-        new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected Void doInBackground(final Void... unused) {
-                final SharedPreferences.Editor editor = mPreferences.edit();
-                editor.putString(key, value);
-                editor.apply();
-
-                return null;
-            }
-        }.execute();
+        final SharedPreferences.Editor editor = mPreferences.edit();
+        editor.putString(key, value);
+        editor.apply();
     }
 
     public final String getArtistSortOrder() {
