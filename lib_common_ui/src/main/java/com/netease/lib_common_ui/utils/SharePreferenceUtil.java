@@ -9,8 +9,6 @@ import android.text.TextUtils;
 import com.netease.lib_api.model.song.AudioBean;
 import com.netease.lib_api.model.user.LoginBean;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 
 
@@ -52,27 +50,30 @@ public class SharePreferenceUtil {
 
 	int getSelectLanguage() {
 		return getInt(Constants.SpKey.TAG_LANGUAGE, 0);
-    }
+	}
 
-    Locale getSystemCurrentLocal() {
-        return systemCurrentLocal;
-    }
+	Locale getSystemCurrentLocal() {
+		return systemCurrentLocal;
+	}
 
-    public int getLocalMusicCount() {
-        return Integer.parseInt(getString(Constants.SpKey.LOCAL_MUSIC_COUNT, "-1"));
-    }
+	/**
+	 * 获取保存的本地音乐数量
+	 */
+	public int getLocalMusicCount() {
+		return Integer.parseInt(getString(Constants.SpKey.LOCAL_MUSIC_COUNT, "-1"));
+	}
 
-    //本地音乐数量
-    public void saveLocalMusicCount(int count) {
-        saveString(Constants.SpKey.LOCAL_MUSIC_COUNT, String.valueOf(count));
-    }
+	/**
+	 * 本地音乐数量
+	 */
+	public void saveLocalMusicCount(int count) {
+		saveString(Constants.SpKey.LOCAL_MUSIC_COUNT, String.valueOf(count));
+	}
 
-    /**
-     * 保存用户的信息以及电话号码（因为bean里的电话号码要处理字符串，所以这里直接暴力传比较高效）
-     *
-     * @param bean
-     */
-    public void saveUserInfo(LoginBean bean, String phoneNumber) {
+	/**
+	 * 保存用户的信息以及电话号码（因为bean里的电话号码要处理字符串，所以这里直接暴力传比较高效）
+	 */
+	public void saveUserInfo(LoginBean bean, String phoneNumber) {
 		if (bean.getBindings() != null && bean.getBindings().size() > 1) {
 			saveAuthToken(bean.getBindings().get(1).getTokenJsonStr());
 		}
@@ -81,43 +82,64 @@ public class SharePreferenceUtil {
 		saveString(Constants.SpKey.USER_INFO, GsonUtil.toJson(bean));
 	}
 
-	//获取当前登录用户信息
+	/**
+	 * 获取当前登录用户信息
+	 */
 	public String getUserInfo(String defaultValue) {
 		return getString(Constants.SpKey.USER_INFO, defaultValue);
 	}
 
-	//获取当前登录用户ID
+	/**
+	 * 获取当前登录用户ID
+	 */
 	public int getUserId() {
 		String userInfo = getString(Constants.SpKey.USER_INFO, "");
-		if(TextUtils.isEmpty(userInfo)){
+		if (TextUtils.isEmpty(userInfo)) {
 			return 0;
 		}
 		LoginBean loginBean = GsonUtil.fromJSON(userInfo, LoginBean.class);
 		return loginBean.getProfile().getUserId();
 	}
 
-	//退出登录 移除已登录用户信息
+	/**
+	 * 退出登录 移除已登录用户信息
+	 */
 	public void removeUserInfo() {
 		remove(Constants.SpKey.USER_INFO);
 		saveAuthToken("");
 	}
 
+	/**
+	 * 保存账号数量
+	 */
 	private void saveAccountNum(String phoneNumber) {
 		saveString(Constants.SpKey.PHONE_NUMBER, phoneNumber);
 	}
 
+	/**
+	 * 保存userId
+	 */
 	private void saveUserId(String id) {
 		saveString(Constants.SpKey.USER_ID, id);
 	}
 
+	/**
+	 * 获取userId
+	 */
 	private void getUserId(String id) {
 		getString(Constants.SpKey.USER_ID, id);
 	}
 
+	/**
+	 * 获取账号数量
+	 */
 	public String getAccountNum() {
 		return getString(Constants.SpKey.PHONE_NUMBER, "");
 	}
 
+	/**
+	 * 保存token
+	 */
 	private void saveAuthToken(String token) {
 		saveString(Constants.SpKey.AUTH_TOKEN, token);
 	}
@@ -127,7 +149,7 @@ public class SharePreferenceUtil {
 	 */
 	public String getAuthToken(String defaultValue) {
 		return getString(Constants.SpKey.AUTH_TOKEN, defaultValue);
-    }
+	}
 
 
     /**
@@ -165,10 +187,16 @@ public class SharePreferenceUtil {
 		saveString(Constants.SpKey.CURRENT_ARTIST_ID, id);
 	}
 
+	/**
+	 * 移除存储的歌手ID
+	 */
 	public void removeCurrentArtistId() {
 		remove(Constants.SpKey.CURRENT_ARTIST_ID);
 	}
 
+	/**
+	 * 获取当前歌手ID
+	 */
 	public String getCurrentArtistId() {
 		return getString(Constants.SpKey.CURRENT_ARTIST_ID, "");
 	}
