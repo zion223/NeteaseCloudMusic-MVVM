@@ -116,6 +116,8 @@ public class MusicUtils {
 
 
     /**
+     * 获取音乐列表
+     *
      * @param context context
      * @param from    不同的界面进来要做不同的查询
      */
@@ -123,7 +125,9 @@ public class MusicUtils {
         return queryMusic(context, null, from);
     }
 
-    //音乐数量
+    /**
+     * 查询音乐数量
+     */
     public static int queryMusicSize(Context context, int from) {
         return queryMusic(context, null, from).size();
     }
@@ -162,16 +166,16 @@ public class MusicUtils {
                         PreferencesUtil.getInstance(context).getAlbumSongSortOrder()));
             //从文件夹
             case START_FROM_FOLDER:
-                ArrayList<MusicInfo> list1 = new ArrayList<>();
+                ArrayList<MusicInfo> folderList = new ArrayList<>();
                 ArrayList<MusicInfo> list = getMusicListCursor(cr.query(Media.EXTERNAL_CONTENT_URI, proj_music,
                         select.toString(), null,
                         null));
                 for (MusicInfo music : list) {
                     if (music.data.substring(0, music.data.lastIndexOf(File.separator)).equals(id)) {
-                        list1.add(music);
+                        folderList.add(music);
                     }
                 }
-                return list1;
+                return folderList;
             default:
                 return null;
         }
