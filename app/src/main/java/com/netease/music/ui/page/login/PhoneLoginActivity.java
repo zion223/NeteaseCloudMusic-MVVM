@@ -63,6 +63,7 @@ public class PhoneLoginActivity extends BaseActivity {
             } else {
                 //登陆失败
                 showLongToast(loginBean.getMsg());
+                mPhoneLoginViewModel.password.set("");
             }
         });
         //观察验证码发送状态  成功后显示验证码输入界面 并且倒计时启动
