@@ -59,15 +59,15 @@ public class SharePreferenceUtil {
 	/**
 	 * 获取保存的本地音乐数量
 	 */
-	public int getLocalMusicCount() {
-		return Integer.parseInt(getString(Constants.SpKey.LOCAL_MUSIC_COUNT, "-1"));
+	public int getLocalMusicCount(int defaultvalue) {
+		return getInt(Constants.SpKey.LOCAL_MUSIC_COUNT, defaultvalue);
 	}
 
 	/**
 	 * 本地音乐数量
 	 */
 	public void saveLocalMusicCount(int count) {
-		saveString(Constants.SpKey.LOCAL_MUSIC_COUNT, String.valueOf(count));
+		saveInt(Constants.SpKey.LOCAL_MUSIC_COUNT, count);
 	}
 
 	/**

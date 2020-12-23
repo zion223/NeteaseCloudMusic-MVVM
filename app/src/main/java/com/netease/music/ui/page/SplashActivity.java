@@ -74,7 +74,7 @@ public class SplashActivity extends AppCompatActivity implements EasyPermissions
                 .subscribe(aLong -> {
                     //初始化本地音乐数量  在授予权限后在初始化 避免出现未授权异常
                     final SharePreferenceUtil preferenceUtil = SharePreferenceUtil.getInstance(Utils.getApp());
-                    if (preferenceUtil.getLocalMusicCount() == -1) {
+                    if (preferenceUtil.getLocalMusicCount(-1) == -1) {
                         preferenceUtil.saveLocalMusicCount(MusicUtils.queryMusicSize(Utils.getApp(), MusicUtils.START_FROM_LOCAL));
                     }
                     String authToken = preferenceUtil.getAuthToken("");
