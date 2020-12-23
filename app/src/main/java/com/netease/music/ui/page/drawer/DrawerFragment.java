@@ -57,6 +57,8 @@ public class DrawerFragment extends BaseFragment {
                 // finish当前Activity
                 mSharedViewModel.requestToFinishActivity(true);
                 startActivity(new Intent(getContext(), LoginActivity.class));
+            } else {
+                showShortToast(R.string.op_failed);
             }
         });
     }

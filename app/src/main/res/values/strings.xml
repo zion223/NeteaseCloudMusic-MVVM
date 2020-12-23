@@ -7,5 +7,5 @@
 
     <string name="reuqest_permission">为保证应用正常运行, 请打开相关权限</string>
     <string name="function_not_completed">此功能暂时无实现</string>
-
+    <string name="op_failed">操作失败</string>
 </resources>

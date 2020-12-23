@@ -28,6 +28,7 @@ public class DrawerRequest extends BaseRequest {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(commonMessageBean -> {
+                    // 业务逻辑操作
                     ResponseStatus responseStatus = new ResponseStatus(String.valueOf(commonMessageBean.getCode()), commonMessageBean.getCode() == 200);
                     mLoginOutLiveData.postValue(new DataResult<>(commonMessageBean, responseStatus));
                 });
