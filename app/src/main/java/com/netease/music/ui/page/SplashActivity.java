@@ -80,14 +80,9 @@ public class SplashActivity extends AppCompatActivity implements EasyPermissions
                     if (preferenceUtil.getLocalMusicCount(-1) == -1) {
                         preferenceUtil.saveLocalMusicCount(MusicUtils.queryMusicSize(Utils.getApp(), MusicUtils.START_FROM_LOCAL));
                     }
-                    String authToken = preferenceUtil.getAuthToken("");
-                    if (TextUtils.isEmpty(authToken)) {
-                        //进入登录界面
-                        startActivity(new Intent(SplashActivity.this, LoginActivity.class));
-                    } else {
-                        //进入主界面
-                        startActivity(new Intent(SplashActivity.this, MainActivity.class));
-                    }
+                    // 根据token选择跳转Activity
+                    startActivity(new Intent(SplashActivity.this,
+                            TextUtils.isEmpty(preferenceUtil.getAuthToken("")) ? LoginActivity.class : MainActivity.class));
                     finish();
                 });
     }
