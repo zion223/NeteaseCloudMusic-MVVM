@@ -1,5 +1,10 @@
 package com.netease.music.ui.page.drawer;
 
+import android.content.Intent;
+import android.os.Bundle;
+
+import androidx.annotation.Nullable;
+
 import com.kunminx.architecture.ui.page.BaseFragment;
 import com.kunminx.architecture.ui.page.DataBindingConfig;
 import com.lxj.xpopup.XPopup;
@@ -9,6 +14,7 @@ import com.netease.lib_common_ui.utils.SharePreferenceUtil;
 import com.netease.music.R;
 import com.netease.music.BR;
 import com.netease.music.ui.callback.SharedViewModel;
+import com.netease.music.ui.page.login.LoginActivity;
 import com.netease.music.ui.state.DrawerViewModel;
 
 import java.util.concurrent.TimeUnit;
@@ -22,9 +28,9 @@ public class DrawerFragment extends BaseFragment {
     private DrawerViewModel mDrawerViewModel;
     private SharedViewModel mSharedViewModel;
 
-
     private Disposable mPauseMusicDisposable;
 
+    private SharePreferenceUtil preferenceUtill;
     @Override
     protected void initViewModel() {
         mDrawerViewModel = getFragmentScopeViewModel(DrawerViewModel.class);
@@ -36,6 +42,23 @@ public class DrawerFragment extends BaseFragment {
 
         return new DataBindingConfig(R.layout.fragment_drawer, BR.vm, mDrawerViewModel)
                 .addBindingParam(BR.click, new ClickProxy());
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        preferenceUtill = SharePreferenceUtil.getInstance(getContext());
+
+        // 观察LiveData
+        mDrawerViewModel.request.getLoginOutLiveData().observe(this, dataResult -> {
+            if (dataResult.getResponseStatus().isSuccess()) {
+                // 成功退出登录
+                preferenceUtill.removeUserInfo();
+                // finish当前Activity
+                mSharedViewModel.requestToFinishActivity(true);
+                startActivity(new Intent(getContext(), LoginActivity.class));
+            }
+        });
     }
 
     public class ClickProxy {
@@ -65,6 +88,11 @@ public class DrawerFragment extends BaseFragment {
             new XPopup.Builder(getContext())
                     .asCustom(new TimerOffDialog(getContext(), listener))
                     .show();
+        }
+
+        // 退出登录
+        public void exitLogin() {
+            mDrawerViewModel.request.requestLoginOut();
         }
     }
 

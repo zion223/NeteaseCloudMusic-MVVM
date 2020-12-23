@@ -67,6 +67,14 @@ public class MainActivity extends BaseActivity {
             }
         });
 
+        // 观察是否需要立即 finish当前Activity
+        mSharedViewModel.isToCloseActivityImmediately().observeInActivity(this, aBoolean -> {
+            if (aBoolean) {
+                finish();
+            }
+        });
+
+
         mSharedViewModel.isToOpenOrCloseDrawer().observeInActivity(this, aBoolean -> {
 
             //TODO yes：同 tip 1: 此处将 drawer 的 open 和 close 都放在 drawerBindingAdapter 中操作，规避了视图调用的一致性问题，

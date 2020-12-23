@@ -51,6 +51,8 @@ public class SharedViewModel extends ViewModel {
 
     private final UnPeekLiveData<Boolean> toOpenOrCloseDrawer = new UnPeekLiveData<>();
 
+    private final UnPeekLiveData<Boolean> toFinishActivity = new UnPeekLiveData<>();
+
     //TODO tip 4：可以通过构造器的方式来配置 UnPeekLiveData
 
     // 具体存在有缘和使用方式可详见《LiveData 数据倒灌 背景缘由全貌 独家解析》
@@ -71,6 +73,10 @@ public class SharedViewModel extends ViewModel {
         return toCloseActivityIfAllowed;
     }
 
+    public ProtectedUnPeekLiveData<Boolean> isToCloseActivityImmediately() {
+        return toFinishActivity;
+    }
+
     public ProtectedUnPeekLiveData<Boolean> isToOpenOrCloseDrawer() {
         return toOpenOrCloseDrawer;
     }
@@ -81,6 +87,10 @@ public class SharedViewModel extends ViewModel {
 
     public void requestToOpenOrCloseDrawer(boolean open) {
         toOpenOrCloseDrawer.setValue(open);
+    }
+
+    public void requestToFinishActivity(boolean finish) {
+        toFinishActivity.setValue(finish);
     }
 
     public void requestToCloseSlidePanelIfExpanded(boolean close) {

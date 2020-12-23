@@ -8,6 +8,7 @@ import com.netease.lib_api.model.user.LoginBean;
 import com.netease.lib_common_ui.utils.GsonUtil;
 import com.netease.lib_common_ui.utils.SharePreferenceUtil;
 import com.kunminx.architecture.utils.Utils;
+import com.netease.music.domain.request.DrawerRequest;
 
 
 public class DrawerViewModel extends ViewModel {
@@ -16,7 +17,7 @@ public class DrawerViewModel extends ViewModel {
 
     // 定时停止播放剩余的时间
     public final MutableLiveData<String> leftPauseAudioTime = new MutableLiveData<>();
-
+    public final DrawerRequest request = new DrawerRequest();
     {
         user.setValue(GsonUtil.fromJSON(SharePreferenceUtil.getInstance(Utils.getApp()).getUserInfo(""), LoginBean.class));
     }
