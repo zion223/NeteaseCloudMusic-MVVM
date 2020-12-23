@@ -29,7 +29,10 @@ import pub.devrel.easypermissions.EasyPermissions;
 
 public class SplashActivity extends AppCompatActivity implements EasyPermissions.PermissionCallbacks {
 
-    String[] perms = {Manifest.permission.READ_PHONE_STATE
+
+    private static final int REQUEST_CODE = 1;
+
+    private static final String[] PERMS = {Manifest.permission.READ_PHONE_STATE
             , Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
     @Override
@@ -39,8 +42,8 @@ public class SplashActivity extends AppCompatActivity implements EasyPermissions
 
         setContentView(R.layout.delegate_splash);
 
-        if (!EasyPermissions.hasPermissions(this, perms)) {
-            EasyPermissions.requestPermissions(this, getString(R.string.reuqest_permission), 1, perms);
+        if (!EasyPermissions.hasPermissions(this, PERMS)) {
+            EasyPermissions.requestPermissions(this, getString(R.string.reuqest_permission), REQUEST_CODE, PERMS);
         } else {
             jumpIntoMainActivity();
         }
@@ -55,8 +58,8 @@ public class SplashActivity extends AppCompatActivity implements EasyPermissions
 
     @Override
     public void onPermissionsGranted(int requestCode, @NonNull List<String> perm) {
-        if (!EasyPermissions.hasPermissions(this, perms)) {
-            EasyPermissions.requestPermissions(this, getString(R.string.reuqest_permission), 1, perms);
+        if (requestCode == REQUEST_CODE && !EasyPermissions.hasPermissions(this, PERMS)) {
+            EasyPermissions.requestPermissions(this, getString(R.string.reuqest_permission), 1, PERMS);
         } else {
             jumpIntoMainActivity();
         }
@@ -64,7 +67,7 @@ public class SplashActivity extends AppCompatActivity implements EasyPermissions
 
     @Override
     public void onPermissionsDenied(int requestCode, @NonNull List<String> perm) {
-        if (EasyPermissions.somePermissionPermanentlyDenied(this, perm)) {
+        if (requestCode == REQUEST_CODE && EasyPermissions.somePermissionPermanentlyDenied(this, perm)) {
             new AppSettingsDialog.Builder(this).build().show();
         }
     }
