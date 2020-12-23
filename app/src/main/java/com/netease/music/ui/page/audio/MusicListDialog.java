@@ -32,7 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 //歌曲播放列表Dialog
-public class MusicListDialog extends BottomPopupView {
+public class MusicListDialog extends BottomPopupView implements View.OnClickListener {
 
     private Context mContext;
     /*
@@ -98,54 +98,18 @@ public class MusicListDialog extends BottomPopupView {
         mTipView = findViewById(R.id.mode_image_view);
         mDeleteView = findViewById(R.id.delete_view);
         mFavouriteView = findViewById(R.id.favourite_view);
-
-        //收藏歌曲到创建的歌单
-        mFavouriteView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                new XPopup.Builder(getContext())
-                        .asCustom(new MusicCollectDialog(getContext(), tracks.toString()))
-                        .show();
-
-            }
-        });
-        mDeleteView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //清空播放列表 TODO 确认对话框
-                AudioController.getInstance().removeAudio();
-                dismiss();
-            }
-        });
         mPlayNumView = findViewById(R.id.num_text_view);
-        mPlayNumView.setText("(" + mQueue.size() + ")");
         mPlayModeView = findViewById(R.id.mode_text_view);
-        mPlayModeView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //调用切换播放模式事件
-                switch (mPlayMode) {
-                    case LOOP:
-                        AudioController.getInstance().setPlayMode(AudioController.PlayMode.RANDOM);
-                        break;
-                    case RANDOM:
-                        AudioController.getInstance().setPlayMode(AudioController.PlayMode.REPEAT);
-                        break;
-                    case REPEAT:
-                        AudioController.getInstance().setPlayMode(AudioController.PlayMode.LOOP);
-                        break;
-                }
-            }
-        });
+
+        mPlayNumView.setText("(" + mQueue.size() + ")");
+        mFavouriteView.setOnClickListener(this);
+        mDeleteView.setOnClickListener(this);
+        mPlayModeView.setOnClickListener(this);
         //更新界面
         updatePlayModeView();
         //初始化recycler
         mRecyclerView = findViewById(R.id.recycler);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext);
-        linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
-        //定位当前播放的音乐的位置
-        int currentPosition = mQueue.indexOf(mAudioBean);
+
         mMusicListAdapter = new MusicListAdapter(mQueue, mAudioBean);
         //切换播放歌曲
         mMusicListAdapter.setOnItemClickListener((adapter, view, position) -> {
@@ -153,10 +117,13 @@ public class MusicListDialog extends BottomPopupView {
             AudioHelper.addAudio(entity);
             dismiss();
         });
-
+        final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext);
+        linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
         mRecyclerView.setAdapter(mMusicListAdapter);
         mRecyclerView.setLayoutManager(linearLayoutManager);
-        //正在播放的音乐处于中间的位置
+        //定位当前播放的音乐的位置
+        int currentPosition = mQueue.indexOf(mAudioBean);
+        //正在播放的音乐尽量处于中间的位置
         mRecyclerView.scrollToPosition(currentPosition - 3);
     }
 
@@ -209,7 +176,40 @@ public class MusicListDialog extends BottomPopupView {
         EventBus.getDefault().unregister(this);
     }
 
-    static class MusicListAdapter extends BaseQuickAdapter<AudioBean, BaseViewHolder> {
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.favourite_view:
+                new XPopup.Builder(getContext())
+                        .asCustom(new MusicCollectDialog(getContext(), tracks.toString()))
+                        .show();
+                break;
+            case R.id.delete_view:
+                //清空播放列表 TODO 确认对话框
+                AudioController.getInstance().removeAudio();
+                dismiss();
+                break;
+            case R.id.mode_text_view:
+                //调用切换播放模式事件
+                switch (mPlayMode) {
+                    case LOOP:
+                        AudioController.getInstance().setPlayMode(AudioController.PlayMode.RANDOM);
+                        break;
+                    case RANDOM:
+                        AudioController.getInstance().setPlayMode(AudioController.PlayMode.REPEAT);
+                        break;
+                    case REPEAT:
+                        AudioController.getInstance().setPlayMode(AudioController.PlayMode.LOOP);
+                        break;
+                }
+                break;
+            default:
+                break;
+
+        }
+    }
+
+    private static class MusicListAdapter extends BaseQuickAdapter<AudioBean, BaseViewHolder> {
 
         private AudioBean mCurrentBean;
 
