@@ -277,7 +277,7 @@ public class AudioController {
             case REPEAT:
                 return getPlaying(mQueueIndex);
         }
-        return null;
+        throw new NullPointerException("cannot find AudioBean");
     }
 
     public void previous() {

@@ -141,23 +141,28 @@ public class MusicService extends Service implements NotificationHelper.Notifica
 				return;
 			}
 			String extra = intent.getStringExtra(EXTRA);
-			switch (extra) {
-				case EXTRA_PLAY:
-					//处理播放暂停事件,可以封到AudioController中
-					AudioController.getInstance().playOrPause();
-					break;
-				case EXTRA_PRE:
-					AudioController.getInstance().previous(); //不管当前状态，直接播放
-					break;
-				case EXTRA_NEXT:
-					AudioController.getInstance().next();
-					break;
-				case EXTRA_FAV:
-					//AudioController.getInstance().changeFavourite();
-					break;
-				case EXTRA_CANCLE:
-					NotificationHelper.getInstance().getNotificationManager().cancel(NotificationHelper.NOTIFICATION_ID);
+			if (!TextUtils.isEmpty(extra)) {
+				switch (extra) {
+					case EXTRA_PLAY:
+						//处理播放暂停事件,可以封到AudioController中
+						AudioController.getInstance().playOrPause();
+						break;
+					case EXTRA_PRE:
+						AudioController.getInstance().previous(); //不管当前状态，直接播放
+						break;
+					case EXTRA_NEXT:
+						AudioController.getInstance().next();
+						break;
+					case EXTRA_FAV:
+						//AudioController.getInstance().changeFavourite();
+						break;
+					case EXTRA_CANCLE:
+						NotificationHelper.getInstance().getNotificationManager().cancel(NotificationHelper.NOTIFICATION_ID);
+					default:
+						break;
+				}
 			}
+
 		}
 	}
 }
