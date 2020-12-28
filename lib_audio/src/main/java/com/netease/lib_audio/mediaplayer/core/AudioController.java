@@ -44,7 +44,6 @@ public class AudioController {
         appDatabase = AppDatabase.getInstance(AudioHelper.getContext());
         preferenceUtil = SharePreferenceUtil.getInstance(AudioHelper.getContext());
         // 获取数据库保存的音乐播放队列
-        mQueue.clear();
         mQueue.addAll(appDatabase.getMusicPlayListDao().getMusicPlayList());
         final AudioBean audio = preferenceUtil.getLatestSong();
         if (audio != null && mQueue.size() > 0 && mQueue.contains(audio)) {
@@ -65,6 +64,9 @@ public class AudioController {
         private static final AudioController INSTANCE = new AudioController();
     }
 
+    /**
+     * 对外提提供是否开始状态
+     */
     public boolean isStartState() {
         return CustomMediaPlayer.Status.STARTED == getStatus();
     }
@@ -230,8 +232,13 @@ public class AudioController {
         mAudioPlayer.seekTo(time);
     }
 
+    /**
+     * 释放资源
+     */
     public void release() {
-        mAudioPlayer.release();
+        if (mAudioPlayer != null) {
+            mAudioPlayer.release();
+        }
         EventBus.getDefault().unregister(this);
     }
 
@@ -239,6 +246,9 @@ public class AudioController {
         mAudioPlayer.resume();
     }
 
+    /**
+     * 播放下一首歌曲
+     */
     public void next() {
         if (mQueue != null && mQueue.size() > 0) {
             mAudioPlayer.load(getNextPlaying());
@@ -262,7 +272,14 @@ public class AudioController {
             default:
                 break;
         }
-        return null;
+        throw new NullPointerException("cannot find Audio");
+    }
+
+    /**
+     * 播放上一首歌曲
+     */
+    public void previous() {
+        mAudioPlayer.load(getPrePlaying());
     }
 
     //获取上一首歌曲
@@ -277,11 +294,7 @@ public class AudioController {
             case REPEAT:
                 return getPlaying(mQueueIndex);
         }
-        throw new NullPointerException("cannot find AudioBean");
-    }
-
-    public void previous() {
-        mAudioPlayer.load(getPrePlaying());
+        throw new NullPointerException("cannot find Audio");
     }
 
     public int getQueueIndex() {

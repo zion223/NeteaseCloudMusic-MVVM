@@ -9,6 +9,7 @@ import androidx.navigation.Navigation;
 
 import com.kunminx.architecture.ui.page.BaseActivity;
 import com.kunminx.architecture.ui.page.DataBindingConfig;
+import com.netease.lib_audio.mediaplayer.core.AudioController;
 import com.netease.music.ui.callback.SharedViewModel;
 import com.netease.music.ui.helper.DrawerCoordinateHelper;
 import com.netease.music.ui.state.MainActivityViewModel;
@@ -141,6 +142,11 @@ public class MainActivity extends BaseActivity {
         mSharedViewModel.requestToCloseSlidePanelIfExpanded(true);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        AudioController.getInstance().release();
+    }
 
     public class EventHandler extends DrawerLayout.SimpleDrawerListener {
         @Override
