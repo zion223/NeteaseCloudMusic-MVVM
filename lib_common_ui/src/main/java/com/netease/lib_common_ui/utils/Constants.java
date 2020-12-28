@@ -24,5 +24,7 @@ public interface Constants {
 		String LOCAL_MUSIC_COUNT = "LOCAL_MUSIC_COUNT";
 
 		String STOP_AUDIO_TIME = "STOP_AUDIO_TIME";
+
+		String PLAY_MODE = "PLAY_MODE";
 	}
 }

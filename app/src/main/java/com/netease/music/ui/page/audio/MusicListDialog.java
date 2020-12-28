@@ -19,6 +19,7 @@ import com.lxj.xpopup.core.BottomPopupView;
 import com.netease.lib_api.model.song.AudioBean;
 import com.netease.lib_audio.app.AudioHelper;
 import com.netease.lib_audio.mediaplayer.core.AudioController;
+import com.netease.lib_audio.mediaplayer.core.PlayMode;
 import com.netease.lib_audio.mediaplayer.events.AudioLoadEvent;
 import com.netease.lib_audio.mediaplayer.events.AudioPlayModeEvent;
 import com.netease.lib_audio.mediaplayer.events.AudioRemoveEvent;
@@ -50,7 +51,7 @@ public class MusicListDialog extends BottomPopupView implements View.OnClickList
      */
     private ArrayList<AudioBean> mQueue; //播放队列
     private AudioBean mAudioBean; //当前正在播放歌曲
-    private AudioController.PlayMode mPlayMode;
+    private PlayMode mPlayMode;
     private StringBuilder tracks;
 
     MusicListDialog(@NonNull Context context) {
@@ -193,13 +194,13 @@ public class MusicListDialog extends BottomPopupView implements View.OnClickList
                 //调用切换播放模式事件
                 switch (mPlayMode) {
                     case LOOP:
-                        AudioController.getInstance().setPlayMode(AudioController.PlayMode.RANDOM);
+                        AudioController.getInstance().setPlayMode(PlayMode.RANDOM);
                         break;
                     case RANDOM:
-                        AudioController.getInstance().setPlayMode(AudioController.PlayMode.REPEAT);
+                        AudioController.getInstance().setPlayMode(PlayMode.REPEAT);
                         break;
                     case REPEAT:
-                        AudioController.getInstance().setPlayMode(AudioController.PlayMode.LOOP);
+                        AudioController.getInstance().setPlayMode(PlayMode.LOOP);
                         break;
                 }
                 break;

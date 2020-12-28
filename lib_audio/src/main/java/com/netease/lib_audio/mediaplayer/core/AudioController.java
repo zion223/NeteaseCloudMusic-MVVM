@@ -26,19 +26,9 @@ public class AudioController {
 
     private static final String TAG = "AudioController";
 
-    /*
-     * 播放模式
-     */
-    public enum PlayMode {
-        LOOP,
-        RANDOM,
-        REPEAT
-    }
-
     //播放器
     private final AudioPlayer mAudioPlayer;
     //当前播放队列
-    //private final ArrayList<AudioBean> mQueue = SharePreferenceUtil.getInstance(AudioHelper.getContext()).getMusicList() == null ? new ArrayList<AudioBean>() : SharePreferenceUtil.getInstance(AudioHelper.getContext()).getMusicList();
     private ArrayList<AudioBean> mQueue = new ArrayList<>();
     //播放模式
     private PlayMode mPlayMode;
@@ -46,21 +36,24 @@ public class AudioController {
     private int mQueueIndex;
     // Room数据库
     private AppDatabase appDatabase;
+    // 本地SharePreference
+    private SharePreferenceUtil preferenceUtil;
 
     private AudioController() {
         mAudioPlayer = new AudioPlayer();
         appDatabase = AppDatabase.getInstance(AudioHelper.getContext());
+        preferenceUtil = SharePreferenceUtil.getInstance(AudioHelper.getContext());
         // 获取数据库保存的音乐播放队列
         mQueue.clear();
         mQueue.addAll(appDatabase.getMusicPlayListDao().getMusicPlayList());
-        final AudioBean audio = SharePreferenceUtil.getInstance(AudioHelper.getContext()).getLatestSong();
+        final AudioBean audio = preferenceUtil.getLatestSong();
         if (audio != null && mQueue.size() > 0 && mQueue.contains(audio)) {
             //当前是否有歌曲
             mQueueIndex = mQueue.indexOf(audio);
         } else {
             mQueueIndex = 0;
         }
-        mPlayMode = PlayMode.LOOP;
+        mPlayMode = PlayMode.getMode(preferenceUtil.getPlayMode());
         EventBus.getDefault().register(this);
     }
 
@@ -191,6 +184,8 @@ public class AudioController {
         mPlayMode = playMode;
         //还要对外发送切换事件，更新UI
         EventBus.getDefault().post(new AudioPlayModeEvent(mPlayMode));
+        // 持久化播放模式
+        preferenceUtil.savePlayMode(PlayMode.getIntValue(playMode));
         Log.e(TAG, "AudioPlayModeEvent " + mPlayMode.name());
     }
 
@@ -207,7 +202,7 @@ public class AudioController {
         final AudioBean currentPlaying = getCurrentPlaying();
         mAudioPlayer.load(currentPlaying);
         //播放时存储最近一次播放的歌曲
-        SharePreferenceUtil.getInstance(AudioHelper.getContext()).saveLatestSong(currentPlaying);
+        preferenceUtil.saveLatestSong(currentPlaying);
         //添加到最近播放歌曲中(不能再主线程中访问)
         new Thread() {
             @Override

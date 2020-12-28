@@ -31,6 +31,7 @@ import com.lxj.xpopup.XPopup;
 import com.netease.lib_api.model.song.AudioBean;
 import com.netease.lib_audio.mediaplayer.core.AudioController;
 import com.netease.lib_audio.mediaplayer.core.CustomMediaPlayer;
+import com.netease.lib_audio.mediaplayer.core.PlayMode;
 import com.netease.lib_audio.mediaplayer.events.AudioBufferUpdateEvent;
 import com.netease.lib_audio.mediaplayer.events.AudioLoadEvent;
 import com.netease.lib_audio.mediaplayer.events.AudioPauseEvent;
@@ -91,7 +92,7 @@ public class MusicPlayerActivity extends AppCompatActivity {
      * data
      */
     private AudioBean mAudioBean; //当前正在播放歌曲
-    private AudioController.PlayMode mPlayMode;//当前播放模式
+    private PlayMode mPlayMode;//当前播放模式
     private List<String> likeList = new ArrayList<>(); //当前喜欢的音乐ID集合
 
     //从外部启动该Activity
@@ -217,13 +218,13 @@ public class MusicPlayerActivity extends AppCompatActivity {
             //切换播放模式 LOOP --> RANDOM --> REPEAT --> LOOP
             switch (mPlayMode) {
                 case LOOP:
-                    AudioController.getInstance().setPlayMode(AudioController.PlayMode.RANDOM);
+                    AudioController.getInstance().setPlayMode(PlayMode.RANDOM);
                     break;
                 case RANDOM:
-                    AudioController.getInstance().setPlayMode(AudioController.PlayMode.REPEAT);
+                    AudioController.getInstance().setPlayMode(PlayMode.REPEAT);
                     break;
                 case REPEAT:
-                    AudioController.getInstance().setPlayMode(AudioController.PlayMode.LOOP);
+                    AudioController.getInstance().setPlayMode(PlayMode.LOOP);
                     break;
             }
         });

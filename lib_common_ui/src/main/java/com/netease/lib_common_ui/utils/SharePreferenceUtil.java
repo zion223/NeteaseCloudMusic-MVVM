@@ -11,6 +11,7 @@ import com.netease.lib_api.model.user.LoginBean;
 
 import java.util.Locale;
 
+import static com.netease.lib_common_ui.utils.Constants.SpKey.PLAY_MODE;
 
 
 /**
@@ -211,6 +212,19 @@ public class SharePreferenceUtil {
 		saveInt(Constants.SpKey.STOP_AUDIO_TIME, time);
 	}
 
+	/**
+	 * 保存当前的播放模式
+	 */
+	public void savePlayMode(int mode) {
+		saveInt(PLAY_MODE, mode);
+	}
+
+	/**
+	 * 获取当前播放模式
+	 */
+	public int getPlayMode() {
+		return getInt(PLAY_MODE, 0);
+	}
 
 	private void remove(String key) {
 		editor.remove(key).apply();
