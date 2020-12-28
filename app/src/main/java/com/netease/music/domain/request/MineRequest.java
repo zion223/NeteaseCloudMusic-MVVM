@@ -68,11 +68,8 @@ public class MineRequest extends BaseRequest {
                     }
                     nodeList.add(new UserPlayListHeader("创建的歌单", subIndex, nodeContextList));
                     nodeList.add(new UserPlayListHeader("收藏的歌单", playlist.size() - subIndex, nodeContext2List));
-
-
+                    // 发布数据
                     userPlaylist.postValue(nodeList);
-
-
                 });
     }
 
