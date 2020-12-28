@@ -29,6 +29,6 @@ public class MineViewModel extends BaseLoadingViewModel {
     {
         user.set(GsonUtil.fromJSON(SharePreferenceUtil.getInstance(Utils.getApp()).getUserInfo(""), LoginBean.class));
 
-        localMusicSize.set(SharePreferenceUtil.getInstance(Utils.getApp()).getLocalMusicCount() == -1 ? MusicUtils.queryMusicSize(Utils.getApp(), MusicUtils.START_FROM_LOCAL) : SharePreferenceUtil.getInstance(Utils.getApp()).getLocalMusicCount());
+        localMusicSize.set(SharePreferenceUtil.getInstance(Utils.getApp()).getLocalMusicCount(-1) == -1 ? MusicUtils.queryMusicSize(Utils.getApp(), MusicUtils.START_FROM_LOCAL) : SharePreferenceUtil.getInstance(Utils.getApp()).getLocalMusicCount(-1));
     }
 }
