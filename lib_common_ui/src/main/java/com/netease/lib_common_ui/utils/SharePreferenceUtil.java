@@ -90,6 +90,14 @@ public class SharePreferenceUtil {
 	}
 
 	/**
+	 * 退出登录 移除已登录用户信息
+	 */
+	public void removeUserInfo() {
+		remove(Constants.SpKey.USER_INFO);
+		saveAuthToken("");
+	}
+
+	/**
 	 * 获取当前登录用户ID
 	 */
 	public int getUserId() {
@@ -101,33 +109,20 @@ public class SharePreferenceUtil {
 		return loginBean.getProfile().getUserId();
 	}
 
+
 	/**
-	 * 退出登录 移除已登录用户信息
+	 * 保存当前用户userId
 	 */
-	public void removeUserInfo() {
-		remove(Constants.SpKey.USER_INFO);
-		saveAuthToken("");
+	private void saveUserId(String id) {
+		saveString(Constants.SpKey.USER_ID, id);
 	}
+
 
 	/**
 	 * 保存账号数量
 	 */
 	private void saveAccountNum(String phoneNumber) {
 		saveString(Constants.SpKey.PHONE_NUMBER, phoneNumber);
-	}
-
-	/**
-	 * 保存userId
-	 */
-	private void saveUserId(String id) {
-		saveString(Constants.SpKey.USER_ID, id);
-	}
-
-	/**
-	 * 获取userId
-	 */
-	private void getUserId(String id) {
-		getString(Constants.SpKey.USER_ID, id);
 	}
 
 	/**
@@ -215,6 +210,7 @@ public class SharePreferenceUtil {
 	public void setStopAudioTime(int time) {
 		saveInt(Constants.SpKey.STOP_AUDIO_TIME, time);
 	}
+
 
 	private void remove(String key) {
 		editor.remove(key).apply();
