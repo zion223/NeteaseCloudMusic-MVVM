@@ -3,7 +3,6 @@ package com.netease.music.util;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
-import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 
 public final class PreferencesUtil {

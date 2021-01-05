@@ -89,7 +89,7 @@ public class TimeUtil {
 	 * 是否是同一天(昨天) 同一年
 	 */
 	public static String getPrivateMsgTime(long time) {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
 		Date date = new Date(time);
 		Date old = null;
 		Date now = null;
@@ -104,14 +104,14 @@ public class TimeUtil {
 
 		long day = (nowTime - oldTime) / (24 * 60 * 60 * 1000);
 		if (day < 1) {  //今天
-			SimpleDateFormat format = new SimpleDateFormat("HH:mm");
+			SimpleDateFormat format = new SimpleDateFormat("HH:mm", Locale.getDefault());
 			String format1 = format.format(date);
 			if (format1.startsWith("0")) {
 				format1 = format1.substring(1);
 			}
 			return format1;
 		} else if (day == 1) {     //昨天
-			SimpleDateFormat format = new SimpleDateFormat("HH:mm");
+			SimpleDateFormat format = new SimpleDateFormat("HH:mm", Locale.getDefault());
 			String format1 = format.format(date);
 			if (format1.startsWith("0")) {
 				format1 = format1.substring(1);
@@ -155,7 +155,7 @@ public class TimeUtil {
 
 	private static boolean isToday(String str, String formatStr) {
 
-		SimpleDateFormat format = new SimpleDateFormat(formatStr);
+		SimpleDateFormat format = new SimpleDateFormat(formatStr, Locale.getDefault());
 		Date date = null;
 		try {
 			date = format.parse(str);
