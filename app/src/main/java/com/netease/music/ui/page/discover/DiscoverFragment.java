@@ -13,7 +13,7 @@ import com.kunminx.architecture.ui.page.DataBindingConfig;
 import com.netease.lib_audio.app.AudioHelper;
 import com.netease.music.BR;
 import com.netease.music.R;
-import com.netease.music.data.config.TYPE;
+import com.netease.music.data.config.TypeEnum;
 import com.netease.music.ui.page.adapter.AlbumSongAdapter;
 import com.netease.music.ui.page.adapter.RecommendPlayListAdapter;
 import com.netease.music.ui.page.discover.album.NewAlbumActivity;
@@ -91,7 +91,7 @@ public class DiscoverFragment extends BaseFragment {
                 mDiscoverViewModel.discoverRequest.requestSongDetailData(songId);
             } else if (item.getTargetType() == 10) {
                 //专辑
-                SongListDetailActivity.startActivity(getContext(), TYPE.ALBUM_ID, item.getTargetId(), "");
+                SongListDetailActivity.startActivity(getContext(), TypeEnum.ALBUM_ID, item.getTargetId(), "");
             }
             //网页
             if (item.getUrl() != null) {
@@ -106,20 +106,20 @@ public class DiscoverFragment extends BaseFragment {
     public class ClickProxy {
 
         public void changeAlbumOrSong() {
-            if (mDiscoverViewModel.type.get().getValue() == TYPE.ALBUM.getValue()) {
+            if (mDiscoverViewModel.type.get().getValue() == TypeEnum.ALBUM.getValue()) {
                 //切换到新歌
-                mDiscoverViewModel.type.set(TYPE.SONG);
+                mDiscoverViewModel.type.set(TypeEnum.SONG);
                 mDiscoverViewModel.currentAlbumOrSongLiveData.set(mDiscoverViewModel.albumOrSongLiveData.get().subList(3, 6));
             } else {
                 //切换到新碟
-                mDiscoverViewModel.type.set(TYPE.ALBUM);
+                mDiscoverViewModel.type.set(TypeEnum.ALBUM);
                 mDiscoverViewModel.currentAlbumOrSongLiveData.set(mDiscoverViewModel.albumOrSongLiveData.get().subList(0, 3));
             }
         }
 
         public void clickAlbumOrSongDetail() {
             //新歌推荐 TODO
-            if (mDiscoverViewModel.type.get() == TYPE.SONG) {
+            if (mDiscoverViewModel.type.get() == TypeEnum.SONG) {
 
             } else {
                 //新碟上架

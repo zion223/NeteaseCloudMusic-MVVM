@@ -13,7 +13,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.netease.lib_common_ui.navigator.CommonNavigatorCreater;
 import com.kunminx.architecture.utils.Utils;
 import com.netease.music.R;
-import com.netease.music.data.config.CHANNEL;
+import com.netease.music.data.config.DiscoveryChannelEnum;
 import com.netease.music.ui.view.ScaleTransitionPagerTitleView;
 
 import net.lucode.hackware.magicindicator.MagicIndicator;
@@ -29,7 +29,7 @@ public class MagicIndicatorBindingAdapter {
 
     //主界面 初始化TabLayout
     @BindingAdapter(value = {"initHomeMagicIndicator"}, requireAll = false)
-    public static void bindHomeMagicIndocator(MagicIndicator magicIndicator, CHANNEL[] channels) {
+    public static void bindHomeMagicIndocator(MagicIndicator magicIndicator, DiscoveryChannelEnum[] channels) {
         magicIndicator.setBackgroundColor(Color.WHITE);
 
         View rootView = magicIndicator.getRootView();

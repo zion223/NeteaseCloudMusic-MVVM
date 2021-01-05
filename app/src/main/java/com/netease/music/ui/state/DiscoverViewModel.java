@@ -7,7 +7,7 @@ import com.kunminx.architecture.ui.adapter.SimpleDataBindingAdapter;
 import com.netease.lib_api.model.album.AlbumOrSongBean;
 import com.netease.lib_api.model.banner.BannerBean;
 import com.netease.lib_api.model.playlist.MainRecommendPlayListBean;
-import com.netease.music.data.config.TYPE;
+import com.netease.music.data.config.TypeEnum;
 import com.netease.music.databinding.ItemDiscoverGedanBinding;
 import com.netease.music.domain.request.DiscoverRequest;
 
@@ -30,13 +30,13 @@ public class DiscoverViewModel extends ViewModel {
     public final ObservableField<List<AlbumOrSongBean>> currentAlbumOrSongLiveData = new ObservableField<>();
 
     //当前选中的是新歌还是新碟
-    public final ObservableField<TYPE> type = new ObservableField<>();
+    public final ObservableField<TypeEnum> type = new ObservableField<>();
 
     //数据访问
     public DiscoverRequest discoverRequest = new DiscoverRequest();
 
     {
         //默认初始选中的是专辑
-        type.set(TYPE.ALBUM);
+        type.set(TypeEnum.ALBUM);
     }
 }

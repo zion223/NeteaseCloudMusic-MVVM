@@ -14,7 +14,7 @@ import com.kunminx.architecture.ui.page.BaseActivity;
 import com.kunminx.architecture.ui.page.DataBindingConfig;
 import com.netease.music.BR;
 import com.netease.music.R;
-import com.netease.music.data.config.TYPE;
+import com.netease.music.data.config.TypeEnum;
 import com.netease.music.ui.page.discover.square.detail.SongListDetailActivity;
 import com.netease.music.ui.state.NewAlbumViewModel;
 
@@ -41,7 +41,7 @@ public class NewAlbumActivity extends BaseActivity {
         NewAlbumAdapter newAlbumAdapter = new NewAlbumAdapter(null);
         newAlbumAdapter.setOnItemClickListener((adapter, view, position) -> {
             AlbumSearchBean.ResultBean.AlbumsBean entity = (AlbumSearchBean.ResultBean.AlbumsBean) adapter.getItem(position);
-            SongListDetailActivity.startActivity(NewAlbumActivity.this, TYPE.ALBUM_ID, entity.getId(), "");
+            SongListDetailActivity.startActivity(NewAlbumActivity.this, TypeEnum.ALBUM_ID, entity.getId(), "");
         });
         mViewModel.request.getAlbumLiveData().observe(this, album -> {
             newAlbumAdapter.addData(album.getAlbums());

@@ -19,7 +19,7 @@ import com.netease.lib_image_loader.app.ImageLoaderManager;
 import com.netease.lib_network.ApiEngine;
 import com.lxj.xpopup.XPopup;
 import com.netease.music.R;
-import com.netease.music.data.config.TYPE;
+import com.netease.music.data.config.TypeEnum;
 import com.netease.music.ui.page.discover.square.detail.SongListDetailActivity;
 
 import org.jetbrains.annotations.NotNull;
@@ -70,7 +70,7 @@ public class MultiplePlaylistAdapter extends BaseNodeAdapter {
             Object item = adapter.getItem(position);
             if (item instanceof UserPlayListHeader.UserPlayListContext) {
                 UserPlayListHeader.UserPlayListContext entity = (UserPlayListHeader.UserPlayListContext) item;
-                SongListDetailActivity.startActivity(context, TYPE.PLAYLIST_ID, entity.getPlaylist().getId(), "");
+                SongListDetailActivity.startActivity(context, TypeEnum.PLAYLIST_ID, entity.getPlaylist().getId(), "");
             }
         });
     }

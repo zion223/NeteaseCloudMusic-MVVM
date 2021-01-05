@@ -1,6 +1,6 @@
 package com.netease.music.data.config;
 
-public enum TYPE {
+public enum TypeEnum {
 
 
     SONG("歌曲", 0x00),
@@ -24,7 +24,7 @@ public enum TYPE {
     private final String key;
     private final int value;
 
-    TYPE(String key, int value) {
+    TypeEnum(String key, int value) {
         this.key = key;
         this.value = value;
     }
@@ -38,7 +38,7 @@ public enum TYPE {
     }
 
 
-    public static TYPE getTypeByID(int id) {
+    public static TypeEnum getTypeByID(int id) {
         switch (id) {
             case PLAYLIST_ID:
                 return PLAYLIST;

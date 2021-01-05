@@ -10,7 +10,7 @@ import com.kunminx.architecture.ui.page.BaseActivity;
 import com.kunminx.architecture.ui.page.DataBindingConfig;
 import com.netease.music.BR;
 import com.netease.music.R;
-import com.netease.music.data.config.TYPE;
+import com.netease.music.data.config.TypeEnum;
 import com.netease.music.ui.page.adapter.MultipleSectionGedanCommentAdapter;
 import com.netease.music.ui.state.MvDetailViewModel;
 
@@ -59,7 +59,7 @@ public class MvDetailActivity extends BaseActivity {
 
             mMvDetailViewModel.request.getMvCommentLiveData().observe(this, commentBean -> {
 
-                mMvDetailViewModel.commentAdapter.set(new MultipleSectionGedanCommentAdapter(mvId, TYPE.MV_ID, MvDetailActivity.this, commentBean));
+                mMvDetailViewModel.commentAdapter.set(new MultipleSectionGedanCommentAdapter(mvId, TypeEnum.MV_ID, MvDetailActivity.this, commentBean));
 
                 mMvDetailViewModel.loadingVisible.set(false);
             });

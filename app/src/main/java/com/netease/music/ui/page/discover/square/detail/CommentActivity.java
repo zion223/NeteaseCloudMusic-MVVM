@@ -15,7 +15,7 @@ import com.kunminx.architecture.ui.page.BaseActivity;
 import com.kunminx.architecture.ui.page.DataBindingConfig;
 import com.netease.music.BR;
 import com.netease.music.R;
-import com.netease.music.data.config.TYPE;
+import com.netease.music.data.config.TypeEnum;
 import com.netease.music.ui.page.adapter.MultipleSectionGedanCommentAdapter;
 import com.netease.music.ui.state.CommentViewModel;
 
@@ -60,12 +60,12 @@ public class CommentActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         Bundle data = getIntent().getBundleExtra("data");
         if (data != null) {
-            mCommentViewModel.type.set(TYPE.getTypeByID(data.getInt(TYPE_ID)));
+            mCommentViewModel.type.set(TypeEnum.getTypeByID(data.getInt(TYPE_ID)));
             mCommentViewModel.listId.set(data.getString(LIST_ID));
             mCommentViewModel.imgUrl.set(data.getString(IMG_ID));
             mCommentViewModel.titile.set(data.getString(TOP_TEXT_ID));
             String creator = data.getString(BOTTOM_TEXT_ID);
-            if (mCommentViewModel.type.get() == TYPE.PLAYLIST) {
+            if (mCommentViewModel.type.get() == TypeEnum.PLAYLIST) {
                 //歌单显示by xxx
                 String creatorIndex = "by " + creator;
                 SpannableString msp = new SpannableString(creatorIndex);

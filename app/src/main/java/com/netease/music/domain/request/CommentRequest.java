@@ -7,7 +7,7 @@ import com.netease.lib_api.model.playlist.PlayListCommentEntity;
 import com.netease.lib_api.model.song.PlayListCommentBean;
 import com.netease.lib_network.ApiEngine;
 import com.kunminx.architecture.domain.request.BaseRequest;
-import com.netease.music.data.config.TYPE;
+import com.netease.music.data.config.TypeEnum;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +39,7 @@ public class CommentRequest extends BaseRequest {
         return mCommentSizeLiveData;
     }
 
-    public void requestCommentData(TYPE type, String id) {
+    public void requestCommentData(TypeEnum type, String id) {
 
         Observable<PlayListCommentBean> commentObservable = null;
 

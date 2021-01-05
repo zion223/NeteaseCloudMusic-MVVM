@@ -16,7 +16,7 @@ import com.kunminx.architecture.ui.page.DataBindingConfig;
 import com.netease.lib_audio.app.AudioHelper;
 import com.netease.music.BR;
 import com.netease.music.R;
-import com.netease.music.data.config.TYPE;
+import com.netease.music.data.config.TypeEnum;
 import com.netease.music.ui.page.adapter.PlayMusicListAdapter;
 import com.netease.music.ui.page.discover.user.UserDetailActivity;
 import com.netease.music.ui.state.SonglistDeatilViewModel;
@@ -145,13 +145,13 @@ public class SongListDetailActivity extends BaseActivity {
         });
 
         if (data != null) {
-            mViewModel.type.set(TYPE.getTypeByID(data.getInt(TYPEID)));
+            mViewModel.type.set(TypeEnum.getTypeByID(data.getInt(TYPEID)));
             mViewModel.reason.set(data.getString(REASON));
             mViewModel.listId.set(data.getLong(LISTID));
-            if (TYPE.getTypeByID(data.getInt(TYPEID)) == TYPE.PLAYLIST) {
+            if (TypeEnum.getTypeByID(data.getInt(TYPEID)) == TypeEnum.PLAYLIST) {
                 //请求歌单相关数据
                 mViewModel.songListRequest.requestPlayListMusicLiveData(mViewModel.listId.get());
-            } else if (TYPE.getTypeByID(data.getInt(TYPEID)) == TYPE.ALBUM) {
+            } else if (TypeEnum.getTypeByID(data.getInt(TYPEID)) == TypeEnum.ALBUM) {
                 //请求专辑相关数据
                 mViewModel.songListRequest.requestAlbumLiveData(mViewModel.listId.get());
             } else {
@@ -178,7 +178,7 @@ public class SongListDetailActivity extends BaseActivity {
 
         //查看用户详情或者歌手详情
         public void userInfo() {
-            if (mViewModel.type.get() == TYPE.PLAYLIST) {
+            if (mViewModel.type.get() == TypeEnum.PLAYLIST) {
                 //查看用户
                 UserDetailActivity.startActivity(SongListDetailActivity.this, mViewModel.creatorId.get());
             } else {

@@ -12,7 +12,7 @@
             name="proxy"
             type="com.netease.music.ui.page.discover.square.detail.SongListDetailActivity.ClickProxy" />
 
-        <import type="com.netease.music.data.config.TYPE" />
+        <import type="com.netease.music.data.config.TypeEnum" />
 
         <import type="com.netease.music.util.SearchUtil" />
     </data>
@@ -75,7 +75,7 @@
 
                             <ImageView
                                 android:id="@+id/iv_gedan_detail_album_tag"
-                                visible="@{vm.type == TYPE.ALBUM}"
+                                visible="@{vm.type == TypeEnum.ALBUM}"
                                 android:layout_width="125dp"
                                 android:layout_height="30dp"
                                 android:layout_marginLeft="10dp"
@@ -91,7 +91,7 @@
 
                             <ImageView
                                 android:id="@+id/iv_gedan_detail_playnum"
-                                visible="@{vm.type == TYPE.PLAYLIST}"
+                                visible="@{vm.type == TypeEnum.PLAYLIST}"
                                 android:layout_width="13dp"
                                 android:layout_height="13dp"
                                 android:layout_alignTop="@+id/iv_gedan_detail_img"
@@ -102,7 +102,7 @@
 
                             <TextView
                                 android:id="@+id/tv_gedan_detail_playnum"
-                                visible="@{vm.type == TYPE.PLAYLIST}"
+                                visible="@{vm.type == TypeEnum.PLAYLIST}"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignTop="@+id/iv_gedan_detail_img"
@@ -140,7 +140,7 @@
                                     android:layout_height="25dp"
                                     onClickWithDebouncing="@{() -> proxy.userInfo()}"
                                     circleImageUrl="@{vm.creatorImgUrl}"
-                                    visible="@{vm.type == TYPE.PLAYLIST}"
+                                    visible="@{vm.type == TypeEnum.PLAYLIST}"
                                     android:layout_marginRight="10dp" />
 
                                 <TextView
@@ -148,7 +148,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_vertical"
-                                    android:text='@{vm.type == TYPE.ALBUM? "歌手: " + vm.creator : vm.creator}'
+                                    android:text='@{vm.type == TypeEnum.ALBUM? "歌手: " + vm.creator : vm.creator}'
                                     android:textColor="@color/white"
                                     onClickWithDebouncing="@{() -> proxy.userInfo()}"
                                     android:textSize="12sp" />

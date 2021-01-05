@@ -4,17 +4,16 @@ package com.netease.music.ui.state;
 import androidx.databinding.ObservableBoolean;
 import androidx.databinding.ObservableField;
 import androidx.databinding.ObservableInt;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.netease.music.data.config.TYPE;
+import com.netease.music.data.config.TypeEnum;
 import com.netease.music.domain.request.SongListDetailRequest;
 import com.netease.music.ui.state.load.BaseLoadingViewModel;
 
 public class SonglistDeatilViewModel extends BaseLoadingViewModel {
 
     //当前类型 是 专辑 或者 歌单
-    public final ObservableField<TYPE> type = new ObservableField<>();
+    public final ObservableField<TypeEnum> type = new ObservableField<>();
 
     //推荐原因  可以为空
     public final ObservableField<String> reason = new ObservableField<>();

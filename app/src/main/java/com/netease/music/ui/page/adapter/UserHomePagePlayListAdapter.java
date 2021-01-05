@@ -9,7 +9,7 @@ import com.netease.lib_api.model.user.UserPlaylistBean;
 import com.netease.lib_api.model.user.UserPlaylistEntity;
 import com.netease.lib_image_loader.app.ImageLoaderManager;
 import com.netease.music.R;
-import com.netease.music.data.config.TYPE;
+import com.netease.music.data.config.TypeEnum;
 import com.netease.music.ui.page.discover.square.detail.SongListDetailActivity;
 import com.netease.music.util.SearchUtil;
 
@@ -34,7 +34,7 @@ public class UserHomePagePlayListAdapter extends BaseMultiItemQuickAdapter<UserP
                     break;
                 case UserPlaylistEntity.TYPE_CONTENT:
                     //查看歌单详情
-                    SongListDetailActivity.startActivity(context, TYPE.PLAYLIST_ID, entity.getPlaylistBean().getId(), "");
+                    SongListDetailActivity.startActivity(context, TypeEnum.PLAYLIST_ID, entity.getPlaylistBean().getId(), "");
                     break;
                 case UserPlaylistEntity.TYPE_FOOTER:
                     //查看更多歌单 TODO

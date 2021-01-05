@@ -43,7 +43,7 @@ import com.netease.lib_common_ui.lrc.LrcView;
 import com.netease.lib_common_ui.utils.SharePreferenceUtil;
 import com.netease.lib_network.ApiEngine;
 import com.netease.music.R;
-import com.netease.music.data.config.TYPE;
+import com.netease.music.data.config.TypeEnum;
 import com.netease.music.ui.page.discover.square.detail.CommentActivity;
 import com.netease.music.util.TimeUtil;
 
@@ -178,7 +178,7 @@ public class MusicPlayerActivity extends AppCompatActivity {
         mNeddleiew.bringToFront();
         //评论
         mCommectView = findViewById(R.id.iv_comment);
-        mCommectView.setOnClickListener(v -> CommentActivity.startActivity(MusicPlayerActivity.this, mAudioBean.getId(), TYPE.SONG_ID, mAudioBean.getAlbumPic(), mAudioBean.getAuthor(), mAudioBean.getName()));
+        mCommectView.setOnClickListener(v -> CommentActivity.startActivity(MusicPlayerActivity.this, mAudioBean.getId(), TypeEnum.SONG_ID, mAudioBean.getAlbumPic(), mAudioBean.getAuthor(), mAudioBean.getName()));
         //喜欢音乐
         mFavouriteView = findViewById(R.id.favourite_view);
         //设置喜欢标志为 默认为false

@@ -5,7 +5,7 @@ import androidx.databinding.ObservableField;
 import androidx.databinding.ObservableInt;
 import androidx.lifecycle.ViewModel;
 
-import com.netease.music.data.config.CHANNEL;
+import com.netease.music.data.config.DiscoveryChannelEnum;
 
 public class MainViewModel extends ViewModel {
 
@@ -13,7 +13,7 @@ public class MainViewModel extends ViewModel {
 
 
     //头部数据
-    public final ObservableField<CHANNEL[]> channelArray = new ObservableField<>();
+    public final ObservableField<DiscoveryChannelEnum[]> channelArray = new ObservableField<>();
     //offsetLimt
     public final ObservableInt limit = new ObservableInt();
     //当前页为发现页
@@ -23,7 +23,7 @@ public class MainViewModel extends ViewModel {
         limit.set(1);
         currentItem.set(1);
         initTabAndPage.set(true);
-        channelArray.set(new CHANNEL[]{CHANNEL.MY, CHANNEL.DISCORY, CHANNEL.YUNCUN, CHANNEL.VIDEO});
+        channelArray.set(new DiscoveryChannelEnum[]{DiscoveryChannelEnum.MY, DiscoveryChannelEnum.DISCORY, DiscoveryChannelEnum.YUNCUN, DiscoveryChannelEnum.VIDEO});
     }
 
 }

@@ -14,7 +14,7 @@ import com.kunminx.architecture.ui.page.BaseActivity;
 import com.kunminx.architecture.ui.page.DataBindingConfig;
 import com.netease.music.BR;
 import com.netease.music.R;
-import com.netease.music.data.config.TYPE;
+import com.netease.music.data.config.TypeEnum;
 import com.netease.music.ui.page.adapter.UserHomePagePlayListAdapter;
 import com.netease.music.ui.page.cloud.EventAdapter;
 import com.netease.music.ui.page.discover.square.detail.SongListDetailActivity;
@@ -104,7 +104,7 @@ public class UserDetailActivity extends BaseActivity {
 
         //查看用户喜欢的歌单
         public void userLikePlaylist() {
-            SongListDetailActivity.startActivity(UserDetailActivity.this, TYPE.PLAYLIST_ID, mUserDetailViewModel.likePlayList.get().getId(), "");
+            SongListDetailActivity.startActivity(UserDetailActivity.this, TypeEnum.PLAYLIST_ID, mUserDetailViewModel.likePlayList.get().getId(), "");
         }
     }
 }

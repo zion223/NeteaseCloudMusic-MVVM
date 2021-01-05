@@ -11,10 +11,9 @@ import com.netease.lib_api.model.search.AlbumSearchBean;
 import com.netease.lib_api.model.search.TopAlbumBean;
 import com.netease.lib_api.model.song.DailyRecommendSongsBean;
 import com.netease.lib_api.model.song.NewSongBean;
-import com.netease.lib_api.model.song.SongDetailBean;
 import com.netease.lib_network.ApiEngine;
 import com.kunminx.architecture.domain.request.BaseRequest;
-import com.netease.music.data.config.TYPE;
+import com.netease.music.data.config.TypeEnum;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -136,7 +135,7 @@ public class DiscoverRequest extends BaseRequest {
                     String albumName = albums.get(i).getName();
                     String picUrl = albums.get(i).getPicUrl();
                     long id = albums.get(i).getId();
-                    data.add(new AlbumOrSongBean(String.valueOf(id), TYPE.ALBUM_ID, picUrl, albumName, artistName));
+                    data.add(new AlbumOrSongBean(String.valueOf(id), TypeEnum.ALBUM_ID, picUrl, albumName, artistName));
                 }
             }
             final List<DailyRecommendBean.RecommendBean> song = newSongBean.getData();
@@ -146,7 +145,7 @@ public class DiscoverRequest extends BaseRequest {
                     String albumName = song.get(i).getName();
                     String picUrl = song.get(i).getAlbum().getPicUrl();
                     long id = song.get(i).getId();
-                    data.add(new AlbumOrSongBean(String.valueOf(id), TYPE.SONG_ID, picUrl, albumName, artistName));
+                    data.add(new AlbumOrSongBean(String.valueOf(id), TypeEnum.SONG_ID, picUrl, albumName, artistName));
                 }
             }
             return data;

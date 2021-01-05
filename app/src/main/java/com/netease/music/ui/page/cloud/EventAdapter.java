@@ -23,7 +23,7 @@ import com.netease.lib_network.ApiEngine;
 import com.netease.lib_video.videoplayer.CustomJzVideoView;
 import com.netease.lib_audio.app.AudioHelper;
 import com.netease.music.R;
-import com.netease.music.data.config.TYPE;
+import com.netease.music.data.config.TypeEnum;
 import com.netease.music.ui.page.discover.square.detail.SongListDetailActivity;
 import com.netease.music.ui.page.discover.user.UserDetailActivity;
 import com.netease.music.util.TimeUtil;
@@ -65,10 +65,10 @@ public class EventAdapter extends BaseQuickAdapter<UserEventBean.EventsBean, Bas
                         AudioHelper.addAudio((AudioBean.convertSongToAudioBean(item)));
                     } else if (jsonBean.getAlbum() != null) {
                         //查看专辑
-                        SongListDetailActivity.startActivity(context, TYPE.ALBUM_ID, jsonBean.getAlbum().getId(), "");
+                        SongListDetailActivity.startActivity(context, TypeEnum.ALBUM_ID, jsonBean.getAlbum().getId(), "");
                     } else if (jsonBean.getPlaylist() != null) {
                         //查看歌单
-                        SongListDetailActivity.startActivity(context, TYPE.PLAYLIST_ID, jsonBean.getPlaylist().getId(), "");
+                        SongListDetailActivity.startActivity(context, TypeEnum.PLAYLIST_ID, jsonBean.getPlaylist().getId(), "");
                     }
                     break;
                 case R.id.iv_like:
@@ -77,7 +77,7 @@ public class EventAdapter extends BaseQuickAdapter<UserEventBean.EventsBean, Bas
                     TextView countTextview = (TextView) adapter.getViewByPosition(position, R.id.tv_like_count);
                     Boolean parise = (Boolean) likeView.getTag();
                     Disposable subscribe = ApiEngine.getInstance().getApiService()
-                            .likeEventResource(event.getInfo().getThreadId(), !parise ? 1 : 2, TYPE.EVENT_ID)
+                            .likeEventResource(event.getInfo().getThreadId(), !parise ? 1 : 2, TypeEnum.EVENT_ID)
                             .subscribeOn(Schedulers.io())
                             .observeOn(AndroidSchedulers.mainThread())
                             .subscribe(commentLikeBean -> {

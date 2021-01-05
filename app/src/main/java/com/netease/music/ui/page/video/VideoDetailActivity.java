@@ -10,7 +10,7 @@ import com.kunminx.architecture.ui.page.BaseActivity;
 import com.kunminx.architecture.ui.page.DataBindingConfig;
 import com.netease.music.BR;
 import com.netease.music.R;
-import com.netease.music.data.config.TYPE;
+import com.netease.music.data.config.TypeEnum;
 import com.netease.music.ui.page.adapter.MultipleSectionGedanCommentAdapter;
 import com.netease.music.ui.state.VideoDetailViewModel;
 
@@ -62,7 +62,7 @@ public class VideoDetailActivity extends BaseActivity {
             //视频评论 无法禁止滑动 TODO
             mViewModel.request.getVideoCommentLiveData().observe(this, commentBean -> {
 
-                mViewModel.commentAdapter.set(new MultipleSectionGedanCommentAdapter(videoId, TYPE.VIDEO_ID, VideoDetailActivity.this, commentBean));
+                mViewModel.commentAdapter.set(new MultipleSectionGedanCommentAdapter(videoId, TypeEnum.VIDEO_ID, VideoDetailActivity.this, commentBean));
 
                 mViewModel.loadingVisible.set(false);
             });

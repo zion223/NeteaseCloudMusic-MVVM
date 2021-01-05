@@ -1,6 +1,6 @@
 package com.netease.music.data.config;
 
-public enum CHANNEL {
+public enum DiscoveryChannelEnum {
 
 	MY("我的", 0x01),
 	DISCORY("发现", 0x02),
@@ -17,7 +17,7 @@ public enum CHANNEL {
 	private final String key;
 	private final int value;
 
-	CHANNEL(String key, int value) {
+	DiscoveryChannelEnum(String key, int value) {
 		this.key = key;
 		this.value = value;
 	}
