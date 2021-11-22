@@ -9,4 +9,5 @@
     <string name="function_not_completed">此功能暂时无实现</string>
     <string name="op_failed">操作失败</string>
     <string name="check_network">当前网络不可用，请检查你的网络设置</string>
+    <string name="agree_rule">请点击同意《用户协议》和《隐私政策》《儿童隐私政策》</string>
 </resources>

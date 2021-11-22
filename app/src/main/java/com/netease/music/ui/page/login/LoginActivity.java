@@ -1,7 +1,7 @@
 package com.netease.music.ui.page.login;
 
 import android.content.Intent;
-import android.widget.Toast;
+import android.view.View;
 
 import com.kunminx.architecture.ui.page.BaseActivity;
 import com.kunminx.architecture.ui.page.DataBindingConfig;
@@ -9,6 +9,7 @@ import com.kunminx.architecture.utils.NetworkUtils;
 import com.netease.music.BR;
 import com.netease.music.R;
 import com.netease.music.ui.state.LoginViewModel;
+import com.netease.music.util.AnimUtil;
 
 public class LoginActivity extends BaseActivity {
 
@@ -31,13 +32,15 @@ public class LoginActivity extends BaseActivity {
         public void phoneLogin() {
             if (mLoginViewModel.argeeRule.get()) {
                 if (!NetworkUtils.isConnected()) {
-                    Toast.makeText(getBaseContext(), getBaseContext().getString(R.string.check_network), Toast.LENGTH_SHORT).show();
+                    showShortToast(getBaseContext().getString(R.string.check_network));
                     return;
                 }
                 startActivity(new Intent(LoginActivity.this, PhoneLoginActivity.class));
             } else {
+                View viewById = getBinding().getRoot().findViewById(R.id.ll_agree_rule);
+                viewById.startAnimation(AnimUtil.shakeAnimation());
                 //提示用户点击同意条款
-                showShortToast("请点击同意《用户协议》和《隐私政策》《儿童隐私政策》");
+                showShortToast(R.string.agree_rule);
             }
         }
 
@@ -53,4 +56,6 @@ public class LoginActivity extends BaseActivity {
     public void onBackPressed() {
         finish();
     }
+
+
 }

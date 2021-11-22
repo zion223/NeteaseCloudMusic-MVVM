@@ -43,7 +43,7 @@
         </RelativeLayout>
 
         <TextView
-            android:id="@+id/login_phone"
+            android:id="@+id/tv_login_phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
@@ -60,7 +60,7 @@
             android:textSize="15sp" />
 
         <TextView
-            android:id="@+id/login_experience"
+            android:id="@+id/tv_login_experience"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
@@ -76,30 +76,38 @@
             android:textColor="@android:color/white"
             android:textSize="15sp" />
 
-        <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toLeftOf="@+id/tv_rule"
-            android:layout_alignBaseline="@+id/tv_rule"
-            android:buttonTint="#cdffffff"
-            android:scaleX="0.65"
-            android:scaleY="0.65"
-            android:paddingBottom="3dp"
-            android:paddingRight="-3dp"
-            android:checked="@={vm.argeeRule}" />
 
-        <TextView
-            android:id="@+id/tv_rule"
+        <LinearLayout
+            android:id="@+id/ll_agree_rule"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="20dp"
-            android:paddingTop="1dp"
-            android:paddingBottom="1dp"
-            android:gravity="center"
-            android:text="同意《用户协议》和《隐私政策》《儿童隐私政策》"
-            android:textColor="@android:color/white"
-            android:textSize="11sp" />
+            android:layout_centerHorizontal="true">
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="#cdffffff"
+                android:scaleX="0.63"
+                android:scaleY="0.63"
+                android:paddingBottom="3dp"
+                android:paddingRight="-3dp"
+                android:checked="@={vm.argeeRule}" />
+
+            <TextView
+                android:id="@+id/tv_rule"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:paddingTop="1dp"
+                android:paddingBottom="1dp"
+                android:gravity="center"
+                android:text="同意《用户协议》和《隐私政策》《儿童隐私政策》"
+                android:textColor="@android:color/white"
+                android:textSize="11sp" />
+
+        </LinearLayout>
+
+
     </RelativeLayout>
 </layout>
