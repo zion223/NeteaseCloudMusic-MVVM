@@ -55,7 +55,7 @@
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
             onClickWithDebouncing="@{() -> click.phoneLogin()}"
-            android:text="手机号登陆"
+            android:text="手机号登录"
             android:textColor="@android:color/holo_red_light"
             android:textSize="15sp" />
 
@@ -80,10 +80,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toLeftOf="@+id/tv_rule"
-            android:layout_alignTop="@+id/tv_rule"
-            android:layout_alignBottom="@+id/tv_rule"
-            android:buttonTint="@color/white"
-            android:layout_margin="1dp"
+            android:layout_alignBaseline="@+id/tv_rule"
+            android:buttonTint="#cdffffff"
+            android:scaleX="0.65"
+            android:scaleY="0.65"
+            android:paddingBottom="3dp"
+            android:paddingRight="-3dp"
             android:checked="@={vm.argeeRule}" />
 
         <TextView
@@ -98,6 +100,6 @@
             android:gravity="center"
             android:text="同意《用户协议》和《隐私政策》《儿童隐私政策》"
             android:textColor="@android:color/white"
-            android:textSize="12sp" />
+            android:textSize="11sp" />
     </RelativeLayout>
 </layout>
