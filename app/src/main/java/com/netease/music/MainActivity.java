@@ -15,6 +15,9 @@ import com.netease.music.ui.helper.DrawerCoordinateHelper;
 import com.netease.music.ui.state.MainActivityViewModel;
 
 
+/**
+ * @author Administrator
+ */
 public class MainActivity extends BaseActivity {
 
     private MainActivityViewModel mMainActivityViewModel;
@@ -63,7 +66,7 @@ public class MainActivity extends BaseActivity {
                     showShortToast("再按一次退出程序");
                     firstTime = System.currentTimeMillis();
                 } else {
-                    finish();
+                    exitApp();
                 }
             }
         });
@@ -71,7 +74,7 @@ public class MainActivity extends BaseActivity {
         // 观察是否需要立即 finish当前Activity
         mSharedViewModel.isToCloseActivityImmediately().observeInActivity(this, aBoolean -> {
             if (aBoolean) {
-                finish();
+                exitApp();
             }
         });
 

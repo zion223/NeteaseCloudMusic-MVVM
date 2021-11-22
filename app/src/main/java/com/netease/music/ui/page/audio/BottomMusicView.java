@@ -12,16 +12,16 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.netease.lib_api.model.song.AudioBean;
-import com.netease.lib_common_ui.utils.SharePreferenceUtil;
-import com.netease.lib_common_ui.widget.CircleProgressButton;
-import com.netease.lib_image_loader.app.ImageLoaderManager;
 import com.lxj.xpopup.XPopup;
+import com.netease.lib_api.model.song.AudioBean;
 import com.netease.lib_audio.mediaplayer.core.AudioController;
 import com.netease.lib_audio.mediaplayer.events.AudioLoadEvent;
 import com.netease.lib_audio.mediaplayer.events.AudioPauseEvent;
 import com.netease.lib_audio.mediaplayer.events.AudioProgressEvent;
 import com.netease.lib_audio.mediaplayer.events.AudioStartEvent;
+import com.netease.lib_common_ui.utils.SharePreferenceUtil;
+import com.netease.lib_common_ui.widget.CircleProgressButton;
+import com.netease.lib_image_loader.app.ImageLoaderManager;
 import com.netease.music.R;
 
 import org.greenrobot.eventbus.EventBus;
@@ -34,7 +34,7 @@ import org.greenrobot.eventbus.ThreadMode;
  */
 public class BottomMusicView extends RelativeLayout {
 
-    private Context mContext;
+    private final Context mContext;
 
     /*
      * View
@@ -73,6 +73,10 @@ public class BottomMusicView extends RelativeLayout {
 
     private void initView() {
         View rootView = LayoutInflater.from(mContext).inflate(R.layout.bottom_view, this);
+        // 当前没有歌曲 那么不展示底部的菜单栏
+        if (AudioController.getInstance().getNowPlaying() == null) {
+            setVisibility(GONE);
+        }
         rootView.setOnClickListener(v -> {
             //跳到音乐播放Activitity
             if (AudioController.getInstance().getNowPlaying() != null) {
@@ -144,6 +148,7 @@ public class BottomMusicView extends RelativeLayout {
     public void onAudioStartEvent(AudioStartEvent event) {
         //更新当前view为播放状态
         showPlayView();
+        setVisibility(VISIBLE);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

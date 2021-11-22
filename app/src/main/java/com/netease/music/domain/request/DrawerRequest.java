@@ -9,9 +9,10 @@ import com.kunminx.architecture.data.response.ResponseStatus;
 import com.kunminx.architecture.domain.request.BaseRequest;
 import com.netease.lib_api.model.notification.CommonMessageBean;
 import com.netease.lib_network.ApiEngine;
+import com.netease.lib_network.ExceptionHandle;
+import com.netease.lib_network.SimpleObserver;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 public class DrawerRequest extends BaseRequest {
@@ -24,13 +25,21 @@ public class DrawerRequest extends BaseRequest {
     }
 
     public void requestLoginOut() {
-        Disposable subscribe = ApiEngine.getInstance().getApiService().logout()
+        ApiEngine.getInstance().getApiService().logout()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(commonMessageBean -> {
-                    // 业务逻辑操作
-                    ResponseStatus responseStatus = new ResponseStatus(String.valueOf(commonMessageBean.getCode()), commonMessageBean.getCode() == 200);
-                    mLoginOutLiveData.postValue(new DataResult<>(commonMessageBean, responseStatus));
+                .subscribe(new SimpleObserver<CommonMessageBean>() {
+                    @Override
+                    protected void onSuccess(CommonMessageBean result) {
+                        // 业务逻辑操作
+                        ResponseStatus responseStatus = new ResponseStatus(String.valueOf(result.getCode()), result.getCode() == 200);
+                        mLoginOutLiveData.postValue(new DataResult<>(result, responseStatus));
+                    }
+
+                    @Override
+                    protected void onFailed(ExceptionHandle.ResponseThrowable errorMsg) {
+
+                    }
                 });
     }
 }

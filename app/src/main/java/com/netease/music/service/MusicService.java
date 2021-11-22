@@ -18,6 +18,7 @@ import com.netease.lib_audio.mediaplayer.events.AudioPauseEvent;
 import com.netease.lib_audio.mediaplayer.events.AudioReleaseEvent;
 import com.netease.lib_audio.mediaplayer.events.AudioStartEvent;
 import com.netease.music.ui.page.audio.NotificationHelper;
+import com.netease.music.util.AppCommonUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -34,9 +35,11 @@ public class MusicService extends Service implements NotificationHelper.Notifica
 	private NotificationReceiver mReceiver;
 
 	public static void startMusicService() {
-		Intent intent = new Intent(AudioHelper.getContext(), MusicService.class);
-		intent.setAction(ACTION_START);
-		AudioHelper.getContext().startService(intent);
+		if (!AppCommonUtils.isServiceRunning(MusicService.class.getName())) {
+			Intent intent = new Intent(AudioHelper.getContext(), MusicService.class);
+			intent.setAction(ACTION_START);
+			AudioHelper.getContext().startService(intent);
+		}
 	}
 
 	@Override

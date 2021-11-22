@@ -135,4 +135,12 @@ public abstract class BaseActivity extends DataBindingActivity {
     protected void showShortToast(int stringRes) {
         showShortToast(getApplicationContext().getString(stringRes));
     }
+
+
+    protected void exitApp() {
+        // 退出JVM,释放所占内存资源,0表示正常退出
+        System.exit(0);
+        // 从系统中kill掉应用程序
+        android.os.Process.killProcess(android.os.Process.myPid());
+    }
 }

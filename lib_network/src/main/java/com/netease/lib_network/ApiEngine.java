@@ -11,6 +11,10 @@ import com.netease.lib_network.interceptor.ResponseInterceptor;
 
 import java.util.concurrent.TimeUnit;
 
+import io.reactivex.ObservableTransformer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Function;
+import io.reactivex.schedulers.Schedulers;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -70,4 +74,17 @@ public class ApiEngine {
     public ApiService getApiService() {
         return retrofit.create(ApiService.class);
     }
+
+    public <T> ObservableTransformer<T, T> applySchedulers() {
+        return upstream ->
+                upstream.subscribeOn(Schedulers.io())
+                        .map(getAppErrorHandler())
+                        .onErrorResumeNext(new HttpErrorHandle<T>())
+                        .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    private <T> Function<T, T> getAppErrorHandler() {
+        return t -> t;
+    }
+
 }

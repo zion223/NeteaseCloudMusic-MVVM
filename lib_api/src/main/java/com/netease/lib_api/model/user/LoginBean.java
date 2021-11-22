@@ -42,6 +42,10 @@ public class LoginBean {
         return code;
     }
 
+    public boolean isSuccess() {
+        return code == 200;
+    }
+
     public void setCode(int code) {
         this.code = code;
     }

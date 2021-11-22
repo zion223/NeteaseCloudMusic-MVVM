@@ -6,13 +6,13 @@ import com.netease.lib_api.model.room.AppDatabase;
 import com.netease.lib_api.model.room.LatestDataDao;
 import com.netease.lib_api.model.song.AudioBean;
 import com.netease.lib_api.model.song.LatestAudioBean;
-import com.netease.lib_common_ui.utils.SharePreferenceUtil;
 import com.netease.lib_audio.app.AudioHelper;
 import com.netease.lib_audio.mediaplayer.events.AudioCompleteEvent;
 import com.netease.lib_audio.mediaplayer.events.AudioErrorEvent;
 import com.netease.lib_audio.mediaplayer.events.AudioPlayModeEvent;
 import com.netease.lib_audio.mediaplayer.events.AudioRemoveEvent;
 import com.netease.lib_audio.mediaplayer.exception.AudioQueueEmptyException;
+import com.netease.lib_common_ui.utils.SharePreferenceUtil;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -293,6 +293,8 @@ public class AudioController {
                 return getPlaying(mQueueIndex);
             case REPEAT:
                 return getPlaying(mQueueIndex);
+            default:
+                break;
         }
         throw new NullPointerException("cannot find Audio");
     }

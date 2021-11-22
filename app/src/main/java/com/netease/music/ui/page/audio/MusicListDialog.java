@@ -142,6 +142,8 @@ public class MusicListDialog extends BottomPopupView implements View.OnClickList
                 mTipView.setImageResource(R.mipmap.once);
                 mPlayModeView.setText("单曲循环");
                 break;
+            default:
+                break;
         }
     }
 

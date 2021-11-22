@@ -6,12 +6,12 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 
-import com.netease.lib_common_ui.utils.SharePreferenceUtil;
-import com.netease.lib_common_ui.utils.ValidateUtils;
-import com.netease.lib_common_ui.widget.CaptchaView;
 import com.kunminx.architecture.ui.page.BaseActivity;
 import com.kunminx.architecture.ui.page.DataBindingConfig;
 import com.kunminx.architecture.utils.Utils;
+import com.netease.lib_common_ui.utils.SharePreferenceUtil;
+import com.netease.lib_common_ui.utils.ValidateUtils;
+import com.netease.lib_common_ui.widget.CaptchaView;
 import com.netease.music.BR;
 import com.netease.music.MainActivity;
 import com.netease.music.R;
@@ -25,6 +25,11 @@ import io.reactivex.observers.ResourceObserver;
 import io.reactivex.schedulers.Schedulers;
 
 
+/**
+ * 手机登录页面
+ *
+ * @author Administrator
+ */
 public class PhoneLoginActivity extends BaseActivity {
 
 
@@ -55,7 +60,7 @@ public class PhoneLoginActivity extends BaseActivity {
 
         //观察登录或注册状态  成功后跳转到主界面
         mPhoneLoginViewModel.accountRequest.getLoginLiveData().observe(this, loginBean -> {
-            if (loginBean.getCode() == 200) {
+            if (loginBean.isSuccess()) {
                 //登陆成功
                 SharePreferenceUtil.getInstance(Utils.getApp()).saveUserInfo(loginBean, mPhoneLoginViewModel.phone.get());
                 startActivity(new Intent(PhoneLoginActivity.this, MainActivity.class));
@@ -99,6 +104,10 @@ public class PhoneLoginActivity extends BaseActivity {
                 //验证码发送失败 给予失败信息提示
                 showLongToast(message.getMessage());
             }
+        });
+
+        mPhoneLoginViewModel.accountRequest.getErrorLiveData().observe(this, errorMsg -> {
+            showShortToast(errorMsg.message + errorMsg.code);
         });
     }
 
@@ -159,6 +168,7 @@ public class PhoneLoginActivity extends BaseActivity {
             mPhoneLoginViewModel.showForgetPasswordView.set(true);
             mPhoneLoginViewModel.title.set("忘记密码");
             mPhoneLoginViewModel.passwordHint.set("请设置登录密码,8-20位字符,至少字母/数字/符号两种组合");
+            mPhoneLoginViewModel.password.set("");
         }
 
         //重新获取验证码  只有在倒计时结束 显示重新获取 后才可以点击此按钮
