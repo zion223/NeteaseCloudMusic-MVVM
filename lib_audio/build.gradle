@@ -1,20 +1,13 @@
 apply plugin: 'com.android.library'
 
-
-def pomName = this.getName()
-def pomVersionName = "1.0.0-SNAPSHOT"
-def pomDescription = "the audio library for all project"
-def versionString = '1.0'
-def versionNumber = 1
-
 android {
     compileSdkVersion rootProject.android.compileSdkVersion
 
     defaultConfig {
         minSdkVersion rootProject.android.minSdkVersion
         targetSdkVersion rootProject.android.targetSdkVersion
-        versionCode versionNumber
-        versionName versionString
+        versionCode rootProject.android.versionCode
+        versionName rootProject.android.versionName
     }
 
     buildTypes {

@@ -63,7 +63,7 @@ public class MainActivity extends BaseActivity {
 
             } else {
                 if (System.currentTimeMillis() - firstTime > 2000) {
-                    showShortToast("再按一次退出程序");
+                    showShortToast(R.string.exit_app_toast);
                     firstTime = System.currentTimeMillis();
                 } else {
                     exitApp();

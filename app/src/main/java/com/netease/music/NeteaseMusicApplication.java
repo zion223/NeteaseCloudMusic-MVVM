@@ -16,12 +16,15 @@
 
 package com.netease.music;
 
-import com.netease.lib_audio.app.AudioHelper;
 import com.kunminx.architecture.BaseApplication;
 import com.kunminx.architecture.utils.Utils;
+import com.netease.lib_audio.app.AudioHelper;
 import com.netease.music.service.MusicService;
 
-public class App extends BaseApplication {
+/**
+ * @author Administrator
+ */
+public class NeteaseMusicApplication extends BaseApplication {
 
     //TODO tip：可借助 Application 来管理一个应用级 的 SharedViewModel，
     // 实现全应用范围内的 生命周期安全 且 事件源可追溯的 视图控制器 事件通知。

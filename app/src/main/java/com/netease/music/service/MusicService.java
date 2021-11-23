@@ -30,7 +30,7 @@ public class MusicService extends Service implements NotificationHelper.Notifica
 
 
 	//actions
-	private static String ACTION_START = "ACTION_START";
+	private static final String ACTION_START = "ACTION_START";
 
 	private NotificationReceiver mReceiver;
 
@@ -38,7 +38,7 @@ public class MusicService extends Service implements NotificationHelper.Notifica
 		if (!AppCommonUtils.isServiceRunning(MusicService.class.getName())) {
 			Intent intent = new Intent(AudioHelper.getContext(), MusicService.class);
 			intent.setAction(ACTION_START);
-//			AudioHelper.getContext().startService(intent);
+			AudioHelper.getContext().startService(intent);
 		}
 	}
 
