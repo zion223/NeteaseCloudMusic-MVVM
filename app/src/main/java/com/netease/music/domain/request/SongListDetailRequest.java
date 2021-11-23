@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.kunminx.architecture.domain.request.BaseRequest;
 import com.netease.lib_api.model.album.AlbumDetailBean;
 import com.netease.lib_api.model.album.AlbumDynamicBean;
 import com.netease.lib_api.model.notification.CommonMessageBean;
@@ -12,15 +13,15 @@ import com.netease.lib_api.model.playlist.PlaylistDetailBean;
 import com.netease.lib_api.model.song.DailyRecommendSongsBean;
 import com.netease.lib_api.model.song.SongDetailBean;
 import com.netease.lib_network.ApiEngine;
-import com.kunminx.architecture.domain.request.BaseRequest;
+import com.netease.lib_network.ExceptionHandle;
+import com.netease.lib_network.SimpleObserver;
 import com.netease.music.data.config.TypeEnum;
 
 import java.util.List;
 
-import io.reactivex.Observable;
-import io.reactivex.ObservableSource;
-import io.reactivex.Observer;
+import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
@@ -71,11 +72,10 @@ public class SongListDetailRequest extends BaseRequest {
     public void requestPlayListMusicLiveData(long id) {
         //先请求歌单数据 在请求歌单的歌曲
         ApiEngine.getInstance().getApiService().getPlaylistDetail(id)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnNext(playlistDetailBean -> mPlayListLiveData.postValue(playlistDetailBean))
+                .compose(ApiEngine.getInstance().applySchedulers())
+                .doAfterSuccess(playlistDetailBean -> mPlayListLiveData.postValue(playlistDetailBean))
                 .observeOn(Schedulers.io())
-                .flatMap((Function<PlaylistDetailBean, ObservableSource<SongDetailBean>>) playlistDetailBean -> {
+                .flatMap((Function<PlaylistDetailBean, Single<SongDetailBean>>) playlistDetailBean -> {
                     List<PlaylistDetailBean.PlaylistBean.TrackIdsBean> trackIds = playlistDetailBean.getPlaylist().getTrackIds();
                     int ids = trackIds.size();
                     if (ids > 80) {
@@ -102,9 +102,9 @@ public class SongListDetailRequest extends BaseRequest {
 
     //请求专辑的数据  专辑详情和专辑动态
     public void requestAlbumLiveData(long id) {
-        Observable<AlbumDetailBean> albumDetailObservable = ApiEngine.getInstance().getApiService().getAlbumDetail(id).subscribeOn(Schedulers.io());
-        Observable<AlbumDynamicBean> albumDynamicObservable = ApiEngine.getInstance().getApiService().getAlbumDynamic(id).subscribeOn(Schedulers.io());
-        Disposable subscribe = Observable.zip(albumDetailObservable, albumDynamicObservable, (albumDetailBean, albumDynamicBean) -> {
+        Single<AlbumDetailBean> albumDetailObservable = ApiEngine.getInstance().getApiService().getAlbumDetail(id).subscribeOn(Schedulers.io());
+        Single<AlbumDynamicBean> albumDynamicObservable = ApiEngine.getInstance().getApiService().getAlbumDynamic(id).subscribeOn(Schedulers.io());
+        Disposable subscribe = Single.zip(albumDetailObservable, albumDynamicObservable, (albumDetailBean, albumDynamicBean) -> {
             //转换数据
             albumDetailBean.setCommentCount(albumDynamicBean.getCommentCount());
             albumDetailBean.setShareCount(albumDynamicBean.getShareCount());
@@ -123,7 +123,7 @@ public class SongListDetailRequest extends BaseRequest {
 
     //改变对专辑或歌单的收藏或者取消收藏
     public void requestChangeSubscribeListStatus(TypeEnum type, boolean isCollected, long id) {
-        Observable<CommonMessageBean> changeObservable = null;
+        Single<CommonMessageBean> changeObservable = null;
         if (type.getValue() == TypeEnum.PLAYLIST_ID) {
             //收藏或取消收藏歌单
             changeObservable = ApiEngine.getInstance().getApiService().subscribePlayList(id, !isCollected ? 1 : 2);
@@ -131,32 +131,17 @@ public class SongListDetailRequest extends BaseRequest {
             //收藏或取消收藏专辑
             changeObservable = ApiEngine.getInstance().getApiService().subscribeAlbum(id, !isCollected ? 1 : 2);
         }
-        changeObservable.subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<CommonMessageBean>() {
+        changeObservable.compose(ApiEngine.getInstance().applySchedulers())
+                .subscribe(new SimpleObserver<CommonMessageBean>() {
                     @Override
-                    public void onSubscribe(Disposable d) {
-
+                    public void onSuccess(@NonNull CommonMessageBean commonMessageBean) {
+                        //操作成功
+                        mChangeSubStatusLiveData.setValue(commonMessageBean.getCode() == 200);
                     }
 
                     @Override
-                    public void onNext(CommonMessageBean commonMessageBean) {
-                        if (commonMessageBean.getCode() == 200) {
-                            //操作成功
-                            mChangeSubStatusLiveData.setValue(true);
-                        } else {
-                            mChangeSubStatusLiveData.setValue(false);
-                        }
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
+                    protected void onFailed(ExceptionHandle.ResponseThrowable errorMsg) {
                         mChangeSubStatusLiveData.setValue(false);
-                    }
-
-                    @Override
-                    public void onComplete() {
-
                     }
                 });
     }

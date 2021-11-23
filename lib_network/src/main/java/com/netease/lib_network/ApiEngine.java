@@ -11,7 +11,7 @@ import com.netease.lib_network.interceptor.ResponseInterceptor;
 
 import java.util.concurrent.TimeUnit;
 
-import io.reactivex.ObservableTransformer;
+import io.reactivex.SingleTransformer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
@@ -75,13 +75,14 @@ public class ApiEngine {
         return retrofit.create(ApiService.class);
     }
 
-    public <T> ObservableTransformer<T, T> applySchedulers() {
+    public <T> SingleTransformer<T, T> applySchedulers() {
         return upstream ->
                 upstream.subscribeOn(Schedulers.io())
                         .map(getAppErrorHandler())
                         .onErrorResumeNext(new HttpErrorHandle<T>())
                         .observeOn(AndroidSchedulers.mainThread());
     }
+
 
     private <T> Function<T, T> getAppErrorHandler() {
         return t -> t;

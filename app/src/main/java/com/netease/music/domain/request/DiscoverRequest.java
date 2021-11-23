@@ -3,6 +3,7 @@ package com.netease.music.domain.request;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.kunminx.architecture.domain.request.BaseRequest;
 import com.netease.lib_api.model.album.AlbumOrSongBean;
 import com.netease.lib_api.model.banner.BannerBean;
 import com.netease.lib_api.model.playlist.DailyRecommendBean;
@@ -12,15 +13,16 @@ import com.netease.lib_api.model.search.TopAlbumBean;
 import com.netease.lib_api.model.song.DailyRecommendSongsBean;
 import com.netease.lib_api.model.song.NewSongBean;
 import com.netease.lib_network.ApiEngine;
-import com.kunminx.architecture.domain.request.BaseRequest;
+import com.netease.lib_network.ExceptionHandle;
+import com.netease.lib_network.SimpleObserver;
 import com.netease.music.data.config.TypeEnum;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import io.reactivex.Observable;
-import io.reactivex.Observer;
+import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
@@ -66,26 +68,15 @@ public class DiscoverRequest extends BaseRequest {
 
     public void requestBannerData() {
         ApiEngine.getInstance().getApiService().getBanner("2")
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<BannerBean>() {
+                .compose(ApiEngine.getInstance().applySchedulers())
+                .subscribe(new SimpleObserver<BannerBean>() {
                     @Override
-                    public void onSubscribe(Disposable d) {
-
-                    }
-
-                    @Override
-                    public void onNext(BannerBean bannerBean) {
+                    public void onSuccess(@NonNull BannerBean bannerBean) {
                         mBannerLiveData.postValue(bannerBean);
                     }
 
                     @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
+                    protected void onFailed(ExceptionHandle.ResponseThrowable errorMsg) {
 
                     }
                 });
@@ -94,28 +85,17 @@ public class DiscoverRequest extends BaseRequest {
 
     public void requestRecommendPlaylistData() {
         ApiEngine.getInstance().getApiService().getRecommendPlayList()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<MainRecommendPlayListBean>() {
+                .compose(ApiEngine.getInstance().applySchedulers())
+                .subscribe(new SimpleObserver<MainRecommendPlayListBean>() {
                     @Override
-                    public void onSubscribe(Disposable d) {
-
-                    }
-
-                    @Override
-                    public void onNext(MainRecommendPlayListBean bannerBean) {
+                    public void onSuccess(@NonNull MainRecommendPlayListBean bannerBean) {
                         if (bannerBean.getCode() == 200 && bannerBean.getRecommend().size() >= 6) {
                             mRecommendPlayListLiveData.postValue(bannerBean.getRecommend().subList(0, 6));
                         }
                     }
 
                     @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
+                    protected void onFailed(ExceptionHandle.ResponseThrowable errorMsg) {
 
                     }
                 });
@@ -123,10 +103,10 @@ public class DiscoverRequest extends BaseRequest {
 
     public void requestAlbumAndSongData() {
         //新碟上架
-        Observable<TopAlbumBean> albumObservable = ApiEngine.getInstance().getApiService().getTopAlbum(3).subscribeOn(Schedulers.io());
+        Single<TopAlbumBean> albumObservable = ApiEngine.getInstance().getApiService().getTopAlbum(3).subscribeOn(Schedulers.io());
         //新歌速递
-        Observable<NewSongBean> newSongObservable = ApiEngine.getInstance().getApiService().getTopSong(0).subscribeOn(Schedulers.io());
-        Disposable subscribe = Observable.zip(albumObservable, newSongObservable, (resultBean, newSongBean) -> {
+        Single<NewSongBean> newSongObservable = ApiEngine.getInstance().getApiService().getTopSong(0).subscribeOn(Schedulers.io());
+        Disposable subscribe = Single.zip(albumObservable, newSongObservable, (resultBean, newSongBean) -> {
             final List<AlbumOrSongBean> data = new ArrayList<>();
             List<AlbumSearchBean.ResultBean.AlbumsBean> albums = resultBean.getWeekData();
             if (albums.size() >= 3) {
@@ -160,8 +140,7 @@ public class DiscoverRequest extends BaseRequest {
 
     public void requestSongDetailData(long id) {
         Disposable subscribe = ApiEngine.getInstance().getApiService().getSongDetail(String.valueOf(id))
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .compose(ApiEngine.getInstance().applySchedulers())
                 .subscribe(songDetailBean -> mSongDetailLiveData.postValue(songDetailBean.getSongs().get(0)));
     }
 }

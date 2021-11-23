@@ -2,18 +2,16 @@ package com.netease.music.domain.request;
 
 import androidx.lifecycle.MutableLiveData;
 
+import com.kunminx.architecture.domain.request.BaseRequest;
 import com.netease.lib_api.model.mv.MvBean;
 import com.netease.lib_api.model.mv.MvTopBean;
 import com.netease.lib_api.model.playlist.PlayListCommentEntity;
 import com.netease.lib_api.model.search.SingerSongSearchBean;
 import com.netease.lib_network.ApiEngine;
-import com.kunminx.architecture.domain.request.BaseRequest;
 
 import java.util.ArrayList;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
 
 public class MvRequest extends BaseRequest {
 
@@ -70,16 +68,14 @@ public class MvRequest extends BaseRequest {
     //请求MV详情
     public void requestMvDetail(String mvId) {
         Disposable requestMvDetail = ApiEngine.getInstance().getApiService().getMvDetail(mvId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .compose(ApiEngine.getInstance().applySchedulers())
                 .subscribe(mvDetail -> mMvDetailLiveData.postValue(mvDetail.getData()));
     }
 
     //请求MV评论
     public void requestMvComment(String mvId) {
         Disposable requestMvComment = ApiEngine.getInstance().getApiService().getMvComment(mvId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .compose(ApiEngine.getInstance().applySchedulers())
                 .subscribe(mvTopBean -> {
                     final ArrayList<PlayListCommentEntity> entities = new ArrayList<>();
                     if (mvTopBean.getHotComments().size() > 0) {
@@ -99,32 +95,28 @@ public class MvRequest extends BaseRequest {
     //请求歌手信息
     public void requestArtistInfo(String artisdId) {
         Disposable subscribe = ApiEngine.getInstance().getApiService().getSingerHotSong(artisdId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .compose(ApiEngine.getInstance().applySchedulers())
                 .subscribe(artistInfo -> mArtistInfoLiveData.postValue(artistInfo));
     }
 
     //请求MV排行榜
     public void requestMvTop() {
         Disposable subscribe = ApiEngine.getInstance().getApiService().getMvTop()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .compose(ApiEngine.getInstance().applySchedulers())
                 .subscribe(mvTopBean -> mvTopBeanLiveData.postValue(mvTopBean));
     }
 
     //请求全部MV
     public void requestAllMv(String area, String type, String order, int limit) {
         Disposable subscribe = ApiEngine.getInstance().getApiService().getAllMv(area, type, order, limit)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .compose(ApiEngine.getInstance().applySchedulers())
                 .subscribe(mvTopBean -> mAllMvLiveData.postValue(mvTopBean));
     }
 
     //给MV点赞
     public void requestLikeMv(String mvId, boolean like) {
         Disposable subscribe = ApiEngine.getInstance().getApiService().likeResource(mvId, like ? 1 : 0, 1)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .compose(ApiEngine.getInstance().applySchedulers())
                 .subscribe(commentLikeBean -> {
                     mChangeLikeStatusLiveData.setValue(commentLikeBean.getCode() == 200);
                 });

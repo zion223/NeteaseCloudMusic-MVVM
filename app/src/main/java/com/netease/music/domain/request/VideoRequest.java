@@ -2,6 +2,7 @@ package com.netease.music.domain.request;
 
 import androidx.lifecycle.MutableLiveData;
 
+import com.kunminx.architecture.domain.request.BaseRequest;
 import com.netease.lib_api.model.mv.VideoBean;
 import com.netease.lib_api.model.mv.VideoDetailBean;
 import com.netease.lib_api.model.mv.VideoGroupBean;
@@ -9,16 +10,15 @@ import com.netease.lib_api.model.mv.VideoRelatedBean;
 import com.netease.lib_api.model.mv.VideoUrlBean;
 import com.netease.lib_api.model.playlist.PlayListCommentEntity;
 import com.netease.lib_network.ApiEngine;
-import com.kunminx.architecture.domain.request.BaseRequest;
+import com.netease.lib_network.ExceptionHandle;
+import com.netease.lib_network.SimpleObserver;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import io.reactivex.Observable;
-import io.reactivex.Observer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.Single;
+import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
 
 public class VideoRequest extends BaseRequest {
 
@@ -109,16 +109,16 @@ public class VideoRequest extends BaseRequest {
 
     public void requestVideoGroup() {
         ApiEngine.getInstance().getApiService().getVideoGroup()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<VideoGroupBean>() {
+                .compose(ApiEngine.getInstance().applySchedulers())
+                .subscribe(new SimpleObserver<VideoGroupBean>() {
+
                     @Override
-                    public void onSubscribe(Disposable d) {
+                    protected void onFailed(ExceptionHandle.ResponseThrowable errorMsg) {
 
                     }
 
                     @Override
-                    public void onNext(VideoGroupBean videoGroupBean) {
+                    public void onSuccess(@NonNull VideoGroupBean videoGroupBean) {
                         final List<VideoGroupBean.Data> data = videoGroupBean.getData();
 
                         // 根据ID查询视频 name为标题 tab数量最多为20个
@@ -140,21 +140,13 @@ public class VideoRequest extends BaseRequest {
                         mVideoTabIdLiveData.postValue(mVideoTabId);
                     }
 
-                    @Override
-                    public void onError(Throwable e) {
 
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
                 });
     }
 
     //请求标签页下面的视频数据
     public void requestVideoTab(long videoId) {
-        Observable<VideoBean> videoObservable = null;
+        Single<VideoBean> videoObservable = null;
         if ("9999".equals(String.valueOf(videoId))) {
             //推荐
             videoObservable = ApiEngine.getInstance().getApiService().getVideoRecommend();
@@ -162,26 +154,15 @@ public class VideoRequest extends BaseRequest {
             //普通数据
             videoObservable = ApiEngine.getInstance().getApiService().getVideoTab(videoId);
         }
-        videoObservable.subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<VideoBean>() {
+        videoObservable.compose(ApiEngine.getInstance().applySchedulers())
+                .subscribe(new SimpleObserver<VideoBean>() {
                     @Override
-                    public void onSubscribe(Disposable d) {
-
-                    }
-
-                    @Override
-                    public void onNext(VideoBean videoBean) {
+                    public void onSuccess(@NonNull VideoBean videoBean) {
                         mVideoLiveData.postValue(videoBean);
                     }
 
                     @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
+                    protected void onFailed(ExceptionHandle.ResponseThrowable errorMsg) {
 
                     }
                 });
@@ -190,24 +171,21 @@ public class VideoRequest extends BaseRequest {
     //请求视频详情
     public void requestVideoDeatail(String videoId) {
         Disposable subscribe = ApiEngine.getInstance().getApiService().getVideoDetail(videoId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .compose(ApiEngine.getInstance().applySchedulers())
                 .subscribe(videoDetailBean -> mVideoDetailLiveData.postValue(videoDetailBean));
     }
 
     //请求相关视频
     public void requestRelatedVideo(String videoId) {
         Disposable subscribe = ApiEngine.getInstance().getApiService().getVideoRelated(videoId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .compose(ApiEngine.getInstance().applySchedulers())
                 .subscribe(videoDetailBean -> mVideoRelatedLiveData.postValue(videoDetailBean));
     }
 
     //请求视频评论
     public void requestVideoComment(String videoId) {
         Disposable subscribe = ApiEngine.getInstance().getApiService().getVideoComment(videoId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .compose(ApiEngine.getInstance().applySchedulers())
                 .subscribe(commentBean -> {
                     final ArrayList<PlayListCommentEntity> entities = new ArrayList<>();
                     if (commentBean.getHotComments().size() > 0) {
@@ -227,8 +205,7 @@ public class VideoRequest extends BaseRequest {
     //请求视频播放地址
     public void requestVideoUrl(String videoId) {
         Disposable subscribe = ApiEngine.getInstance().getApiService().getVideoUrl(videoId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .compose(ApiEngine.getInstance().applySchedulers())
                 .subscribe(videoUrlBean -> {
                     mVideoUrlLiveData.postValue(videoUrlBean);
                 });
@@ -237,8 +214,7 @@ public class VideoRequest extends BaseRequest {
     //给视频点赞
     public void requestLikeVideo(String videoId, boolean like) {
         Disposable subscribe = ApiEngine.getInstance().getApiService().likeResource(videoId, like ? 1 : 0, 5)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .compose(ApiEngine.getInstance().applySchedulers())
                 .subscribe(commentLikeBean -> {
                     mChangeLikeStatusLiveData.setValue(commentLikeBean.getCode() == 200);
                 });
@@ -247,8 +223,7 @@ public class VideoRequest extends BaseRequest {
     //收藏或取消收藏
     public void requestSubscribeVideo(String videoId, boolean subscribe) {
         Disposable dis = ApiEngine.getInstance().getApiService().subscribeVideo(videoId, subscribe ? 1 : 0)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .compose(ApiEngine.getInstance().applySchedulers())
                 .subscribe(commentLikeBean -> {
                     mChangeSubscribeStatusLiveData.setValue(commentLikeBean.getCode() == 200);
                 });
@@ -257,8 +232,7 @@ public class VideoRequest extends BaseRequest {
 
     public void requestFollowUser(long userid, boolean followed) {
         Disposable dis = ApiEngine.getInstance().getApiService().getUserFollow(userid, followed ? 1 : 0)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .compose(ApiEngine.getInstance().applySchedulers())
                 .subscribe(commentLikeBean -> {
                     mChangeFollowStatusLiveData.setValue(commentLikeBean.getCode() == 200);
                 });

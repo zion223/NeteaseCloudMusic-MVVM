@@ -14,9 +14,7 @@ import com.netease.music.data.config.TypeEnum;
 import com.netease.music.databinding.ItemDiscoverAlbumSongBinding;
 import com.netease.music.ui.page.discover.square.detail.SongListDetailActivity;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
 
 public class AlbumSongAdapter extends SimpleDataBindingAdapter<AlbumOrSongBean, ItemDiscoverAlbumSongBinding> {
 
@@ -26,8 +24,7 @@ public class AlbumSongAdapter extends SimpleDataBindingAdapter<AlbumOrSongBean, 
             if (item.getType() == TypeEnum.SONG_ID) {
                 //加入播放队列
                 Disposable subscribe = ApiEngine.getInstance().getApiService().getSongDetail(String.valueOf(item.getId()))
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
+                        .compose(ApiEngine.getInstance().applySchedulers())
                         .subscribe(songDetailBean -> AudioHelper.addAudio(AudioBean.convertSongToAudioBean(songDetailBean.getSongs().get(0))));
             } else {
                 //查看专辑详情

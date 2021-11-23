@@ -86,7 +86,7 @@ public class SplashActivity extends AppCompatActivity implements EasyPermissions
                 .compose(ApiEngine.getInstance().applySchedulers())
                 .subscribe(new SimpleObserver<ResponseBody>() {
                     @Override
-                    protected void onSuccess(ResponseBody result) {
+                    public void onSuccess(ResponseBody result) {
                         timerDisposable = timer.subscribe(aLong -> {
                             //初始化本地音乐数量  在授予权限后在初始化 避免出现未授权异常
                             final SharePreferenceUtil preferenceUtil = SharePreferenceUtil.getInstance(Utils.getApp());

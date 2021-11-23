@@ -3,14 +3,13 @@ package com.netease.music.domain.request;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.kunminx.architecture.domain.request.BaseRequest;
 import com.netease.lib_api.model.search.AlbumSearchBean;
 import com.netease.lib_network.ApiEngine;
-import com.kunminx.architecture.domain.request.BaseRequest;
+import com.netease.lib_network.ExceptionHandle;
+import com.netease.lib_network.SimpleObserver;
 
-import io.reactivex.Observer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
+import io.reactivex.annotations.NonNull;
 
 public class NewAlbumRequest extends BaseRequest {
 
@@ -28,26 +27,15 @@ public class NewAlbumRequest extends BaseRequest {
 
     public void requestAlbumData() {
         ApiEngine.getInstance().getApiService().getNewAlbum()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<AlbumSearchBean.ResultBean>() {
+                .compose(ApiEngine.getInstance().applySchedulers())
+                .subscribe(new SimpleObserver<AlbumSearchBean.ResultBean>() {
                     @Override
-                    public void onSubscribe(Disposable d) {
-
-                    }
-
-                    @Override
-                    public void onNext(AlbumSearchBean.ResultBean resultBean) {
+                    public void onSuccess(@NonNull AlbumSearchBean.ResultBean resultBean) {
                         mAlbumLiveData.postValue(resultBean);
                     }
 
                     @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
+                    protected void onFailed(ExceptionHandle.ResponseThrowable errorMsg) {
 
                     }
                 });

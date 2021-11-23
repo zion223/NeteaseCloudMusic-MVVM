@@ -8,21 +8,19 @@ import androidx.annotation.Nullable;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
+import com.kunminx.architecture.ui.page.BaseActivity;
+import com.kunminx.architecture.ui.page.DataBindingConfig;
 import com.netease.lib_api.model.playlist.TopListDetailBean;
 import com.netease.lib_common_ui.widget.ArtistSortView;
 import com.netease.lib_image_loader.app.ImageLoaderManager;
 import com.netease.lib_network.ApiEngine;
-import com.kunminx.architecture.ui.page.BaseActivity;
-import com.kunminx.architecture.ui.page.DataBindingConfig;
 import com.netease.music.BR;
 import com.netease.music.R;
 import com.netease.music.ui.state.ArtistSortViewModel;
 
 import java.util.List;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
 
 public class ArtistSortActivity extends BaseActivity {
 
@@ -77,8 +75,7 @@ public class ArtistSortActivity extends BaseActivity {
                 int id = view.getId();
                 boolean isSubed = (id == R.id.ll_singer_followed);
                 Disposable subscribe = ApiEngine.getInstance().getApiService().getSubArtist(entity.getId(), !isSubed ? 1 : 0)
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
+                        .compose(ApiEngine.getInstance().applySchedulers())
                         .subscribe(djSubBean -> {
                             if (djSubBean.getCode() == 200 && followedView != null && followView != null) {
                                 //关注或取消关注成功

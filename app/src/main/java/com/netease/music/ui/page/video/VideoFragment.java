@@ -11,12 +11,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
+import com.kunminx.architecture.ui.page.BaseFragment;
+import com.kunminx.architecture.ui.page.DataBindingConfig;
 import com.netease.lib_api.model.mv.VideoBean;
 import com.netease.lib_image_loader.app.ImageLoaderManager;
 import com.netease.lib_network.ApiEngine;
 import com.netease.lib_video.videoplayer.CustomJzVideoView;
-import com.kunminx.architecture.ui.page.BaseFragment;
-import com.kunminx.architecture.ui.page.DataBindingConfig;
 import com.netease.music.BR;
 import com.netease.music.R;
 import com.netease.music.ui.state.VideoViewModel;
@@ -25,8 +25,6 @@ import com.netease.music.util.TimeUtil;
 import java.util.List;
 
 import cn.jzvd.Jzvd;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 
 
 public class VideoFragment extends BaseFragment {
@@ -148,8 +146,7 @@ public class VideoFragment extends BaseFragment {
             manager.displayImageForView(jzvdStd.posterImageView, item.getData().getCoverurl());
 
             ApiEngine.getInstance().getApiService().getVideoUrl(item.getData().getVid())
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
+                    .compose(ApiEngine.getInstance().applySchedulers())
                     .subscribe(videoUrlBean -> jzvdStd.setUp(videoUrlBean.getUrls().get(0).getUrl(), "", Jzvd.SCREEN_NORMAL));
 
         }

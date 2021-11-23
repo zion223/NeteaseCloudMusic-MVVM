@@ -12,12 +12,12 @@ import com.chad.library.adapter.base.BaseNodeAdapter;
 import com.chad.library.adapter.base.entity.node.BaseNode;
 import com.chad.library.adapter.base.provider.BaseNodeProvider;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
+import com.lxj.xpopup.XPopup;
 import com.netease.lib_api.model.user.UserPlayListHeader;
 import com.netease.lib_api.model.user.UserPlaylistBean;
 import com.netease.lib_common_ui.dialog.CreatePlayListDialog;
 import com.netease.lib_image_loader.app.ImageLoaderManager;
 import com.netease.lib_network.ApiEngine;
-import com.lxj.xpopup.XPopup;
 import com.netease.music.R;
 import com.netease.music.data.config.TypeEnum;
 import com.netease.music.ui.page.discover.square.detail.SongListDetailActivity;
@@ -26,9 +26,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
 
 public class MultiplePlaylistAdapter extends BaseNodeAdapter {
 
@@ -56,8 +54,7 @@ public class MultiplePlaylistAdapter extends BaseNodeAdapter {
                     new XPopup.Builder(getContext())
                             .asCustom(new CreatePlayListDialog(getContext(), name -> {
                                 Disposable subscribe = ApiEngine.getInstance().getApiService().createPlayList(name)
-                                        .subscribeOn(Schedulers.io())
-                                        .observeOn(AndroidSchedulers.mainThread())
+                                        .compose(ApiEngine.getInstance().applySchedulers())
                                         .subscribe(commonMessageBean -> Toast.makeText(context, commonMessageBean.getCode() == 200 ? "歌单创建成功" : "歌单创建失败", Toast.LENGTH_SHORT).show());
                             })).show();
                     break;

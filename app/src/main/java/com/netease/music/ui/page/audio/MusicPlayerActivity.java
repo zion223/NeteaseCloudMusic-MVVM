@@ -55,9 +55,7 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
 
 
 public class MusicPlayerActivity extends AppCompatActivity {
@@ -306,8 +304,7 @@ public class MusicPlayerActivity extends AppCompatActivity {
     //是否喜欢该音乐
     void loadFavouriteStatus() {
         Disposable subscribe = apiService.getLikeList(SharePreferenceUtil.getInstance(getBaseContext()).getUserId())
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .compose(ApiEngine.getInstance().applySchedulers())
                 .subscribe(likeListBean -> {
                     likeList = likeListBean.getIds();
                     boolean likeMusic = false;
@@ -328,8 +325,7 @@ public class MusicPlayerActivity extends AppCompatActivity {
     private void changeFavouriteStatus() {
         final boolean liked = (boolean) mFavouriteView.getTag();
         Disposable subscribe = apiService.likeMusic(mAudioBean.getId(), !liked)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .compose(ApiEngine.getInstance().applySchedulers())
                 .subscribe(likeMusicBean -> {
                     if (likeMusicBean.getCode() == 200) {
                         mFavouriteView.setImageResource(liked ? R.mipmap.audio_aef : R.mipmap.audio_aeh);
@@ -356,14 +352,12 @@ public class MusicPlayerActivity extends AppCompatActivity {
         mPlayMode = AudioController.getInstance().getPlayMode();
         //获取歌词
         Disposable subscribe = apiService.getLyric(mAudioBean.getId())
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .compose(ApiEngine.getInstance().applySchedulers())
                 .subscribe(lyricBean -> lrcView.loadLrc(lyricBean.getLrc().getLyric(), lyricBean.getTlyric().getLyric()));
 
         //获取评论数量
         Disposable subscribecomment = apiService.getMusicComment(mAudioBean.getId())
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .compose(ApiEngine.getInstance().applySchedulers())
                 .subscribe(bean -> mCommentNum.setText(bean.getTotal() > 1000 ? "999+" : String.valueOf(bean.getTotal())));
 
     }

@@ -21,9 +21,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
 
 public class MultipleSectionGedanCommentAdapter extends BaseSectionQuickAdapter<PlayListCommentEntity, BaseViewHolder> {
 
@@ -54,8 +52,7 @@ public class MultipleSectionGedanCommentAdapter extends BaseSectionQuickAdapter<
 
                     Disposable subscribe = ApiEngine.getInstance().getApiService()
                             .likeComment(commentId, entity.getComment().getCommentId(), !parise ? 1 : 2, type)
-                            .subscribeOn(Schedulers.io())
-                            .observeOn(AndroidSchedulers.mainThread())
+                            .compose(ApiEngine.getInstance().applySchedulers())
                             .subscribe(commentLikeBean -> {
                                 if (commentLikeBean.getCode() == 200) {
                                     //操作成功

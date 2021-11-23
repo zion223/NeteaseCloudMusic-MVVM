@@ -3,16 +3,15 @@ package com.netease.music.domain.request;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.kunminx.architecture.domain.request.BaseRequest;
 import com.netease.lib_api.model.playlist.DailyRecommendBean;
 import com.netease.lib_network.ApiEngine;
-import com.kunminx.architecture.domain.request.BaseRequest;
+import com.netease.lib_network.ExceptionHandle;
+import com.netease.lib_network.SimpleObserver;
 
 import java.util.List;
 
-import io.reactivex.Observer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
+import io.reactivex.annotations.NonNull;
 
 public class DailyRecommendRequest extends BaseRequest {
 
@@ -28,16 +27,10 @@ public class DailyRecommendRequest extends BaseRequest {
 
     public void requestDailyRecommendMusic() {
         ApiEngine.getInstance().getApiService().getDailyRecommend()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<DailyRecommendBean>() {
+                .compose(ApiEngine.getInstance().applySchedulers())
+                .subscribe(new SimpleObserver<DailyRecommendBean>() {
                     @Override
-                    public void onSubscribe(Disposable d) {
-
-                    }
-
-                    @Override
-                    public void onNext(DailyRecommendBean dailyRecommendBean) {
+                    public void onSuccess(@NonNull DailyRecommendBean dailyRecommendBean) {
                         //推荐原因
                         List<DailyRecommendBean.RecommendReason> recommendReasons = dailyRecommendBean.getData().getRecommendReasons();
                         int recommendMusicSize = dailyRecommendBean.getData().getDailySongs().size();
@@ -55,12 +48,7 @@ public class DailyRecommendRequest extends BaseRequest {
                     }
 
                     @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
+                    protected void onFailed(ExceptionHandle.ResponseThrowable errorMsg) {
 
                     }
                 });

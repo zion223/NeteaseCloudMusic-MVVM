@@ -9,14 +9,9 @@ import com.netease.lib_api.model.notification.ForwardsMeBean;
 import com.netease.lib_api.model.notification.PrivateCommentBean;
 import com.netease.lib_api.model.notification.PrivateMsgBean;
 import com.netease.lib_api.model.notification.PrivateNoticeBean;
-import com.netease.lib_api.model.playlist.PlayListCommentEntity;
 import com.netease.lib_network.ApiEngine;
 
 import java.util.List;
-
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
 
 @SuppressLint("CheckResult")
 public class NotificationRequest extends BaseRequest {
@@ -59,8 +54,7 @@ public class NotificationRequest extends BaseRequest {
     // 请求评论
     public void requestPirvateCommnet(int uid) {
         ApiEngine.getInstance().getApiService().getPrivateComment(uid)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .compose(ApiEngine.getInstance().applySchedulers())
                 .subscribe(privateCommentBean -> {
                     if (privateCommentBean.getCode() == 200) {
                         mCommentLiveData.postValue(privateCommentBean.getComments());
@@ -71,8 +65,7 @@ public class NotificationRequest extends BaseRequest {
     // 请求私信
     public void requestPirvateLetter() {
         ApiEngine.getInstance().getApiService().getPrivateLetter(30)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .compose(ApiEngine.getInstance().applySchedulers())
                 .subscribe(notificationBean -> {
                     if (notificationBean.getCode() == 200) {
                         mPrivateLetterLiveData.postValue(notificationBean.getMsgs());
@@ -83,8 +76,7 @@ public class NotificationRequest extends BaseRequest {
     // 请求转发的数据
     public void requestForwardsMe() {
         ApiEngine.getInstance().getApiService().getPrivateFowards()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .compose(ApiEngine.getInstance().applySchedulers())
                 .subscribe(notificationBean -> {
                     if (notificationBean.getCode() == 200) {
                         mForwardsMeLiveData.postValue(notificationBean.getForwards());
@@ -95,8 +87,7 @@ public class NotificationRequest extends BaseRequest {
     // 请求通知
     public void requestNotice() {
         ApiEngine.getInstance().getApiService().getPrivateNotice()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .compose(ApiEngine.getInstance().applySchedulers())
                 .subscribe(notificationBean -> {
                     if (notificationBean.getCode() == 200) {
                         mNoticeLiveData.postValue(notificationBean.getNotices());

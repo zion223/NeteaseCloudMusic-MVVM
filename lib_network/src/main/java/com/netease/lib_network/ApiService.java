@@ -71,7 +71,7 @@ import com.netease.lib_api.model.user.UserFollowedBean;
 import com.netease.lib_api.model.user.UserFollowerBean;
 import com.netease.lib_api.model.user.UserPlaylistBean;
 
-import io.reactivex.Observable;
+import io.reactivex.Single;
 import okhttp3.ResponseBody;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
@@ -82,82 +82,82 @@ public interface ApiService {
 
 
     @GET("/")
-    Observable<ResponseBody> checkNetwork();
+    Single<ResponseBody> checkNetwork();
 
     @GET("login/cellphone")
-    Observable<LoginBean> login(@Query("phone") String phone, @Query("password") String password);
+    Single<LoginBean> login(@Query("phone") String phone, @Query("password") String password);
 
     @GET("captcha/sent")
-    Observable<CommonMessageBean> capture(@Query("phone") String phone);
+    Single<CommonMessageBean> capture(@Query("phone") String phone);
 
     @GET("video/url")
-    Observable<VideoUrlBean> getVideoUrl(@Query("id") String id);
+    Single<VideoUrlBean> getVideoUrl(@Query("id") String id);
 
     @GET("user/cloud")
-    Observable<UserCloudBean> getUserCloudMusic();
+    Single<UserCloudBean> getUserCloudMusic();
 
     @GET("dj/detail")
-    Observable<DjDetailBean> getRadioDetail(@Query("rid") String id);
+    Single<DjDetailBean> getRadioDetail(@Query("rid") String id);
 
     @GET("dj/sublist")
-    Observable<DjSubListBean> getDjSubList();
+    Single<DjSubListBean> getDjSubList();
 
     @GET("dj/program")
-    Observable<DjProgramBean> getRadioProgram(@Query("rid") String id, @Query("asc") boolean asc);
+    Single<DjProgramBean> getRadioProgram(@Query("rid") String id, @Query("asc") boolean asc);
 
     @GET("album")
-    Observable<AlbumDetailBean> getAlbumDetail(@Query("id") long id);
+    Single<AlbumDetailBean> getAlbumDetail(@Query("id") long id);
 
     @GET("album/detail/dynamic")
-    Observable<AlbumDynamicBean> getAlbumDynamic(@Query("id") long id);
+    Single<AlbumDynamicBean> getAlbumDynamic(@Query("id") long id);
 
     @GET("register/cellphone")
-    Observable<LoginBean> register(@Query("phone") String phone, @Query("password") String password, @Query("capture") String capture);
+    Single<LoginBean> register(@Query("phone") String phone, @Query("password") String password, @Query("capture") String capture);
 
     @GET("logout")
-    Observable<CommonMessageBean> logout();
+    Single<CommonMessageBean> logout();
 
     @GET("banner")
-    Observable<BannerBean> getBanner(@Query("type") String type);
+    Single<BannerBean> getBanner(@Query("type") String type);
 
     @GET("dj/banner")
-    Observable<DjBannerBean> getRadioBanner();
+    Single<DjBannerBean> getRadioBanner();
 
     @GET("recommend/resource")
-    Observable<MainRecommendPlayListBean> getRecommendPlayList();
+    Single<MainRecommendPlayListBean> getRecommendPlayList();
 
     @GET("recommend/songs")
-    Observable<DailyRecommendBean> getDailyRecommend();
+    Single<DailyRecommendBean> getDailyRecommend();
 
     @GET("toplist")
-    Observable<TopListBean> getTopList();
+    Single<TopListBean> getTopList();
 
     @GET("dj/recommend")
-    Observable<DjRecommendBean> getRadioRecommend();
+    Single<DjRecommendBean> getRadioRecommend();
 
     @GET("dj/recommend/type")
-    Observable<DjRecommendTypeBean> getDjRecommend(@Query("type") int type);
+    Single<DjRecommendTypeBean> getDjRecommend(@Query("type") int type);
 
     @GET("top/playlist")
-    Observable<RecommendPlayListBean> getPlayList(@Query("cat") String type, @Query("limit") int limit);
+    Single<RecommendPlayListBean> getPlayList(@Query("cat") String type, @Query("limit") int limit);
 
     @GET("top/artists")
-    Observable<ArtistListBean> getHotSingerList();
+    Single<ArtistListBean> getHotSingerList();
 
     @GET("top/playlist/highquality")
-    Observable<HighQualityPlayListBean> getHighquality(@Query("limit") int limit, @Query("before") long before);
+    Single<HighQualityPlayListBean> getHighquality(@Query("limit") int limit, @Query("before") long before);
 
     @GET("playlist/catlist")
-    Observable<CatlistBean> getCatlist();
+    Single<CatlistBean> getCatlist();
 
     @GET("playlist/detail")
-    Observable<PlaylistDetailBean> getPlaylistDetail(@Query("id") long id);
+    Single<PlaylistDetailBean> getPlaylistDetail(@Query("id") long id);
 
     @GET("check/music")
-    Observable<MusicCanPlayBean> getMusicCanPlay(@Query("id") long id);
+    Single<MusicCanPlayBean> getMusicCanPlay(@Query("id") long id);
 
     @GET("user/playlist")
-    Observable<UserPlaylistBean> getUserPlaylist(@Query("uid") long uid);
+    Single<UserPlaylistBean> getUserPlaylist(@Query("uid") long uid);
 
     /**
      * 对歌单添加或删除歌曲
@@ -166,27 +166,27 @@ public interface ApiService {
      * tracks: 歌曲 id,可多个,用逗号隔开
      */
     @GET("playlist/tracks")
-    Observable<CommonMessageBean> trackPlayList(@Query("pid") long id, @Query("tracks") String tracksId, @Query("op") String op);
+    Single<CommonMessageBean> trackPlayList(@Query("pid") long id, @Query("tracks") String tracksId, @Query("op") String op);
 
     @GET("user/event")
-    Observable<UserEventBean> getUserEvent(@Query("uid") long uid, @Query("limit") int limit, @Query("lasttime") long time);
+    Single<UserEventBean> getUserEvent(@Query("uid") long uid, @Query("limit") int limit, @Query("lasttime") long time);
 
     @GET("user/detail")
-    Observable<UserDetailBean> getUserDetail(@Query("uid") long uid);
+    Single<UserDetailBean> getUserDetail(@Query("uid") long uid);
 
     // t:1关注 0:取消关注
     @GET("follow")
-    Observable<FollowBean> getUserFollow(@Query("id") long uid, @Query("t") int t);
+    Single<FollowBean> getUserFollow(@Query("id") long uid, @Query("t") int t);
 
 
     @GET("user/follows")
-    Observable<UserFollowerBean> getUserFollower(@Query("id") long uid);
+    Single<UserFollowerBean> getUserFollower(@Query("id") long uid);
 
     @GET("user/followeds")
-    Observable<UserFollowedBean> getUserFollowed(@Query("id") long uid);
+    Single<UserFollowedBean> getUserFollowed(@Query("id") long uid);
 
     @GET("search/hot/detail")
-    Observable<HotSearchDetailBean> getSearchHotDetail();
+    Single<HotSearchDetailBean> getSearchHotDetail();
 
     /**
      * 搜索
@@ -196,31 +196,31 @@ public interface ApiService {
      * 1014: 视频, 1018:综合
      */
     @GET("search")
-    Observable<SongSearchBean> getSongSearch(@Query("keywords") String keywords, @Query("type") int type);
+    Single<SongSearchBean> getSongSearch(@Query("keywords") String keywords, @Query("type") int type);
 
     @GET("search")
-    Observable<FeedSearchBean> getVideoSearch(@Query("keywords") String keywords, @Query("type") int type);
+    Single<FeedSearchBean> getVideoSearch(@Query("keywords") String keywords, @Query("type") int type);
 
     @GET("search")
-    Observable<SingerSearchBean> getSingerSearch(@Query("keywords") String keywords, @Query("type") int type);
+    Single<SingerSearchBean> getSingerSearch(@Query("keywords") String keywords, @Query("type") int type);
 
     @GET("search")
-    Observable<AlbumSearchBean> getAlbumSearch(@Query("keywords") String keywords, @Query("type") int type);
+    Single<AlbumSearchBean> getAlbumSearch(@Query("keywords") String keywords, @Query("type") int type);
 
     @GET("search")
-    Observable<PlayListSearchBean> getPlayListSearch(@Query("keywords") String keywords, @Query("type") int type);
+    Single<PlayListSearchBean> getPlayListSearch(@Query("keywords") String keywords, @Query("type") int type);
 
     @GET("search")
-    Observable<RadioSearchBean> getRadioSearch(@Query("keywords") String keywords, @Query("type") int type);
+    Single<RadioSearchBean> getRadioSearch(@Query("keywords") String keywords, @Query("type") int type);
 
     @GET("search")
-    Observable<UserSearchBean> getUserSearch(@Query("keywords") String keywords, @Query("type") int type);
+    Single<UserSearchBean> getUserSearch(@Query("keywords") String keywords, @Query("type") int type);
 
     @GET("search")
-    Observable<SynthesisSearchBean> getSynthesisSearch(@Query("keywords") String keywords, @Query("type") int type);
+    Single<SynthesisSearchBean> getSynthesisSearch(@Query("keywords") String keywords, @Query("type") int type);
 
     @GET("artists")
-    Observable<SingerSongSearchBean> getSingerHotSong(@Query("id") String id);
+    Single<SingerSongSearchBean> getSingerHotSong(@Query("id") String id);
 
     /**
      * 歌手分类
@@ -228,52 +228,52 @@ public interface ApiService {
      * area  -1:全部 7:华语(1) 96:欧美(2) 8:日本(3) 16韩国(4) 0:其他
      */
     @GET("artist/list")
-    Observable<ArtistListBean> getSingerList(@Query("type") int type, @Query("area") int area);
+    Single<ArtistListBean> getSingerList(@Query("type") int type, @Query("area") int area);
 
     @GET("artist/album")
-    Observable<SingerAblumSearchBean> getSingerAlbum(@Query("id") long id);
+    Single<SingerAblumSearchBean> getSingerAlbum(@Query("id") long id);
 
     @GET("artist/desc")
-    Observable<SingerDescriptionBean> getSingerDesc(@Query("id") long id);
+    Single<SingerDescriptionBean> getSingerDesc(@Query("id") long id);
 
     @GET("simi/artist")
-    Observable<SimiSingerBean> getSimiSinger(@Query("id") long id);
+    Single<SimiSingerBean> getSimiSinger(@Query("id") long id);
 
     @GET("likelist")
-    Observable<LikeListBean> getLikeList(@Query("uid") long uid);
+    Single<LikeListBean> getLikeList(@Query("uid") long uid);
 
     @GET("song/detail")
-    Observable<SongDetailBean> getSongDetail(@Query("ids") String ids);
+    Single<SongDetailBean> getSongDetail(@Query("ids") String ids);
 
     @GET("like")
-    Observable<LikeMusicBean> likeMusic(@Query("id") String id, @Query("like") boolean like);
+    Single<LikeMusicBean> likeMusic(@Query("id") String id, @Query("like") boolean like);
 
     @GET("comment/music")
-    Observable<PlayListCommentBean> getMusicComment(@Query("id") String id);
+    Single<PlayListCommentBean> getMusicComment(@Query("id") String id);
 
     @GET("comment/playlist")
-    Observable<PlayListCommentBean> getPlayListComment(@Query("id") String id);
+    Single<PlayListCommentBean> getPlayListComment(@Query("id") String id);
 
     @GET("comment/album")
-    Observable<PlayListCommentBean> getAlbumComment(@Query("id") String id);
+    Single<PlayListCommentBean> getAlbumComment(@Query("id") String id);
 
     @GET("comment/mv")
-    Observable<PlayListCommentBean> getMvComment(@Query("id") String id);
+    Single<PlayListCommentBean> getMvComment(@Query("id") String id);
 
     @GET("video/group/list")
-    Observable<VideoGroupBean> getVideoGroup();
+    Single<VideoGroupBean> getVideoGroup();
 
     @GET("video/group")
-    Observable<VideoBean> getVideoTab(@Query("id") long id);
+    Single<VideoBean> getVideoTab(@Query("id") long id);
 
     @GET("video/detail")
-    Observable<VideoDetailBean> getVideoDetail(@Query("id") String id);
+    Single<VideoDetailBean> getVideoDetail(@Query("id") String id);
 
     @GET("video/timeline/recommend")
-    Observable<VideoBean> getVideoRecommend();
+    Single<VideoBean> getVideoRecommend();
 
     @GET("related/allvideo")
-    Observable<VideoRelatedBean> getVideoRelated(@Query("id") String id);
+    Single<VideoRelatedBean> getVideoRelated(@Query("id") String id);
 
     /**
      * 给评论点赞
@@ -284,7 +284,7 @@ public interface ApiService {
      * 0: 歌曲 1: mv 2: 歌单 3: 专辑 4: 电台 5: 视频 6: 动态
      */
     @GET("comment/like")
-    Observable<CommentLikeBean> likeComment(@Query("id") String id, @Query("cid") long cid, @Query("t") int t, @Query("type") int type);
+    Single<CommentLikeBean> likeComment(@Query("id") String id, @Query("cid") long cid, @Query("t") int t, @Query("type") int type);
 
     /**
      * 给资源点赞
@@ -294,94 +294,94 @@ public interface ApiService {
      * PS  注意：如给动态点赞，不需要传入 id，需要传入 threadId,可通过 event,/user/event 接口获取，如： /resource/like?t=1&type=6&threadId=A_EV_2_6559519868_32953014
      */
     @GET("resource/like")
-    Observable<CommentLikeBean> likeResource(@Query("id") String id, @Query("t") int t, @Query("type") int type);
+    Single<CommentLikeBean> likeResource(@Query("id") String id, @Query("t") int t, @Query("type") int type);
 
     @GET("resource/like")
-    Observable<CommentLikeBean> likeEventResource(@Query("threadId") String id, @Query("t") int t, @Query("type") int type);
+    Single<CommentLikeBean> likeEventResource(@Query("threadId") String id, @Query("t") int t, @Query("type") int type);
 
     @GET("playmode/intelligence/list")
-    Observable<PlayModeIntelligenceBean> getIntelligenceList(@Query("id") long id, @Query("pid") long pid);
+    Single<PlayModeIntelligenceBean> getIntelligenceList(@Query("id") long id, @Query("pid") long pid);
 
     // t=1 收藏 2 取消收藏
     @GET("playlist/subscribe")
-    Observable<CommonMessageBean> subscribePlayList(@Query("id") long id, @Query("t") long t);
+    Single<CommonMessageBean> subscribePlayList(@Query("id") long id, @Query("t") long t);
 
     @GET("playlist/create")
-    Observable<CommonMessageBean> createPlayList(@Query("name") String name);
+    Single<CommonMessageBean> createPlayList(@Query("name") String name);
 
     // t=1 收藏 2 取消收藏
     @GET("album/sub")
-    Observable<CommonMessageBean> subscribeAlbum(@Query("id") long id, @Query("t") long t);
+    Single<CommonMessageBean> subscribeAlbum(@Query("id") long id, @Query("t") long t);
 
     // t=1 收藏 2 取消收藏
     @GET("video/sub")
-    Observable<CommonMessageBean> subscribeVideo(@Query("id") String id, @Query("t") long t);
+    Single<CommonMessageBean> subscribeVideo(@Query("id") String id, @Query("t") long t);
 
     @GET("top/album")
-    Observable<TopAlbumBean> getTopAlbum(@Query("limit") int limit);
+    Single<TopAlbumBean> getTopAlbum(@Query("limit") int limit);
 
     @GET("album/newest")
-    Observable<AlbumSearchBean.ResultBean> getNewAlbum();
+    Single<AlbumSearchBean.ResultBean> getNewAlbum();
 
     //PS.全部:0 华语:7  欧美:96 日本:8 韩国:16
     @GET("top/song")
-    Observable<NewSongBean> getTopSong(@Query("type") int type);
+    Single<NewSongBean> getTopSong(@Query("type") int type);
 
     @GET("album/sublist")
-    Observable<AlbumSublistBean> getAlbumSublist();
+    Single<AlbumSublistBean> getAlbumSublist();
 
     @GET("artist/sublist")
-    Observable<ArtistSublistBean> getArtistSublist();
+    Single<ArtistSublistBean> getArtistSublist();
 
     @GET("artist/sub")
         //t =1 true  0 = false
-    Observable<CommonMessageBean> getSubArtist(@Query("id") int id, @Query("t") int t);
+    Single<CommonMessageBean> getSubArtist(@Query("id") int id, @Query("t") int t);
 
     @GET("mv/sublist")
-    Observable<MvSublistBean> getMvSublist();
+    Single<MvSublistBean> getMvSublist();
 
     @GET("mv/sub")
-    Observable<CommentLikeBean> getMvSub(@Query("id") int id, @Query("t") int t);
+    Single<CommentLikeBean> getMvSub(@Query("id") int id, @Query("t") int t);
 
     @GET("personal_fm")
-    Observable<MyFmBean> getMyFm();
+    Single<MyFmBean> getMyFm();
 
     @GET("event")
-    Observable<MainEventBean> getMainEvent();
+    Single<MainEventBean> getMainEvent();
 
     @GET("lyric")
-    Observable<LyricBean> getLyric(@Query("id") String id);
+    Single<LyricBean> getLyric(@Query("id") String id);
 
     @GET("comment/playlist")
-    Observable<PlayListCommentBean> getPlaylistComment(@Query("id") long id);
+    Single<PlayListCommentBean> getPlaylistComment(@Query("id") long id);
 
     @GET("comment/video")
-    Observable<PlayListCommentBean> getVideoComment(@Query("id") String id);
+    Single<PlayListCommentBean> getVideoComment(@Query("id") String id);
 
     @GET("dj/paygift")
-    Observable<DjPaygiftBean> getDjPaygift(@Query("limit") int limit, @Query("offset") int offset);
+    Single<DjPaygiftBean> getDjPaygift(@Query("limit") int limit, @Query("offset") int offset);
 
     @GET("dj/category/recommend")
-    Observable<DjCategoryRecommendBean> getDjCategoryRecommend();
+    Single<DjCategoryRecommendBean> getDjCategoryRecommend();
 
     @GET("dj/catelist")
-    Observable<DjCatelistBean> getDjCatelist();
+    Single<DjCatelistBean> getDjCatelist();
 
     // 1 订阅 0取消订阅
     @GET("dj/sub")
-    Observable<CommonMessageBean> getSubRadio(@Query("rid") String rid, @Query("t") int isSub);
+    Single<CommonMessageBean> getSubRadio(@Query("rid") String rid, @Query("t") int isSub);
 
     @GET("top/mv")
-    Observable<MvTopBean> getMvTop();
+    Single<MvTopBean> getMvTop();
 
     @GET("mv/detail")
-    Observable<MvInfoBean> getMvDetail(@Query("mvid") String mvId);
+    Single<MvInfoBean> getMvDetail(@Query("mvid") String mvId);
 
     @GET("top/mv")
-    Observable<MvTopBean> getMvTop(@Query("area") String area);
+    Single<MvTopBean> getMvTop(@Query("area") String area);
 
     @GET("mv/first")
-    Observable<MvBean> getFirstMv(@Query("area") String area, @Query("limit") int limit);
+    Single<MvBean> getFirstMv(@Query("area") String area, @Query("limit") int limit);
 
     /**
      * 获取全部MV
@@ -392,18 +392,18 @@ public interface ApiService {
      * offset: 偏移数量 , 用于分页 , 如 :( 页数 -1)*50, 其中 50 为 limit 的值 , 默认 为 0
      */
     @GET("mv/all")
-    Observable<MvBean> getAllMv(@Query("area") String area, @Query("type") String type, @Query("order") String order, @Query("limit") int limit);
+    Single<MvBean> getAllMv(@Query("area") String area, @Query("type") String type, @Query("order") String order, @Query("limit") int limit);
 
     @GET("msg/comments")
-    Observable<PrivateCommentBean> getPrivateComment(@Query("uid") int userId);
+    Single<PrivateCommentBean> getPrivateComment(@Query("uid") int userId);
 
     @GET("msg/private")
-    Observable<PrivateMsgBean> getPrivateLetter(@Query("limit") int limit);
+    Single<PrivateMsgBean> getPrivateLetter(@Query("limit") int limit);
 
     @GET("msg/notices")
-    Observable<PrivateNoticeBean> getPrivateNotice();
+    Single<PrivateNoticeBean> getPrivateNotice();
 
     @GET("msg/forwards")
-    Observable<ForwardsMeBean> getPrivateFowards();
+    Single<ForwardsMeBean> getPrivateFowards();
 
 }

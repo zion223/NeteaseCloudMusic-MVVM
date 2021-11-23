@@ -2,6 +2,7 @@ package com.netease.music.domain.request;
 
 import androidx.lifecycle.MutableLiveData;
 
+import com.kunminx.architecture.domain.request.BaseRequest;
 import com.netease.lib_api.model.user.FollowBean;
 import com.netease.lib_api.model.user.UserDetailBean;
 import com.netease.lib_api.model.user.UserEventBean;
@@ -10,14 +11,11 @@ import com.netease.lib_api.model.user.UserFollowerBean;
 import com.netease.lib_api.model.user.UserPlaylistBean;
 import com.netease.lib_api.model.user.UserPlaylistEntity;
 import com.netease.lib_network.ApiEngine;
-import com.kunminx.architecture.domain.request.BaseRequest;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
 
 public class UserDetailRequest extends BaseRequest {
 
@@ -87,22 +85,19 @@ public class UserDetailRequest extends BaseRequest {
 
     public void requestUserDetail(long uid) {
         Disposable subscribe = ApiEngine.getInstance().getApiService().getUserDetail(uid)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .compose(ApiEngine.getInstance().applySchedulers())
                 .subscribe(bean -> userDeatailLiveData.postValue(bean));
     }
 
     public void requestUserEvent(long uid) {
         Disposable subscribe = ApiEngine.getInstance().getApiService().getUserEvent(uid, 30, -1)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .compose(ApiEngine.getInstance().applySchedulers())
                 .subscribe(bean -> userEventLiveData.postValue(bean));
     }
 
     public void requestUserFollow(long uid, boolean follow) {
         Disposable subscribe = ApiEngine.getInstance().getApiService().getUserFollow(uid, follow ? 1 : 0)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .compose(ApiEngine.getInstance().applySchedulers())
                 .subscribe(bean -> {
                     if (bean.getCode() == 200) {
                         userFollowLiveData.postValue(bean);
@@ -112,23 +107,20 @@ public class UserDetailRequest extends BaseRequest {
 
     public void requestUserFollower(long uid) {
         Disposable subscribe = ApiEngine.getInstance().getApiService().getUserFollower(uid)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .compose(ApiEngine.getInstance().applySchedulers())
                 .subscribe(bean -> userFollowerLiveData.postValue(bean));
     }
 
     public void requestUserFollowed(long uid) {
         Disposable subscribe = ApiEngine.getInstance().getApiService().getUserFollowed(uid)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .compose(ApiEngine.getInstance().applySchedulers())
                 .subscribe(bean -> userFollowedLiveData.postValue(bean));
     }
 
     //查询用户歌单  解析数据
     public void requestUserPlaylist(long uid) {
         Disposable subscribe = ApiEngine.getInstance().getApiService().getUserPlaylist(uid)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .compose(ApiEngine.getInstance().applySchedulers())
                 .subscribe(playList -> {
 
                     userLikePlayListLiveData.postValue(playList.getPlaylist().get(0));

@@ -20,9 +20,7 @@ import com.netease.music.R;
 
 import java.util.List;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
 
 //收藏音乐到创建的歌单
 public class MusicCollectDialog extends CenterPopupView {
@@ -50,8 +48,7 @@ public class MusicCollectDialog extends CenterPopupView {
         //获取当前用户ID
         final int userId = SharePreferenceUtil.getInstance(mContext).getUserId();
         Disposable subscribe = ApiEngine.getInstance().getApiService().getUserPlaylist(userId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .compose(ApiEngine.getInstance().applySchedulers())
                 .subscribe(userPlaylistBean -> {
                     List<UserPlaylistBean.PlaylistBean> playlist = userPlaylistBean.getPlaylist();
                     int subIndex = 0;
@@ -68,8 +65,7 @@ public class MusicCollectDialog extends CenterPopupView {
                         UserPlaylistBean.PlaylistBean entity = (UserPlaylistBean.PlaylistBean) adapter.getItem(position);
 
                         Disposable subscribe1 = ApiEngine.getInstance().getApiService().trackPlayList(entity.getId(), mTracks, "add")
-                                .subscribeOn(Schedulers.io())
-                                .observeOn(AndroidSchedulers.mainThread())
+                                .compose(ApiEngine.getInstance().applySchedulers())
                                 .subscribe(commonMessageBean -> {
                                     Toast.makeText(getContext(), commonMessageBean.getCode() == 200 ? "收藏成功" : "收藏失败或不支持收藏本地歌曲: " + commonMessageBean.getMsg(), Toast.LENGTH_SHORT).show();
                                     dismiss();

@@ -2,18 +2,18 @@ package com.netease.music.domain.request;
 
 import androidx.lifecycle.MutableLiveData;
 
+import com.kunminx.architecture.domain.request.BaseRequest;
 import com.netease.lib_api.model.dj.DjBannerBean;
 import com.netease.lib_api.model.dj.DjDetailBean;
 import com.netease.lib_api.model.dj.DjProgramBean;
 import com.netease.lib_api.model.dj.DjRecommendBean;
 import com.netease.lib_api.model.notification.CommonMessageBean;
 import com.netease.lib_network.ApiEngine;
-import com.kunminx.architecture.domain.request.BaseRequest;
+import com.netease.lib_network.ExceptionHandle;
+import com.netease.lib_network.SimpleObserver;
 
-import io.reactivex.Observer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
 
 public class RadioRequest extends BaseRequest {
 
@@ -63,26 +63,16 @@ public class RadioRequest extends BaseRequest {
 
     public void requestRadioBanner() {
         ApiEngine.getInstance().getApiService().getRadioBanner()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<DjBannerBean>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-
-                    }
+                .compose(ApiEngine.getInstance().applySchedulers())
+                .subscribe(new SimpleObserver<DjBannerBean>() {
 
                     @Override
-                    public void onNext(DjBannerBean djBannerBean) {
+                    public void onSuccess(@NonNull DjBannerBean djBannerBean) {
                         mBannerLiveData.postValue(djBannerBean);
                     }
 
                     @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
+                    protected void onFailed(ExceptionHandle.ResponseThrowable errorMsg) {
 
                     }
                 });
@@ -91,28 +81,18 @@ public class RadioRequest extends BaseRequest {
     //推荐电台
     public void requestRecommendRadio() {
         ApiEngine.getInstance().getApiService().getRadioRecommend()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<DjRecommendBean>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-
-                    }
+                .compose(ApiEngine.getInstance().applySchedulers())
+                .subscribe(new SimpleObserver<DjRecommendBean>() {
 
                     @Override
-                    public void onNext(DjRecommendBean djRecommendBean) {
+                    public void onSuccess(@NonNull DjRecommendBean djRecommendBean) {
                         if (djRecommendBean.getCode() == 200) {
                             mRecommendRadioLiveData.postValue(djRecommendBean);
                         }
                     }
 
                     @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
+                    protected void onFailed(ExceptionHandle.ResponseThrowable errorMsg) {
 
                     }
                 });
@@ -120,8 +100,7 @@ public class RadioRequest extends BaseRequest {
 
     public void requestRadioDeatil(String radioId) {
         Disposable subscribe = ApiEngine.getInstance().getApiService().getRadioDetail(radioId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .compose(ApiEngine.getInstance().applySchedulers())
                 .subscribe(djDetailBean -> mRadioDetailLiveData.postValue(djDetailBean));
     }
 
@@ -136,16 +115,14 @@ public class RadioRequest extends BaseRequest {
      */
     public void requestRadioProgram(String radioId, boolean asc) {
         Disposable subscribe = ApiEngine.getInstance().getApiService().getRadioProgram(radioId, asc)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .compose(ApiEngine.getInstance().applySchedulers())
                 .subscribe(djDetailBean -> mRadioProgramLiveData.postValue(djDetailBean));
     }
 
     //订阅或取消订阅
     public void requestSubRadio(String radioId, boolean isSub) {
         Disposable subscribe = ApiEngine.getInstance().getApiService().getSubRadio(radioId, isSub ? 1 : 0)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .compose(ApiEngine.getInstance().applySchedulers())
                 .subscribe(djSubBean -> mRadioSubLiveData.postValue(djSubBean));
     }
 

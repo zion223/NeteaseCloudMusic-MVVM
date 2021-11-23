@@ -3,14 +3,13 @@ package com.netease.music.domain.request;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.kunminx.architecture.domain.request.BaseRequest;
 import com.netease.lib_api.model.dj.DjPaygiftBean;
 import com.netease.lib_network.ApiEngine;
-import com.kunminx.architecture.domain.request.BaseRequest;
+import com.netease.lib_network.ExceptionHandle;
+import com.netease.lib_network.SimpleObserver;
 
-import io.reactivex.Observer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
+import io.reactivex.annotations.NonNull;
 
 public class RadioPayRequest extends BaseRequest {
 
@@ -25,26 +24,16 @@ public class RadioPayRequest extends BaseRequest {
 
     public void requestRadioPayData(int limit, int offset) {
         ApiEngine.getInstance().getApiService().getDjPaygift(limit, offset)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<DjPaygiftBean>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-
-                    }
+                .compose(ApiEngine.getInstance().applySchedulers())
+                .subscribe(new SimpleObserver<DjPaygiftBean>() {
 
                     @Override
-                    public void onNext(DjPaygiftBean djPaygiftBean) {
+                    public void onSuccess(@NonNull DjPaygiftBean djPaygiftBean) {
                         mRadioPayLiveData.postValue(djPaygiftBean);
                     }
 
                     @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
+                    protected void onFailed(ExceptionHandle.ResponseThrowable errorMsg) {
 
                     }
                 });

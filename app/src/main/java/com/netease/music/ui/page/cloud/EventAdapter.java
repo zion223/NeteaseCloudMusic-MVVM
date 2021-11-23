@@ -17,11 +17,11 @@ import com.netease.lib_api.model.playlist.DailyRecommendBean;
 import com.netease.lib_api.model.song.AudioBean;
 import com.netease.lib_api.model.user.UserEventBean;
 import com.netease.lib_api.model.user.UserEventJsonBean;
+import com.netease.lib_audio.app.AudioHelper;
 import com.netease.lib_common_ui.utils.GsonUtil;
 import com.netease.lib_image_loader.app.ImageLoaderManager;
 import com.netease.lib_network.ApiEngine;
 import com.netease.lib_video.videoplayer.CustomJzVideoView;
-import com.netease.lib_audio.app.AudioHelper;
 import com.netease.music.R;
 import com.netease.music.data.config.TypeEnum;
 import com.netease.music.ui.page.discover.square.detail.SongListDetailActivity;
@@ -33,9 +33,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.jzvd.Jzvd;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
 
 //用户动态适配器
 public class EventAdapter extends BaseQuickAdapter<UserEventBean.EventsBean, BaseViewHolder> {
@@ -78,8 +76,7 @@ public class EventAdapter extends BaseQuickAdapter<UserEventBean.EventsBean, Bas
                     Boolean parise = (Boolean) likeView.getTag();
                     Disposable subscribe = ApiEngine.getInstance().getApiService()
                             .likeEventResource(event.getInfo().getThreadId(), !parise ? 1 : 2, TypeEnum.EVENT_ID)
-                            .subscribeOn(Schedulers.io())
-                            .observeOn(AndroidSchedulers.mainThread())
+                            .compose(ApiEngine.getInstance().applySchedulers())
                             .subscribe(commentLikeBean -> {
                                 if (commentLikeBean.getCode() == 200) {
                                     likeView.setImageResource(!parise ? R.drawable.ic_parise_red : R.drawable.ic_parise);
@@ -264,8 +261,7 @@ public class EventAdapter extends BaseQuickAdapter<UserEventBean.EventsBean, Bas
             manager.displayImageForCorner(jzvdStd.posterImageView, jsonBean.getVideo().getCoverUrl());
             //获取视频播放地址
             ApiEngine.getInstance().getApiService().getVideoUrl(jsonBean.getVideo().getVideoId())
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
+                    .compose(ApiEngine.getInstance().applySchedulers())
                     //视频播放View
                     .subscribe(videoUrlBean -> jzvdStd.setUp(videoUrlBean.getUrls().get(0).getUrl(), "", Jzvd.SCREEN_NORMAL));
             adapter.setVisible(R.id.rl_video, true);

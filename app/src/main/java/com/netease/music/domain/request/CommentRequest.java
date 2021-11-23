@@ -3,20 +3,19 @@ package com.netease.music.domain.request;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.kunminx.architecture.domain.request.BaseRequest;
 import com.netease.lib_api.model.playlist.PlayListCommentEntity;
 import com.netease.lib_api.model.song.PlayListCommentBean;
 import com.netease.lib_network.ApiEngine;
-import com.kunminx.architecture.domain.request.BaseRequest;
+import com.netease.lib_network.ExceptionHandle;
+import com.netease.lib_network.SimpleObserver;
 import com.netease.music.data.config.TypeEnum;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import io.reactivex.Observable;
-import io.reactivex.Observer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
+import io.reactivex.Single;
+import io.reactivex.annotations.NonNull;
 
 public class CommentRequest extends BaseRequest {
 
@@ -41,7 +40,7 @@ public class CommentRequest extends BaseRequest {
 
     public void requestCommentData(TypeEnum type, String id) {
 
-        Observable<PlayListCommentBean> commentObservable = null;
+        Single<PlayListCommentBean> commentObservable = null;
 
         switch (type) {
             case SONG:
@@ -57,16 +56,11 @@ public class CommentRequest extends BaseRequest {
                 break;
         }
         if (commentObservable != null) {
-            commentObservable.subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new Observer<PlayListCommentBean>() {
-                        @Override
-                        public void onSubscribe(Disposable d) {
-
-                        }
+            commentObservable.compose(ApiEngine.getInstance().applySchedulers())
+                    .subscribe(new SimpleObserver<PlayListCommentBean>() {
 
                         @Override
-                        public void onNext(PlayListCommentBean commentBean) {
+                        public void onSuccess(@NonNull PlayListCommentBean commentBean) {
                             mCommentSizeLiveData.postValue(commentBean.getTotal());
                             final ArrayList<PlayListCommentEntity> entities = new ArrayList<>();
 
@@ -84,12 +78,7 @@ public class CommentRequest extends BaseRequest {
                         }
 
                         @Override
-                        public void onError(Throwable e) {
-
-                        }
-
-                        @Override
-                        public void onComplete() {
+                        protected void onFailed(ExceptionHandle.ResponseThrowable errorMsg) {
 
                         }
                     });

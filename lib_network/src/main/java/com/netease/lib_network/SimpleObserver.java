@@ -1,7 +1,7 @@
 package com.netease.lib_network;
 
 
-import io.reactivex.Observer;
+import io.reactivex.SingleObserver;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 
@@ -12,30 +12,21 @@ import io.reactivex.disposables.Disposable;
  * @author zhangruiping
  * @Date 2021/11/22
  */
-public abstract class SimpleObserver<T> implements Observer<T> {
-
-
+public abstract class SimpleObserver<T> implements SingleObserver<T> {
     @Override
     public void onSubscribe(@NonNull Disposable d) {
 
     }
 
     @Override
-    public void onNext(@NonNull T t) {
-        onSuccess(t);
+    public void onSuccess(@NonNull T t) {
+
     }
 
     @Override
     public void onError(@NonNull Throwable e) {
         onFailure(e);
     }
-
-    @Override
-    public void onComplete() {
-
-    }
-
-    protected abstract void onSuccess(T result);
 
     protected abstract void onFailed(ExceptionHandle.ResponseThrowable errorMsg);
 
