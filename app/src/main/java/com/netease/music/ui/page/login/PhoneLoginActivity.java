@@ -33,14 +33,20 @@ import io.reactivex.schedulers.Schedulers;
 public class PhoneLoginActivity extends BaseActivity {
 
 
-    private PhoneLoginViewModel mPhoneLoginViewModel;
-
     Observable<Long> timer = Observable.interval(0, 1, TimeUnit.SECONDS)
             .take(60 + 1)
             .map(takeValue -> 60 - takeValue)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread());
-
+    private PhoneLoginViewModel mPhoneLoginViewModel;
+    //验证码输入完成后的回调
+    public CaptchaView.OnInputListener listener = new CaptchaView.OnInputListener() {
+        @Override
+        public void onSucess(String code) {
+            //注册(更改密码)
+            mPhoneLoginViewModel.accountRequest.register(mPhoneLoginViewModel.phone.get(), mPhoneLoginViewModel.password.get(), code);
+        }
+    };
 
     @Override
     protected void initViewModel() {
@@ -57,6 +63,12 @@ public class PhoneLoginActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //TODO tip：让 accountRequest 可观察页面生命周期，
+        // 从而在页面即将退出、且登录请求由于网络延迟尚未完成时，
+        // 及时通知数据层取消本次请求，以避免资源浪费和一系列不可预期的问题。
+        getLifecycle().addObserver(mPhoneLoginViewModel.accountRequest);
+
 
         //观察登录或注册状态  成功后跳转到主界面
         mPhoneLoginViewModel.accountRequest.getLoginLiveData().observe(this, loginBean -> {
@@ -106,7 +118,6 @@ public class PhoneLoginActivity extends BaseActivity {
             }
         });
     }
-
 
     public class ClickProxy {
         //返回按钮
@@ -172,15 +183,6 @@ public class PhoneLoginActivity extends BaseActivity {
             mPhoneLoginViewModel.accountRequest.sendCapture(mPhoneLoginViewModel.phone.get());
         }
     }
-
-    //验证码输入完成后的回调
-    public CaptchaView.OnInputListener listener = new CaptchaView.OnInputListener() {
-        @Override
-        public void onSucess(String code) {
-            //注册(更改密码)
-            mPhoneLoginViewModel.accountRequest.register(mPhoneLoginViewModel.phone.get(), mPhoneLoginViewModel.password.get(), code);
-        }
-    };
 
 
 }

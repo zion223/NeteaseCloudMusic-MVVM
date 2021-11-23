@@ -1,6 +1,9 @@
 package com.netease.music.domain.request;
 
 
+import androidx.annotation.NonNull;
+import androidx.lifecycle.DefaultLifecycleObserver;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
@@ -13,15 +16,18 @@ import com.netease.lib_network.ApiEngine;
 import com.netease.lib_network.ExceptionHandle;
 import com.netease.lib_network.SimpleObserver;
 
+import io.reactivex.disposables.Disposable;
 
-public class AccountRequest extends BaseRequest {
+
+public class AccountRequest extends BaseRequest implements DefaultLifecycleObserver {
 
     //登录数据(更改密码)
-    private MutableLiveData<DataResult<LoginBean>> loginData = new MutableLiveData<>();
+    private final MutableLiveData<DataResult<LoginBean>> loginData = new MutableLiveData<>();
 
     //验证码数据
-    private MutableLiveData<DataResult<CommonMessageBean>> captureData = new MutableLiveData<>();
-
+    private final MutableLiveData<DataResult<CommonMessageBean>> captureData = new MutableLiveData<>();
+    private Disposable loginDispos;
+    private Disposable captureDispos;
 
     public LiveData<DataResult<LoginBean>> getLoginLiveData() {
         return loginData;
@@ -36,6 +42,10 @@ public class AccountRequest extends BaseRequest {
         ApiEngine.getInstance().getApiService().login(phone, password)
                 .compose(ApiEngine.getInstance().applySchedulers())
                 .subscribe(new SimpleObserver<LoginBean>() {
+                    @Override
+                    public void onSubscribe(@io.reactivex.annotations.NonNull Disposable d) {
+                        loginDispos = d;
+                    }
 
                     @Override
                     protected void onSuccess(LoginBean result) {
@@ -59,6 +69,11 @@ public class AccountRequest extends BaseRequest {
                 .compose(ApiEngine.getInstance().applySchedulers())
                 .subscribe(new SimpleObserver<LoginBean>() {
                     @Override
+                    public void onSubscribe(@io.reactivex.annotations.NonNull Disposable d) {
+                        loginDispos = d;
+                    }
+
+                    @Override
                     protected void onSuccess(LoginBean loginBean) {
                         ResponseStatus responseStatus = new ResponseStatus(String.valueOf(loginBean.getCode()), loginBean.getCode() == 200);
                         loginData.postValue(new DataResult<>(loginBean, responseStatus));
@@ -80,6 +95,11 @@ public class AccountRequest extends BaseRequest {
                 .compose(ApiEngine.getInstance().applySchedulers())
                 .subscribe(new SimpleObserver<CommonMessageBean>() {
                     @Override
+                    public void onSubscribe(@io.reactivex.annotations.NonNull Disposable d) {
+                        captureDispos = d;
+                    }
+
+                    @Override
                     protected void onSuccess(CommonMessageBean result) {
                         ResponseStatus responseStatus = new ResponseStatus(String.valueOf(result.getCode()), result.getCode() == 200);
                         captureData.postValue(new DataResult<>(result, responseStatus));
@@ -91,5 +111,15 @@ public class AccountRequest extends BaseRequest {
                         loginData.postValue(new DataResult<>(null, responseStatus));
                     }
                 });
+    }
+
+    @Override
+    public void onStop(@NonNull LifecycleOwner owner) {
+        if (loginDispos != null) {
+            loginDispos.dispose();
+        }
+        if (captureDispos != null) {
+            captureDispos.dispose();
+        }
     }
 }
