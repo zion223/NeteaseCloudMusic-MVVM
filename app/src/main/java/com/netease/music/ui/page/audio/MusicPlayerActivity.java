@@ -42,6 +42,7 @@ import com.netease.lib_audio.mediaplayer.view.IndictorView;
 import com.netease.lib_common_ui.lrc.LrcView;
 import com.netease.lib_common_ui.utils.SharePreferenceUtil;
 import com.netease.lib_network.ApiEngine;
+import com.netease.lib_network.ApiService;
 import com.netease.music.R;
 import com.netease.music.data.config.TypeEnum;
 import com.netease.music.ui.page.discover.square.detail.CommentActivity;
@@ -95,6 +96,11 @@ public class MusicPlayerActivity extends AppCompatActivity {
     private PlayMode mPlayMode;//当前播放模式
     private List<String> likeList = new ArrayList<>(); //当前喜欢的音乐ID集合
 
+    /**
+     * 网络请求service
+     */
+    private ApiService apiService;
+
     //从外部启动该Activity
     public static void start(Activity context) {
         Intent intent = new Intent(context, MusicPlayerActivity.class);
@@ -113,6 +119,7 @@ public class MusicPlayerActivity extends AppCompatActivity {
         getWindow().setEnterTransition(
                 TransitionInflater.from(this).inflateTransition(R.transition.transition_bottom2top));
         EventBus.getDefault().register(this);
+        apiService = ApiEngine.getInstance().getApiService();
         initData();
         initView();
         initAnimator();
@@ -226,6 +233,8 @@ public class MusicPlayerActivity extends AppCompatActivity {
                 case REPEAT:
                     AudioController.getInstance().setPlayMode(PlayMode.LOOP);
                     break;
+                default:
+                    break;
             }
         });
 
@@ -257,8 +266,6 @@ public class MusicPlayerActivity extends AppCompatActivity {
                 mIndictorView.setVisibility(View.GONE);
                 mNeddleiew.setVisibility(View.GONE);
                 mLlOpreationView.setVisibility(View.GONE);
-
-
             }
         });
         //ViewPager转动时唱针收起
@@ -291,12 +298,14 @@ public class MusicPlayerActivity extends AppCompatActivity {
             case REPEAT:
                 mPlayModeView.setImageResource(R.mipmap.ic_player_once);
                 break;
+            default:
+                break;
         }
     }
 
     //是否喜欢该音乐
     void loadFavouriteStatus() {
-        Disposable subscribe = ApiEngine.getInstance().getApiService().getLikeList(SharePreferenceUtil.getInstance(getBaseContext()).getUserId())
+        Disposable subscribe = apiService.getLikeList(SharePreferenceUtil.getInstance(getBaseContext()).getUserId())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(likeListBean -> {
@@ -318,7 +327,7 @@ public class MusicPlayerActivity extends AppCompatActivity {
     //喜欢或取消喜欢该音乐
     private void changeFavouriteStatus() {
         final boolean liked = (boolean) mFavouriteView.getTag();
-        Disposable subscribe = ApiEngine.getInstance().getApiService().likeMusic(mAudioBean.getId(), !liked)
+        Disposable subscribe = apiService.likeMusic(mAudioBean.getId(), !liked)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(likeMusicBean -> {
@@ -346,13 +355,13 @@ public class MusicPlayerActivity extends AppCompatActivity {
         mAudioBean = AudioController.getInstance().getNowPlaying();
         mPlayMode = AudioController.getInstance().getPlayMode();
         //获取歌词
-        Disposable subscribe = ApiEngine.getInstance().getApiService().getLyric(mAudioBean.getId())
+        Disposable subscribe = apiService.getLyric(mAudioBean.getId())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(lyricBean -> lrcView.loadLrc(lyricBean.getLrc().getLyric(), lyricBean.getTlyric().getLyric()));
 
         //获取评论数量
-        Disposable subscribecomment = ApiEngine.getInstance().getApiService().getMusicComment(mAudioBean.getId())
+        Disposable subscribecomment = apiService.getMusicComment(mAudioBean.getId())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(bean -> mCommentNum.setText(bean.getTotal() > 1000 ? "999+" : String.valueOf(bean.getTotal())));
