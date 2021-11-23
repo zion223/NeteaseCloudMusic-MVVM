@@ -4,7 +4,6 @@ import com.franmontiel.persistentcookiejar.ClearableCookieJar;
 import com.franmontiel.persistentcookiejar.PersistentCookieJar;
 import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
 import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
-import com.google.gson.Gson;
 import com.kunminx.architecture.utils.Utils;
 import com.netease.lib_network.interceptor.NetWorkInterceptor;
 import com.netease.lib_network.interceptor.ResponseInterceptor;
@@ -51,11 +50,10 @@ public class ApiEngine {
 //                .cache(cache)
                 .build();
 
-        Gson gson = new Gson();
         retrofit = new Retrofit.Builder()
                 .baseUrl(ApiService.BASE_URL)
                 .client(client)
-                .addConverterFactory(GsonConverterFactory.create(gson))
+                .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
     }
