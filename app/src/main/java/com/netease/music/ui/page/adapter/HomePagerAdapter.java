@@ -36,6 +36,8 @@ public class HomePagerAdapter extends FragmentPagerAdapter {
                 return new CloudVillageFragment();
             case DiscoveryChannelEnum.VIDEO_ID:
                 return new VideoTabFragment();
+            default:
+                break;
         }
         throw new IllegalArgumentException("cannot find fragment");
     }

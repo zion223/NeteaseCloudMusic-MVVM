@@ -3,18 +3,16 @@ package com.netease.music.domain.request;
 import androidx.lifecycle.MutableLiveData;
 
 import com.chad.library.adapter.base.entity.node.BaseNode;
+import com.kunminx.architecture.domain.request.BaseRequest;
 import com.netease.lib_api.model.dj.DjSubListBean;
 import com.netease.lib_api.model.user.UserPlayListHeader;
 import com.netease.lib_api.model.user.UserPlaylistBean;
 import com.netease.lib_network.ApiEngine;
-import com.kunminx.architecture.domain.request.BaseRequest;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
 
 public class MineRequest extends BaseRequest {
 
@@ -42,8 +40,7 @@ public class MineRequest extends BaseRequest {
 
     public void requestUserPlaylist(long uid) {
         Disposable subscribe = ApiEngine.getInstance().getApiService().getUserPlaylist(uid)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .compose(ApiEngine.getInstance().applySchedulers())
                 .subscribe(playlistBeans -> {
                     List<UserPlaylistBean.PlaylistBean> playlist = playlistBeans.getPlaylist();
                     //创建的歌单和收藏的歌单的分界索引值
@@ -75,8 +72,7 @@ public class MineRequest extends BaseRequest {
 
     public void requestSubList() {
         Disposable subscribe = ApiEngine.getInstance().getApiService().getDjSubList()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .compose(ApiEngine.getInstance().applySchedulers())
                 .subscribe(djSubListBean -> djSubList.postValue(djSubListBean));
     }
 }

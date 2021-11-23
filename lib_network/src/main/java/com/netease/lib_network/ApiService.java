@@ -72,12 +72,17 @@ import com.netease.lib_api.model.user.UserFollowerBean;
 import com.netease.lib_api.model.user.UserPlaylistBean;
 
 import io.reactivex.Observable;
+import okhttp3.ResponseBody;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
 public interface ApiService {
 
     String BASE_URL = "http://192.168.1.184:3000/";
+
+
+    @GET("/")
+    Observable<ResponseBody> checkNetwork();
 
     @GET("login/cellphone")
     Observable<LoginBean> login(@Query("phone") String phone, @Query("password") String password);

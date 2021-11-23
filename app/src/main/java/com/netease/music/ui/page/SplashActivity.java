@@ -5,14 +5,18 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.netease.lib_common_ui.utils.SharePreferenceUtil;
 import com.kunminx.architecture.utils.BarUtils;
 import com.kunminx.architecture.utils.Utils;
+import com.netease.lib_common_ui.utils.SharePreferenceUtil;
+import com.netease.lib_network.ApiEngine;
+import com.netease.lib_network.ExceptionHandle;
+import com.netease.lib_network.SimpleObserver;
 import com.netease.music.MainActivity;
 import com.netease.music.R;
 import com.netease.music.ui.page.login.LoginActivity;
@@ -23,6 +27,7 @@ import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
 import io.reactivex.disposables.Disposable;
+import okhttp3.ResponseBody;
 import pub.devrel.easypermissions.AppSettingsDialog;
 import pub.devrel.easypermissions.EasyPermissions;
 
@@ -35,13 +40,16 @@ public class SplashActivity extends AppCompatActivity implements EasyPermissions
     private static final String[] PERMS = {Manifest.permission.READ_PHONE_STATE
             , Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
+    private Disposable timerDisposable;
+    private Observable<Long> timer;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         BarUtils.setStatusBarColor(this, Color.TRANSPARENT);
 
         setContentView(R.layout.delegate_splash);
-
+        timer = Observable.timer(2, TimeUnit.SECONDS);
         if (!EasyPermissions.hasPermissions(this, PERMS)) {
             EasyPermissions.requestPermissions(this, getString(R.string.reuqest_permission), REQUEST_CODE, PERMS);
         } else {
@@ -73,18 +81,37 @@ public class SplashActivity extends AppCompatActivity implements EasyPermissions
     }
 
     private void jumpIntoMainActivity() {
-        Disposable subscribe = Observable.timer(2, TimeUnit.SECONDS)
-                .subscribe(aLong -> {
-                    //初始化本地音乐数量  在授予权限后在初始化 避免出现未授权异常
-                    final SharePreferenceUtil preferenceUtil = SharePreferenceUtil.getInstance(Utils.getApp());
-                    if (preferenceUtil.getLocalMusicCount(-1) == -1) {
-                        preferenceUtil.saveLocalMusicCount(MusicUtils.queryMusicSize(Utils.getApp(), MusicUtils.START_FROM_LOCAL));
+        ApiEngine.getInstance().getApiService().checkNetwork()
+                .compose(ApiEngine.getInstance().applySchedulers())
+                .subscribe(new SimpleObserver<ResponseBody>() {
+                    @Override
+                    protected void onSuccess(ResponseBody result) {
+                        timerDisposable = timer.subscribe(aLong -> {
+                            //初始化本地音乐数量  在授予权限后在初始化 避免出现未授权异常
+                            final SharePreferenceUtil preferenceUtil = SharePreferenceUtil.getInstance(Utils.getApp());
+                            if (preferenceUtil.getLocalMusicCount(-1) == -1) {
+                                preferenceUtil.saveLocalMusicCount(MusicUtils.queryMusicSize(Utils.getApp(), MusicUtils.START_FROM_LOCAL));
+                            }
+                            // 根据token选择跳转Activity
+                            startActivity(new Intent(SplashActivity.this,
+                                    TextUtils.isEmpty(preferenceUtil.getAuthToken("")) ? LoginActivity.class : MainActivity.class));
+                            finish();
+                        });
                     }
-                    // 根据token选择跳转Activity
-                    startActivity(new Intent(SplashActivity.this,
-                            TextUtils.isEmpty(preferenceUtil.getAuthToken("")) ? LoginActivity.class : MainActivity.class));
-                    finish();
+
+                    @Override
+                    protected void onFailed(ExceptionHandle.ResponseThrowable errorMsg) {
+                        Toast.makeText(SplashActivity.this, errorMsg.message + getString(R.string.check_network), Toast.LENGTH_SHORT).show();
+                    }
                 });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (timerDisposable != null) {
+            timerDisposable.dispose();
+        }
     }
 }
 

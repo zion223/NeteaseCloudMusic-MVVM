@@ -38,7 +38,7 @@ public class MusicService extends Service implements NotificationHelper.Notifica
 		if (!AppCommonUtils.isServiceRunning(MusicService.class.getName())) {
 			Intent intent = new Intent(AudioHelper.getContext(), MusicService.class);
 			intent.setAction(ACTION_START);
-			AudioHelper.getContext().startService(intent);
+//			AudioHelper.getContext().startService(intent);
 		}
 	}
 
