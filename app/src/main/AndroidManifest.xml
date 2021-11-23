@@ -55,7 +55,9 @@
         <activity android:name=".ui.page.mine.radio.MyRadioActivity" />
         <activity android:name=".ui.page.video.mv.MvDetailActivity" />
         <!-- 闪屏界面作为应用的入口-->
-        <activity android:name=".ui.page.SplashActivity">
+        <activity
+            android:name=".ui.page.SplashActivity"
+            android:theme="@style/AppTheme.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -9,4 +9,15 @@
         <item name="android:fitsSystemWindows">true</item>
     </style>
 
+    <style name="AppTheme.Splash" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <!--将顶部状态栏设置为透明，并将界面内容布局上边界上提至状态栏顶部-->
+        <item name="android:windowTranslucentStatus">true</item>
+        <!--如果有底部虚拟导航栏，则将底部虚拟导航栏设置为透明，并将界面内容布局下边界下沉至虚拟导航栏底部-->
+        <item name="android:windowTranslucentNavigation">true</item>
+        <!--给window窗口设置背景图-->
+        <item name="android:windowBackground">@drawable/splash_view</item>
+
+    </style>
+
+
 </resources>

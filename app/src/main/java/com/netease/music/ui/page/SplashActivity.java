@@ -45,6 +45,7 @@ public class SplashActivity extends AppCompatActivity implements EasyPermissions
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        getWindow().setBackgroundDrawable(null);
         super.onCreate(savedInstanceState);
         BarUtils.setStatusBarColor(this, Color.TRANSPARENT);
 
