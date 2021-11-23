@@ -4,6 +4,8 @@ package com.netease.music.domain.request;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.kunminx.architecture.data.response.DataResult;
+import com.kunminx.architecture.data.response.ResponseStatus;
 import com.kunminx.architecture.domain.request.BaseRequest;
 import com.netease.lib_api.model.notification.CommonMessageBean;
 import com.netease.lib_api.model.user.LoginBean;
@@ -11,32 +13,22 @@ import com.netease.lib_network.ApiEngine;
 import com.netease.lib_network.ExceptionHandle;
 import com.netease.lib_network.SimpleObserver;
 
-import io.reactivex.Observer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
-
 
 public class AccountRequest extends BaseRequest {
 
     //登录数据(更改密码)
-    private MutableLiveData<LoginBean> loginData = new MutableLiveData<>();
-    private MutableLiveData<ExceptionHandle.ResponseThrowable> errorData = new MutableLiveData<>();
+    private MutableLiveData<DataResult<LoginBean>> loginData = new MutableLiveData<>();
 
     //验证码数据
-    private MutableLiveData<CommonMessageBean> captureData = new MutableLiveData<>();
+    private MutableLiveData<DataResult<CommonMessageBean>> captureData = new MutableLiveData<>();
 
 
-    public LiveData<LoginBean> getLoginLiveData() {
+    public LiveData<DataResult<LoginBean>> getLoginLiveData() {
         return loginData;
     }
 
-    public LiveData<CommonMessageBean> getCaptureLiveData() {
+    public LiveData<DataResult<CommonMessageBean>> getCaptureLiveData() {
         return captureData;
-    }
-
-    public LiveData<ExceptionHandle.ResponseThrowable> getErrorLiveData() {
-        return errorData;
     }
 
     //请求登录
@@ -47,12 +39,14 @@ public class AccountRequest extends BaseRequest {
 
                     @Override
                     protected void onSuccess(LoginBean result) {
-                        loginData.postValue(result);
+                        ResponseStatus responseStatus = new ResponseStatus(String.valueOf(result.getCode()), result.getCode() == 200);
+                        loginData.postValue(new DataResult<>(result, responseStatus));
                     }
 
                     @Override
                     protected void onFailed(ExceptionHandle.ResponseThrowable result) {
-                        errorData.postValue(result);
+                        ResponseStatus responseStatus = new ResponseStatus(String.valueOf(result.code), false);
+                        loginData.postValue(new DataResult<>(null, responseStatus));
                     }
                 });
 
@@ -66,41 +60,35 @@ public class AccountRequest extends BaseRequest {
                 .subscribe(new SimpleObserver<LoginBean>() {
                     @Override
                     protected void onSuccess(LoginBean loginBean) {
-                        loginData.postValue(loginBean);
+                        ResponseStatus responseStatus = new ResponseStatus(String.valueOf(loginBean.getCode()), loginBean.getCode() == 200);
+                        loginData.postValue(new DataResult<>(loginBean, responseStatus));
                     }
 
                     @Override
                     protected void onFailed(ExceptionHandle.ResponseThrowable result) {
-                        errorData.postValue(result);
+                        ResponseStatus responseStatus = new ResponseStatus(String.valueOf(result.code), false);
+                        loginData.postValue(new DataResult<>(null, responseStatus));
                     }
                 });
 
     }
 
+    // 发送验证码
     public void sendCapture(String phone) {
 
         ApiEngine.getInstance().getApiService().capture(phone)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<CommonMessageBean>() {
+                .compose(ApiEngine.getInstance().applySchedulers())
+                .subscribe(new SimpleObserver<CommonMessageBean>() {
                     @Override
-                    public void onSubscribe(Disposable d) {
-
+                    protected void onSuccess(CommonMessageBean result) {
+                        ResponseStatus responseStatus = new ResponseStatus(String.valueOf(result.getCode()), result.getCode() == 200);
+                        captureData.postValue(new DataResult<>(result, responseStatus));
                     }
 
                     @Override
-                    public void onNext(CommonMessageBean message) {
-                        captureData.postValue(message);
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
-
+                    protected void onFailed(ExceptionHandle.ResponseThrowable errorMsg) {
+                        ResponseStatus responseStatus = new ResponseStatus(String.valueOf(errorMsg.code), false);
+                        loginData.postValue(new DataResult<>(null, responseStatus));
                     }
                 });
     }

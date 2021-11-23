@@ -38,7 +38,7 @@ public class DrawerRequest extends BaseRequest {
 
                     @Override
                     protected void onFailed(ExceptionHandle.ResponseThrowable errorMsg) {
-
+                        mLoginOutLiveData.postValue(new DataResult<>(null, new ResponseStatus(String.valueOf(errorMsg.code), false)));
                     }
                 });
     }

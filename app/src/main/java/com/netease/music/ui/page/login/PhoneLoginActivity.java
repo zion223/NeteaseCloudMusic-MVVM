@@ -60,20 +60,20 @@ public class PhoneLoginActivity extends BaseActivity {
 
         //观察登录或注册状态  成功后跳转到主界面
         mPhoneLoginViewModel.accountRequest.getLoginLiveData().observe(this, loginBean -> {
-            if (loginBean.isSuccess()) {
+            if (loginBean.getResponseStatus().isSuccess()) {
                 //登陆成功
-                SharePreferenceUtil.getInstance(Utils.getApp()).saveUserInfo(loginBean, mPhoneLoginViewModel.phone.get());
+                SharePreferenceUtil.getInstance(Utils.getApp()).saveUserInfo(loginBean.getResult(), mPhoneLoginViewModel.phone.get());
                 startActivity(new Intent(PhoneLoginActivity.this, MainActivity.class));
                 finish();
             } else {
                 //登陆失败
-                showLongToast(loginBean.getMsg());
+                showLongToast(loginBean.getResult().getMsg());
                 mPhoneLoginViewModel.password.set("");
             }
         });
         //观察验证码发送状态  成功后显示验证码输入界面 并且倒计时启动
         mPhoneLoginViewModel.accountRequest.getCaptureLiveData().observe(this, message -> {
-            if (message.getCode() == 200) {
+            if (message.getResponseStatus().isSuccess()) {
                 //验证码发送成功
                 mPhoneLoginViewModel.showCaptureView.set(true);
                 mPhoneLoginViewModel.showInputPasswordView.set(false);
@@ -102,12 +102,8 @@ public class PhoneLoginActivity extends BaseActivity {
 
             } else {
                 //验证码发送失败 给予失败信息提示
-                showLongToast(message.getMessage());
+                showLongToast(message.getResponseStatus().getResponseCode());
             }
-        });
-
-        mPhoneLoginViewModel.accountRequest.getErrorLiveData().observe(this, errorMsg -> {
-            showShortToast(errorMsg.message + errorMsg.code);
         });
     }
 

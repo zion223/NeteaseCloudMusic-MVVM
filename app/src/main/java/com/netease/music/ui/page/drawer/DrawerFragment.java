@@ -11,8 +11,8 @@ import com.lxj.xpopup.XPopup;
 import com.netease.lib_audio.mediaplayer.core.AudioController;
 import com.netease.lib_common_ui.dialog.TimerOffDialog;
 import com.netease.lib_common_ui.utils.SharePreferenceUtil;
-import com.netease.music.R;
 import com.netease.music.BR;
+import com.netease.music.R;
 import com.netease.music.ui.callback.SharedViewModel;
 import com.netease.music.ui.page.login.LoginActivity;
 import com.netease.music.ui.state.DrawerViewModel;
@@ -58,7 +58,7 @@ public class DrawerFragment extends BaseFragment {
                 mSharedViewModel.requestToFinishActivity(true);
                 startActivity(new Intent(getContext(), LoginActivity.class));
             } else {
-                showShortToast(R.string.op_failed);
+                showShortToast(dataResult.getResponseStatus().getResponseCode() + getString(R.string.op_failed));
             }
         });
     }
