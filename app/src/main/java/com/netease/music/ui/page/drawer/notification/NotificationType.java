@@ -21,6 +21,8 @@ public enum NotificationType {
                 return NOTICE;
             case 0x004:
                 return PRIVATE_LETTER;
+            default:
+                break;
         }
         return null;
     }

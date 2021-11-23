@@ -107,6 +107,8 @@ public class SearchUtil {
             case 21:
                 eventType = "分享视频：";
                 break;
+            default:
+                break;
         }
         return eventType;
     }

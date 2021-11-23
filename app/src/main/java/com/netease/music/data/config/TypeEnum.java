@@ -54,6 +54,8 @@ public enum TypeEnum {
                 return EVENT;
             case SONG_ID:
                 return SONG;
+            default:
+                break;
         }
         throw new IllegalArgumentException("cannot find type");
     }

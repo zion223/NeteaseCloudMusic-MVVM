@@ -204,6 +204,8 @@ public class MusicListDialog extends BottomPopupView implements View.OnClickList
                     case REPEAT:
                         AudioController.getInstance().setPlayMode(PlayMode.LOOP);
                         break;
+                    default:
+                        break;
                 }
                 break;
             default:

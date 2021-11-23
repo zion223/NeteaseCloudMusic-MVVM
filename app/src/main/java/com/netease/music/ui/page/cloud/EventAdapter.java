@@ -163,7 +163,8 @@ public class EventAdapter extends BaseQuickAdapter<UserEventBean.EventsBean, Bas
                 case 21:
                     adapter.setText(R.id.tv_title, "分享视频：");
                     break;
-
+                default:
+                    break;
             }
 
         }
