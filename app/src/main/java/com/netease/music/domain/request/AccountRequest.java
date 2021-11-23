@@ -21,13 +21,18 @@ import io.reactivex.disposables.Disposable;
 
 public class AccountRequest extends BaseRequest implements DefaultLifecycleObserver {
 
+
+    /**
+     * 登录相关的Disposable
+     */
+    private Disposable loginDispos;
+    private Disposable captureDispos;
+
     //登录数据(更改密码)
     private final MutableLiveData<DataResult<LoginBean>> loginData = new MutableLiveData<>();
 
     //验证码数据
     private final MutableLiveData<DataResult<CommonMessageBean>> captureData = new MutableLiveData<>();
-    private Disposable loginDispos;
-    private Disposable captureDispos;
 
     public LiveData<DataResult<LoginBean>> getLoginLiveData() {
         return loginData;
