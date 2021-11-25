@@ -18,6 +18,10 @@ import com.netease.lib_common_ui.R;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 输入验证码的自定义View
+ * @author Administrator
+ */
 public class CaptchaView extends RelativeLayout {
 	private Context context;
 	private TextView tv_code1;

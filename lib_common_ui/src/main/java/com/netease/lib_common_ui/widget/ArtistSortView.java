@@ -157,6 +157,6 @@ public class ArtistSortView extends LinearLayout implements View.OnClickListener
 	}
 
 	public interface OnChooseArtistSortListener {
-		public void onChoose(int type, int area);
+		void onChoose(int type, int area);
 	}
 }
