@@ -162,7 +162,7 @@ public class CommonBindingAdapter {
     }
 
     @BindingAdapter(value = {"bannerPic", "bannerListener"}, requireAll = false)
-    public static void setDefault(ConvenientBanner convenientBanner,
+    public static void setDefault(ConvenientBanner<String> convenientBanner,
                                   List<String> banners,
                                   OnItemClickListener listener) {
         convenientBanner.setPages(new HolderCreator(), banners)
