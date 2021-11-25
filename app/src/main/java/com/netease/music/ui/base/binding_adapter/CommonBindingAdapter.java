@@ -18,6 +18,7 @@ package com.netease.music.ui.base.binding_adapter;
 
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -123,6 +124,12 @@ public class CommonBindingAdapter {
     public static void setOnEditorActionListener(EditText editText, TextView.OnEditorActionListener listener) {
         editText.setOnEditorActionListener(listener);
     }
+
+    @BindingAdapter(value = {"textChangedListener"})
+    public static void addTextChangedListener(EditText editText, TextWatcher listener) {
+        editText.addTextChangedListener(listener);
+    }
+
 
     @BindingAdapter(value = {"viewPagerAdapter"})
     public static void setViewPagerAdapter(ViewPager viewPager, PagerAdapter adapter) {

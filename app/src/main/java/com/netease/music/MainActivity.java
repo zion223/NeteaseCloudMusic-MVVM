@@ -74,7 +74,8 @@ public class MainActivity extends BaseActivity {
         // 观察是否需要立即 finish当前Activity
         mSharedViewModel.isToCloseActivityImmediately().observeInActivity(this, aBoolean -> {
             if (aBoolean) {
-                exitApp();
+                //exitApp();
+                finish();
             }
         });
 

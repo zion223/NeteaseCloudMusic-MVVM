@@ -22,6 +22,10 @@ public class LoginBean {
     private ProfileBean profile;
     private List<BindingsBean> bindings;
 
+    public LoginBean(String msg) {
+        this.msg = msg;
+    }
+
     public String getMsg() {
         return msg;
     }

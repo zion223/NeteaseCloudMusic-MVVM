@@ -12,216 +12,250 @@
             type="com.netease.music.ui.page.login.PhoneLoginActivity.ClickProxy" />
 
         <variable
-            name="listener"
+            name="captchaViewInputListener"
             type="com.netease.lib_common_ui.widget.CaptchaView.OnInputListener" />
+
+        <variable
+            name="phoneTextWatcher"
+            type="android.text.TextWatcher" />
     </data>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-
-    <LinearLayout
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:id="@+id/img_tab_back"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_margin="10dp"
-            onClickWithDebouncing="@{() -> proxy.back()}"
-            android:src="@drawable/ic_left_arrow_black" />
-
-        <TextView
-            android:id="@+id/tv_login_title"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="7"
-            android:gravity="center_vertical"
-            android:text="@{vm.title}"
-            android:textColor="@color/black"
-            android:textSize="18sp" />
-
-    </LinearLayout>
-
-    <RelativeLayout
-        android:id="@+id/rv_login_phone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        visible="@{vm.showInputPhoneView}">
-
-        <TextView
-            android:id="@+id/tv_show_auto_signin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="40dp"
-            android:text="未注册手机号登录后将自动创建账号"
-            android:textSize="13sp" />
-
-        <TextView
-            android:id="@+id/tv_86"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_show_auto_signin"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:text="+86"
-            android:textColor="@color/black"
-            android:textSize="18sp" />
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_login_phone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_show_auto_signin"
-            android:layout_alignBottom="@+id/tv_86"
-            android:layout_marginTop="20dp"
-            android:layout_toRightOf="@+id/tv_86"
-            android:background="@null"
-            android:text="@={vm.phone}"
-            android:paddingLeft="10dp" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_below="@+id/tv_86"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="20dp"
-            android:background="@color/app_background" />
-
-        <TextView
-            android:id="@+id/tv_login_next"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="150dp"
-            android:layout_marginEnd="30dp"
-            android:layout_marginBottom="110dp"
-            android:background="@drawable/bg_common_button"
-            android:gravity="center"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            onClickWithDebouncing="@{() -> proxy.next()}"
-            android:text="下一步"
-            android:textColor="@android:color/white"
-            android:textSize="15sp" />
-    </RelativeLayout>
-
-    <LinearLayout
-        android:id="@+id/rv_login_password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        visible="@{vm.showInputPasswordView}">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
             android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/et_login_password"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_weight="8"
-                android:background="@null"
-                android:inputType="textPassword"
-                android:hint="@{vm.passwordHint}"
-                android:text="@={vm.password}"
-                android:paddingLeft="10dp" />
+            <ImageView
+                android:id="@+id/img_tab_back"
+                onClickWithDebouncing="@{() -> proxy.back()}"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/ic_left_arrow_black" />
 
             <TextView
-                android:id="@+id/tv_login_forget"
-                android:layout_width="wrap_content"
+                android:id="@+id/tv_login_title"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
-                android:text="忘记密码?"
-                onClickWithDebouncing="@{() -> proxy.forgetPassword()}"
-                visible="@{!vm.showForgetPasswordView}"
-                android:textColor="@color/blue"
-                android:textSize="11sp" />
+                android:layout_gravity="center"
+                android:layout_weight="7"
+                android:gravity="center_vertical"
+                android:text="@{vm.title}"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
         </LinearLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_below="@+id/et_login_password"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="20dp"
-            android:background="@color/app_background" />
 
-        <TextView
-            android:id="@+id/tv_login_login"
+        <RelativeLayout
+            android:id="@+id/rv_login_phone"
+            visible="@{vm.showInputPhoneView}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_show_auto_signin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="40dp"
+                android:text="未注册手机号登录后将自动创建账号"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/tv_86"
+                textColor="@{vm.prePhoneColor}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_show_auto_signin"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:text="+86"
+                android:textSize="18sp" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_login_phone"
+                textChangedListener="@{phoneTextWatcher}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_show_auto_signin"
+                android:layout_alignBottom="@+id/tv_86"
+                android:layout_marginTop="20dp"
+                android:layout_toRightOf="@+id/tv_86"
+                android:background="@null"
+                android:paddingLeft="10dp"
+                android:text="@={vm.phone}" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/tv_86"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:background="@color/app_background" />
+
+            <TextView
+                android:id="@+id/tv_login_next"
+                onClickWithDebouncing="@{() -> proxy.next()}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="150dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="110dp"
+                android:background="@drawable/bg_common_button"
+                android:gravity="center"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:text="下一步"
+                android:textColor="@android:color/white"
+                android:textSize="15sp" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/rv_login_password"
+            visible="@{vm.showInputPasswordView}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="80dp"
-            android:layout_marginEnd="30dp"
-            android:layout_marginBottom="110dp"
-            android:background="@drawable/bg_common_button"
-            android:gravity="center"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            onClickWithDebouncing="@{() -> proxy.login()}"
-            android:text='@{vm.showForgetPasswordView? "下一步": "登录"}'
-            android:textColor="@android:color/white"
-            android:textSize="15sp" />
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/et_login_password"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="8"
+                    android:background="@null"
+                    android:hint="@{vm.passwordHint}"
+                    android:inputType="textPassword"
+                    android:paddingLeft="10dp"
+                    android:text="@={vm.password}" />
+
+                <TextView
+                    android:id="@+id/tv_login_forget"
+                    onClickWithDebouncing="@{() -> proxy.forgetPassword()}"
+                    visible="@{!vm.showForgetPasswordView}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:text="忘记密码?"
+                    android:textColor="@color/blue"
+                    android:textSize="11sp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/et_login_password"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:background="@color/app_background" />
+
+
+            <ProgressBar
+                android:id="@+id/progress"
+                style="@style/Widget.AppCompat.ProgressBar"
+                visible="@{vm.loadingVisible}"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
+                android:indeterminate="true"
+                android:indeterminateTint="#ffff4b4b"
+                android:indeterminateTintMode="src_atop" />
+
+            <TextView
+                android:id="@+id/tv_login_login"
+                onClickWithDebouncing="@{() -> proxy.login()}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="80dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="110dp"
+                android:background="@drawable/bg_common_button"
+                android:gravity="center"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:text='@{vm.showForgetPasswordView? "下一步": "登录"}'
+                android:textColor="@android:color/white"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_captcha"
+            visible="@{vm.showCaptureView}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp">
+
+            <TextView
+                android:id="@+id/tv_capcha_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="验证码已发送至"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_captcha_timer"
+                onClickWithDebouncing="@{() -> proxy.reObtainCpatureCode()}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="20dp"
+                android:enabled="@{vm.enableCaptureButton}"
+                android:text="@{vm.countDownText}" />
+
+            <TextView
+                android:id="@+id/tv_capcha_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_capcha_title"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:text='@{vm.phone.length() >= 11 ? vm.phone.substring(0,3) + "****" + vm.phone.substring(7) : ""}' />
+
+            <com.netease.lib_common_ui.widget.CaptchaView
+                android:id="@+id/captcha_view"
+                initCaptureViewListener="@{captchaViewInputListener}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_capcha_phone"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp" />
+
+            <ProgressBar
+                style="@style/Widget.AppCompat.ProgressBar"
+                visible="@{vm.loadingVisible}"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/captcha_view"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="30dp"
+                android:indeterminate="true"
+                android:indeterminateTint="#ffff4b4b"
+                android:indeterminateTintMode="src_atop" />
+
+        </RelativeLayout>
+
+
     </LinearLayout>
-
-    <RelativeLayout
-        android:id="@+id/rl_captcha"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        visible="@{vm.showCaptureView}">
-
-        <TextView
-            android:id="@+id/tv_capcha_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:text="验证码已发送至"
-            android:textColor="@color/black"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/tv_captcha_timer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="5dp"
-            onClickWithDebouncing="@{() -> proxy.reObtainCpatureCode()}"
-            android:enabled="@{vm.enableCaptureButton}"
-            android:layout_marginRight="20dp"
-            android:text="@{vm.countDownText}" />
-
-        <TextView
-            android:id="@+id/tv_capcha_phone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_capcha_title"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="20dp"
-            android:text='@{vm.phone.length() >= 11 ? vm.phone.substring(0,3) + "****" + vm.phone.substring(7) : ""}' />
-
-        <com.netease.lib_common_ui.widget.CaptchaView
-            android:id="@+id/captcha_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_capcha_phone"
-            initCaptureViewListener="@{listener}"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp" />
-
-    </RelativeLayout>
-</LinearLayout>
 </layout>

@@ -4,6 +4,7 @@ import androidx.databinding.ObservableBoolean;
 import androidx.databinding.ObservableField;
 import androidx.lifecycle.ViewModel;
 
+import com.netease.music.R;
 import com.netease.music.domain.request.AccountRequest;
 
 public class PhoneLoginViewModel extends ViewModel {
@@ -29,6 +30,12 @@ public class PhoneLoginViewModel extends ViewModel {
     //密码
     public final ObservableField<String> password = new ObservableField<>();
 
+    // 显示loading转圈
+    public final ObservableBoolean loadingVisible = new ObservableBoolean();
+
+    // +86的颜色
+    public final ObservableField<Integer> prePhoneColor = new ObservableField<>();
+
     public final AccountRequest accountRequest = new AccountRequest();
 
     {
@@ -37,5 +44,6 @@ public class PhoneLoginViewModel extends ViewModel {
         title.set("手机号登录");
         phone.set("");
         enableCaptureButton.set(false);
+        prePhoneColor.set(R.color.gray);
     }
 }

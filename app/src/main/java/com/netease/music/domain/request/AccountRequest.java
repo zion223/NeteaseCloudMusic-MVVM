@@ -16,6 +16,8 @@ import com.netease.lib_network.ApiEngine;
 import com.netease.lib_network.ExceptionHandle;
 import com.netease.lib_network.SimpleObserver;
 
+import java.util.concurrent.TimeUnit;
+
 import io.reactivex.disposables.Disposable;
 
 
@@ -46,6 +48,7 @@ public class AccountRequest extends BaseRequest implements DefaultLifecycleObser
     public void requestLogin(String phone, String password) {
         ApiEngine.getInstance().getApiService().login(phone, password)
                 .compose(ApiEngine.getInstance().applySchedulers())
+                .delay(3, TimeUnit.SECONDS)
                 .subscribe(new SimpleObserver<LoginBean>() {
                     @Override
                     public void onSubscribe(@io.reactivex.annotations.NonNull Disposable d) {
@@ -72,6 +75,7 @@ public class AccountRequest extends BaseRequest implements DefaultLifecycleObser
 
         ApiEngine.getInstance().getApiService().register(phone, password, code)
                 .compose(ApiEngine.getInstance().applySchedulers())
+                .delay(3, TimeUnit.SECONDS)
                 .subscribe(new SimpleObserver<LoginBean>() {
                     @Override
                     public void onSubscribe(@io.reactivex.annotations.NonNull Disposable d) {
@@ -87,7 +91,7 @@ public class AccountRequest extends BaseRequest implements DefaultLifecycleObser
                     @Override
                     protected void onFailed(ExceptionHandle.ResponseThrowable result) {
                         ResponseStatus responseStatus = new ResponseStatus(String.valueOf(result.code), false);
-                        loginData.postValue(new DataResult<>(null, responseStatus));
+                        loginData.postValue(new DataResult<>(new LoginBean(result.message), responseStatus));
                     }
                 });
 

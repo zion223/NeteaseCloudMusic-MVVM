@@ -3,6 +3,9 @@ package com.netease.music.ui.page.login;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 
 import androidx.annotation.Nullable;
 
@@ -44,7 +47,24 @@ public class PhoneLoginActivity extends BaseActivity {
         @Override
         public void onSucess(String code) {
             //注册(更改密码)
+            mPhoneLoginViewModel.loadingVisible.set(true);
             mPhoneLoginViewModel.accountRequest.register(mPhoneLoginViewModel.phone.get(), mPhoneLoginViewModel.password.get(), code);
+        }
+    };
+    private final TextWatcher phoneTextWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            mPhoneLoginViewModel.prePhoneColor.set(TextUtils.isEmpty(s.toString()) ? R.color.gray : R.color.black);
         }
     };
 
@@ -57,7 +77,8 @@ public class PhoneLoginActivity extends BaseActivity {
     protected DataBindingConfig getDataBindingConfig() {
         return new DataBindingConfig(R.layout.delegate_phone_login, BR.vm, mPhoneLoginViewModel)
                 .addBindingParam(BR.proxy, new ClickProxy())
-                .addBindingParam(BR.listener, listener);
+                .addBindingParam(BR.captchaViewInputListener, listener)
+                .addBindingParam(BR.phoneTextWatcher, phoneTextWatcher);
     }
 
     @Override
@@ -72,6 +93,7 @@ public class PhoneLoginActivity extends BaseActivity {
 
         //观察登录或注册状态  成功后跳转到主界面
         mPhoneLoginViewModel.accountRequest.getLoginLiveData().observe(this, loginBean -> {
+            mPhoneLoginViewModel.loadingVisible.set(false);
             if (loginBean.getResponseStatus().isSuccess()) {
                 //登陆成功
                 SharePreferenceUtil.getInstance(Utils.getApp()).saveUserInfo(loginBean.getResult(), mPhoneLoginViewModel.phone.get());
@@ -79,13 +101,14 @@ public class PhoneLoginActivity extends BaseActivity {
                 finish();
             } else {
                 //登陆失败
-                showLongToast(loginBean.getResult().getMsg());
+                showLongToast(loginBean.getResponseStatus().getResponseCode() + loginBean.getResult().getMsg());
                 mPhoneLoginViewModel.password.set("");
             }
         });
         //观察验证码发送状态  成功后显示验证码输入界面 并且倒计时启动
         mPhoneLoginViewModel.accountRequest.getCaptureLiveData().observe(this, message -> {
             if (message.getResponseStatus().isSuccess()) {
+                showShortToast(R.string.capture_code_success);
                 //验证码发送成功
                 mPhoneLoginViewModel.showCaptureView.set(true);
                 mPhoneLoginViewModel.showInputPasswordView.set(false);
@@ -136,6 +159,11 @@ public class PhoneLoginActivity extends BaseActivity {
                 //当前在输入密码界面 返回时显示输入手机号界面
                 mPhoneLoginViewModel.showInputPasswordView.set(false);
                 mPhoneLoginViewModel.showInputPhoneView.set(true);
+            } else {
+                // 在输入验证码界面 返回时显示 设置登录密码界面
+                mPhoneLoginViewModel.showInputPasswordView.set(true);
+                mPhoneLoginViewModel.showForgetPasswordView.set(true);
+                mPhoneLoginViewModel.showCaptureView.set(false);
             }
         }
 
@@ -149,7 +177,7 @@ public class PhoneLoginActivity extends BaseActivity {
                 //密码框获取到焦点
             } else {
                 //手机号格式不正确
-                showShortToast("请输入正确格式的手机号");
+                showShortToast(R.string.input_correct_phone_number);
             }
         }
 
@@ -166,6 +194,7 @@ public class PhoneLoginActivity extends BaseActivity {
 
             } else {
                 //登录请求
+                mPhoneLoginViewModel.loadingVisible.set(true);
                 mPhoneLoginViewModel.accountRequest.requestLogin(mPhoneLoginViewModel.phone.get(), mPhoneLoginViewModel.password.get());
             }
         }

@@ -129,4 +129,11 @@ public class DrawerFragment extends BaseFragment {
         }
     };
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mPauseMusicDisposable != null) {
+            mPauseMusicDisposable.dispose();
+        }
+    }
 }

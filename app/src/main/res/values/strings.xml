@@ -11,4 +11,6 @@
     <string name="check_network">当前网络不可用，请检查你的网络设置</string>
     <string name="agree_rule">请点击同意《用户协议》和《隐私政策》《儿童隐私政策》</string>
     <string name="exit_app_toast">"再按一次退出程序"</string>
+    <string name="input_correct_phone_number">"请输入十一位数字的手机号"</string>
+    <string name="capture_code_success">"验证码发送成功，请注意查收"</string>
 </resources>

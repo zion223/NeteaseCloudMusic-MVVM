@@ -13,7 +13,6 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-
 import com.netease.lib_common_ui.R;
 
 import java.util.ArrayList;
@@ -133,23 +132,23 @@ public class CaptchaView extends RelativeLayout {
 	 * 设置高亮颜色
 	 */
 	private void setColor() {
-		int color_default = Color.parseColor("#333333");
-		int color_focus = Color.parseColor("#D81B60");
-		v1.setBackgroundColor(color_default);
-		v2.setBackgroundColor(color_default);
-		v3.setBackgroundColor(color_default);
-		v4.setBackgroundColor(color_default);
+		int colorDefault = Color.parseColor("#333333");
+		int colorFocus = Color.parseColor("#D81B60");
+		v1.setBackgroundColor(colorDefault);
+		v2.setBackgroundColor(colorDefault);
+		v3.setBackgroundColor(colorDefault);
+		v4.setBackgroundColor(colorDefault);
 		if (codes.size() == 0) {
-			v1.setBackgroundColor(color_focus);
+			v1.setBackgroundColor(colorFocus);
 		}
 		if (codes.size() == 1) {
-			v2.setBackgroundColor(color_focus);
+			v2.setBackgroundColor(colorFocus);
 		}
 		if (codes.size() == 2) {
-			v3.setBackgroundColor(color_focus);
+			v3.setBackgroundColor(colorFocus);
 		}
 		if (codes.size() >= 3) {
-			v4.setBackgroundColor(color_focus);
+			v4.setBackgroundColor(colorFocus);
 		}
 	}
 
