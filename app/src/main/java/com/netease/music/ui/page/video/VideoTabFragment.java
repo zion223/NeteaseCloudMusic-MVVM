@@ -11,7 +11,6 @@ import com.kunminx.architecture.ui.page.BaseFragment;
 import com.kunminx.architecture.ui.page.DataBindingConfig;
 import com.netease.music.BR;
 import com.netease.music.R;
-import com.netease.music.ui.page.drawer.DrawerFragment;
 import com.netease.music.ui.page.video.mv.MvFragment;
 import com.netease.music.ui.state.VideoTabViewModel;
 
@@ -37,11 +36,11 @@ public class VideoTabFragment extends BaseFragment {
         super.onCreate(savedInstanceState);
 
         //标题
-        mViewModel.request.getTitleLiveData().observe(this, title -> {
+        mViewModel.request.getTitleLiveData().observe(getViewLifecycleOwner(), title -> {
             mViewModel.indicatorTitle.set(title);
         });
         //分页ID
-        mViewModel.request.getVideoTabIdLiveData().observe(this, idArray -> {
+        mViewModel.request.getVideoTabIdLiveData().observe(getViewLifecycleOwner(), idArray -> {
             VideoTabAdapter mAdapter = new VideoTabAdapter(idArray, getChildFragmentManager());
             mViewModel.adapter.set(mAdapter);
         });

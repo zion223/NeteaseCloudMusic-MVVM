@@ -50,7 +50,7 @@ public class DrawerFragment extends BaseFragment {
         preferenceUtill = SharePreferenceUtil.getInstance(getContext());
 
         // 观察LiveData
-        mDrawerViewModel.request.getLoginOutLiveData().observe(this, dataResult -> {
+        mDrawerViewModel.request.getLoginOutLiveData().observe(getViewLifecycleOwner(), dataResult -> {
             if (dataResult.getResponseStatus().isSuccess()) {
                 // 成功退出登录
                 preferenceUtill.removeUserInfo();

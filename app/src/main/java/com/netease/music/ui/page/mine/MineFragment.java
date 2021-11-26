@@ -5,9 +5,9 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 
-import com.netease.lib_api.model.room.AppDatabase;
 import com.kunminx.architecture.ui.page.BaseFragment;
 import com.kunminx.architecture.ui.page.DataBindingConfig;
+import com.netease.lib_api.model.room.AppDatabase;
 import com.netease.music.BR;
 import com.netease.music.R;
 import com.netease.music.ui.page.adapter.MultiplePlaylistAdapter;
@@ -35,12 +35,19 @@ public class MineFragment extends BaseFragment {
         super.onCreate(savedInstanceState);
 
         //最近播放的音乐数量  实时更新
-        AppDatabase.getInstance(getContext()).getLatestSongDao().getRecentSongSize().observe(this, size -> {
+        AppDatabase.getInstance(getContext()).getLatestSongDao().getRecentSongSize().observe(getViewLifecycleOwner(), size -> {
             mMineViewModel.recentPlaySongSize.set(size);
         });
 
+        //TODO tip :
+        // getViewLifeCycleOwner 是 2020 年新增的特性，
+        // 主要是为了解决 getView() 的生命长度 比 fragment 短（仅存活于 onCreateView 之后和 onDestroyView 之前），
+        // 导致某些时候 fragment 其他成员还活着，但 getView() 为 null 的 生命周期安全问题，
+        // 也即，在 fragment 的场景下，请使用 getViewLifeCycleOwner 来作为 liveData 的观察者。
+        // Activity 则不用改变。
+
         //用户歌单
-        mMineViewModel.mineRequest.getUserPlaylistLiveData().observe(this, playlistBeans -> {
+        mMineViewModel.mineRequest.getUserPlaylistLiveData().observe(getViewLifecycleOwner(), playlistBeans -> {
 
             mMineViewModel.playlistAdapter.set(new MultiplePlaylistAdapter(getContext(), playlistBeans));
             mMineViewModel.loadingVisible.set(false);
