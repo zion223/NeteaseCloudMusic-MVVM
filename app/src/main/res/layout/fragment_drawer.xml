@@ -127,7 +127,7 @@
                                 android:layout_marginTop="20dp"
                                 android:gravity="center"
                                 android:text="@string/home_login_tip"
-                                android:textColor="@color/color_333333"
+                                android:textColor="@color/colorPrimary"
                                 android:textSize="13sp" />
 
                             <TextView
@@ -136,7 +136,7 @@
                                 android:layout_marginTop="2dp"
                                 android:gravity="center"
                                 android:text="@string/home_login_tip_2"
-                                android:textColor="@color/color_333333"
+                                android:textColor="@color/colorPrimary"
                                 android:textSize="13sp" />
 
                             <TextView
@@ -151,7 +151,7 @@
                                 android:paddingBottom="5dp"
                                 onClickWithDebouncing="@{() -> click.login()}"
                                 android:text="@string/home_login"
-                                android:textColor="@color/color_333333"
+                                android:textColor="@color/colorPrimary"
                                 android:textSize="15sp" />
                         </LinearLayout>
                     </RelativeLayout>
@@ -173,7 +173,7 @@
                             app:iconHeight="23dp"
                             app:iconWidth="23dp"
                             app:infoText="我的消息"
-                            app:infoTextColor="@color/color_333333"
+                            app:infoTextColor="@color/colorPrimary"
                             app:infoTextMarginTop="5dp"
                             app:infoTextSize="11sp"
                             app:tipBg="@drawable/bg_circle_red"
@@ -181,7 +181,7 @@
                             app:tipPaddingTop="2dp"
                             app:tipText="1"
                             onClickWithDebouncing="@{() -> click.searchMessage()}"
-                            app:tipTextColor="@color/color_white"
+                            app:tipTextColor="@color/white"
                             app:tipTextSize="7sp" />
 
                         <com.netease.lib_common_ui.VerticalItemView
@@ -192,14 +192,14 @@
                             app:iconHeight="23dp"
                             app:iconWidth="23dp"
                             app:infoText="我的好友"
-                            app:infoTextColor="@color/color_333333"
+                            app:infoTextColor="@color/colorPrimary"
                             app:infoTextMarginTop="5dp"
                             app:infoTextSize="11sp"
                             app:tipBg="@drawable/bg_circle_red"
                             app:tipPaddingRight="2dp"
                             app:tipPaddingTop="2dp"
                             app:tipText="1"
-                            app:tipTextColor="@color/color_white"
+                            app:tipTextColor="@color/white"
                             app:tipTextSize="7sp" />
 
                         <com.netease.lib_common_ui.VerticalItemView
@@ -211,14 +211,14 @@
                             app:iconHeight="23dp"
                             app:iconWidth="23dp"
                             app:infoText="听歌识曲"
-                            app:infoTextColor="@color/color_333333"
+                            app:infoTextColor="@color/colorPrimary"
                             app:infoTextMarginTop="5dp"
                             app:infoTextSize="11sp"
                             app:tipBg="@drawable/bg_circle_red"
                             app:tipPaddingRight="2dp"
                             app:tipPaddingTop="2dp"
                             app:tipText="1"
-                            app:tipTextColor="@color/color_white"
+                            app:tipTextColor="@color/white"
                             app:tipTextSize="7sp" />
 
                         <com.netease.lib_common_ui.VerticalItemView
@@ -229,14 +229,14 @@
                             app:iconHeight="23dp"
                             app:iconWidth="23dp"
                             app:infoText="个性换肤"
-                            app:infoTextColor="@color/color_333333"
+                            app:infoTextColor="@color/colorPrimary"
                             app:infoTextMarginTop="5dp"
                             app:infoTextSize="11sp"
                             app:tipBg="@drawable/bg_circle_red"
                             app:tipPaddingRight="2dp"
                             app:tipPaddingTop="2dp"
                             app:tipText="1"
-                            app:tipTextColor="@color/color_white"
+                            app:tipTextColor="@color/white"
                             app:tipTextSize="7sp" />
 
                     </LinearLayout>
@@ -399,7 +399,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="夜间模式"
-                        android:textColor="@color/color_333333"
+                        android:textColor="@color/colorPrimary"
                         android:textSize="15sp" />
                 </LinearLayout>
 
@@ -423,7 +423,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="设置"
-                        android:textColor="@color/color_333333"
+                        android:textColor="@color/colorPrimary"
                         android:textSize="15sp" />
                 </LinearLayout>
 
@@ -449,7 +449,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="退出"
-                        android:textColor="@color/color_333333"
+                        android:textColor="@color/colorPrimary"
                         android:textSize="15sp" />
                 </LinearLayout>
 

@@ -64,7 +64,7 @@ public class CreatePlayListDialog extends CenterPopupView implements View.OnClic
                     mTvTextSize.setEnabled(true);
                     mButtonConfirm.setClickable(true);
                     mButtonConfirm.setEnabled(true);
-                    mTvTextSize.setTextColor(getResources().getColor(R.color.color_333333));
+                    mTvTextSize.setTextColor(getResources().getColor(R.color.colorPrimary));
                 }else if(editable.toString().length() < 16 && editable.toString().length() != 0 ){
                     mButtonConfirm.setClickable(false);
                     mButtonConfirm.setEnabled(false);

@@ -3,9 +3,6 @@
     <color name="colorPrimary">#333333</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
-    <color name="color_31c27c">#31c27c</color>
-    <color name="color_333333">#333333</color>
-    <color name="color_white">#ffffffff</color>
     <color name="color_999999">#11784F4F</color>
     <color name="app_background">#1111</color>
     <color name="gedan_detail">#F2EDF3</color>

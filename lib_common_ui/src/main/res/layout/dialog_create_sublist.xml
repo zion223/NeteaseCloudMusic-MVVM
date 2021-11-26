@@ -11,7 +11,7 @@
         android:layout_marginLeft="20dp"
         android:textStyle="bold"
         android:textSize="16sp"
-        android:textColor="@color/color_333333"
+        android:textColor="@color/colorPrimary"
         android:text="新建歌单"/>
     <EditText
         android:id="@+id/et_create_playlist_name"
@@ -24,7 +24,7 @@
         android:layout_below="@+id/tv_create_playlist_title"
         android:layout_alignLeft="@+id/tv_create_playlist_title"
         android:background="@null"
-        android:textColor="@color/color_333333"/>
+        android:textColor="@color/colorPrimary"/>
     <View
         android:id="@+id/view_gap"
         android:layout_below="@+id/et_create_playlist_name"
