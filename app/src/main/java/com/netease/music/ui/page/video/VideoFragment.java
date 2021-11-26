@@ -31,11 +31,11 @@ public class VideoFragment extends BaseFragment {
 
 
     private VideoViewModel mVideoViewModel;
-
+    private static final String VIDEO_ID = "videoId";
 
     public static VideoFragment newInstance(long videoId) {
         Bundle argz = new Bundle();
-        argz.putLong("videoId", videoId);
+        argz.putLong(VIDEO_ID, videoId);
         VideoFragment fragment = new VideoFragment();
         fragment.setArguments(argz);
         return fragment;
@@ -58,7 +58,7 @@ public class VideoFragment extends BaseFragment {
         super.onCreate(savedInstanceState);
 
         if (getArguments() != null) {
-            long videoId = getArguments().getLong("videoId");
+            long videoId = getArguments().getLong(VIDEO_ID);
 
             VideoAdapter adapter = new VideoAdapter(null);
             adapter.setOnItemClickListener((adapter1, view, position) -> {

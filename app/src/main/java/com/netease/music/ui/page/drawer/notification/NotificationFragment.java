@@ -21,9 +21,11 @@ public class NotificationFragment extends BaseFragment {
 
     private NotificationViewModel mState;
 
+    private static final String NOTIFICATION_TYPE = "notificationType";
+
     public static NotificationFragment newInstance(int type) {
         Bundle argz = new Bundle();
-        argz.putInt("notificationType", type);
+        argz.putInt(NOTIFICATION_TYPE, type);
         NotificationFragment fragment = new NotificationFragment();
         fragment.setArguments(argz);
         return fragment;
@@ -43,8 +45,8 @@ public class NotificationFragment extends BaseFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         final NotificationType type;
-        if (getArguments() != null && NotificationType.getType(getArguments().getInt("notificationType")) != null) {
-            type = NotificationType.getType(getArguments().getInt("notificationType"));
+        if (getArguments() != null && NotificationType.getType(getArguments().getInt(NOTIFICATION_TYPE)) != null) {
+            type = NotificationType.getType(getArguments().getInt(NOTIFICATION_TYPE));
             switch (type) {
                 case COMMENT:
                     mState.request.getPrivateCommentLiveData().observe(getViewLifecycleOwner(), comments -> {
