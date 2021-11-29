@@ -37,7 +37,7 @@ public class MainFragment extends BaseFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mSharedViewModel.isToCloseSlidePanelIfExpanded().observeInFragment(this, aBoolean -> {
+        mSharedViewModel.isToCloseSlidePanelIfExpanded().observe(this, aBoolean -> {
             mSharedViewModel.requestToCloseActivityIfAllowed(true);
         });
     }
