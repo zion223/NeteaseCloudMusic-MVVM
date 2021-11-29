@@ -41,19 +41,15 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'androidx.recyclerview:recyclerview:1.1.0'
 
-    testImplementation 'junit:junit:4.13.1'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
-    api 'androidx.appcompat:appcompat:1.2.0'
-
-    api 'androidx.lifecycle:lifecycle-runtime:2.2.0'
-    api 'androidx.lifecycle:lifecycle-common-java8:2.2.0'
-    api 'androidx.lifecycle:lifecycle-viewmodel:2.2.0'
-    api 'androidx.lifecycle:lifecycle-livedata:2.2.0'
-    api 'androidx.navigation:navigation-runtime:2.3.1'
+    api this.rootProject.depsLibs.appcompat
+    api this.rootProject.depsLibs.recyclerview
+    api this.rootProject.depsLibs.lifecycle_runtime
+    api this.rootProject.depsLibs.lifecycle_common_java8
+    api this.rootProject.depsLibs.lifecycle_viewmodel
+    api this.rootProject.depsLibs.lifecycle_livedata
+    api this.rootProject.depsLibs.navigation_runtime
 
     api 'com.kunminx.arch:unpeek-livedata:7.2.0-beta1'
     api 'com.kunminx.arch:smooth-navigation:4.0.0-beta1'
