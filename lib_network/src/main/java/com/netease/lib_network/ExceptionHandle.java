@@ -30,14 +30,32 @@ public class ExceptionHandle {
             ex = new ResponseThrowable(e, ERROR.HTTP_ERROR);
             switch (httpException.code()) {
                 case UNAUTHORIZED:
+                    ex.message = "未授权";
+                    break;
                 case FORBIDDEN:
+                    ex.message = "无权限";
+                    break;
                 case NOT_FOUND:
+                    ex.message = "未找到";
+                    break;
                 case NO_AGENT:
+                    ex.message = "需要代理授权";
+                    break;
                 case REQUEST_TIMEOUT:
+                    ex.message = "请求超时";
+                    break;
                 case GATEWAY_TIMEOUT:
+                    ex.message = "网关超时";
+                    break;
                 case INTERNAL_SERVER_ERROR:
+                    ex.message = "服务器内部错误";
+                    break;
                 case BAD_GATEWAY:
+                    ex.message = "错误网关";
+                    break;
                 case SERVICE_UNAVAILABLE:
+                    ex.message = "服务不可用";
+                    break;
                 default:
                     ex.message = "网络错误";
                     break;
