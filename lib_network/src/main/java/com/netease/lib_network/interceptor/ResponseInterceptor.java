@@ -20,7 +20,7 @@ import okio.BufferedSource;
 public class ResponseInterceptor implements Interceptor {
     private static final String TAG = "ResponseInterceptor";
 
-    private final Charset UTF8 = StandardCharsets.UTF_8;
+    private static final Charset UTF_8 = StandardCharsets.UTF_8;
 
     @Override
     public Response intercept(Chain chain) throws IOException {
@@ -36,17 +36,16 @@ public class ResponseInterceptor implements Interceptor {
         }
         long contentLength = responseBody.contentLength();
 
-
         if (!bodyEncoded(response.headers())) {
             BufferedSource source = responseBody.source();
             source.request(Long.MAX_VALUE); // Buffer the entire body.
             Buffer buffer = source.buffer();
 
-            Charset charset = UTF8;
+            Charset charset = UTF_8;
             MediaType contentType = responseBody.contentType();
             if (contentType != null) {
                 try {
-                    charset = contentType.charset(UTF8);
+                    charset = contentType.charset(UTF_8);
                 } catch (UnsupportedCharsetException e) {
                     return response;
                 }
@@ -54,8 +53,8 @@ public class ResponseInterceptor implements Interceptor {
 
             if (contentLength != 0) {
                 String result = buffer.clone().readString(charset);
-                Log.d(TAG, " response.url():" + response.request().url());
-                Log.d(TAG, " response.body():" + result);
+                Log.d(TAG, " response.url: [" + response.request().url() + "]");
+                Log.d(TAG, " response.body: [" + result + "]");
                 Log.d(TAG, " 响应时间: " + (t2 - t1) / 1e6d + "ms");
             }
         }

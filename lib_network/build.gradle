@@ -38,6 +38,8 @@ dependencies {
     //rxjava库
     implementation this.rootProject.depsLibs.rxjava
     implementation this.rootProject.depsLibs.rxandroid
+    // okhttp log
+    implementation this.rootProject.depsLibs.okhttp_log_interceptor
     implementation project(':architecture')
 	compileOnly project(':lib_api')
 }

@@ -64,5 +64,6 @@ ext{
             retrofit_rxjava2 : "com.squareup.retrofit2:adapter-rxjava2:${depsVersion.retrofit_rxjava}",
             BaseRecyclerViewAdapterHelper         : "com.github.CymChad:BaseRecyclerViewAdapterHelper:${depsVersion.BaseRVAdapterHelper}",
             butterknife_compiler                  : "com.jakewharton:butterknife-compiler:${depsVersion.butterknife_compiler}",
+            okhttp_log_interceptor                : "com.squareup.okhttp3:logging-interceptor:${depsVersion.okhttp}",
     ]
 }

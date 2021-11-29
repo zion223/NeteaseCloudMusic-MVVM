@@ -15,6 +15,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -33,6 +34,9 @@ public class ApiEngine {
         //解析返回结果的Interceptor
         ResponseInterceptor responseInterceptor = new ResponseInterceptor();
 
+        // okhttp的日志拦截器
+        HttpLoggingInterceptor logInterceptor = new HttpLoggingInterceptor();
+        logInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         //缓存
 //        int size = 1024 * 1024 * 100;
 //        File cacheFile = new File(App.getContext().getCacheDir(), "OkHttpCache");
@@ -45,6 +49,7 @@ public class ApiEngine {
                 .readTimeout(20, TimeUnit.SECONDS)
                 .writeTimeout(20, TimeUnit.SECONDS)
                 .addNetworkInterceptor(netWorkInterceptor)
+                .addInterceptor(logInterceptor)
                 .addInterceptor(responseInterceptor)
                 .cookieJar(cookieJar)
 //                .cache(cache)
