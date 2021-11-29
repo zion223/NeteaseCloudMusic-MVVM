@@ -36,12 +36,54 @@ import io.reactivex.schedulers.Schedulers;
 public class PhoneLoginActivity extends BaseActivity {
 
 
-    Observable<Long> timer = Observable.interval(0, 1, TimeUnit.SECONDS)
+    private final Observable<Long> timer = Observable.interval(0, 1, TimeUnit.SECONDS)
             .take(60 + 1)
             .map(takeValue -> 60 - takeValue)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread());
     private PhoneLoginViewModel mPhoneLoginViewModel;
+    //验证码输入完成后的回调
+    public CaptchaView.OnInputListener listener = new CaptchaView.OnInputListener() {
+        @Override
+        public void onSucess(String code) {
+            //注册(更改密码)
+            mPhoneLoginViewModel.loadingVisible.set(true);
+            mPhoneLoginViewModel.accountRequest.register(mPhoneLoginViewModel.phone.get(), mPhoneLoginViewModel.password.get(), code);
+        }
+    };
+    private final TextWatcher phoneTextWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            mPhoneLoginViewModel.prePhoneColor.set(TextUtils.isEmpty(s.toString()) ? R.color.gray : R.color.black);
+        }
+    };
+    private final ResourceObserver<Long> timerObserver = new ResourceObserver<Long>() {
+        @Override
+        public void onNext(Long value) {
+            mPhoneLoginViewModel.countDownText.set(value.toString() + "秒");
+        }
+
+        @Override
+        public void onError(Throwable e) {
+
+        }
+
+        @Override
+        public void onComplete() {
+            mPhoneLoginViewModel.countDownText.set("重新获取");
+            mPhoneLoginViewModel.enableCaptureButton.set(true);
+        }
+    };
 
     @Override
     protected void initViewModel() {
@@ -90,23 +132,7 @@ public class PhoneLoginActivity extends BaseActivity {
                 //显示发送到的手机号 150****7777
                 //显示倒计时1min
                 //interval 实现倒计时  订阅倒计时接口
-                timer.subscribe(new ResourceObserver<Long>() {
-                    @Override
-                    public void onNext(Long value) {
-                        mPhoneLoginViewModel.countDownText.set(value.toString() + "秒");
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
-                        mPhoneLoginViewModel.countDownText.set("重新获取");
-                        mPhoneLoginViewModel.enableCaptureButton.set(true);
-                    }
-                });
+                timer.subscribe(timerObserver);
                 //无法点击倒计时按钮
                 mPhoneLoginViewModel.enableCaptureButton.set(false);
 
@@ -117,31 +143,13 @@ public class PhoneLoginActivity extends BaseActivity {
         });
     }
 
-    //验证码输入完成后的回调
-    public CaptchaView.OnInputListener listener = new CaptchaView.OnInputListener() {
-        @Override
-        public void onSucess(String code) {
-            //注册(更改密码)
-            mPhoneLoginViewModel.loadingVisible.set(true);
-            mPhoneLoginViewModel.accountRequest.register(mPhoneLoginViewModel.phone.get(), mPhoneLoginViewModel.password.get(), code);
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (timerObserver != null) {
+            timerObserver.dispose();
         }
-    };
-    private final TextWatcher phoneTextWatcher = new TextWatcher() {
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-        }
-
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-        }
-
-        @Override
-        public void afterTextChanged(Editable s) {
-            mPhoneLoginViewModel.prePhoneColor.set(TextUtils.isEmpty(s.toString()) ? R.color.gray : R.color.black);
-        }
-    };
+    }
 
     public class ClickProxy {
         //返回按钮
