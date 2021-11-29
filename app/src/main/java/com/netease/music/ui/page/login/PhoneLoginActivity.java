@@ -42,31 +42,6 @@ public class PhoneLoginActivity extends BaseActivity {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread());
     private PhoneLoginViewModel mPhoneLoginViewModel;
-    //验证码输入完成后的回调
-    public CaptchaView.OnInputListener listener = new CaptchaView.OnInputListener() {
-        @Override
-        public void onSucess(String code) {
-            //注册(更改密码)
-            mPhoneLoginViewModel.loadingVisible.set(true);
-            mPhoneLoginViewModel.accountRequest.register(mPhoneLoginViewModel.phone.get(), mPhoneLoginViewModel.password.get(), code);
-        }
-    };
-    private final TextWatcher phoneTextWatcher = new TextWatcher() {
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-        }
-
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-        }
-
-        @Override
-        public void afterTextChanged(Editable s) {
-            mPhoneLoginViewModel.prePhoneColor.set(TextUtils.isEmpty(s.toString()) ? R.color.gray : R.color.black);
-        }
-    };
 
     @Override
     protected void initViewModel() {
@@ -141,6 +116,32 @@ public class PhoneLoginActivity extends BaseActivity {
             }
         });
     }
+
+    //验证码输入完成后的回调
+    public CaptchaView.OnInputListener listener = new CaptchaView.OnInputListener() {
+        @Override
+        public void onSucess(String code) {
+            //注册(更改密码)
+            mPhoneLoginViewModel.loadingVisible.set(true);
+            mPhoneLoginViewModel.accountRequest.register(mPhoneLoginViewModel.phone.get(), mPhoneLoginViewModel.password.get(), code);
+        }
+    };
+    private final TextWatcher phoneTextWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            mPhoneLoginViewModel.prePhoneColor.set(TextUtils.isEmpty(s.toString()) ? R.color.gray : R.color.black);
+        }
+    };
 
     public class ClickProxy {
         //返回按钮
