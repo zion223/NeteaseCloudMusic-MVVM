@@ -9,13 +9,13 @@ import com.netease.music.domain.request.AccountRequest;
 
 public class PhoneLoginViewModel extends ViewModel {
 
-    //输入手机号界面
+    //输入手机号界面 step 1
     public final ObservableBoolean showInputPhoneView = new ObservableBoolean();
-    //输入密码界面
+    //输入密码界面  step 2
     public final ObservableBoolean showInputPasswordView = new ObservableBoolean();
-    //忘记密码界面
+    //忘记密码界面 step 3 (if nesscessary)
     public final ObservableBoolean showForgetPasswordView = new ObservableBoolean();
-    //显示验证码界面
+    //显示验证码界面 step 4 (if nesscessary)
     public final ObservableBoolean showCaptureView = new ObservableBoolean();
     //使能重新获取验证码按钮
     public final ObservableBoolean enableCaptureButton = new ObservableBoolean();
