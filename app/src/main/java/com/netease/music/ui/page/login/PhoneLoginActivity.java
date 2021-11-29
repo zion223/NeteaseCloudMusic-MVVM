@@ -146,7 +146,7 @@ public class PhoneLoginActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (timerObserver != null) {
+        if (timerObserver != null && !timerObserver.isDisposed()) {
             timerObserver.dispose();
         }
     }

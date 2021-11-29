@@ -110,7 +110,7 @@ public class SplashActivity extends AppCompatActivity implements EasyPermissions
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (timerDisposable != null) {
+        if (timerDisposable != null && !timerDisposable.isDisposed()) {
             timerDisposable.dispose();
         }
     }

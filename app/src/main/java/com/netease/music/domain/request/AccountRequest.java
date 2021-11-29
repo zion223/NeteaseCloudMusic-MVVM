@@ -124,11 +124,13 @@ public class AccountRequest extends BaseRequest implements DefaultLifecycleObser
 
     @Override
     public void onStop(@NonNull LifecycleOwner owner) {
-        if (loginDispos != null) {
+        if (loginDispos != null && !loginDispos.isDisposed()) {
             loginDispos.dispose();
+            loginDispos = null;
         }
-        if (captureDispos != null) {
+        if (captureDispos != null && !captureDispos.isDisposed()) {
             captureDispos.dispose();
+            captureDispos = null;
         }
     }
 }
