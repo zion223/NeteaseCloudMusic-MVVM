@@ -46,14 +46,15 @@ dependencies {
 
     testImplementation 'junit:junit:4.13'
 
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
-    implementation 'com.google.android.material:material:1.3.0-alpha02'
+    implementation this.rootProject.depsLibs.refresh_layout_kernel   //核心必须依赖
+    implementation this.rootProject.depsLibs.refresh_header_classics //经典刷新头
 
-    implementation 'com.sothree.slidinguppanel:library:3.4.0'
-    implementation 'net.steamcrafted:materialiconlib:1.1.5'
+    implementation this.rootProject.depsLibs.slidinguppanel
+    implementation this.rootProject.depsLibs.materialiconlib
 
-    implementation  'com.scwang.smart:refresh-layout-kernel:2.0.1'      //核心必须依赖
-    implementation  'com.scwang.smart:refresh-header-classics:2.0.1'    //经典刷新头
+    implementation this.rootProject.depsLibs.material
+    implementation this.rootProject.depsLibs.constraintlayout
+
     //implementation 'com.kunminx.archi:binding-recyclerview:3.3.2-beta3'
     // eventBus
     implementation this.rootProject.depsLibs.eventbus

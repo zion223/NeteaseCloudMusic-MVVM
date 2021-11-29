@@ -29,14 +29,19 @@ ext{
         room_version   : "2.2.5",
         retrofit2      : "2.9.0",
         recyclerview   : '1.2.1',
+        material       : '1.4.0',
         lifecycleVersion : "2.4.0",
         navigationVersion : "2.3.5",
+        materialiconlib : "1.1.5",
+        slidinguppanel  : "3.4.0",
+        constraintlayout: "2.0.1",
         butterknife_compiler               : '8.6.0',
         retrofit_rxjava                    : '2.5.0',
         retrofit_converter                 : '2.4.0',
         BaseRVAdapterHelper                : '3.0.4',
-        view_pager_transforms              : '1.2.32@aar'
-
+        view_pager_transforms              : '1.2.32@aar',
+        refresh_layout_kernel              : '2.0.1',
+        refresh_header_classics            : '2.0.1'
     ]
     depsLibs = [
             appcompat      : "androidx.appcompat:appcompat:${depsVersion.appcompat}",
@@ -54,15 +59,19 @@ ext{
             tinypinyin     : "com.github.promeg:tinypinyin:${depsVersion.tinypinyin}",
             videoplayer    : "cn.jzvd:jiaozivideoplayer:${depsVersion.videoplayer}",
             xpopup         : "com.lxj:xpopup:${depsVersion.xpopup}",
+            material       : "com.google.android.material:material:${depsVersion.material}",
             vptransforms   : "com.ToxicBakery.viewpager.transforms:view-pager-transforms:${depsVersion.view_pager_transforms}",
             cvbanner       : "com.bigkoo:convenientbanner:${depsVersion.cvbanner}",
+            materialiconlib: "net.steamcrafted:materialiconlib:${depsVersion.materialiconlib}",
             room           : "androidx.room:room-runtime:${depsVersion.room_version}",
             room_rxjava2   : "androidx.room:room-rxjava2:${depsVersion.room_version}",
             room_compiler  : "androidx.room:room-compiler:${depsVersion.room_version}",
             room_guava     : "androidx.room:room-guava:${depsVersion.room_version}",
+            slidinguppanel : "com.sothree.slidinguppanel:library:${depsVersion.slidinguppanel}",
             cookieJar      : "com.github.franmontiel:PersistentCookieJar:${depsVersion.cookiejar}",
             retrofit       : "com.squareup.retrofit2:retrofit:${depsVersion.retrofit2}",
             retrofit_gson  : "com.squareup.retrofit2:converter-gson:${depsVersion.retrofit_converter}",
+            constraintlayout : "androidx.constraintlayout:constraintlayout:${depsVersion.constraintlayout}",
             retrofit_rxjava2 : "com.squareup.retrofit2:adapter-rxjava2:${depsVersion.retrofit_rxjava}",
             BaseRecyclerViewAdapterHelper         : "com.github.CymChad:BaseRecyclerViewAdapterHelper:${depsVersion.BaseRVAdapterHelper}",
             butterknife_compiler                  : "com.jakewharton:butterknife-compiler:${depsVersion.butterknife_compiler}",
@@ -71,6 +80,8 @@ ext{
             lifecycle_common_java8                : "androidx.lifecycle:lifecycle-common-java8:${depsVersion.lifecycleVersion}",
             lifecycle_viewmodel                   : "androidx.lifecycle:lifecycle-viewmodel:${depsVersion.lifecycleVersion}",
             lifecycle_livedata                    : "androidx.lifecycle:lifecycle-livedata:${depsVersion.lifecycleVersion}",
-            navigation_runtime                    : "androidx.navigation:navigation-runtime:${depsVersion.navigationVersion}"
+            navigation_runtime                    : "androidx.navigation:navigation-runtime:${depsVersion.navigationVersion}",
+            refresh_layout_kernel                 : "com.scwang.smart:refresh-layout-kernel:${depsVersion.refresh_layout_kernel}",
+            refresh_header_classics               : "com.scwang.smart:refresh-header-classics:${depsVersion.refresh_header_classics}",
     ]
 }
