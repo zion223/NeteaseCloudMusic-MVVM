@@ -9,6 +9,8 @@ import com.netease.lib_network.ApiEngine;
 import com.netease.lib_network.ExceptionHandle;
 import com.netease.lib_network.SimpleObserver;
 
+import org.jetbrains.annotations.NotNull;
+
 import io.reactivex.annotations.NonNull;
 
 public class SearchRequest extends BaseRequest {
@@ -30,7 +32,7 @@ public class SearchRequest extends BaseRequest {
                 .compose(ApiEngine.getInstance().applySchedulers())
                 .subscribe(new SimpleObserver<HotSearchDetailBean>() {
                     @Override
-                    public void onSuccess(@NonNull HotSearchDetailBean hotSearchDetailBean) {
+                    public void onSuccess(@NonNull @NotNull HotSearchDetailBean hotSearchDetailBean) {
                         mHotSearchLiveData.postValue(hotSearchDetailBean);
                     }
 

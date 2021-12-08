@@ -9,6 +9,8 @@ import com.netease.lib_network.ApiEngine;
 import com.netease.lib_network.ExceptionHandle;
 import com.netease.lib_network.SimpleObserver;
 
+import org.jetbrains.annotations.NotNull;
+
 import io.reactivex.annotations.NonNull;
 
 public class CloudMusicRequest extends BaseRequest {
@@ -27,7 +29,7 @@ public class CloudMusicRequest extends BaseRequest {
                 .compose(ApiEngine.getInstance().applySchedulers())
                 .subscribe(new SimpleObserver<UserCloudBean>() {
                     @Override
-                    public void onSuccess(@NonNull UserCloudBean userCloudBean) {
+                    public void onSuccess(@NonNull @NotNull UserCloudBean userCloudBean) {
                         mUserCloudLiveData.postValue(userCloudBean);
                     }
 

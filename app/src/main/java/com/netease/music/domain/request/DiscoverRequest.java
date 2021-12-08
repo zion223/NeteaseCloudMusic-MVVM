@@ -17,6 +17,8 @@ import com.netease.lib_network.ExceptionHandle;
 import com.netease.lib_network.SimpleObserver;
 import com.netease.music.data.config.TypeEnum;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,7 +73,7 @@ public class DiscoverRequest extends BaseRequest {
                 .compose(ApiEngine.getInstance().applySchedulers())
                 .subscribe(new SimpleObserver<BannerBean>() {
                     @Override
-                    public void onSuccess(@NonNull BannerBean bannerBean) {
+                    public void onSuccess(@NonNull @NotNull BannerBean bannerBean) {
                         mBannerLiveData.postValue(bannerBean);
                     }
 
@@ -88,7 +90,7 @@ public class DiscoverRequest extends BaseRequest {
                 .compose(ApiEngine.getInstance().applySchedulers())
                 .subscribe(new SimpleObserver<MainRecommendPlayListBean>() {
                     @Override
-                    public void onSuccess(@NonNull MainRecommendPlayListBean bannerBean) {
+                    public void onSuccess(@NonNull @NotNull MainRecommendPlayListBean bannerBean) {
                         if (bannerBean.getCode() == 200 && bannerBean.getRecommend().size() >= 6) {
                             mRecommendPlayListLiveData.postValue(bannerBean.getRecommend().subList(0, 6));
                         }

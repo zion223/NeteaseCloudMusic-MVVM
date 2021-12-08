@@ -12,6 +12,8 @@ import com.netease.lib_network.ApiEngine;
 import com.netease.lib_network.ExceptionHandle;
 import com.netease.lib_network.SimpleObserver;
 
+import org.jetbrains.annotations.NotNull;
+
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 
@@ -67,7 +69,7 @@ public class RadioRequest extends BaseRequest {
                 .subscribe(new SimpleObserver<DjBannerBean>() {
 
                     @Override
-                    public void onSuccess(@NonNull DjBannerBean djBannerBean) {
+                    public void onSuccess(@NonNull @NotNull DjBannerBean djBannerBean) {
                         mBannerLiveData.postValue(djBannerBean);
                     }
 
@@ -85,7 +87,7 @@ public class RadioRequest extends BaseRequest {
                 .subscribe(new SimpleObserver<DjRecommendBean>() {
 
                     @Override
-                    public void onSuccess(@NonNull DjRecommendBean djRecommendBean) {
+                    public void onSuccess(@NonNull @NotNull DjRecommendBean djRecommendBean) {
                         if (djRecommendBean.getCode() == 200) {
                             mRecommendRadioLiveData.postValue(djRecommendBean);
                         }

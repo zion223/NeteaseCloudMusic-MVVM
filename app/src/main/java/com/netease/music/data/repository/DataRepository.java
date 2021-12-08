@@ -17,16 +17,11 @@ package com.netease.music.data.repository;
 
 import android.util.Log;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.kunminx.architecture.data.response.DataResult;
 import com.kunminx.architecture.data.response.ResponseStatus;
-import com.kunminx.architecture.utils.Utils;
 import com.netease.lib_api.model.user.UserEventBean;
 import com.netease.music.data.bean.DownloadFile;
 
-import java.lang.reflect.Type;
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -52,18 +47,7 @@ public class DataRepository {
      * <p>
      * 如果这样说还不理解的话，详见《如何让同事爱上架构模式、少写 bug 多注释》篇的解析
      * https://xiaozhuanlan.com/topic/8204519736
-     *
-     * @param result
      */
-//    public void getFreeMusic(DataResult.Result<TestAlbum> result) {
-//
-//        Gson gson = new Gson();
-//        Type type = new TypeToken<TestAlbum>() {
-//        }.getType();
-//        TestAlbum testAlbum = gson.fromJson(Utils.getApp().getString(R.string.free_music_json), type);
-//
-//        result.onResult(new DataResult<>(testAlbum, new ResponseStatus()));
-//    }
 
 
     /**

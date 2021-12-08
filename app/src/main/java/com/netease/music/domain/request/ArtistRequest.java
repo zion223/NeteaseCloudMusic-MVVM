@@ -1,5 +1,8 @@
 package com.netease.music.domain.request;
 
+import androidx.annotation.NonNull;
+import androidx.lifecycle.DefaultLifecycleObserver;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.MutableLiveData;
 
 import com.kunminx.architecture.domain.request.BaseRequest;
@@ -10,7 +13,12 @@ import java.util.List;
 
 import io.reactivex.disposables.Disposable;
 
-public class ArtistRequest extends BaseRequest {
+public class ArtistRequest extends BaseRequest implements DefaultLifecycleObserver {
+
+
+
+    private Disposable hotSinglerDisposable;
+    private Disposable hotSinglerAreaDisposable;
 
 
     private MutableLiveData<List<TopListDetailBean.Artist>> mTopArtistData = new MutableLiveData<>();
@@ -23,16 +31,25 @@ public class ArtistRequest extends BaseRequest {
     }
 
     public void requestHotSinger() {
-        Disposable subscribe = ApiEngine.getInstance().getApiService().getHotSingerList()
+        hotSinglerDisposable = ApiEngine.getInstance().getApiService().getHotSingerList()
                 .compose(ApiEngine.getInstance().applySchedulers())
                 .subscribe(artistListBean -> mTopArtistData.postValue(artistListBean.getArtists()));
     }
 
     //根据地区查找
     public void requestHotSingerArea(int type, int area) {
-        Disposable subscribe = ApiEngine.getInstance().getApiService().getSingerList(type, area)
+        hotSinglerAreaDisposable = ApiEngine.getInstance().getApiService().getSingerList(type, area)
                 .compose(ApiEngine.getInstance().applySchedulers())
                 .subscribe(artistListBean -> mTopArtistData.postValue(artistListBean.getArtists()));
     }
 
+    @Override
+    public void onStop(@NonNull LifecycleOwner owner) {
+        if(hotSinglerDisposable != null && !hotSinglerDisposable.isDisposed()){
+            hotSinglerDisposable.dispose();
+        }
+        if(hotSinglerAreaDisposable != null && !hotSinglerAreaDisposable.isDisposed()){
+            hotSinglerAreaDisposable.dispose();
+        }
+    }
 }

@@ -9,6 +9,8 @@ import com.netease.lib_network.ApiEngine;
 import com.netease.lib_network.ExceptionHandle;
 import com.netease.lib_network.SimpleObserver;
 
+import org.jetbrains.annotations.NotNull;
+
 import io.reactivex.annotations.NonNull;
 
 public class NewAlbumRequest extends BaseRequest {
@@ -30,7 +32,7 @@ public class NewAlbumRequest extends BaseRequest {
                 .compose(ApiEngine.getInstance().applySchedulers())
                 .subscribe(new SimpleObserver<AlbumSearchBean.ResultBean>() {
                     @Override
-                    public void onSuccess(@NonNull AlbumSearchBean.ResultBean resultBean) {
+                    public void onSuccess(@NonNull AlbumSearchBean.@NotNull ResultBean resultBean) {
                         mAlbumLiveData.postValue(resultBean);
                     }
 

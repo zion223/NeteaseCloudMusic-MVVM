@@ -9,6 +9,8 @@ import com.netease.lib_network.ApiEngine;
 import com.netease.lib_network.ExceptionHandle;
 import com.netease.lib_network.SimpleObserver;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
 import io.reactivex.annotations.NonNull;
@@ -30,7 +32,7 @@ public class DailyRecommendRequest extends BaseRequest {
                 .compose(ApiEngine.getInstance().applySchedulers())
                 .subscribe(new SimpleObserver<DailyRecommendBean>() {
                     @Override
-                    public void onSuccess(@NonNull DailyRecommendBean dailyRecommendBean) {
+                    public void onSuccess(@NonNull @NotNull DailyRecommendBean dailyRecommendBean) {
                         //推荐原因
                         List<DailyRecommendBean.RecommendReason> recommendReasons = dailyRecommendBean.getData().getRecommendReasons();
                         int recommendMusicSize = dailyRecommendBean.getData().getDailySongs().size();

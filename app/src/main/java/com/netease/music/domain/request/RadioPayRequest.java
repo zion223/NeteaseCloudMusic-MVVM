@@ -9,6 +9,8 @@ import com.netease.lib_network.ApiEngine;
 import com.netease.lib_network.ExceptionHandle;
 import com.netease.lib_network.SimpleObserver;
 
+import org.jetbrains.annotations.NotNull;
+
 import io.reactivex.annotations.NonNull;
 
 public class RadioPayRequest extends BaseRequest {
@@ -28,7 +30,7 @@ public class RadioPayRequest extends BaseRequest {
                 .subscribe(new SimpleObserver<DjPaygiftBean>() {
 
                     @Override
-                    public void onSuccess(@NonNull DjPaygiftBean djPaygiftBean) {
+                    public void onSuccess(@NonNull @NotNull DjPaygiftBean djPaygiftBean) {
                         mRadioPayLiveData.postValue(djPaygiftBean);
                     }
 

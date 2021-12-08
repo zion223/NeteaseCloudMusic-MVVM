@@ -42,7 +42,7 @@ public class ArtistSortActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        getLifecycle().addObserver(mViewModel.request);
         mViewModel.request.getTopArtistData().observe(this, artists -> mViewModel.artistData.set(artists));
 
         mViewModel.request.requestHotSinger();

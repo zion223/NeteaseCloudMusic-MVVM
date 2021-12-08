@@ -17,6 +17,8 @@ import com.netease.lib_network.ExceptionHandle;
 import com.netease.lib_network.SimpleObserver;
 import com.netease.music.data.config.TypeEnum;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
 import io.reactivex.Single;
@@ -134,7 +136,7 @@ public class SongListDetailRequest extends BaseRequest {
         changeObservable.compose(ApiEngine.getInstance().applySchedulers())
                 .subscribe(new SimpleObserver<CommonMessageBean>() {
                     @Override
-                    public void onSuccess(@NonNull CommonMessageBean commonMessageBean) {
+                    public void onSuccess(@NonNull @NotNull CommonMessageBean commonMessageBean) {
                         //操作成功
                         mChangeSubStatusLiveData.setValue(commonMessageBean.getCode() == 200);
                     }

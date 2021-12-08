@@ -11,6 +11,8 @@ import com.netease.lib_network.ExceptionHandle;
 import com.netease.lib_network.SimpleObserver;
 import com.netease.music.data.config.TypeEnum;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,7 +62,7 @@ public class CommentRequest extends BaseRequest {
                     .subscribe(new SimpleObserver<PlayListCommentBean>() {
 
                         @Override
-                        public void onSuccess(@NonNull PlayListCommentBean commentBean) {
+                        public void onSuccess(@NonNull @NotNull PlayListCommentBean commentBean) {
                             mCommentSizeLiveData.postValue(commentBean.getTotal());
                             final ArrayList<PlayListCommentEntity> entities = new ArrayList<>();
 

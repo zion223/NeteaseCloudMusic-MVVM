@@ -9,6 +9,8 @@ import com.netease.lib_network.ApiEngine;
 import com.netease.lib_network.ExceptionHandle;
 import com.netease.lib_network.SimpleObserver;
 
+import org.jetbrains.annotations.NotNull;
+
 import io.reactivex.annotations.NonNull;
 
 public class CloudVillageRequest extends BaseRequest {
@@ -32,7 +34,7 @@ public class CloudVillageRequest extends BaseRequest {
                     }
 
                     @Override
-                    public void onSuccess(@NonNull MainEventBean mainEventBean) {
+                    public void onSuccess(@NonNull @NotNull MainEventBean mainEventBean) {
                         mEventLiveData.postValue(mainEventBean);
                     }
 

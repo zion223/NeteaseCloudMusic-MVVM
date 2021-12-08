@@ -16,6 +16,8 @@ import com.netease.lib_network.ApiEngine;
 import com.netease.lib_network.ExceptionHandle;
 import com.netease.lib_network.SimpleObserver;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.disposables.Disposable;
@@ -56,7 +58,7 @@ public class AccountRequest extends BaseRequest implements DefaultLifecycleObser
                     }
 
                     @Override
-                    public void onSuccess(LoginBean result) {
+                    public void onSuccess(@NotNull LoginBean result) {
                         ResponseStatus responseStatus = new ResponseStatus(String.valueOf(result.getCode()), result.getCode() == 200);
                         loginData.postValue(new DataResult<>(result, responseStatus));
                     }
@@ -83,7 +85,7 @@ public class AccountRequest extends BaseRequest implements DefaultLifecycleObser
                     }
 
                     @Override
-                    public void onSuccess(LoginBean loginBean) {
+                    public void onSuccess(@NotNull LoginBean loginBean) {
                         ResponseStatus responseStatus = new ResponseStatus(String.valueOf(loginBean.getCode()), loginBean.getCode() == 200);
                         loginData.postValue(new DataResult<>(loginBean, responseStatus));
                     }
@@ -109,7 +111,7 @@ public class AccountRequest extends BaseRequest implements DefaultLifecycleObser
                     }
 
                     @Override
-                    public void onSuccess(CommonMessageBean result) {
+                    public void onSuccess(@NotNull CommonMessageBean result) {
                         ResponseStatus responseStatus = new ResponseStatus(String.valueOf(result.getCode()), result.getCode() == 200);
                         captureData.postValue(new DataResult<>(result, responseStatus));
                     }
@@ -122,6 +124,10 @@ public class AccountRequest extends BaseRequest implements DefaultLifecycleObser
                 });
     }
 
+    /**
+     * 页面销毁时 及时释放资源
+     * @param owner
+     */
     @Override
     public void onStop(@NonNull LifecycleOwner owner) {
         if (loginDispos != null && !loginDispos.isDisposed()) {

@@ -13,6 +13,8 @@ import com.netease.lib_network.ApiEngine;
 import com.netease.lib_network.ExceptionHandle;
 import com.netease.lib_network.SimpleObserver;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -118,7 +120,7 @@ public class VideoRequest extends BaseRequest {
                     }
 
                     @Override
-                    public void onSuccess(@NonNull VideoGroupBean videoGroupBean) {
+                    public void onSuccess(@NonNull @NotNull VideoGroupBean videoGroupBean) {
                         final List<VideoGroupBean.Data> data = videoGroupBean.getData();
 
                         // 根据ID查询视频 name为标题 tab数量最多为20个
@@ -157,7 +159,7 @@ public class VideoRequest extends BaseRequest {
         videoObservable.compose(ApiEngine.getInstance().applySchedulers())
                 .subscribe(new SimpleObserver<VideoBean>() {
                     @Override
-                    public void onSuccess(@NonNull VideoBean videoBean) {
+                    public void onSuccess(@NonNull @NotNull VideoBean videoBean) {
                         mVideoLiveData.postValue(videoBean);
                     }
 
