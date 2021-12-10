@@ -33,7 +33,10 @@ import okhttp3.ResponseBody;
 import pub.devrel.easypermissions.AppSettingsDialog;
 import pub.devrel.easypermissions.EasyPermissions;
 
-
+/**
+ * 闪屏页
+ * @author Zhangruiping
+ */
 public class SplashActivity extends AppCompatActivity implements EasyPermissions.PermissionCallbacks {
 
 
