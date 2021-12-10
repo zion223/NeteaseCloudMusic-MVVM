@@ -42,15 +42,7 @@ public class PhoneLoginActivity extends BaseActivity {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread());
     private PhoneLoginViewModel mPhoneLoginViewModel;
-    //验证码输入完成后的回调
-    public CaptchaView.OnInputListener listener = new CaptchaView.OnInputListener() {
-        @Override
-        public void onSucess(String code) {
-            //注册(更改密码)
-            mPhoneLoginViewModel.loadingVisible.set(true);
-            mPhoneLoginViewModel.accountRequest.register(mPhoneLoginViewModel.phone.get(), mPhoneLoginViewModel.password.get(), code);
-        }
-    };
+
     private final TextWatcher phoneTextWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -80,7 +72,7 @@ public class PhoneLoginActivity extends BaseActivity {
 
         @Override
         public void onComplete() {
-            mPhoneLoginViewModel.countDownText.set("重新获取");
+            mPhoneLoginViewModel.countDownText.set(getResources().getString(R.string.re_obtain_code));
             mPhoneLoginViewModel.enableCaptureButton.set(true);
         }
     };
@@ -151,6 +143,16 @@ public class PhoneLoginActivity extends BaseActivity {
         }
     }
 
+    //验证码输入完成后的回调
+    public CaptchaView.OnInputListener listener = new CaptchaView.OnInputListener() {
+        @Override
+        public void onSucess(String code) {
+            //注册(更改密码)
+            mPhoneLoginViewModel.loadingVisible.set(true);
+            mPhoneLoginViewModel.accountRequest.register(mPhoneLoginViewModel.phone.get(), mPhoneLoginViewModel.password.get(), code);
+        }
+    };
+
     public class ClickProxy {
         //返回按钮
         public void back() {
@@ -162,8 +164,8 @@ public class PhoneLoginActivity extends BaseActivity {
             } else if (mPhoneLoginViewModel.showForgetPasswordView.get() && mPhoneLoginViewModel.showInputPasswordView.get()) {
                 //当前在忘记密码界面 返回时显示输入密码界面
                 mPhoneLoginViewModel.showForgetPasswordView.set(false);
-                mPhoneLoginViewModel.title.set("手机号登录");
-                mPhoneLoginViewModel.passwordHint.set("请输入密码");
+                mPhoneLoginViewModel.title.set(getResources().getString(R.string.phone_login));
+                mPhoneLoginViewModel.passwordHint.set(getResources().getString(R.string.input_password));
             } else if (mPhoneLoginViewModel.showInputPasswordView.get() && !mPhoneLoginViewModel.showForgetPasswordView.get()) {
                 //当前在输入密码界面 返回时显示输入手机号界面
                 mPhoneLoginViewModel.showInputPasswordView.set(false);
@@ -182,7 +184,7 @@ public class PhoneLoginActivity extends BaseActivity {
             if (ValidateUtils.isMobile(mPhoneLoginViewModel.phone.get())) {
                 mPhoneLoginViewModel.showInputPhoneView.set(false);
                 mPhoneLoginViewModel.showInputPasswordView.set(true);
-                mPhoneLoginViewModel.passwordHint.set("请输入密码");
+                mPhoneLoginViewModel.passwordHint.set(getResources().getString(R.string.input_password));
                 //密码框获取到焦点
             } else {
                 //手机号格式不正确
@@ -211,8 +213,8 @@ public class PhoneLoginActivity extends BaseActivity {
         //忘记密码
         public void forgetPassword() {
             mPhoneLoginViewModel.showForgetPasswordView.set(true);
-            mPhoneLoginViewModel.title.set("忘记密码");
-            mPhoneLoginViewModel.passwordHint.set("请设置登录密码,8-20位字符,至少字母/数字/符号两种组合");
+            mPhoneLoginViewModel.title.set(getResources().getString(R.string.forget_password));
+            mPhoneLoginViewModel.passwordHint.set(getResources().getString(R.string.password_tip));
             mPhoneLoginViewModel.password.set("");
         }
 

@@ -11,6 +11,13 @@
     <string name="check_network">当前网络不可用，请检查你的网络设置</string>
     <string name="agree_rule">请点击同意《用户协议》和《隐私政策》《儿童隐私政策》</string>
     <string name="exit_app_toast">"再按一次退出程序"</string>
+
+    <!-- 登录相关-->
     <string name="input_correct_phone_number">"请输入十一位数字的手机号"</string>
     <string name="capture_code_success">"验证码发送成功，请注意查收"</string>
+    <string name="input_password">"请输入密码"</string>
+    <string name="phone_login">"手机号登录"</string>
+    <string name="re_obtain_code">"重新获取"</string>
+    <string name="forget_password">"忘记密码"</string>
+    <string name="password_tip">"请设置登录密码,8-20位字符,至少字母/数字/符号两种组合"</string>
 </resources>
