@@ -13,9 +13,9 @@ public class PhoneLoginViewModel extends ViewModel {
     public final ObservableBoolean showInputPhoneView = new ObservableBoolean();
     //输入密码界面  step 2
     public final ObservableBoolean showInputPasswordView = new ObservableBoolean();
-    //忘记密码界面 step 3 (if nesscessary)
+    //忘记密码界面 step 3 (if necessary)
     public final ObservableBoolean showForgetPasswordView = new ObservableBoolean();
-    //显示验证码界面 step 4 (if nesscessary)
+    //显示验证码界面 step 4 (if necessary)
     public final ObservableBoolean showCaptureView = new ObservableBoolean();
     //使能重新获取验证码按钮
     public final ObservableBoolean enableCaptureButton = new ObservableBoolean();

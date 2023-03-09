@@ -110,7 +110,7 @@ public class PhoneLoginActivity extends BaseActivity {
                 finish();
             } else {
                 //登陆失败
-                showLongToast(loginBean.getResponseStatus().getResponseCode() + loginBean.getResult().getMsg());
+                showLongToast(loginBean.getResponseStatus().getResponseCode());
                 mPhoneLoginViewModel.password.set("");
             }
         });

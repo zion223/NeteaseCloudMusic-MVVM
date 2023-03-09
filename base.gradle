@@ -11,7 +11,7 @@ ext{
 
     depsVersion = [
         appcompat      : '1.2.0',
-        magicindicator : '1.5.0',
+        magicindicator : '1.6.0',
         okhttp         : '3.3.0',
         gson           : '2.8.0',
         glide          : '4.11.0',

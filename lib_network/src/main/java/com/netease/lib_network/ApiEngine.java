@@ -49,7 +49,7 @@ public class ApiEngine {
                 .readTimeout(20, TimeUnit.SECONDS)
                 .writeTimeout(20, TimeUnit.SECONDS)
                 .addNetworkInterceptor(netWorkInterceptor)
-                .addInterceptor(logInterceptor)
+                //.addInterceptor(logInterceptor)
                 .addInterceptor(responseInterceptor)
                 .cookieJar(cookieJar)
 //                .cache(cache)
